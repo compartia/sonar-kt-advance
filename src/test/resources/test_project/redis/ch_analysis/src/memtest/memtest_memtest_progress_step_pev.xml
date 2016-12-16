@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry delta-checkvalid="33" delta-invariant="4" delta-lifted="5" time="05/24/2016 04:45:10"/>
+  </log>
+  <function name="memtest_progress_step">
+   <statistics checkvalid="33" invariant="4" invariant_with_api="5" total="42" total-proven="42"/>
+   <open-proof-obligations/>
+   <proof-obligations-discharged>
+    <discharged domain="none" id="1" method="invariants" time="05/24/2016 04:45:10" type="cast">
+     <evidence comment="predicate depends on global variables progress_full, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="1" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/24/2016 04:45:10" type="cast">
+     <evidence comment="casting from unsigned long to unsigned long long is safe"/>
+    </discharged>
+    <discharged id="3" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="curr is a function parameter"/>
+    </discharged>
+    <discharged id="4" method="check-valid" time="05/24/2016 04:45:10" type="cast">
+     <evidence comment="casting from unsigned long to unsigned long long is safe"/>
+    </discharged>
+    <discharged id="5" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="progress_full is global"/>
+    </discharged>
+    <discharged id="6" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="7" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="8" method="check-valid" time="05/24/2016 04:45:10" type="cast">
+     <evidence comment="casting from unsigned long to unsigned long long is safe"/>
+    </discharged>
+    <discharged id="9" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="size is a function parameter"/>
+    </discharged>
+    <discharged id="10" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="11" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged domain="linear equalities" id="12" method="invariants" time="05/24/2016 04:45:10" type="not-zero">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="1" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="13" method="check-valid" time="05/24/2016 04:45:10" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 0 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="14" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#82"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="15" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#80"/>
+    </discharged>
+    <discharged id="16" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="progress_printed is global"/>
+    </discharged>
+    <discharged id="17" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="18" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="19" method="check-valid" time="05/24/2016 04:45:10" type="format-string">
+     <evidence comment="%c is a string literal"/>
+    </discharged>
+    <discharged id="20" method="check-valid" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="string-literal"/>
+    </discharged>
+    <discharged id="21" method="check-valid" time="05/24/2016 04:45:10" type="null-terminated">
+     <evidence comment="string literal"/>
+    </discharged>
+    <discharged id="22" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="23" method="check-valid" time="05/24/2016 04:45:10" type="ptr-upper-bound">
+     <evidence comment="upperbound of constant string argument: %c"/>
+    </discharged>
+    <discharged id="24" method="check-valid" time="05/24/2016 04:45:10" type="initialized-range">
+     <evidence comment="constant string"/>
+    </discharged>
+    <discharged id="25" method="check-valid" time="05/24/2016 04:45:10" type="pointer-cast">
+     <evidence comment="source and target type are the same"/>
+    </discharged>
+    <discharged id="26" method="check-valid" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="27" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="28" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="29" method="check-valid" time="05/24/2016 04:45:10" type="cast">
+     <evidence comment="casting from char to int is safe"/>
+    </discharged>
+    <discharged id="30" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="c is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="31" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#82"/>
+    </discharged>
+    <discharged id="32" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="33" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="34" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#80"/>
+    </discharged>
+    <discharged domain="none" id="35" method="invariants" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="predicate depends on global variables stdout, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="4" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="36" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="global variable stdout is assigned a value with valid lower bound by inductive hypothesis (checked at assignment)"/>
+    </discharged>
+    <discharged id="37" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="global variable stdout is assigned a value with valid upper bound by inductive hypothesis (checked at assignment)"/>
+    </discharged>
+    <discharged domain="none" id="38" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="predicate depends on global variables stdout, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="3" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="39" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="stdout is global"/>
+    </discharged>
+    <discharged domain="none" id="40" method="invariants" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="predicate depends on global variables stdout, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="2" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="41" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="global variable stdout is assigned a value with valid lower bound by inductive hypothesis (checked at assignment)"/>
+    </discharged>
+    <discharged id="42" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="global variable stdout is assigned a value with valid upper bound by inductive hypothesis (checked at assignment)"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/24/2016 04:45:10">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

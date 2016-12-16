@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function cfilename="uninit_pointer.c" gvid="1164" name="uninit_pointer_014_func_001" num-ppo="0">
+   <statistics api-assumptions="0" callers="1" ds-assumptions="0" field-assignments="4" global-assignments="6" global-assumptions="2" rv-assumptions="0"/>
+   <parameters>
+    <param formal-vid="4678" index="1" vname="flag"/>
+   </parameters>
+   <callers>
+    <caller cfilename="uninit_pointer.c" fname="uninit_pointer_014" gvid="1163" updated="05/31/2016 16:55:52" updated-f="1464713752.75">
+     <call-site byte="139000" file="uninit_pointer.c" line="331"/>
+     <args>
+      <arg etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </arg>
+     </args>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="115"/>
+     </calling-context>
+    </caller>
+   </callers>
+   <api-assumptions/>
+   <rv-assumptions/>
+   <ds-assumptions/>
+   <global-assumptions>
+    <global-assumption nr="1">
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="1185" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="13"/>
+      <po id="18"/>
+      <po id="33"/>
+      <po id="38"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="2">
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="1185" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="14"/>
+      <po id="19"/>
+      <po id="34"/>
+      <po id="39"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+   </global-assumptions>
+   <global-assignments>
+    <global-assignment nr="1">
+     <lhs>
+      <lhost>
+       <var vid="1185" vname="s"/>
+      </lhost>
+     </lhs>
+     <rhs etag="caste" xstr="caste (tmp:(struct 24*))">
+      <typ ttag="tptr">
+       <typ ckey="24" ttag="tcomp"/>
+      </typ>
+      <exp etag="lval" xstr="tmp">
+       <lval>
+        <lhost>
+         <var vid="4679" vname="tmp"/>
+        </lhost>
+       </lval>
+      </exp>
+     </rhs>
+     <loc byte="138578" file="uninit_pointer.c" line="302"/>
+    </global-assignment>
+    <global-assignment nr="4">
+     <lhs>
+      <lhost>
+       <var vid="1185" vname="s"/>
+      </lhost>
+     </lhs>
+     <rhs etag="caste" xstr="caste (tmp___0:(struct 24*))">
+      <typ ttag="tptr">
+       <typ ckey="24" ttag="tcomp"/>
+      </typ>
+      <exp etag="lval" xstr="tmp___0">
+       <lval>
+        <lhost>
+         <var vid="4681" vname="tmp___0"/>
+        </lhost>
+       </lval>
+      </exp>
+     </rhs>
+     <loc byte="138750" file="uninit_pointer.c" line="312"/>
+    </global-assignment>
+    <global-assignment nr="5">
+     <lhs>
+      <lhost>
+       <mem etag="lval" xstr="s">
+        <lval>
+         <lhost>
+          <var vid="1185" vname="s"/>
+         </lhost>
+        </lval>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="24" fname="a"/>
+      </offset>
+     </lhs>
+     <rhs etag="const" xstr="20">
+      <constant ctag="cint64" ikind="iint" intValue="20"/>
+     </rhs>
+     <loc byte="138857" file="uninit_pointer.c" line="315"/>
+    </global-assignment>
+    <global-assignment nr="3">
+     <lhs>
+      <lhost>
+       <mem etag="lval" xstr="s">
+        <lval>
+         <lhost>
+          <var vid="1185" vname="s"/>
+         </lhost>
+        </lval>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="24" fname="b"/>
+      </offset>
+     </lhs>
+     <rhs etag="const" xstr="10">
+      <constant ctag="cint64" ikind="iint" intValue="10"/>
+     </rhs>
+     <loc byte="138703" file="uninit_pointer.c" line="306"/>
+    </global-assignment>
+    <global-assignment nr="2">
+     <lhs>
+      <lhost>
+       <mem etag="lval" xstr="s">
+        <lval>
+         <lhost>
+          <var vid="1185" vname="s"/>
+         </lhost>
+        </lval>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="24" fname="a"/>
+      </offset>
+     </lhs>
+     <rhs etag="const" xstr="10">
+      <constant ctag="cint64" ikind="iint" intValue="10"/>
+     </rhs>
+     <loc byte="138685" file="uninit_pointer.c" line="305"/>
+    </global-assignment>
+    <global-assignment nr="6">
+     <lhs>
+      <lhost>
+       <mem etag="lval" xstr="s">
+        <lval>
+         <lhost>
+          <var vid="1185" vname="s"/>
+         </lhost>
+        </lval>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="24" fname="b"/>
+      </offset>
+     </lhs>
+     <rhs etag="const" xstr="20">
+      <constant ctag="cint64" ikind="iint" intValue="20"/>
+     </rhs>
+     <loc byte="138875" file="uninit_pointer.c" line="316"/>
+    </global-assignment>
+   </global-assignments>
+   <field-assignments>
+    <field-assignment ckey="24" field="a" nr="1">
+     <rhs etag="const" xstr="10">
+      <constant ctag="cint64" ikind="iint" intValue="10"/>
+     </rhs>
+     <loc byte="138685" file="uninit_pointer.c" line="305"/>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </field-assignment>
+    <field-assignment ckey="24" field="b" nr="4">
+     <rhs etag="const" xstr="20">
+      <constant ctag="cint64" ikind="iint" intValue="20"/>
+     </rhs>
+     <loc byte="138875" file="uninit_pointer.c" line="316"/>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </field-assignment>
+    <field-assignment ckey="24" field="a" nr="3">
+     <rhs etag="const" xstr="20">
+      <constant ctag="cint64" ikind="iint" intValue="20"/>
+     </rhs>
+     <loc byte="138857" file="uninit_pointer.c" line="315"/>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </field-assignment>
+    <field-assignment ckey="24" field="b" nr="2">
+     <rhs etag="const" xstr="10">
+      <constant ctag="cint64" ikind="iint" intValue="10"/>
+     </rhs>
+     <loc byte="138703" file="uninit_pointer.c" line="306"/>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </field-assignment>
+   </field-assignments>
+  </function>
+  <header time="05/31/2016 17:16:53">
+   <application file="uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

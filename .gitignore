@@ -1,0 +1,32 @@
+/target/
+/.sonar/**
+/.settings/**
+.classpath
+
+.project
+
+src/test/resources/test_project/.sonar/**
+src/test/resources/test_project/redis/.sonar/**
+src/test/resources/test_project/itc-benchmarks/.sonar/**
+src/test/resources/test_project/itc-benchmarks/01.w_Defects/.sonar/**
+
+src/main/resources/static/css/advance.css.map
+src/test/resources/test_project/itc-benchmarks-small/**
+src/main/java/org/sonar/plugins/kt/advance/batch/Cacher.java
+
+Scan itc-benchmarksFULL.launch
+redeploy-from-eclipse.sh
+Scan itc-benchmarks.launch
+
+Scan itc-benchmarks FULL wo.launch
+
+src/**/ehcache-disk-store.data
+src/**/ehcache-disk-store.meta
+
+**/.sonar.kt.data/
+*.launch
+
+src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export/**
+
+src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export_5.5.*/**
+*.log

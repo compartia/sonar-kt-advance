@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_005">
+   <secondary-proof-obligations max-spo-id="12" num-ppo="3">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="9" fname="uninit_pointer_005_func_001" fvid="4599">
+      <location byte="135902" file="uninit_pointer.c" line="94"/>
+      <args>
+       <arg etag="startof" xstr="startof (pbuf)">
+        <lval>
+         <lhost>
+          <var vid="4609" vname="pbuf"/>
+         </lhost>
+        </lval>
+       </arg>
+      </args>
+      <obligations>
+       <obligation api-id="6" id="12">
+        <predicate tag="initialized">
+         <lval>
+          <lhost>
+           <mem binop="indexpi" etag="binop" xstr="((*(((startof (pbuf) +i 1):((int*)*)) +i 1):(int*)">
+            <exp1 etag="lval" xstr="*(((startof (pbuf) +i 1):((int*)*))">
+             <lval>
+              <lhost>
+               <mem binop="indexpi" etag="binop" xstr="((startof (pbuf) +i 1):((int*)*)">
+                <exp1 etag="startof" xstr="startof (pbuf)">
+                 <lval>
+                  <lhost>
+                   <var vid="4609" vname="pbuf"/>
+                  </lhost>
+                 </lval>
+                </exp1>
+                <exp2 etag="const" xstr="1">
+                 <constant ctag="cint64" ikind="iint" intValue="1"/>
+                </exp2>
+                <typ ttag="tptr">
+                 <typ ttag="tptr">
+                  <typ ikind="iint" ttag="tint"/>
+                 </typ>
+                </typ>
+               </mem>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const" xstr="1">
+             <constant ctag="cint64" ikind="iint" intValue="1"/>
+            </exp2>
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </mem>
+          </lhost>
+         </lval>
+        </predicate>
+       </obligation>
+       <obligation api-id="2" id="11">
+        <predicate tag="not-null">
+         <exp etag="lval" xstr="*(((startof (pbuf) +i 1):((int*)*))">
+          <lval>
+           <lhost>
+            <mem binop="indexpi" etag="binop" xstr="((startof (pbuf) +i 1):((int*)*)">
+             <exp1 etag="startof" xstr="startof (pbuf)">
+              <lval>
+               <lhost>
+                <var vid="4609" vname="pbuf"/>
+               </lhost>
+              </lval>
+             </exp1>
+             <exp2 etag="const" xstr="1">
+              <constant ctag="cint64" ikind="iint" intValue="1"/>
+             </exp2>
+             <typ ttag="tptr">
+              <typ ttag="tptr">
+               <typ ikind="iint" ttag="tint"/>
+              </typ>
+             </typ>
+            </mem>
+           </lhost>
+          </lval>
+         </exp>
+        </predicate>
+       </obligation>
+       <obligation api-id="8" id="10">
+        <predicate tag="initialized">
+         <lval>
+          <lhost>
+           <mem binop="indexpi" etag="binop" xstr="((startof (pbuf) +i 1):((int*)*)">
+            <exp1 etag="startof" xstr="startof (pbuf)">
+             <lval>
+              <lhost>
+               <var vid="4609" vname="pbuf"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const" xstr="1">
+             <constant ctag="cint64" ikind="iint" intValue="1"/>
+            </exp2>
+            <typ ttag="tptr">
+             <typ ttag="tptr">
+              <typ ikind="iint" ttag="tint"/>
+             </typ>
+            </typ>
+           </mem>
+          </lhost>
+         </lval>
+        </predicate>
+       </obligation>
+       <obligation api-id="7" id="9">
+        <predicate op="pluspi" tag="ptr-upper-bound-deref">
+         <typ ttag="tptr">
+          <typ ikind="iint" ttag="tint"/>
+         </typ>
+         <exp1 etag="startof" xstr="startof (pbuf)">
+          <lval>
+           <lhost>
+            <var vid="4609" vname="pbuf"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="const" xstr="4">
+          <constant ctag="cint64" ikind="iint" intValue="4"/>
+         </exp2>
+        </predicate>
+       </obligation>
+       <obligation api-id="3" id="8">
+        <predicate op="pluspi" tag="ptr-upper-bound-deref">
+         <typ ttag="tptr">
+          <typ ikind="iint" ttag="tint"/>
+         </typ>
+         <exp1 etag="startof" xstr="startof (pbuf)">
+          <lval>
+           <lhost>
+            <var vid="4609" vname="pbuf"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp2>
+        </predicate>
+       </obligation>
+       <obligation api-id="5" id="7">
+        <predicate op="pluspi" tag="ptr-upper-bound-deref">
+         <typ ttag="tptr">
+          <typ ikind="iint" ttag="tint"/>
+         </typ>
+         <exp1 etag="startof" xstr="startof (pbuf)">
+          <lval>
+           <lhost>
+            <var vid="4609" vname="pbuf"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="const" xstr="2">
+          <constant ctag="cint64" ikind="iint" intValue="2"/>
+         </exp2>
+        </predicate>
+       </obligation>
+       <obligation api-id="4" id="6">
+        <predicate op="pluspi" tag="ptr-upper-bound-deref">
+         <typ ikind="iint" ttag="tint"/>
+         <exp1 etag="lval" xstr="*(((startof (pbuf) +i 1):((int*)*))">
+          <lval>
+           <lhost>
+            <mem binop="indexpi" etag="binop" xstr="((startof (pbuf) +i 1):((int*)*)">
+             <exp1 etag="startof" xstr="startof (pbuf)">
+              <lval>
+               <lhost>
+                <var vid="4609" vname="pbuf"/>
+               </lhost>
+              </lval>
+             </exp1>
+             <exp2 etag="const" xstr="1">
+              <constant ctag="cint64" ikind="iint" intValue="1"/>
+             </exp2>
+             <typ ttag="tptr">
+              <typ ttag="tptr">
+               <typ ikind="iint" ttag="tint"/>
+              </typ>
+             </typ>
+            </mem>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp2>
+        </predicate>
+       </obligation>
+       <obligation api-id="9" id="5">
+        <predicate op="pluspi" tag="ptr-upper-bound-deref">
+         <typ ttag="tptr">
+          <typ ikind="iint" ttag="tint"/>
+         </typ>
+         <exp1 etag="startof" xstr="startof (pbuf)">
+          <lval>
+           <lhost>
+            <var vid="4609" vname="pbuf"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="const" xstr="3">
+          <constant ctag="cint64" ikind="iint" intValue="3"/>
+         </exp2>
+        </predicate>
+       </obligation>
+       <obligation api-id="1" id="4">
+        <predicate tag="not-null">
+         <exp etag="startof" xstr="startof (pbuf)">
+          <lval>
+           <lhost>
+            <var vid="4609" vname="pbuf"/>
+           </lhost>
+          </lval>
+         </exp>
+        </predicate>
+       </obligation>
+      </obligations>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="13"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/31/2016 17:16:52">
+   <application file="uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

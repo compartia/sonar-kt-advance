@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4592" vname="uninit_pointer_004_func_001">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="p">
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </arg>
+     </args>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="135377" file="uninit_pointer.c" line="61"/>
+   </svar>
+   <sformals>
+    <varinfo vid="4594" vname="p">
+     <vtyp ttag="tptr">
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="135415" file="uninit_pointer.c" line="61"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vid="4595" vname="ret">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="135426" file="uninit_pointer.c" line="63"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="7">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4595" vname="ret"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="0"/>
+         </exp>
+         <loc byte="135432" file="uninit_pointer.c" line="64"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="8"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="8">
+      <skind stag="return">
+       <loc byte="135441" file="uninit_pointer.c" line="65"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="7"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

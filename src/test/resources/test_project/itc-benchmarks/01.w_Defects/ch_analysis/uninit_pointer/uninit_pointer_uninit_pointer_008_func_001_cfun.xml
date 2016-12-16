@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4634" vname="uninit_pointer_008_func_001">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="p">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_008_s_001" ttag="tnamed"/>
+       </typ>
+      </arg>
+     </args>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="136588" file="uninit_pointer.c" line="148"/>
+   </svar>
+   <sformals>
+    <varinfo vid="4636" vname="p">
+     <vtyp ttag="tptr">
+      <typ tname="uninit_pointer_008_s_001" ttag="tnamed"/>
+     </vtyp>
+     <vdecl byte="136647" file="uninit_pointer.c" line="148"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vid="4637" vname="ret">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="136658" file="uninit_pointer.c" line="150"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="40">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <field ckey="50" fname="uninit"/>
+          </offset>
+          <lhost>
+           <mem etag="lval">
+            <lval>
+             <lhost>
+              <var vid="4636" vname="p"/>
+             </lhost>
+            </lval>
+           </mem>
+          </lhost>
+         </lval>
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="4637" vname="ret"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="136664" file="uninit_pointer.c" line="151"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="41"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="41">
+      <skind stag="return">
+       <loc byte="136679" file="uninit_pointer.c" line="152"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="40"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

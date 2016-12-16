@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry time="05/31/2016 17:12:40"/>
+   <log-entry time="05/31/2016 16:57:54"/>
+  </log>
+  <function name="uninit_pointer_008_func_001">
+   <statistics checkvalid="0" invariant="0" invariant_with_api="0" total="0" total-proven="0"/>
+   <open-proof-obligations/>
+   <proof-obligations-discharged/>
+  </function>
+  <header time="05/31/2016 17:12:40">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

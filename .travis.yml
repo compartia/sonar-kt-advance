@@ -1,0 +1,12 @@
+language: java
+sudo: false
+jdk: oraclejdk8
+git:
+  submodules: false
+install: true
+script: ./travis.sh
+env:
+- TEST=CI
+
+notifications:
+  slack: kestreltechnology:QcOSfR0bHUi92kqkmioIsT4H    

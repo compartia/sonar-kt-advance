@@ -1,0 +1,158 @@
+$default-bg: #ffffff;
+
+$color-red: #dd1133;
+$color-orange: #eeaa66;
+
+$color-violation:         $color-red;
+$color-violation-hover:   lighten($color-violation, 12%);
+
+$color-violation-sev:     darken($color-violation, 20%);
+$color-violation-sev-hover:   lighten($color-violation-sev, 12%);
+
+$color-open-pev:         $color-orange;
+$color-open-pev-hover:   lighten($color-open-pev, 8%);
+
+$color-open-sev:         darken($color-open-pev, 20%);
+$color-open-sev-hover:   lighten($color-open-sev, 8%);
+ 
+$bar-height: 1.6em;
+$label-padding: 0.5em;
+$label-z-index: 100;
+
+$label-width: 25%;
+$bar-width: 100%-$label-width;
+
+@mixin gradient-left($from-color, $to-color) { 
+    background-image: -webkit-linear-gradient(left, $from-color, $to-color); 
+    background-image:    -moz-linear-gradient(left, $from-color, $to-color);
+    background-image:     -ms-linear-gradient(left, $from-color, $to-color);
+    background: linear-gradient(to right, $from-color 0%, $to-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from-color}', EndColorStr='#{$to-color},GradientType=1')";     
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from-color', endColorstr='$to-color',GradientType=1 ); /* IE6-9 */
+}
+
+ .kt-advance-logo{        
+    background-position: center;
+    background-repeat: none;
+    width: 80px;
+    display: inline-block;
+    float: right;
+    height: 18px;
+    background-size: cover;
+}
+
+.kt-chart-a {
+    font-size: 0.9em!important;
+    clear: both;       
+   
+    .row{       
+        background: $default-bg;
+        display:block;
+        border: none;        
+        margin-bottom: 1px;
+        clear: both;
+        white-space: nowrap;  
+        
+        overflow: hidden;
+	    width: 100%;
+        
+        
+        label{
+            position: relative;
+            box-sizing:border-box;
+            float:left;
+            line-height:$bar-height;
+            text-align: right;
+            width: $label-width;
+            padding-right:$label-padding*2;
+            white-space: nowrap;
+            z-index: $label-z-index;
+            overflow: hidden;
+            
+            &:after{
+                position: absolute;
+                width: 1em;
+                padding: $label-padding $label-padding/2;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                content: " ";
+                @include gradient-left(rgba($default-bg, 0), rgba($default-bg, 1));
+                z-index: $label-z-index + 10;
+            }
+        } 
+        
+        
+        .bar-container {
+            box-sizing:border-box;
+            
+            float:left;
+            display: block;
+            width: $bar-width;
+            
+            overflow: hidden;
+            
+            a{
+                cursor:pointer;
+                border: none;
+            }
+
+            .bar{
+                color: white;
+                height:$bar-height;
+                float:left;
+                text-align: left;
+                min-width:0.4em;
+             }
+
+            .pev-open{
+                color: white;
+                background-color: $color-open-pev;
+
+                &:hover{
+                    background-color: $color-open-pev-hover;
+                }
+            }
+            
+            .sev-open{
+                color: white;
+                background-color: $color-open-sev;
+
+                &:hover{
+                    background-color: $color-open-pev-hover;
+                }
+            }
+
+            .pev-violation{
+                color: white;
+                background-color: $color-violation;
+
+                &:hover{
+                    background-color: $color-violation-hover;
+                }
+            }
+            
+            .sev-violation{
+                color: white;
+                background-color: $color-violation-sev;
+
+                &:hover{
+                    background-color: $color-violation-sev-hover;
+                }
+            }
+            
+            .value{
+                float:left;
+                line-height:$bar-height;
+                text-align: left;
+                /*min-width:5em;*/
+                padding-left:$label-padding;
+                &:after{
+                    clear: right;
+                }
+            }
+        }
+    }
+    
+   
+}

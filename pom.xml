@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>sonar-kt-advance-plugin</artifactId>
+	<groupId>org.sonar.plugins.kt.advance</groupId>
+	<packaging>sonar-plugin</packaging>
+	<version>5.5.6</version>
+
+	<name>KT Advance</name>
+	<description>KT Advance Memory Safety Analyzer for C</description>
+	<inceptionYear>2016</inceptionYear>
+
+	<organization>
+		<name>Kestrel Technology LLC</name>
+		<url>http://www.kestreltechnology.com</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>GNU LGPL 3</name>
+			<url>http://www.gnu.org/licenses/lgpl.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/mrbkt/kestreltech/issues</url>
+	</issueManagement>
+
+	<scm>
+		<url>https://github.com/mrbkt/kestreltech</url>
+		<connection>scm:git:git://github.com/mrbkt/kestreltech.git</connection>
+	</scm>
+
+	<developers>
+		<developer>
+			<email>artem@toptal.com</email>
+			<name>Artem Zaborskiy</name>
+			<url>http://www.zaborskiy.org/</url>
+			<id>compartia</id>
+		</developer>
+	</developers>
+
+	<properties>
+		<sonar.language>java</sonar.language>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.buildVersion>5.5</sonar.buildVersion>
+		<sonar.pluginName>advance</sonar.pluginName>
+		<jdk.min.version>1.8</jdk.min.version>
+		<slf4j.version>1.7.7</slf4j.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sonarsource.sonarqube</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+			<version>${sonar.buildVersion}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.0.54-beta</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ehcache.modules</groupId>
+			<artifactId>ehcache-impl</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.8.2</version>
+		</dependency>
+
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>1.16</version>
+				<configuration>
+					<pluginKey>advance</pluginKey>
+					<pluginName>Advance</pluginName>
+					<pluginClass>org.sonar.plugins.kt.advance.KtAdvancePlugin</pluginClass>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${jdk.min.version}</source>
+					<target>${jdk.min.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>nl.geodienstencentrum.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<version>2.14</version>
+				<configuration>
+					<destination default-value="src/main/resources/static/css" />
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+
+
+
+
+
+
+</project>

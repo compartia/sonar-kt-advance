@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function cfilename="bit_shift.c" gvid="1" name="bit_shift_017" num-ppo="0">
+   <statistics api-assumptions="0" callers="1" ds-assumptions="0" field-assignments="0" global-assignments="1" global-assumptions="0" rv-assumptions="0"/>
+   <parameters/>
+   <callers>
+    <caller cfilename="bit_shift.c" fname="bit_shift_main" gvid="0" updated="05/31/2016 16:55:49" updated-f="1464713749.47">
+     <call-site byte="138097" file="bit_shift.c" line="329"/>
+     <args/>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="103"/>
+      <node name="if-then"/>
+      <node name="stmt" num="102"/>
+     </calling-context>
+    </caller>
+   </callers>
+   <api-assumptions/>
+   <rv-assumptions/>
+   <ds-assumptions/>
+   <global-assumptions/>
+   <global-assignments>
+    <global-assignment nr="1">
+     <lhs>
+      <lhost>
+       <var vid="704" vname="sink"/>
+      </lhost>
+     </lhs>
+     <rhs etag="lval" xstr="ret">
+      <lval>
+       <lhost>
+        <var vid="4646" vname="ret"/>
+       </lhost>
+      </lval>
+     </rhs>
+     <loc byte="137053" file="bit_shift.c" line="237"/>
+    </global-assignment>
+   </global-assignments>
+   <field-assignments/>
+  </function>
+  <header time="05/31/2016 17:16:52">
+   <application file="bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

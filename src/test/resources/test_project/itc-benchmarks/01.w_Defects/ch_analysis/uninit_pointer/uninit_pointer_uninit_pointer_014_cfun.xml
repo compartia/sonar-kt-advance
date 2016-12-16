@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4682" vname="uninit_pointer_014">
+    <vtyp ttag="tfun" vararg="false">
+     <args/>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="138941" file="uninit_pointer.c" line="328"/>
+   </svar>
+   <sformals/>
+   <slocals>
+    <varinfo vid="4683" vname="r">
+     <vtyp tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+     <vdecl byte="138996" file="uninit_pointer.c" line="330"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="115">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="4676" vname="uninit_pointer_014_func_001"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="const">
+           <constant ctag="cint64" ikind="iint" intValue="1"/>
+          </exp>
+         </args>
+         <loc byte="139000" file="uninit_pointer.c" line="331"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="116"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="116">
+      <skind stag="if">
+       <exp binop="ne" etag="binop">
+        <exp1 etag="caste">
+         <typ ikind="iulong" ttag="tint"/>
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="4675" vname="s"/>
+           </lhost>
+          </lval>
+         </exp>
+        </exp1>
+        <exp2 etag="caste">
+         <typ ikind="iulong" ttag="tint"/>
+         <exp etag="caste">
+          <typ ttag="tptr">
+           <typ ttag="tvoid"/>
+          </typ>
+          <exp etag="const">
+           <constant ctag="cint64" ikind="iint" intValue="0"/>
+          </exp>
+         </exp>
+        </exp2>
+        <typ ikind="iint" ttag="tint"/>
+       </exp>
+       <thenblock>
+        <bstmts>
+         <stmt sid="117">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4683" vname="r"/>
+              </lhost>
+             </lval>
+             <exp etag="lval">
+              <lval>
+               <lhost>
+                <mem etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="4675" vname="s"/>
+                  </lhost>
+                 </lval>
+                </mem>
+               </lhost>
+              </lval>
+             </exp>
+             <loc byte="139061" file="uninit_pointer.c" line="334"/>
+            </instr>
+            <instr itag="call">
+             <exp etag="lval">
+              <lval>
+               <lhost>
+                <var vid="969" vname="free"/>
+               </lhost>
+              </lval>
+             </exp>
+             <args>
+              <exp etag="caste">
+               <typ ttag="tptr">
+                <typ ttag="tvoid"/>
+               </typ>
+               <exp etag="lval">
+                <lval>
+                 <lhost>
+                  <var vid="4675" vname="s"/>
+                 </lhost>
+                </lval>
+               </exp>
+              </exp>
+             </args>
+             <loc byte="139074" file="uninit_pointer.c" line="335"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="118"/>
+          </succs>
+          <preds>
+           <int intValue="116"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </thenblock>
+       <elseblock>
+        <bstmts/>
+       </elseblock>
+       <loc byte="139034" file="uninit_pointer.c" line="332"/>
+      </skind>
+      <succs>
+       <int intValue="117"/>
+       <int intValue="118"/>
+      </succs>
+      <preds>
+       <int intValue="115"/>
+      </preds>
+     </stmt>
+     <stmt sid="118">
+      <skind stag="return">
+       <loc byte="139086" file="uninit_pointer.c" line="337"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="117"/>
+       <int intValue="116"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

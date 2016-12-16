@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_016">
+   <statistics avg-context-complexity="0.00" avg-predicate-complexity="0.57" context-complexity="0" predicate-complexity="4" size="7"/>
+   <unconstrained-external-functions/>
+   <primary-proof-obligations>
+    <proof-obligation c-complexity="0" id="1" origin="prim-exp" p-complexity="0">
+     <location byte="136914" file="bit_shift.c" line="223"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4641" vname="shift"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="2" origin="prim-exp" p-complexity="0">
+     <location byte="136931" file="bit_shift.c" line="224"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4642" vname="shift1"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="3" origin="prim-exp" p-complexity="0">
+     <location byte="136949" file="bit_shift.c" line="225"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4640" vname="a"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="4" origin="prim-exp" p-complexity="0">
+     <location byte="136949" file="bit_shift.c" line="225"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4643" vname="shift2"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="5" origin="prim-op" p-complexity="1">
+     <location byte="136949" file="bit_shift.c" line="225"/>
+     <predicate tag="non-negative">
+      <exp etag="lval" xstr="shift2">
+       <lval>
+        <lhost>
+         <var vid="4643" vname="shift2"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="6" origin="prim-op" p-complexity="3">
+     <location byte="136949" file="bit_shift.c" line="225"/>
+     <predicate size="iint" tag="width-overflow">
+      <exp etag="lval" xstr="shift2">
+       <lval>
+        <lhost>
+         <var vid="4643" vname="shift2"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="7" origin="prim-exp" p-complexity="0">
+     <location byte="136976" file="bit_shift.c" line="226"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4644" vname="ret"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="5"/>
+       <node name="stmt" num="34"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+   </primary-proof-obligations>
+  </function>
+  <header time="05/31/2016 16:55:49">
+   <application file="bit_shift.xml" name="application"/>
+  </header>
+ </c-analysis>

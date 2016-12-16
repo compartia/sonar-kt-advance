@@ -1,0 +1,112 @@
+.kt-advance-logo {
+  background-position: center;
+  background-repeat: none;
+  width: 80px;
+  display: inline-block;
+  float: right;
+  height: 18px;
+  background-size: cover;
+}
+
+.kt-chart-a {
+  font-size: 0.9em !important;
+  clear: both;
+}
+.kt-chart-a .row {
+  background: #ffffff;
+  display: block;
+  border: none;
+  margin-bottom: 1px;
+  clear: both;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+.kt-chart-a .row label {
+  position: relative;
+  box-sizing: border-box;
+  float: left;
+  line-height: 1.6em;
+  text-align: right;
+  width: 25%;
+  padding-right: 1em;
+  white-space: nowrap;
+  z-index: 100;
+  overflow: hidden;
+}
+.kt-chart-a .row label:after {
+  position: absolute;
+  width: 1em;
+  padding: 0.5em 0.25em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  content: " ";
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), white);
+  background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0), white);
+  background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 0), white);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='rgba(255, 255, 255, 0)', EndColorStr='white,GradientType=1')";
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from-color', endColorstr='$to-color',GradientType=1 );
+  /* IE6-9 */
+  z-index: 110;
+}
+.kt-chart-a .row .bar-container {
+  box-sizing: border-box;
+  float: left;
+  display: block;
+  width: 75%;
+  overflow: hidden;
+}
+.kt-chart-a .row .bar-container a {
+  cursor: pointer;
+  border: none;
+}
+.kt-chart-a .row .bar-container .bar {
+  color: white;
+  height: 1.6em;
+  float: left;
+  text-align: left;
+  min-width: 0.4em;
+}
+.kt-chart-a .row .bar-container .pev-open {
+  color: white;
+  background-color: #eeaa66;
+}
+.kt-chart-a .row .bar-container .pev-open:hover {
+  background-color: #f2be8b;
+}
+.kt-chart-a .row .bar-container .sev-open {
+  color: white;
+  background-color: #d67718;
+}
+.kt-chart-a .row .bar-container .sev-open:hover {
+  background-color: #f2be8b;
+}
+.kt-chart-a .row .bar-container .pev-violation {
+  color: white;
+  background-color: #dd1133;
+}
+.kt-chart-a .row .bar-container .pev-violation:hover {
+  background-color: #f03b59;
+}
+.kt-chart-a .row .bar-container .sev-violation {
+  color: white;
+  background-color: #7e0a1d;
+}
+.kt-chart-a .row .bar-container .sev-violation:hover {
+  background-color: #b70e2a;
+}
+.kt-chart-a .row .bar-container .value {
+  float: left;
+  line-height: 1.6em;
+  text-align: left;
+  /*min-width:5em;*/
+  padding-left: 0.5em;
+}
+.kt-chart-a .row .bar-container .value:after {
+  clear: right;
+}
+
+/*# sourceMappingURL=advance.css.map */

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_006" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="136051" file="uninit_pointer.c" line="110"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="17"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="2" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="0" pv="3"/>
+      <inv nrv="1" pv="4"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="5">
+    <pvals index="0">
+     <pval arg="1" id="1"/>
+     <pval arg="2" id="2"/>
+     <pval arg="2" id="3"/>
+    </pvals>
+    <pvals index="1">
+     <pval>
+      <lhost>
+       <var vid="4615" vname="p"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="2">
+     <pval etag="addrof" external="yes" property="vm" xstr="addrof (p)">
+      <lval>
+       <lhost>
+        <var vid="4615" vname="p"/>
+       </lhost>
+      </lval>
+     </pval>
+    </pvals>
+    <pvals index="3">
+     <pval arg="1" id="1"/>
+     <pval arg="2" id="2"/>
+     <pval arg="2" id="3"/>
+     <pval arg="1" id="5"/>
+    </pvals>
+    <pvals index="4">
+     <pval arg="1" id="4"/>
+     <pval arg="1" id="6"/>
+     <pval arg="2" id="7"/>
+     <pval arg="2" id="8"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="3">
+    <nrv etag="addrof" index="0" tag="fv" xstr="addrof (p)">
+     <lval>
+      <lhost>
+       <var vid="4615" vname="p"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv index="1" lb="0" tag="range"/>
+    <nrv index="2" tag="ss">
+     <sym name="valid"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 17:14:59">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

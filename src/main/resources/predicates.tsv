@@ -1,0 +1,35 @@
+1.0	allocation-base	Allocation Base
+1.0	cast	Cast
+1.0	common-base	Common Base
+1.0	common-base-type	Common Base Type
+1.0	format-string	Format String
+1.0	f-precondition	F-precondition
+1.0	global-mem	Global Memory
+1.0	index-lower-bound	Index Lower Bound
+1.0	index-upper-bound	Index Upper Bound
+1.0	initialized	Initialized
+1.0	initialized-range	Initialized Range
+1.0	int-overflow	Integer Overflow
+1.0	int-underflow	Integer Underflow
+1.0	lower-bound	Lower Bound
+1.0	non-negative	Not Negative
+1.0	no-overlap	No Overlap
+1.0	not-null	Not null
+1.0	not-zero	Not zero
+1.0	null	null
+1.0	null-terminated	null-terminated
+1.0	pointer-cast	Pointer Cast
+1.0	ptr-lower-bound	Pointer Lower Bound
+1.0	ptr-upper-bound	Pointer Upper Bound
+1.0	ptr-upper-bound-deref	Pointer Upper Bound Dereference
+1.0	signed-to-unsigned-cast	Signed to Unsigned Cast
+1.0	type-at-offset	Type At Offset
+1.0	unsigned-to-signed-cast	Unsigned to Signed Cast
+1.0	upper-bound	Upper Bound
+1.0	width-overflow	Width Overflow
+1.0	valid-mem	Valid Memory
+1.0	value-constraint	Value Constraint
+1.0	div-by-zero	Division By Zero
+1.0	ptr-upperbound	Pointer Upper Bound (!)
+1.0	ptr-op-lowerbound	Pointer Operation Lower Bound
+1.0	ptr-op-upperbound	Pointer Operation Upper Bound

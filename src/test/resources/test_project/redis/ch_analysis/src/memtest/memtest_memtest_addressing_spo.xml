@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="memtest_addressing">
+   <secondary-proof-obligations max-spo-id="77" num-ppo="77">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="0" fname="memtest_progress_step" fvid="949">
+      <location byte="31613" file="src/memtest.c" line="99"/>
+      <args>
+       <arg etag="lval" xstr="j">
+        <lval>
+         <lhost>
+          <var vid="964" vname="j"/>
+         </lhost>
+        </lval>
+       </arg>
+       <arg binop="mult" etag="binop" xstr="((words * 2):unsigned long">
+        <exp1 etag="lval" xstr="words">
+         <lval>
+          <lhost>
+           <var vid="963" vname="words"/>
+          </lhost>
+         </lval>
+        </exp1>
+        <exp2 etag="const" xstr="2">
+         <constant ctag="cint64" ikind="iulong" intValue="2"/>
+        </exp2>
+        <typ ikind="iulong" ttag="tint"/>
+       </arg>
+       <arg etag="caste" xstr="caste (A:char)">
+        <typ ikind="ichar" ttag="tint"/>
+        <exp etag="const" xstr="A">
+         <constant charValue="65" ctag="cchr"/>
+        </exp>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="23"/>
+        <node name="if-then"/>
+        <node name="stmt" num="22"/>
+        <node name="loop"/>
+        <node name="stmt" num="18"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="memtest_progress_step" fvid="949">
+      <location byte="31919" file="src/memtest.c" line="110"/>
+      <args>
+       <arg binop="plusa" etag="binop" xstr="((j + words):unsigned long">
+        <exp1 etag="lval" xstr="j">
+         <lval>
+          <lhost>
+           <var vid="964" vname="j"/>
+          </lhost>
+         </lval>
+        </exp1>
+        <exp2 etag="lval" xstr="words">
+         <lval>
+          <lhost>
+           <var vid="963" vname="words"/>
+          </lhost>
+         </lval>
+        </exp2>
+        <typ ikind="iulong" ttag="tint"/>
+       </arg>
+       <arg binop="mult" etag="binop" xstr="((words * 2):unsigned long">
+        <exp1 etag="lval" xstr="words">
+         <lval>
+          <lhost>
+           <var vid="963" vname="words"/>
+          </lhost>
+         </lval>
+        </exp1>
+        <exp2 etag="const" xstr="2">
+         <constant ctag="cint64" ikind="iulong" intValue="2"/>
+        </exp2>
+        <typ ikind="iulong" ttag="tint"/>
+       </arg>
+       <arg etag="caste" xstr="caste (A:char)">
+        <typ ikind="ichar" ttag="tint"/>
+        <exp etag="const" xstr="A">
+         <constant charValue="65" ctag="cchr"/>
+        </exp>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="33"/>
+        <node name="if-then"/>
+        <node name="stmt" num="32"/>
+        <node name="loop"/>
+        <node name="stmt" num="26"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/24/2016 04:33:27">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

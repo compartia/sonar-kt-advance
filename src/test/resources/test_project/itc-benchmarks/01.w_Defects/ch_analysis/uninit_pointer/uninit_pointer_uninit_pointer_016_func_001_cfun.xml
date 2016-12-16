@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4690" vname="uninit_pointer_016_func_001">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="flag">
+       <typ ikind="iint" ttag="tint"/>
+      </arg>
+     </args>
+     <typ ikind="iint" ttag="tint"/>
+    </vtyp>
+    <vdecl byte="139335" file="uninit_pointer.c" line="364"/>
+   </svar>
+   <sformals>
+    <varinfo vid="4692" vname="flag">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="139371" file="uninit_pointer.c" line="364"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vid="4693" vname="ret">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="139386" file="uninit_pointer.c" line="366"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="123">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4693" vname="ret"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="0"/>
+         </exp>
+         <loc byte="139382" file="uninit_pointer.c" line="366"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="124"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="124">
+      <skind stag="if">
+       <exp binop="eq" etag="binop">
+        <exp1 etag="lval">
+         <lval>
+          <lhost>
+           <var vid="4692" vname="flag"/>
+          </lhost>
+         </lval>
+        </exp1>
+        <exp2 etag="const">
+         <constant ctag="cint64" ikind="iint" intValue="0"/>
+        </exp2>
+        <typ ikind="iint" ttag="tint"/>
+       </exp>
+       <thenblock>
+        <bstmts>
+         <stmt sid="125">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4693" vname="ret"/>
+              </lhost>
+             </lval>
+             <exp etag="const">
+              <constant ctag="cint64" ikind="iint" intValue="0"/>
+             </exp>
+             <loc byte="139415" file="uninit_pointer.c" line="368"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="127"/>
+          </succs>
+          <preds>
+           <int intValue="124"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </thenblock>
+       <elseblock>
+        <bstmts>
+         <stmt sid="126">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4693" vname="ret"/>
+              </lhost>
+             </lval>
+             <exp etag="const">
+              <constant ctag="cint64" ikind="iint" intValue="1"/>
+             </exp>
+             <loc byte="139436" file="uninit_pointer.c" line="370"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="127"/>
+          </succs>
+          <preds>
+           <int intValue="124"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </elseblock>
+       <loc byte="139397" file="uninit_pointer.c" line="367"/>
+      </skind>
+      <succs>
+       <int intValue="125"/>
+       <int intValue="126"/>
+      </succs>
+      <preds>
+       <int intValue="123"/>
+      </preds>
+     </stmt>
+     <stmt sid="127">
+      <skind stag="return">
+       <loc byte="139446" file="uninit_pointer.c" line="371"/>
+       <exp etag="lval">
+        <lval>
+         <lhost>
+          <var vid="4693" vname="ret"/>
+         </lhost>
+        </lval>
+       </exp>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="126"/>
+       <int intValue="125"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

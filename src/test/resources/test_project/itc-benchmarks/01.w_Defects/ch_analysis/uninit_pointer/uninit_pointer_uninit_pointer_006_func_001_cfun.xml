@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4610" vname="uninit_pointer_006_func_001">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="pp">
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </arg>
+     </args>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="135944" file="uninit_pointer.c" line="101"/>
+   </svar>
+   <sformals>
+    <varinfo vid="4612" vname="pp">
+     <vtyp ttag="tptr">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </vtyp>
+     <vdecl byte="135982" file="uninit_pointer.c" line="101"/>
+    </varinfo>
+   </sformals>
+   <slocals/>
+   <sbody>
+    <bstmts>
+     <stmt sid="15">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <mem etag="lval">
+            <lval>
+             <lhost>
+              <mem etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="4612" vname="pp"/>
+                </lhost>
+               </lval>
+              </mem>
+             </lhost>
+            </lval>
+           </mem>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="135991" file="uninit_pointer.c" line="103"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="16"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="16">
+      <skind stag="return">
+       <loc byte="136001" file="uninit_pointer.c" line="104"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="15"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_014_func_001" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="138544" file="uninit_pointer.c" line="298"/>
+     </locations>
+     <cfg-context>
+      <node name="switch-expr"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="5" pv="0"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="26" pv="26"/>
+      <inv nrv="26" pv="25"/>
+      <inv nrv="5" pv="18"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138578" file="uninit_pointer.c" line="302"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="105"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="12" pv="2"/>
+      <inv nrv="20" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="22" pv="26"/>
+      <inv nrv="21" pv="25"/>
+      <inv nrv="1" pv="3"/>
+      <inv nrv="14" pv="3"/>
+      <inv nrv="12" pv="3"/>
+      <inv nrv="20" pv="3"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="14" pv="1"/>
+      <inv nrv="12" pv="1"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138578" file="uninit_pointer.c" line="302"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="105"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="26" pv="26"/>
+      <inv nrv="26" pv="25"/>
+      <inv nrv="0" pv="19"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138657" file="uninit_pointer.c" line="303"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="106"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="1" pv="6"/>
+      <inv nrv="14" pv="6"/>
+      <inv nrv="12" pv="6"/>
+      <inv nrv="27" pv="6"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="12" pv="2"/>
+      <inv nrv="20" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="22" pv="26"/>
+      <inv nrv="21" pv="25"/>
+      <inv nrv="4" pv="16"/>
+      <inv nrv="4" pv="15"/>
+      <inv nrv="1" pv="14"/>
+      <inv nrv="14" pv="14"/>
+      <inv nrv="12" pv="14"/>
+      <inv nrv="27" pv="14"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138685" file="uninit_pointer.c" line="305"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="107"/>
+      <node name="if-then"/>
+      <node name="stmt" num="106"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="1" pv="6"/>
+      <inv nrv="15" pv="6"/>
+      <inv nrv="12" pv="6"/>
+      <inv nrv="27" pv="6"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="12" pv="2"/>
+      <inv nrv="20" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="22" pv="26"/>
+      <inv nrv="21" pv="25"/>
+      <inv nrv="1" pv="17"/>
+      <inv nrv="15" pv="17"/>
+      <inv nrv="12" pv="17"/>
+      <inv nrv="27" pv="17"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138703" file="uninit_pointer.c" line="306"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="107"/>
+      <node name="if-then"/>
+      <node name="stmt" num="106"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="1" pv="6"/>
+      <inv nrv="15" pv="6"/>
+      <inv nrv="12" pv="6"/>
+      <inv nrv="27" pv="6"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="12" pv="2"/>
+      <inv nrv="20" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="11" pv="24"/>
+      <inv nrv="28" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="22" pv="26"/>
+      <inv nrv="21" pv="25"/>
+      <inv nrv="1" pv="20"/>
+      <inv nrv="15" pv="20"/>
+      <inv nrv="12" pv="20"/>
+      <inv nrv="27" pv="20"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138750" file="uninit_pointer.c" line="312"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="109"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="3" pv="5"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="13" pv="5"/>
+      <inv nrv="24" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="21" pv="26"/>
+      <inv nrv="22" pv="25"/>
+      <inv nrv="3" pv="13"/>
+      <inv nrv="14" pv="13"/>
+      <inv nrv="13" pv="13"/>
+      <inv nrv="24" pv="13"/>
+      <inv nrv="3" pv="12"/>
+      <inv nrv="14" pv="12"/>
+      <inv nrv="13" pv="12"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138750" file="uninit_pointer.c" line="312"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="109"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="26" pv="26"/>
+      <inv nrv="26" pv="25"/>
+      <inv nrv="0" pv="11"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138829" file="uninit_pointer.c" line="313"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="110"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="3" pv="6"/>
+      <inv nrv="14" pv="6"/>
+      <inv nrv="13" pv="6"/>
+      <inv nrv="23" pv="6"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="3" pv="5"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="13" pv="5"/>
+      <inv nrv="24" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="21" pv="26"/>
+      <inv nrv="22" pv="25"/>
+      <inv nrv="4" pv="10"/>
+      <inv nrv="4" pv="9"/>
+      <inv nrv="3" pv="8"/>
+      <inv nrv="14" pv="8"/>
+      <inv nrv="13" pv="8"/>
+      <inv nrv="23" pv="8"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138857" file="uninit_pointer.c" line="315"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="111"/>
+      <node name="if-then"/>
+      <node name="stmt" num="110"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="3" pv="6"/>
+      <inv nrv="15" pv="6"/>
+      <inv nrv="13" pv="6"/>
+      <inv nrv="23" pv="6"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="3" pv="5"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="13" pv="5"/>
+      <inv nrv="24" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="7" pv="22"/>
+      <inv nrv="17" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="21" pv="26"/>
+      <inv nrv="22" pv="25"/>
+      <inv nrv="3" pv="4"/>
+      <inv nrv="15" pv="4"/>
+      <inv nrv="13" pv="4"/>
+      <inv nrv="23" pv="4"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="138875" file="uninit_pointer.c" line="316"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="111"/>
+      <node name="if-then"/>
+      <node name="stmt" num="110"/>
+      <node name="stmt" num="104"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="3" pv="6"/>
+      <inv nrv="15" pv="6"/>
+      <inv nrv="13" pv="6"/>
+      <inv nrv="23" pv="6"/>
+      <inv nrv="14" pv="2"/>
+      <inv nrv="3" pv="5"/>
+      <inv nrv="14" pv="5"/>
+      <inv nrv="13" pv="5"/>
+      <inv nrv="24" pv="5"/>
+      <inv nrv="9" pv="24"/>
+      <inv nrv="19" pv="24"/>
+      <inv nrv="8" pv="23"/>
+      <inv nrv="18" pv="23"/>
+      <inv nrv="10" pv="22"/>
+      <inv nrv="25" pv="22"/>
+      <inv nrv="6" pv="21"/>
+      <inv nrv="16" pv="21"/>
+      <inv nrv="21" pv="26"/>
+      <inv nrv="22" pv="25"/>
+      <inv nrv="3" pv="7"/>
+      <inv nrv="15" pv="7"/>
+      <inv nrv="13" pv="7"/>
+      <inv nrv="23" pv="7"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="27">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="4678" vname="flag"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval arg="2" id="5"/>
+     <pval arg="2" id="6"/>
+     <pval arg="1" id="7"/>
+    </pvals>
+    <pvals index="2">
+     <pval>
+      <lhost>
+       <var vid="4679" vname="tmp"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="3">
+     <pval arg="3" id="3"/>
+     <pval arg="1" id="4"/>
+    </pvals>
+    <pvals index="4">
+     <pval arg="1" id="32"/>
+     <pval arg="1" id="33"/>
+     <pval arg="1" id="34"/>
+     <pval arg="2" id="35"/>
+     <pval arg="2" id="36"/>
+    </pvals>
+    <pvals index="5">
+     <pval>
+      <lhost>
+       <var vid="4681" vname="tmp___0"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="6">
+     <pval>
+      <lhost>
+       <var vid="4675" vname="s"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="7">
+     <pval arg="1" id="37"/>
+     <pval arg="1" id="38"/>
+     <pval arg="1" id="39"/>
+     <pval arg="2" id="40"/>
+     <pval arg="2" id="41"/>
+    </pvals>
+    <pvals index="8">
+     <pval arg="3" id="28"/>
+     <pval arg="1" id="29"/>
+    </pvals>
+    <pvals index="9">
+     <pval arg="3" id="31"/>
+    </pvals>
+    <pvals index="10">
+     <pval arg="3" id="30"/>
+    </pvals>
+    <pvals index="11">
+     <pval arg="3" id="22"/>
+    </pvals>
+    <pvals index="12">
+     <pval arg="2" id="25"/>
+     <pval arg="2" id="26"/>
+     <pval arg="1" id="27"/>
+    </pvals>
+    <pvals index="13">
+     <pval arg="3" id="23"/>
+     <pval arg="1" id="24"/>
+    </pvals>
+    <pvals index="14">
+     <pval arg="3" id="8"/>
+     <pval arg="1" id="9"/>
+    </pvals>
+    <pvals index="15">
+     <pval arg="3" id="11"/>
+    </pvals>
+    <pvals index="16">
+     <pval arg="3" id="10"/>
+    </pvals>
+    <pvals index="17">
+     <pval arg="1" id="12"/>
+     <pval arg="1" id="13"/>
+     <pval arg="1" id="14"/>
+     <pval arg="2" id="15"/>
+     <pval arg="2" id="16"/>
+    </pvals>
+    <pvals index="18">
+     <pval arg="1" id="1"/>
+    </pvals>
+    <pvals index="19">
+     <pval arg="3" id="2"/>
+    </pvals>
+    <pvals index="20">
+     <pval arg="1" id="17"/>
+     <pval arg="1" id="18"/>
+     <pval arg="1" id="19"/>
+     <pval arg="2" id="20"/>
+     <pval arg="2" id="21"/>
+    </pvals>
+    <pvals index="21">
+     <pval>
+      <lhost>
+       <mem byte="138750" etag="fnapp" file="uninit_pointer.c" line="312" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="b"/>
+      </offset>
+     </pval>
+    </pvals>
+    <pvals index="22">
+     <pval>
+      <lhost>
+       <mem byte="138750" etag="fnapp" file="uninit_pointer.c" line="312" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="a"/>
+      </offset>
+     </pval>
+    </pvals>
+    <pvals index="23">
+     <pval>
+      <lhost>
+       <mem byte="138578" etag="fnapp" file="uninit_pointer.c" line="302" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="b"/>
+      </offset>
+     </pval>
+    </pvals>
+    <pvals index="24">
+     <pval>
+      <lhost>
+       <mem byte="138578" etag="fnapp" file="uninit_pointer.c" line="302" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="a"/>
+      </offset>
+     </pval>
+    </pvals>
+    <pvals index="25">
+     <pval byte="138750" etag="fnapp" external="yes" file="uninit_pointer.c" line="312" property="vm" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+      <arg etag="caste" xstr="caste (1:size_t)">
+       <typ tname="size_t" ttag="tnamed"/>
+       <exp etag="const" xstr="1">
+        <constant ctag="cint64" ikind="iint" intValue="1"/>
+       </exp>
+      </arg>
+      <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+       <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+      </arg>
+      <fn etag="lval" xstr="calloc">
+       <lval>
+        <lhost>
+         <var vid="961" vname="calloc"/>
+        </lhost>
+       </lval>
+      </fn>
+     </pval>
+    </pvals>
+    <pvals index="26">
+     <pval byte="138578" etag="fnapp" external="yes" file="uninit_pointer.c" line="302" property="vm" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+      <arg etag="caste" xstr="caste (1:size_t)">
+       <typ tname="size_t" ttag="tnamed"/>
+       <exp etag="const" xstr="1">
+        <constant ctag="cint64" ikind="iint" intValue="1"/>
+       </exp>
+      </arg>
+      <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+       <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+      </arg>
+      <fn etag="lval" xstr="calloc">
+       <lval>
+        <lhost>
+         <var vid="961" vname="calloc"/>
+        </lhost>
+       </lval>
+      </fn>
+     </pval>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="29">
+    <nrv index="0" tag="range" value="1"/>
+    <nrv byte="138578" etag="fnapp" file="uninit_pointer.c" index="1" line="302" tag="fv" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+     <arg etag="caste" xstr="caste (1:size_t)">
+      <typ tname="size_t" ttag="tnamed"/>
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </arg>
+     <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+      <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+     </arg>
+     <fn etag="lval" xstr="calloc">
+      <lval>
+       <lhost>
+        <var vid="961" vname="calloc"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv index="2" tag="range" value="2"/>
+    <nrv byte="138750" etag="fnapp" file="uninit_pointer.c" index="3" line="312" tag="fv" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+     <arg etag="caste" xstr="caste (1:size_t)">
+      <typ tname="size_t" ttag="tnamed"/>
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </arg>
+     <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+      <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+     </arg>
+     <fn etag="lval" xstr="calloc">
+      <lval>
+       <lhost>
+        <var vid="961" vname="calloc"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv index="4" tag="range" value="0"/>
+    <nrv etag="lval" index="5" tag="fv" xstr="flag">
+     <lval>
+      <lhost>
+       <var vid="4678" vname="flag"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="6" tag="fv" xstr="*(fn(lval (calloc))@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).b">
+     <lval>
+      <lhost>
+       <mem byte="138750" etag="fnapp" file="uninit_pointer.c" line="312" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="b"/>
+      </offset>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="7" tag="fv" xstr="*(fn(lval (calloc))@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).a">
+     <lval>
+      <lhost>
+       <mem byte="138750" etag="fnapp" file="uninit_pointer.c" line="312" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="a"/>
+      </offset>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="8" tag="fv" xstr="*(fn(lval (calloc))@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).b">
+     <lval>
+      <lhost>
+       <mem byte="138578" etag="fnapp" file="uninit_pointer.c" line="302" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="b"/>
+      </offset>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="9" tag="fv" xstr="*(fn(lval (calloc))@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).a">
+     <lval>
+      <lhost>
+       <mem byte="138578" etag="fnapp" file="uninit_pointer.c" line="302" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+        <arg etag="caste" xstr="caste (1:size_t)">
+         <typ tname="size_t" ttag="tnamed"/>
+         <exp etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+        </arg>
+        <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+         <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+        </arg>
+        <fn etag="lval" xstr="calloc">
+         <lval>
+          <lhost>
+           <var vid="961" vname="calloc"/>
+          </lhost>
+         </lval>
+        </fn>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="51" fname="a"/>
+      </offset>
+     </lval>
+    </nrv>
+    <nrv index="10" tag="range" value="20"/>
+    <nrv index="11" tag="range" value="10"/>
+    <nrv address-type="external" index="12" tag="vs" value="0">
+     <base byte="138578" etag="fnapp" file="uninit_pointer.c" line="302" xstr="fn(calloc)@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+      <arg etag="caste" xstr="caste (1:size_t)">
+       <typ tname="size_t" ttag="tnamed"/>
+       <exp etag="const" xstr="1">
+        <constant ctag="cint64" ikind="iint" intValue="1"/>
+       </exp>
+      </arg>
+      <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+       <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+      </arg>
+      <fn etag="lval" xstr="calloc">
+       <lval>
+        <lhost>
+         <var vid="961" vname="calloc"/>
+        </lhost>
+       </lval>
+      </fn>
+     </base>
+    </nrv>
+    <nrv address-type="external" index="13" not-null="true" tag="vs" value="0">
+     <base byte="138750" etag="fnapp" file="uninit_pointer.c" line="312" xstr="fn(calloc)@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]">
+      <arg etag="caste" xstr="caste (1:size_t)">
+       <typ tname="size_t" ttag="tnamed"/>
+       <exp etag="const" xstr="1">
+        <constant ctag="cint64" ikind="iint" intValue="1"/>
+       </exp>
+      </arg>
+      <arg etag="sizeof" xstr="sizeof (uninit_pointer_014_s_001)">
+       <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+      </arg>
+      <fn etag="lval" xstr="calloc">
+       <lval>
+        <lhost>
+         <var vid="961" vname="calloc"/>
+        </lhost>
+       </lval>
+      </fn>
+     </base>
+    </nrv>
+    <nrv index="14" lb="0" tag="range"/>
+    <nrv index="15" lb="1" tag="range"/>
+    <nrv index="16" tag="ss">
+     <sym name="parameter">
+      <attr value="*(fn(lval (calloc))@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).b"/>
+     </sym>
+    </nrv>
+    <nrv index="17" tag="ss">
+     <sym name="parameter">
+      <attr value="*(fn(lval (calloc))@ 312[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).a"/>
+     </sym>
+    </nrv>
+    <nrv index="18" tag="ss">
+     <sym name="parameter">
+      <attr value="*(fn(lval (calloc))@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).b"/>
+     </sym>
+    </nrv>
+    <nrv index="19" tag="ss">
+     <sym name="parameter">
+      <attr value="*(fn(lval (calloc))@ 302[caste (1:size_t), sizeof (uninit_pointer_014_s_001)]).a"/>
+     </sym>
+    </nrv>
+    <nrv index="20" tag="ss">
+     <sym name="assignedAt#302">
+      <attr value="return-value"/>
+      <attr value="calloc"/>
+     </sym>
+    </nrv>
+    <nrv index="21" tag="ss">
+     <sym name="invalid"/>
+    </nrv>
+    <nrv index="22" tag="ss">
+     <sym name="valid">
+      <attr value="calloc"/>
+     </sym>
+    </nrv>
+    <nrv index="23" tag="ss">
+     <sym name="assignedAt#312"/>
+    </nrv>
+    <nrv index="24" tag="ss">
+     <sym name="assignedAt#312">
+      <attr value="return-value"/>
+      <attr value="calloc"/>
+     </sym>
+    </nrv>
+    <nrv index="25" tag="ss">
+     <sym name="assignedAt#315"/>
+    </nrv>
+    <nrv index="26" tag="ss">
+     <sym name="valid"/>
+    </nrv>
+    <nrv index="27" tag="ss">
+     <sym name="assignedAt#302"/>
+    </nrv>
+    <nrv index="28" tag="ss">
+     <sym name="assignedAt#305"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:33">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

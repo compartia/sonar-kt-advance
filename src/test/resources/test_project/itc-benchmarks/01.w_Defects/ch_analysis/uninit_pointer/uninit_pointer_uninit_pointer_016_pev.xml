@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry time="05/31/2016 17:12:40"/>
+   <log-entry delta-checkvalid="33" delta-invariant="18" delta-lifted="32" time="05/31/2016 16:57:54"/>
+  </log>
+  <function name="uninit_pointer_016">
+   <statistics checkvalid="33" invariant="18" invariant_with_api="32" total="86" total-proven="83"/>
+   <open-proof-obligations>
+    <open id="38" line="405" predicate="valid-mem"/>
+    <open id="81" line="410" predicate="allocation-base"/>
+    <open id="84" line="410" predicate="valid-mem"/>
+   </open-proof-obligations>
+   <proof-obligations-discharged>
+    <discharged id="1" method="check-valid" time="05/31/2016 16:57:54" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/31/2016 16:57:54" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="3" method="check-valid" time="05/31/2016 16:57:54" type="pointer-cast">
+     <evidence comment="cast to character type"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="4" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#392"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="5" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#391"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="6" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#393"/>
+    </discharged>
+    <discharged id="7" method="check-valid" time="05/31/2016 16:57:54" type="cast">
+     <evidence comment="cast to integer in context of if-expr"/>
+    </discharged>
+    <discharged id="8" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="uninit_pointer_016_gbl_doubleptr is global"/>
+    </discharged>
+    <discharged id="9" method="check-valid" time="05/31/2016 16:57:54" type="cast">
+     <evidence comment="null-pointer cast"/>
+    </discharged>
+    <discharged id="10" method="check-valid" time="05/31/2016 16:57:54" type="cast">
+     <evidence comment="null-pointer cast"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="11" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#400"/>
+    </discharged>
+    <discharged id="12" method="check-valid" time="05/31/2016 16:57:54" type="cast">
+     <evidence comment="cast to integer in context of if-expr"/>
+    </discharged>
+    <discharged domain="none" id="13" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="12" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="14" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="uninit_pointer_016_gbl_doubleptr is global"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="15" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#400"/>
+    </discharged>
+    <discharged domain="none" id="16" method="invariants" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="10" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="17" method="invariants" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="4" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="18" method="invariants" time="05/31/2016 16:57:54" type="ptr-lower-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="1" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="19" method="invariants" time="05/31/2016 16:57:54" type="ptr-upper-bound-deref">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="2" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="20" method="check-valid" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="arguments of pointer arithmetic are checked for null"/>
+    </discharged>
+    <discharged id="21" method="check-valid" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="22" method="check-valid" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="23" method="check-valid" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy upperbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="24" method="check-valid" time="05/31/2016 16:57:54" type="cast">
+     <evidence comment="null-pointer cast"/>
+    </discharged>
+    <discharged id="25" method="check-valid" time="05/31/2016 16:57:54" type="cast">
+     <evidence comment="null-pointer cast"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="26" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#400"/>
+    </discharged>
+    <discharged domain="none" id="27" method="invariants" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="8" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="28" method="invariants" time="05/31/2016 16:57:54" type="null-terminated">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="18" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="29" method="invariants" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="16" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="30" method="invariants" time="05/31/2016 16:57:54" type="ptr-upper-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="7" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="31" method="invariants" time="05/31/2016 16:57:54" type="initialized-range">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="11" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="32" method="invariants" time="05/31/2016 16:57:54" type="no-overlap">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="3" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="linear equalities" id="33" method="invariants" time="05/31/2016 16:57:54" type="not-null" violation="true">
+     <evidence comment="return value from malloc may be null"/>
+    </discharged>
+    <discharged domain="linear equalities" id="34" method="invariants" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="non-negative offset from return value from malloc at 392"/>
+    </discharged>
+    <discharged domain="none" id="35" method="invariants" time="05/31/2016 16:57:54" type="ptr-upper-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="21" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="36" method="check-valid" time="05/31/2016 16:57:54" type="pointer-cast">
+     <evidence comment="source and target type are the same"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="37" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#392"/>
+    </discharged>
+    <discharged domain="linear equalities" id="39" method="invariants" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="non-negative offset from return value from malloc at 392"/>
+    </discharged>
+    <discharged domain="linear equalities" id="40" method="invariants" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="address received from return value from malloc at 392dereferencability is checked as part of postcondition"/>
+    </discharged>
+    <discharged id="41" method="check-valid" time="05/31/2016 16:57:54" type="pointer-cast">
+     <evidence comment="source and target type are the same"/>
+    </discharged>
+    <discharged domain="none" id="42" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="12" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="43" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="uninit_pointer_016_gbl_doubleptr is global"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="44" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#400"/>
+    </discharged>
+    <discharged domain="none" id="45" method="invariants" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="10" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="46" method="invariants" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="4" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="47" method="invariants" time="05/31/2016 16:57:54" type="ptr-lower-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="1" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="48" method="invariants" time="05/31/2016 16:57:54" type="ptr-upper-bound-deref">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="2" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="49" method="check-valid" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="arguments of pointer arithmetic are checked for null"/>
+    </discharged>
+    <discharged id="50" method="check-valid" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="51" method="check-valid" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="52" method="check-valid" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy upperbound by inductive hypothesis"/>
+    </discharged>
+    <discharged domain="none" id="53" method="invariants" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="19" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="54" method="invariants" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="16" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="55" method="invariants" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="6" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="56" method="invariants" time="05/31/2016 16:57:54" type="allocation-base">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="9" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="57" method="check-valid" time="05/31/2016 16:57:54" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged domain="none" id="58" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="12" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="59" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="uninit_pointer_016_gbl_doubleptr is global"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="60" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#400"/>
+    </discharged>
+    <discharged domain="none" id="61" method="invariants" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="10" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="62" method="invariants" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="4" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="63" method="invariants" time="05/31/2016 16:57:54" type="ptr-lower-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="1" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="64" method="invariants" time="05/31/2016 16:57:54" type="ptr-upper-bound-deref">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="2" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="65" method="check-valid" time="05/31/2016 16:57:54" type="not-null">
+     <evidence comment="arguments of pointer arithmetic are checked for null"/>
+    </discharged>
+    <discharged id="66" method="check-valid" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="67" method="check-valid" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="68" method="check-valid" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy upperbound by inductive hypothesis"/>
+    </discharged>
+    <discharged domain="none" id="69" method="invariants" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="13" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="70" method="invariants" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="20" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="none" id="71" method="invariants" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="15" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="symbolic sets" id="72" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#400"/>
+    </discharged>
+    <discharged id="73" method="check-valid" time="05/31/2016 16:57:54" type="int-underflow">
+     <evidence comment="add non-negative number: value is 1"/>
+    </discharged>
+    <discharged domain="linear equalities" id="74" method="invariants" time="05/31/2016 16:57:54" type="int-overflow">
+     <evidence comment="result of addition is less than MAX: ((9 + 1) &lt; 32767)"/>
+    </discharged>
+    <discharged domain="none" id="75" method="invariants" time="05/31/2016 16:57:54" type="allocation-base">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="14" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="76" method="check-valid" time="05/31/2016 16:57:54" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="77" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="uninit_pointer_016_gbl_doubleptr is global"/>
+    </discharged>
+    <discharged domain="none" id="78" method="invariants" time="05/31/2016 16:57:54" type="valid-mem">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="17" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="79" method="check-valid" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="global variable uninit_pointer_016_gbl_doubleptr is assigned a value with valid lower bound by inductive hypothesis (checked at assignment)"/>
+    </discharged>
+    <discharged domain="none" id="80" method="invariants" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="predicate depends on global variables uninit_pointer_016_gbl_doubleptr, which is delegated to global analysis"/>
+     <assumptions>
+      <uses a-id="5" a-type="global"/>
+     </assumptions>
+    </discharged>
+    <discharged id="82" method="check-valid" time="05/31/2016 16:57:54" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="83" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#392"/>
+    </discharged>
+    <discharged domain="linear equalities" id="85" method="invariants" time="05/31/2016 16:57:54" type="lower-bound">
+     <evidence comment="non-negative offset from return value from malloc at 392"/>
+    </discharged>
+    <discharged domain="linear equalities" id="86" method="invariants" time="05/31/2016 16:57:54" type="upper-bound">
+     <evidence comment="address received from return value from malloc at 392dereferencability is checked as part of postcondition"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/31/2016 17:12:40">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

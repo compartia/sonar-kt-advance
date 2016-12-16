@@ -1,0 +1,3859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_013">
+   <statistics avg-context-complexity="4.34" avg-predicate-complexity="1.12" context-complexity="560" predicate-complexity="145" size="129"/>
+   <unconstrained-external-functions/>
+   <primary-proof-obligations>
+    <proof-obligation c-complexity="0" id="1" origin="prim-op" p-complexity="1">
+     <location byte="138013" file="uninit_pointer.c" line="263"/>
+     <predicate op="mult" size="iulong" tag="int-underflow">
+      <exp1 etag="const" xstr="5">
+       <constant ctag="cint64" ikind="iulong" intValue="5"/>
+      </exp1>
+      <exp2 etag="sizeof" xstr="sizeof ((int*))">
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="87"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="2" origin="prim-op" p-complexity="1">
+     <location byte="138013" file="uninit_pointer.c" line="263"/>
+     <predicate op="mult" size="iulong" tag="int-overflow">
+      <exp1 etag="const" xstr="5">
+       <constant ctag="cint64" ikind="iulong" intValue="5"/>
+      </exp1>
+      <exp2 etag="sizeof" xstr="sizeof ((int*))">
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="87"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="3" origin="prim-exp" p-complexity="1">
+     <location byte="138013" file="uninit_pointer.c" line="263"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tvoid"/>
+      <tto ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </tto>
+      <exp etag="lval" xstr="tmp">
+       <lval>
+        <lhost>
+         <var vid="4669" vname="tmp"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="87"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="4" origin="prim-exp" p-complexity="0">
+     <location byte="138013" file="uninit_pointer.c" line="263"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4669" vname="tmp"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="87"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="5" origin="prim-exp" p-complexity="0">
+     <location byte="138071" file="uninit_pointer.c" line="266"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="89"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="6" origin="prim-op" p-complexity="1">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate op="mult" size="iulong" tag="int-underflow">
+      <exp1 etag="const" xstr="5">
+       <constant ctag="cint64" ikind="iulong" intValue="5"/>
+      </exp1>
+      <exp2 etag="sizeof" xstr="sizeof (int)">
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="7" origin="prim-op" p-complexity="1">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate op="mult" size="iulong" tag="int-overflow">
+      <exp1 etag="const" xstr="5">
+       <constant ctag="cint64" ikind="iulong" intValue="5"/>
+      </exp1>
+      <exp2 etag="sizeof" xstr="sizeof (int)">
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="8" origin="prim-exp" p-complexity="0">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4668" vname="ptr"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="9" origin="prim-exp" p-complexity="0">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="10" origin="prim-op" p-complexity="1">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="11" origin="prim-op" p-complexity="1">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="12" origin="prim-op" p-complexity="3">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate op="indexpi" tag="ptr-lower-bound">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="13" origin="prim-op" p-complexity="2">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate op="indexpi" tag="ptr-upper-bound-deref">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="14" origin="prim-lval" p-complexity="3">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="not-null">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="15" origin="prim-lval" p-complexity="3">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="valid-mem">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="16" origin="prim-lval" p-complexity="3">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="lower-bound">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="17" origin="prim-lval" p-complexity="3">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="upper-bound">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="18" origin="prim-exp" p-complexity="1">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tvoid"/>
+      <tto ikind="iint" ttag="tint"/>
+      <exp etag="lval" xstr="tmp___0">
+       <lval>
+        <lhost>
+         <var vid="4673" vname="tmp___0"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="19" origin="prim-exp" p-complexity="0">
+     <location byte="138091" file="uninit_pointer.c" line="267"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4673" vname="tmp___0"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="20" origin="prim-exp" p-complexity="0">
+     <location byte="138071" file="uninit_pointer.c" line="266"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="21" origin="prim-op" p-complexity="2">
+     <location byte="138071" file="uninit_pointer.c" line="266"/>
+     <predicate op="plusa" size="iint" tag="int-underflow">
+      <exp1 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="22" origin="prim-op" p-complexity="2">
+     <location byte="138071" file="uninit_pointer.c" line="266"/>
+     <predicate op="plusa" size="iint" tag="int-overflow">
+      <exp1 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="91"/>
+       <node name="loop"/>
+       <node name="stmt" num="88"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="23" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="24" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="25" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="26" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="27" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="28" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="29" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="30" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="31" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="32" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="33" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="34" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="35" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="36" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="37" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="38" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="39" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="40" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="41" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="42" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="43" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="5"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="44" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="5"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="45" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="5"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="46" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="5"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="47" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="6"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="48" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="6"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="49" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="6"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="50" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="6"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="51" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="7"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="52" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="7"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="53" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="7"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="54" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="7"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="55" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="8"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="56" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="8"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="57" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="8"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="58" origin="prim-offset" p-complexity="0">
+     <location byte="138133" file="uninit_pointer.c" line="268"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="8"/>
+       <node name="stmt" num="92"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="59" origin="prim-exp" p-complexity="0">
+     <location byte="138219" file="uninit_pointer.c" line="272"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="94"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="60" origin="prim-exp" p-complexity="0">
+     <location byte="138243" file="uninit_pointer.c" line="274"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4671" vname="j"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="98"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="61" origin="prim-exp" p-complexity="8">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+         <exp1 etag="lval" xstr="ptr">
+          <lval>
+           <lhost>
+            <var vid="4668" vname="ptr"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="lval" xstr="i">
+          <lval>
+           <lhost>
+            <var vid="4670" vname="i"/>
+           </lhost>
+          </lval>
+         </exp2>
+         <typ ttag="tptr">
+          <typ ttag="tptr">
+           <typ ikind="iint" ttag="tint"/>
+          </typ>
+         </typ>
+        </mem>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="62" origin="prim-exp" p-complexity="0">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4668" vname="ptr"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="63" origin="prim-exp" p-complexity="0">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="64" origin="prim-op" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="65" origin="prim-op" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="66" origin="prim-op" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate op="pluspi" tag="ptr-lower-bound">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="67" origin="prim-op" p-complexity="2">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate op="pluspi" tag="ptr-upper-bound-deref">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="68" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="not-null">
+      <exp binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="69" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="valid-mem">
+      <exp binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="70" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="lower-bound">
+      <exp binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="71" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="upper-bound">
+      <exp binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="72" origin="prim-exp" p-complexity="0">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4671" vname="j"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="73" origin="prim-op" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+       <lval>
+        <lhost>
+         <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+          <exp1 etag="lval" xstr="ptr">
+           <lval>
+            <lhost>
+             <var vid="4668" vname="ptr"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="lval" xstr="i">
+           <lval>
+            <lhost>
+             <var vid="4670" vname="i"/>
+            </lhost>
+           </lval>
+          </exp2>
+          <typ ttag="tptr">
+           <typ ttag="tptr">
+            <typ ikind="iint" ttag="tint"/>
+           </typ>
+          </typ>
+         </mem>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="74" origin="prim-op" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+       <lval>
+        <lhost>
+         <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+          <exp1 etag="lval" xstr="ptr">
+           <lval>
+            <lhost>
+             <var vid="4668" vname="ptr"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="lval" xstr="i">
+           <lval>
+            <lhost>
+             <var vid="4670" vname="i"/>
+            </lhost>
+           </lval>
+          </exp2>
+          <typ ttag="tptr">
+           <typ ttag="tptr">
+            <typ ikind="iint" ttag="tint"/>
+           </typ>
+          </typ>
+         </mem>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="75" origin="prim-op" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate op="pluspi" tag="ptr-lower-bound">
+      <typ ikind="iint" ttag="tint"/>
+      <exp1 etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+       <lval>
+        <lhost>
+         <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+          <exp1 etag="lval" xstr="ptr">
+           <lval>
+            <lhost>
+             <var vid="4668" vname="ptr"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="lval" xstr="i">
+           <lval>
+            <lhost>
+             <var vid="4670" vname="i"/>
+            </lhost>
+           </lval>
+          </exp2>
+          <typ ttag="tptr">
+           <typ ttag="tptr">
+            <typ ikind="iint" ttag="tint"/>
+           </typ>
+          </typ>
+         </mem>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="j">
+       <lval>
+        <lhost>
+         <var vid="4671" vname="j"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="76" origin="prim-op" p-complexity="2">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate op="pluspi" tag="ptr-upper-bound-deref">
+      <typ ikind="iint" ttag="tint"/>
+      <exp1 etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+       <lval>
+        <lhost>
+         <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+          <exp1 etag="lval" xstr="ptr">
+           <lval>
+            <lhost>
+             <var vid="4668" vname="ptr"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="lval" xstr="i">
+           <lval>
+            <lhost>
+             <var vid="4670" vname="i"/>
+            </lhost>
+           </lval>
+          </exp2>
+          <typ ttag="tptr">
+           <typ ttag="tptr">
+            <typ ikind="iint" ttag="tint"/>
+           </typ>
+          </typ>
+         </mem>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="j">
+       <lval>
+        <lhost>
+         <var vid="4671" vname="j"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="77" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="not-null">
+      <exp binop="pluspi" etag="binop" xstr="((*(((lval (ptr) +i lval (i)):((int*)*)) +i j):(int*)">
+       <exp1 etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="j">
+        <lval>
+         <lhost>
+          <var vid="4671" vname="j"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="78" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="valid-mem">
+      <exp binop="pluspi" etag="binop" xstr="((*(((lval (ptr) +i lval (i)):((int*)*)) +i j):(int*)">
+       <exp1 etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="j">
+        <lval>
+         <lhost>
+          <var vid="4671" vname="j"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="79" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="lower-bound">
+      <exp binop="pluspi" etag="binop" xstr="((*(((lval (ptr) +i lval (i)):((int*)*)) +i j):(int*)">
+       <exp1 etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="j">
+        <lval>
+         <lhost>
+          <var vid="4671" vname="j"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="80" origin="prim-lval" p-complexity="3">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="upper-bound">
+      <exp binop="pluspi" etag="binop" xstr="((*(((lval (ptr) +i lval (i)):((int*)*)) +i j):(int*)">
+       <exp1 etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="pluspi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="j">
+        <lval>
+         <lhost>
+          <var vid="4671" vname="j"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ikind="iint" ttag="tint"/>
+       </typ>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="81" origin="prim-exp" p-complexity="2">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4674" vname="arr"/>
+       </lhost>
+       <offset>
+        <offset>
+         <index etag="lval" xstr="j">
+          <lval>
+           <lhost>
+            <var vid="4671" vname="j"/>
+           </lhost>
+          </lval>
+         </index>
+        </offset>
+        <index etag="lval" xstr="i">
+         <lval>
+          <lhost>
+           <var vid="4670" vname="i"/>
+          </lhost>
+         </lval>
+        </index>
+       </offset>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="82" origin="prim-offset" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lval"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="83" origin="prim-offset" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="var"/>
+       <node name="lval"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="84" origin="prim-exp" p-complexity="0">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index"/>
+       <node name="var"/>
+       <node name="lval"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="85" origin="prim-offset" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="index-lower-bound">
+      <exp etag="lval" xstr="j">
+       <lval>
+        <lhost>
+         <var vid="4671" vname="j"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lval"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="86" origin="prim-offset" p-complexity="1">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="index-upper-bound">
+      <exp etag="lval" xstr="j">
+       <lval>
+        <lhost>
+         <var vid="4671" vname="j"/>
+        </lhost>
+       </lval>
+      </exp>
+      <len-exp etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lval"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="87" origin="prim-exp" p-complexity="0">
+     <location byte="138269" file="uninit_pointer.c" line="276"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4671" vname="j"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="index"/>
+       <node name="index-offset"/>
+       <node name="var"/>
+       <node name="lval"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="88" origin="prim-exp" p-complexity="0">
+     <location byte="138243" file="uninit_pointer.c" line="274"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4671" vname="j"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="89" origin="prim-op" p-complexity="2">
+     <location byte="138243" file="uninit_pointer.c" line="274"/>
+     <predicate op="plusa" size="iint" tag="int-underflow">
+      <exp1 etag="lval" xstr="j">
+       <lval>
+        <lhost>
+         <var vid="4671" vname="j"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="10" id="90" origin="prim-op" p-complexity="2">
+     <location byte="138243" file="uninit_pointer.c" line="274"/>
+     <predicate op="plusa" size="iint" tag="int-overflow">
+      <exp1 etag="lval" xstr="j">
+       <lval>
+        <lhost>
+         <var vid="4671" vname="j"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="100"/>
+       <node name="loop"/>
+       <node name="stmt" num="97"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" fname="free" id="91" name="allocation-base" origin="f-pre" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="allocation-base">
+      <exp etag="caste" xstr="caste (*(((lval (ptr) +i lval (i)):((int*)*)):(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="ptr" nr="1" xstr="caste (*(((lval (ptr) +i lval (i)):((int*)*)):(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="allocation-base">
+      <math>
+       <apply>
+        <allocation-base/>
+        <ci>ptr</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="92" origin="prim-exp" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="iint" ttag="tint"/>
+      <tto ttag="tvoid"/>
+      <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+       <lval>
+        <lhost>
+         <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+          <exp1 etag="lval" xstr="ptr">
+           <lval>
+            <lhost>
+             <var vid="4668" vname="ptr"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="lval" xstr="i">
+           <lval>
+            <lhost>
+             <var vid="4670" vname="i"/>
+            </lhost>
+           </lval>
+          </exp2>
+          <typ ttag="tptr">
+           <typ ttag="tptr">
+            <typ ikind="iint" ttag="tint"/>
+           </typ>
+          </typ>
+         </mem>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="93" origin="prim-exp" p-complexity="8">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+         <exp1 etag="lval" xstr="ptr">
+          <lval>
+           <lhost>
+            <var vid="4668" vname="ptr"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="lval" xstr="i">
+          <lval>
+           <lhost>
+            <var vid="4670" vname="i"/>
+           </lhost>
+          </lval>
+         </exp2>
+         <typ ttag="tptr">
+          <typ ttag="tptr">
+           <typ ikind="iint" ttag="tint"/>
+          </typ>
+         </typ>
+        </mem>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="94" origin="prim-exp" p-complexity="0">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4668" vname="ptr"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="95" origin="prim-exp" p-complexity="0">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="96" origin="prim-op" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="97" origin="prim-op" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="98" origin="prim-op" p-complexity="3">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate op="indexpi" tag="ptr-lower-bound">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="99" origin="prim-op" p-complexity="2">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate op="indexpi" tag="ptr-upper-bound-deref">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="100" origin="prim-lval" p-complexity="3">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="not-null">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="101" origin="prim-lval" p-complexity="3">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="valid-mem">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="102" origin="prim-lval" p-complexity="3">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="lower-bound">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="103" origin="prim-lval" p-complexity="3">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="upper-bound">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lval"/>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="104" origin="prim-exp" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (*(((lval (ptr) +i lval (i)):((int*)*)):(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="105" origin="prim-exp" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (*(((lval (ptr) +i lval (i)):((int*)*)):(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ttag="tvoid"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="106" origin="prim-exp" p-complexity="1">
+     <location byte="138306" file="uninit_pointer.c" line="278"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (*(((lval (ptr) +i lval (i)):((int*)*)):(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (ptr) +i lval (i)):((int*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+           <exp1 etag="lval" xstr="ptr">
+            <lval>
+             <lhost>
+              <var vid="4668" vname="ptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4670" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="iint" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ttag="tvoid"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="107" origin="prim-exp" p-complexity="0">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4668" vname="ptr"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="108" origin="prim-exp" p-complexity="0">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="109" origin="prim-op" p-complexity="1">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="110" origin="prim-op" p-complexity="1">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="111" origin="prim-op" p-complexity="3">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate op="indexpi" tag="ptr-lower-bound">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="112" origin="prim-op" p-complexity="2">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate op="indexpi" tag="ptr-upper-bound-deref">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="113" origin="prim-lval" p-complexity="3">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="not-null">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="114" origin="prim-lval" p-complexity="3">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="valid-mem">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="115" origin="prim-lval" p-complexity="3">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="lower-bound">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="116" origin="prim-lval" p-complexity="3">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="upper-bound">
+      <exp binop="indexpi" etag="binop" xstr="((ptr +i i):((int*)*)">
+       <exp1 etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp1>
+       <exp2 etag="lval" xstr="i">
+        <lval>
+         <lhost>
+          <var vid="4670" vname="i"/>
+         </lhost>
+        </lval>
+       </exp2>
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </exp>
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="117" origin="prim-exp" p-complexity="0">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tvoid"/>
+      <tto ikind="iint" ttag="tint"/>
+      <exp etag="caste" xstr="caste (0:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="const" xstr="0">
+        <constant ctag="cint64" ikind="iint" intValue="0"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="118" origin="prim-exp" p-complexity="0">
+     <location byte="138326" file="uninit_pointer.c" line="279"/>
+     <predicate tag="cast">
+      <tfrom ikind="iint" ttag="tint"/>
+      <tto ttag="tptr">
+       <typ ttag="tvoid"/>
+      </tto>
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="119" origin="prim-exp" p-complexity="0">
+     <location byte="138219" file="uninit_pointer.c" line="272"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4670" vname="i"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="120" origin="prim-op" p-complexity="2">
+     <location byte="138219" file="uninit_pointer.c" line="272"/>
+     <predicate op="plusa" size="iint" tag="int-underflow">
+      <exp1 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="5" id="121" origin="prim-op" p-complexity="2">
+     <location byte="138219" file="uninit_pointer.c" line="272"/>
+     <predicate op="plusa" size="iint" tag="int-overflow">
+      <exp1 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4670" vname="i"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="101"/>
+       <node name="loop"/>
+       <node name="stmt" num="93"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="free" id="122" name="allocation-base" origin="f-pre" p-complexity="1">
+     <location byte="138354" file="uninit_pointer.c" line="281"/>
+     <predicate tag="allocation-base">
+      <exp etag="caste" xstr="caste (ptr:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="ptr" nr="1" xstr="caste (ptr:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="allocation-base">
+      <math>
+       <apply>
+        <allocation-base/>
+        <ci>ptr</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="123" origin="prim-exp" p-complexity="1">
+     <location byte="138354" file="uninit_pointer.c" line="281"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </tfrom>
+      <tto ttag="tvoid"/>
+      <exp etag="lval" xstr="ptr">
+       <lval>
+        <lhost>
+         <var vid="4668" vname="ptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="124" origin="prim-exp" p-complexity="0">
+     <location byte="138354" file="uninit_pointer.c" line="281"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4668" vname="ptr"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="125" origin="prim-exp" p-complexity="1">
+     <location byte="138354" file="uninit_pointer.c" line="281"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (ptr:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="126" origin="prim-exp" p-complexity="1">
+     <location byte="138354" file="uninit_pointer.c" line="281"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (ptr:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ttag="tvoid"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="127" origin="prim-exp" p-complexity="1">
+     <location byte="138354" file="uninit_pointer.c" line="281"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (ptr:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4668" vname="ptr"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ttag="tvoid"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="128" origin="prim-exp" p-complexity="0">
+     <location byte="138367" file="uninit_pointer.c" line="282"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tvoid"/>
+      <tto ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </tto>
+      <exp etag="caste" xstr="caste (0:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="const" xstr="0">
+        <constant ctag="cint64" ikind="iint" intValue="0"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="129" origin="prim-exp" p-complexity="0">
+     <location byte="138367" file="uninit_pointer.c" line="282"/>
+     <predicate tag="cast">
+      <tfrom ikind="iint" ttag="tint"/>
+      <tto ttag="tptr">
+       <typ ttag="tvoid"/>
+      </tto>
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="102"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+   </primary-proof-obligations>
+  </function>
+  <header time="05/31/2016 16:55:52">
+   <application file="uninit_pointer.xml" name="application"/>
+  </header>
+ </c-analysis>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function cfilename="src/memtest.c" gvid="762" name="memtest_fill_random" num-ppo="0">
+   <statistics api-assumptions="1" callers="1" ds-assumptions="0" field-assignments="0" global-assignments="0" global-assumptions="0" rv-assumptions="0"/>
+   <parameters>
+    <param formal-vid="969" index="1" vname="l"/>
+    <param formal-vid="970" index="2" vname="bytes"/>
+   </parameters>
+   <callers>
+    <caller cfilename="src/memtest.c" fname="memtest_test" gvid="758" updated="05/24/2016 04:22:02" updated-f="1464063722.07">
+     <call-site byte="35286" file="src/memtest.c" line="226"/>
+     <args>
+      <arg/>
+      <arg/>
+     </args>
+     <calling-context>
+      <node name="instr" num="5"/>
+      <node name="stmt" num="100"/>
+      <node name="loop"/>
+      <node name="stmt" num="97"/>
+     </calling-context>
+    </caller>
+   </callers>
+   <api-assumptions>
+    <api-assumption nr="1">
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="l">
+       <lval>
+        <lhost>
+         <var vid="969" vname="l"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="30"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </api-assumption>
+   </api-assumptions>
+   <rv-assumptions/>
+   <ds-assumptions/>
+   <global-assumptions/>
+   <global-assignments/>
+   <field-assignments/>
+  </function>
+  <header time="05/24/2016 04:45:10">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4663" vname="uninit_pointer_012">
+    <vtyp ttag="tfun" vararg="false">
+     <args/>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="137795" file="uninit_pointer.c" line="241"/>
+   </svar>
+   <sformals/>
+   <slocals>
+    <varinfo vid="4664" vname="fptr">
+     <vtyp ttag="tptr">
+      <typ fkind="ffloat" ttag="tfloat"/>
+     </vtyp>
+     <vdecl byte="137831" file="uninit_pointer.c" line="243"/>
+    </varinfo>
+    <varinfo vaddrof="true" vid="4665" vname="arr">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="10"/>
+      </exp>
+      <typ fkind="ffloat" ttag="tfloat"/>
+     </vtyp>
+     <vdecl byte="137846" file="uninit_pointer.c" line="244"/>
+    </varinfo>
+    <varinfo vid="4666" vname="i">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="137873" file="uninit_pointer.c" line="246"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="76">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4664" vname="fptr"/>
+          </lhost>
+         </lval>
+         <exp etag="startof">
+          <lval>
+           <lhost>
+            <var vid="4665" vname="arr"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="137856" file="uninit_pointer.c" line="245"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4666" vname="i"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="0"/>
+         </exp>
+         <loc byte="137877" file="uninit_pointer.c" line="247"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="77"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="77">
+      <skind breakstmtid="81" continuestmtid="77" stag="loop">
+       <block>
+        <bstmts>
+         <stmt sid="78">
+          <skind stag="if">
+           <exp binop="lt" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="4666" vname="i"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="5"/>
+            </exp2>
+            <typ ikind="iint" ttag="tint"/>
+           </exp>
+           <thenblock>
+            <bstmts/>
+           </thenblock>
+           <elseblock>
+            <bstmts>
+             <stmt sid="79">
+              <skind stag="break">
+               <loc byte="137877" file="uninit_pointer.c" line="247"/>
+              </skind>
+              <succs>
+               <int intValue="81"/>
+              </succs>
+              <preds>
+               <int intValue="78"/>
+              </preds>
+             </stmt>
+            </bstmts>
+           </elseblock>
+           <loc byte="137877" file="uninit_pointer.c" line="247"/>
+          </skind>
+          <succs>
+           <int intValue="80"/>
+           <int intValue="79"/>
+          </succs>
+          <preds>
+           <int intValue="77"/>
+          </preds>
+         </stmt>
+         <stmt sid="80">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <mem binop="indexpi" etag="binop">
+                <exp1 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="4664" vname="fptr"/>
+                  </lhost>
+                 </lval>
+                </exp1>
+                <exp2 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="4666" vname="i"/>
+                  </lhost>
+                 </lval>
+                </exp2>
+                <typ ttag="tptr">
+                 <typ fkind="ffloat" ttag="tfloat"/>
+                </typ>
+               </mem>
+              </lhost>
+             </lval>
+             <exp etag="caste">
+              <typ fkind="ffloat" ttag="tfloat"/>
+              <exp etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="4666" vname="i"/>
+                </lhost>
+               </lval>
+              </exp>
+             </exp>
+             <loc byte="137904" file="uninit_pointer.c" line="249"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4666" vname="i"/>
+              </lhost>
+             </lval>
+             <exp binop="plusa" etag="binop">
+              <exp1 etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="4666" vname="i"/>
+                </lhost>
+               </lval>
+              </exp1>
+              <exp2 etag="const">
+               <constant ctag="cint64" ikind="iint" intValue="1"/>
+              </exp2>
+              <typ ikind="iint" ttag="tint"/>
+             </exp>
+             <loc byte="137877" file="uninit_pointer.c" line="247"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="77"/>
+          </succs>
+          <preds>
+           <int intValue="78"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </block>
+       <loc byte="137877" file="uninit_pointer.c" line="247"/>
+      </skind>
+      <succs>
+       <int intValue="78"/>
+      </succs>
+      <preds>
+       <int intValue="80"/>
+       <int intValue="76"/>
+      </preds>
+     </stmt>
+     <stmt sid="81">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4666" vname="i"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="0"/>
+         </exp>
+         <loc byte="137928" file="uninit_pointer.c" line="251"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="82"/>
+      </succs>
+      <preds>
+       <int intValue="79"/>
+      </preds>
+     </stmt>
+     <stmt sid="82">
+      <skind breakstmtid="86" continuestmtid="82" stag="loop">
+       <block>
+        <bstmts>
+         <stmt sid="83">
+          <skind stag="if">
+           <exp binop="lt" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="4666" vname="i"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="10"/>
+            </exp2>
+            <typ ikind="iint" ttag="tint"/>
+           </exp>
+           <thenblock>
+            <bstmts/>
+           </thenblock>
+           <elseblock>
+            <bstmts>
+             <stmt sid="84">
+              <skind stag="break">
+               <loc byte="137928" file="uninit_pointer.c" line="251"/>
+              </skind>
+              <succs>
+               <int intValue="86"/>
+              </succs>
+              <preds>
+               <int intValue="83"/>
+              </preds>
+             </stmt>
+            </bstmts>
+           </elseblock>
+           <loc byte="137928" file="uninit_pointer.c" line="251"/>
+          </skind>
+          <succs>
+           <int intValue="85"/>
+           <int intValue="84"/>
+          </succs>
+          <preds>
+           <int intValue="82"/>
+          </preds>
+         </stmt>
+         <stmt sid="85">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <mem binop="indexpi" etag="binop">
+                <exp1 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="4664" vname="fptr"/>
+                  </lhost>
+                 </lval>
+                </exp1>
+                <exp2 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="4666" vname="i"/>
+                  </lhost>
+                 </lval>
+                </exp2>
+                <typ ttag="tptr">
+                 <typ fkind="ffloat" ttag="tfloat"/>
+                </typ>
+               </mem>
+              </lhost>
+             </lval>
+             <exp binop="plusa" etag="binop">
+              <exp1 etag="lval">
+               <lval>
+                <lhost>
+                 <mem binop="indexpi" etag="binop">
+                  <exp1 etag="lval">
+                   <lval>
+                    <lhost>
+                     <var vid="4664" vname="fptr"/>
+                    </lhost>
+                   </lval>
+                  </exp1>
+                  <exp2 etag="lval">
+                   <lval>
+                    <lhost>
+                     <var vid="4666" vname="i"/>
+                    </lhost>
+                   </lval>
+                  </exp2>
+                  <typ ttag="tptr">
+                   <typ fkind="ffloat" ttag="tfloat"/>
+                  </typ>
+                 </mem>
+                </lhost>
+               </lval>
+              </exp1>
+              <exp2 etag="caste">
+               <typ fkind="ffloat" ttag="tfloat"/>
+               <exp etag="const">
+                <constant ctag="cint64" ikind="iint" intValue="1"/>
+               </exp>
+              </exp2>
+              <typ fkind="ffloat" ttag="tfloat"/>
+             </exp>
+             <loc byte="137953" file="uninit_pointer.c" line="253"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <offset>
+               <index etag="lval">
+                <lval>
+                 <lhost>
+                  <var vid="4666" vname="i"/>
+                 </lhost>
+                </lval>
+               </index>
+              </offset>
+              <lhost>
+               <var vid="4665" vname="arr"/>
+              </lhost>
+             </lval>
+             <exp etag="lval">
+              <lval>
+               <lhost>
+                <mem binop="indexpi" etag="binop">
+                 <exp1 etag="lval">
+                  <lval>
+                   <lhost>
+                    <var vid="4664" vname="fptr"/>
+                   </lhost>
+                  </lval>
+                 </exp1>
+                 <exp2 etag="lval">
+                  <lval>
+                   <lhost>
+                    <var vid="4666" vname="i"/>
+                   </lhost>
+                  </lval>
+                 </exp2>
+                 <typ ttag="tptr">
+                  <typ fkind="ffloat" ttag="tfloat"/>
+                 </typ>
+                </mem>
+               </lhost>
+              </lval>
+             </exp>
+             <loc byte="137953" file="uninit_pointer.c" line="253"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4666" vname="i"/>
+              </lhost>
+             </lval>
+             <exp binop="plusa" etag="binop">
+              <exp1 etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="4666" vname="i"/>
+                </lhost>
+               </lval>
+              </exp1>
+              <exp2 etag="const">
+               <constant ctag="cint64" ikind="iint" intValue="1"/>
+              </exp2>
+              <typ ikind="iint" ttag="tint"/>
+             </exp>
+             <loc byte="137928" file="uninit_pointer.c" line="251"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="82"/>
+          </succs>
+          <preds>
+           <int intValue="83"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </block>
+       <loc byte="137928" file="uninit_pointer.c" line="251"/>
+      </skind>
+      <succs>
+       <int intValue="83"/>
+      </succs>
+      <preds>
+       <int intValue="85"/>
+       <int intValue="81"/>
+      </preds>
+     </stmt>
+     <stmt sid="86">
+      <skind stag="return">
+       <loc byte="137976" file="uninit_pointer.c" line="255"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="84"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

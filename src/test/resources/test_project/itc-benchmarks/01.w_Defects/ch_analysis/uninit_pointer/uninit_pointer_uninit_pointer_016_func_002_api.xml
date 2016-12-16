@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function cfilename="uninit_pointer.c" gvid="1159" name="uninit_pointer_016_func_002" num-ppo="0">
+   <statistics api-assumptions="0" callers="1" ds-assumptions="0" field-assignments="0" global-assignments="2" global-assumptions="10" rv-assumptions="0"/>
+   <parameters/>
+   <callers>
+    <caller cfilename="uninit_pointer.c" fname="uninit_pointer_016" gvid="1158" updated="05/31/2016 16:55:52" updated-f="1464713752.73">
+     <call-site byte="139944" file="uninit_pointer.c" line="395"/>
+     <args/>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="141"/>
+      <node name="if-then"/>
+      <node name="stmt" num="140"/>
+     </calling-context>
+    </caller>
+   </callers>
+   <api-assumptions/>
+   <rv-assumptions/>
+   <ds-assumptions/>
+   <global-assumptions>
+    <global-assumption nr="1">
+     <predicate op="indexpi" tag="ptr-upper-bound-deref">
+      <typ ttag="tptr">
+       <typ ikind="ichar" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+       <lval>
+        <lhost>
+         <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4695" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="17"/>
+      <po id="45"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="2">
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*)):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+           <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+            <lval>
+             <lhost>
+              <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4695" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="ichar" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="50"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="3">
+     <predicate op="indexpi" tag="ptr-lower-bound">
+      <typ ttag="tptr">
+       <typ ikind="ichar" ttag="tint"/>
+      </typ>
+      <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+       <lval>
+        <lhost>
+         <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+        </lhost>
+       </lval>
+      </exp1>
+      <exp2 etag="lval" xstr="i">
+       <lval>
+        <lhost>
+         <var vid="4695" vname="i"/>
+        </lhost>
+       </lval>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="16"/>
+      <po id="44"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="4">
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*)):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+           <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+            <lval>
+             <lhost>
+              <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4695" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="ichar" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint"/>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="52"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="5">
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+       <lval>
+        <lhost>
+         <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="14"/>
+      <po id="42"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="6">
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint"/>
+      <exp1 etag="caste" xstr="caste (*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*)):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+           <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+            <lval>
+             <lhost>
+              <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4695" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="ichar" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;STRING00&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;STRING00&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;STRING00&quot;">
+         <constant ctag="cstr" strValue="STRING00"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="37"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="7">
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*)):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+           <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+            <lval>
+             <lhost>
+              <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4695" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="ichar" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint"/>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="36"/>
+      <po id="51"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="8">
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+       <lval>
+        <lhost>
+         <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="15"/>
+      <po id="43"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="9">
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+         <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+          <lval>
+           <lhost>
+            <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+           </lhost>
+          </lval>
+         </exp1>
+         <exp2 etag="lval" xstr="i">
+          <lval>
+           <lhost>
+            <var vid="4695" vname="i"/>
+           </lhost>
+          </lval>
+         </exp2>
+         <typ ttag="tptr">
+          <typ ttag="tptr">
+           <typ ikind="ichar" ttag="tint"/>
+          </typ>
+         </typ>
+        </mem>
+       </lhost>
+      </lval>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="39"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="10">
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*)):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="lval" xstr="*(((lval (uninit_pointer_016_gbl_doubleptr) +i lval (i)):((char*)*))">
+        <lval>
+         <lhost>
+          <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+           <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+            <lval>
+             <lhost>
+              <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+             </lhost>
+            </lval>
+           </exp1>
+           <exp2 etag="lval" xstr="i">
+            <lval>
+             <lhost>
+              <var vid="4695" vname="i"/>
+             </lhost>
+            </lval>
+           </exp2>
+           <typ ttag="tptr">
+            <typ ttag="tptr">
+             <typ ikind="ichar" ttag="tint"/>
+            </typ>
+           </typ>
+          </mem>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="35"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+   </global-assumptions>
+   <global-assignments>
+    <global-assignment nr="1">
+     <lhs>
+      <lhost>
+       <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+      </lhost>
+     </lhs>
+     <rhs etag="caste" xstr="caste (tmp:((char*)*))">
+      <typ ttag="tptr">
+       <typ ttag="tptr">
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+      </typ>
+      <exp etag="lval" xstr="tmp">
+       <lval>
+        <lhost>
+         <var vid="4696" vname="tmp"/>
+        </lhost>
+       </lval>
+      </exp>
+     </rhs>
+     <loc byte="139550" file="uninit_pointer.c" line="379"/>
+    </global-assignment>
+    <global-assignment nr="2">
+     <lhs>
+      <lhost>
+       <mem binop="indexpi" etag="binop" xstr="((uninit_pointer_016_gbl_doubleptr +i i):((char*)*)">
+        <exp1 etag="lval" xstr="uninit_pointer_016_gbl_doubleptr">
+         <lval>
+          <lhost>
+           <var vid="1186" vname="uninit_pointer_016_gbl_doubleptr"/>
+          </lhost>
+         </lval>
+        </exp1>
+        <exp2 etag="lval" xstr="i">
+         <lval>
+          <lhost>
+           <var vid="4695" vname="i"/>
+          </lhost>
+         </lval>
+        </exp2>
+        <typ ttag="tptr">
+         <typ ttag="tptr">
+          <typ ikind="ichar" ttag="tint"/>
+         </typ>
+        </typ>
+       </mem>
+      </lhost>
+     </lhs>
+     <rhs etag="caste" xstr="caste (tmp___0:(char*))">
+      <typ ttag="tptr">
+       <typ ikind="ichar" ttag="tint"/>
+      </typ>
+      <exp etag="lval" xstr="tmp___0">
+       <lval>
+        <lhost>
+         <var vid="4698" vname="tmp___0"/>
+        </lhost>
+       </lval>
+      </exp>
+     </rhs>
+     <loc byte="139654" file="uninit_pointer.c" line="382"/>
+    </global-assignment>
+   </global-assignments>
+   <field-assignments/>
+  </function>
+  <header time="05/31/2016 17:16:53">
+   <application file="uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_009" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="136993" file="uninit_pointer.c" line="180"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="48"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="9"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="0"/>
+      <inv nrv="13" pv="13"/>
+      <inv nrv="0" pv="5"/>
+      <inv nrv="10" pv="5"/>
+      <inv nrv="14" pv="17"/>
+      <inv nrv="0" pv="16"/>
+      <inv nrv="10" pv="16"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="136993" file="uninit_pointer.c" line="180"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="49"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="9"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="0"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="11" pv="13"/>
+      <inv nrv="5" pv="6"/>
+      <inv nrv="2" pv="6"/>
+      <inv nrv="9" pv="6"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="137039" file="uninit_pointer.c" line="182"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="50"/>
+      <node name="if-then"/>
+      <node name="stmt" num="49"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="9"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="0"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="11" pv="13"/>
+      <inv nrv="8" pv="10"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="137072" file="uninit_pointer.c" line="184"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="51"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="9"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="0"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="11" pv="13"/>
+      <inv nrv="0" pv="2"/>
+      <inv nrv="10" pv="2"/>
+      <inv nrv="14" pv="15"/>
+      <inv nrv="0" pv="14"/>
+      <inv nrv="10" pv="14"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="137072" file="uninit_pointer.c" line="184"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="52"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="9"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="0"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="6" pv="3"/>
+      <inv nrv="3" pv="3"/>
+      <inv nrv="12" pv="3"/>
+      <inv nrv="11" pv="13"/>
+      <inv nrv="6" pv="4"/>
+      <inv nrv="3" pv="4"/>
+      <inv nrv="12" pv="4"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="137123" file="uninit_pointer.c" line="186"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="53"/>
+      <node name="if-then"/>
+      <node name="stmt" num="52"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="9"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="0"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="6" pv="3"/>
+      <inv nrv="3" pv="3"/>
+      <inv nrv="8" pv="3"/>
+      <inv nrv="12" pv="3"/>
+      <inv nrv="11" pv="13"/>
+      <inv nrv="4" pv="7"/>
+      <inv nrv="7" pv="12"/>
+      <inv nrv="4" pv="8"/>
+      <inv nrv="7" pv="11"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="18">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="4647" vname="flag"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval>
+      <lhost>
+       <var vid="4648" vname="tmp"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="2">
+     <pval arg="1" id="4"/>
+    </pvals>
+    <pvals index="3">
+     <pval>
+      <lhost>
+       <var vid="4650" vname="tmp___0"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="4">
+     <pval arg="1" id="5"/>
+    </pvals>
+    <pvals index="5">
+     <pval arg="1" id="1"/>
+    </pvals>
+    <pvals index="6">
+     <pval arg="1" id="2"/>
+    </pvals>
+    <pvals index="7">
+     <pval arg="3" id="15"/>
+    </pvals>
+    <pvals index="8">
+     <pval arg="1" id="11"/>
+     <pval arg="1" id="12"/>
+     <pval arg="2" id="13"/>
+     <pval arg="3" id="14"/>
+     <pval arg="1" id="16"/>
+     <pval arg="2" id="17"/>
+     <pval arg="2" id="18"/>
+    </pvals>
+    <pvals index="9">
+     <pval>
+      <lhost>
+       <var vid="4645" vname="buf"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="10">
+     <pval arg="3" id="3"/>
+    </pvals>
+    <pvals index="11">
+     <pval arg="1" id="6"/>
+     <pval arg="1" id="7"/>
+     <pval arg="2" id="8"/>
+     <pval arg="3" id="9"/>
+     <pval arg="1" id="10"/>
+     <pval arg="2" id="11"/>
+     <pval arg="1" id="21"/>
+     <pval arg="2" id="22"/>
+     <pval arg="2" id="23"/>
+    </pvals>
+    <pvals index="12">
+     <pval arg="3" id="19"/>
+     <pval arg="1" id="20"/>
+    </pvals>
+    <pvals index="13">
+     <pval etag="addrof" external="yes" property="vm" xstr="addrof (buf1)">
+      <lval>
+       <lhost>
+        <var vid="4646" vname="buf1"/>
+       </lhost>
+      </lval>
+     </pval>
+    </pvals>
+    <pvals index="14">
+     <pval arg="1" id="4"/>
+     <pval arg="2" id="25"/>
+    </pvals>
+    <pvals index="15">
+     <pval arg="3" id="25"/>
+    </pvals>
+    <pvals index="16">
+     <pval arg="1" id="1"/>
+     <pval arg="2" id="24"/>
+    </pvals>
+    <pvals index="17">
+     <pval arg="3" id="24"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="15">
+    <nrv index="0" tag="range" value="10"/>
+    <nrv index="1" tag="range" value="0"/>
+    <nrv byte="136993" etag="fnapp" file="uninit_pointer.c" index="2" line="180" tag="fv" xstr="fn(uninit_pointer_009_func_001)@ 180[_]">
+     <arg/>
+     <fn etag="lval" xstr="uninit_pointer_009_func_001">
+      <lval>
+       <lhost>
+        <var vid="4640" vname="uninit_pointer_009_func_001"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv byte="137072" etag="fnapp" file="uninit_pointer.c" index="3" line="184" tag="fv" xstr="fn(uninit_pointer_009_func_001)@ 184[_]">
+     <arg/>
+     <fn etag="lval" xstr="uninit_pointer_009_func_001">
+      <lval>
+       <lhost>
+        <var vid="4640" vname="uninit_pointer_009_func_001"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv etag="addrof" index="4" tag="fv" xstr="addrof (buf1)">
+     <lval>
+      <lhost>
+       <var vid="4646" vname="buf1"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv byte="136993" etag="fnapp" file="uninit_pointer.c" index="5" line="180" tag="fv" xstr="fn(uninit_pointer_009_func_001)@ 180[10]">
+     <arg etag="const" xstr="10">
+      <constant ctag="cint64" ikind="iint" intValue="10"/>
+     </arg>
+     <fn etag="lval" xstr="uninit_pointer_009_func_001">
+      <lval>
+       <lhost>
+        <var vid="4640" vname="uninit_pointer_009_func_001"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv byte="137072" etag="fnapp" file="uninit_pointer.c" index="6" line="184" tag="fv" xstr="fn(uninit_pointer_009_func_001)@ 184[10]">
+     <arg etag="const" xstr="10">
+      <constant ctag="cint64" ikind="iint" intValue="10"/>
+     </arg>
+     <fn etag="lval" xstr="uninit_pointer_009_func_001">
+      <lval>
+       <lhost>
+        <var vid="4640" vname="uninit_pointer_009_func_001"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv index="7" lb="0" tag="range"/>
+    <nrv index="8" lb="1" tag="range"/>
+    <nrv index="9" tag="ss">
+     <sym name="assignedAt#180">
+      <attr value="return-value"/>
+      <attr value="uninit_pointer_009_func_001"/>
+     </sym>
+    </nrv>
+    <nrv index="10" tag="ss">
+     <sym name="assignedAt#178"/>
+    </nrv>
+    <nrv index="11" tag="ss">
+     <sym name="invalid"/>
+    </nrv>
+    <nrv index="12" tag="ss">
+     <sym name="assignedAt#184">
+      <attr value="return-value"/>
+      <attr value="uninit_pointer_009_func_001"/>
+     </sym>
+    </nrv>
+    <nrv index="13" tag="ss">
+     <sym name="valid"/>
+    </nrv>
+    <nrv index="14" tag="range" value="1"/>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 17:14:59">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

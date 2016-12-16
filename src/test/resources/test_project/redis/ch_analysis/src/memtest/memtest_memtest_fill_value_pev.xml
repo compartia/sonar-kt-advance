@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry delta-checkvalid="40" delta-invariant="32" delta-lifted="1" time="05/24/2016 04:45:10"/>
+  </log>
+  <function name="memtest_fill_value">
+   <statistics checkvalid="40" invariant="32" invariant_with_api="1" total="94" total-proven="73"/>
+   <open-proof-obligations>
+    <open id="15" line="153" predicate="not-zero"/>
+    <open id="31" line="158" predicate="valid-mem"/>
+    <open id="33" line="158" predicate="ptr-upper-bound-deref"/>
+    <open id="36" line="159" predicate="not-null"/>
+    <open id="37" line="159" predicate="valid-mem"/>
+    <open id="38" line="159" predicate="ptr-lower-bound"/>
+    <open id="39" line="159" predicate="ptr-upper-bound-deref"/>
+    <open id="56" line="166" predicate="not-null"/>
+    <open id="57" line="166" predicate="valid-mem"/>
+    <open id="58" line="166" predicate="lower-bound"/>
+    <open id="59" line="166" predicate="upper-bound"/>
+    <open id="62" line="166" predicate="not-null"/>
+    <open id="63" line="166" predicate="valid-mem"/>
+    <open id="64" line="166" predicate="lower-bound"/>
+    <open id="65" line="166" predicate="upper-bound"/>
+    <open id="69" line="171" predicate="not-null"/>
+    <open id="70" line="171" predicate="valid-mem"/>
+    <open id="72" line="171" predicate="ptr-upper-bound-deref"/>
+    <open id="75" line="172" predicate="not-null"/>
+    <open id="76" line="172" predicate="valid-mem"/>
+    <open id="78" line="172" predicate="ptr-upper-bound-deref"/>
+   </open-proof-obligations>
+   <proof-obligations-discharged>
+    <discharged id="1" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="3" method="check-valid" time="05/24/2016 04:45:10" type="not-zero">
+     <evidence comment="value is size of type"/>
+    </discharged>
+    <discharged id="4" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="bytes is a function parameter"/>
+    </discharged>
+    <discharged id="5" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="6" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="7" method="check-valid" time="05/24/2016 04:45:10" type="not-zero">
+     <evidence comment="value is size of type"/>
+    </discharged>
+    <discharged id="8" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="9" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="10" method="check-valid" time="05/24/2016 04:45:10" type="not-zero">
+     <evidence comment="value is 2"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="11" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#152"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="12" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#151"/>
+    </discharged>
+    <discharged id="13" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="14" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="16" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="bytes is a function parameter"/>
+    </discharged>
+    <discharged id="17" method="check-valid" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="18" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="19" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="20" method="check-valid" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="21" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="22" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="23" method="check-valid" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="24" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="25" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="26" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#157"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="27" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#151"/>
+    </discharged>
+    <discharged id="28" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="l is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="29" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#157"/>
+    </discharged>
+    <discharged domain="linear equalities" id="30" method="invariants" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="1" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="intervals" id="32" method="invariants" time="05/24/2016 04:45:10" type="ptr-lower-bound">
+     <evidence comment="non-negative lower bound on pointer increment: 0"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="34" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#158"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="35" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#152"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="40" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#157"/>
+    </discharged>
+    <discharged id="41" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="v2 is a function parameter"/>
+    </discharged>
+    <discharged id="42" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="v1 is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="43" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#161"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="44" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#153"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="45" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#160"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="46" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#160"/>
+    </discharged>
+    <discharged id="47" method="check-valid" time="05/24/2016 04:45:10" type="non-negative">
+     <evidence comment=" value is 16"/>
+    </discharged>
+    <discharged id="48" method="check-valid" time="05/24/2016 04:45:10" type="width-overflow">
+     <evidence comment="value 16 is less than minimum word size (32"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="49" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#160"/>
+    </discharged>
+    <discharged id="50" method="check-valid" time="05/24/2016 04:45:10" type="non-negative">
+     <evidence comment=" value is 32"/>
+    </discharged>
+    <discharged id="51" method="check-valid" time="05/24/2016 04:45:10" type="width-overflow">
+     <evidence comment="value 32 requires a minimum word size of 64"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="52" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#160"/>
+    </discharged>
+    <discharged id="53" method="check-valid" time="05/24/2016 04:45:10" type="non-negative">
+     <evidence comment=" value is 48"/>
+    </discharged>
+    <discharged id="54" method="check-valid" time="05/24/2016 04:45:10" type="width-overflow">
+     <evidence comment="value 48 requires a minimum word size of 64"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="55" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#159_xx_assignedAt#172"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="60" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#166"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="61" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#158_xx_assignedAt#171"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="66" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#166"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="67" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#158_xx_assignedAt#171"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="68" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#151"/>
+    </discharged>
+    <discharged domain="intervals" id="71" method="invariants" time="05/24/2016 04:45:10" type="ptr-lower-bound">
+     <evidence comment="non-negative lower bound on pointer increment: 1"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="73" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#159_xx_assignedAt#172"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="74" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#151"/>
+    </discharged>
+    <discharged domain="intervals" id="77" method="invariants" time="05/24/2016 04:45:10" type="ptr-lower-bound">
+     <evidence comment="non-negative lower bound on pointer increment: 1"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="79" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#161"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="80" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#161"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="81" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#153"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="82" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#157"/>
+    </discharged>
+    <discharged id="83" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="84" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="85" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="86" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="87" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#152"/>
+    </discharged>
+    <discharged id="88" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="sym is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="89" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#161"/>
+    </discharged>
+    <discharged id="90" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="91" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="92" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#157"/>
+    </discharged>
+    <discharged id="93" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="94" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/24/2016 04:45:10">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

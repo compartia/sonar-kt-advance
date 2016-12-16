@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry time="05/31/2016 17:12:40"/>
+   <log-entry delta-checkvalid="3" delta-invariant="1" delta-lifted="1" time="05/31/2016 16:57:54"/>
+  </log>
+  <function name="uninit_pointer_009_func_001">
+   <statistics checkvalid="3" invariant="1" invariant_with_api="1" total="5" total-proven="5"/>
+   <open-proof-obligations/>
+   <proof-obligations-discharged>
+    <discharged id="1" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="flag is a function parameter"/>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="flag is a function parameter"/>
+    </discharged>
+    <discharged id="3" method="check-valid" time="05/31/2016 16:57:54" type="int-underflow">
+     <evidence comment="add non-negative number: value is 1"/>
+    </discharged>
+    <discharged domain="linear equalities" id="4" method="invariants" time="05/31/2016 16:57:54" type="int-overflow">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="1" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="symbolic sets" id="5" method="invariants" time="05/31/2016 16:57:54" type="initialized">
+     <evidence comment="assignedAt#169_xx_assignedAt#171"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/31/2016 17:12:40">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_002" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="135261" file="uninit_pointer.c" line="40"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="3"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="0" pv="1"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="2">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="4586" vname="p"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval arg="1" id="1"/>
+     <pval arg="1" id="2"/>
+     <pval arg="1" id="3"/>
+     <pval arg="2" id="4"/>
+     <pval arg="2" id="5"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="1">
+    <nrv index="0" lb="0" tag="range"/>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:33">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

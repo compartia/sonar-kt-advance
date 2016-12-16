@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="src/memtest" project-directory="/home/vagrant/git/redis" time="05/24/2016 04:14:35"/>
+  </header>
+  <function filename="src/memtest">
+   <svar vglob="true" vid="941" vname="memtest_progress_start">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="title">
+       <typ ttag="tptr">
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+      </arg>
+      <arg aname="pass">
+       <typ ikind="iint" ttag="tint"/>
+      </arg>
+     </args>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="30540" file="src/memtest.c" line="60"/>
+   </svar>
+   <sformals>
+    <varinfo vid="944" vname="title">
+     <vtyp ttag="tptr">
+      <typ ikind="ichar" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="30573" file="src/memtest.c" line="60"/>
+    </varinfo>
+    <varinfo vid="945" vname="pass">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="30585" file="src/memtest.c" line="60"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vid="946" vname="j">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="30601" file="src/memtest.c" line="61"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="1">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="512" vname="printf"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="caste">
+           <typ ttag="tptr">
+            <typ ikind="ichar" ttag="tint">
+             <attributes>
+              <attr attrname="const"/>
+             </attributes>
+            </typ>
+            <attributes>
+             <attr attrname="restrict"/>
+            </attributes>
+           </typ>
+           <exp etag="const">
+            <constant ctag="cstr" strValue="[H[2J"/>
+           </exp>
+          </exp>
+         </args>
+         <loc byte="30609" file="src/memtest.c" line="63"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="946" vname="j"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="0"/>
+         </exp>
+         <loc byte="30639" file="src/memtest.c" line="65"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="2"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="2">
+      <skind breakstmtid="6" continuestmtid="2" stag="loop">
+       <block>
+        <bstmts>
+         <stmt sid="3">
+          <skind stag="if">
+           <exp binop="lt" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="946" vname="j"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 binop="mult" etag="binop">
+             <exp1 etag="caste">
+              <typ ikind="iint" ttag="tint"/>
+              <exp etag="lval">
+               <lval>
+                <offset>
+                 <field ckey="14" fname="ws_col"/>
+                </offset>
+                <lhost>
+                 <var vid="938" vname="ws"/>
+                </lhost>
+               </lval>
+              </exp>
+             </exp1>
+             <exp2 binop="minusa" etag="binop">
+              <exp1 etag="caste">
+               <typ ikind="iint" ttag="tint"/>
+               <exp etag="lval">
+                <lval>
+                 <offset>
+                  <field ckey="14" fname="ws_row"/>
+                 </offset>
+                 <lhost>
+                  <var vid="938" vname="ws"/>
+                 </lhost>
+                </lval>
+               </exp>
+              </exp1>
+              <exp2 etag="const">
+               <constant ctag="cint64" ikind="iint" intValue="2"/>
+              </exp2>
+              <typ ikind="iint" ttag="tint"/>
+             </exp2>
+             <typ ikind="iint" ttag="tint"/>
+            </exp2>
+            <typ ikind="iint" ttag="tint"/>
+           </exp>
+           <thenblock>
+            <bstmts/>
+           </thenblock>
+           <elseblock>
+            <bstmts>
+             <stmt sid="4">
+              <skind stag="break">
+               <loc byte="30639" file="src/memtest.c" line="65"/>
+              </skind>
+              <succs>
+               <int intValue="6"/>
+              </succs>
+              <preds>
+               <int intValue="3"/>
+              </preds>
+             </stmt>
+            </bstmts>
+           </elseblock>
+           <loc byte="30639" file="src/memtest.c" line="65"/>
+          </skind>
+          <succs>
+           <int intValue="5"/>
+           <int intValue="4"/>
+          </succs>
+          <preds>
+           <int intValue="2"/>
+          </preds>
+         </stmt>
+         <stmt sid="5">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="call">
+             <exp etag="lval">
+              <lval>
+               <lhost>
+                <var vid="512" vname="printf"/>
+               </lhost>
+              </lval>
+             </exp>
+             <args>
+              <exp etag="caste">
+               <typ ttag="tptr">
+                <typ ikind="ichar" ttag="tint">
+                 <attributes>
+                  <attr attrname="const"/>
+                 </attributes>
+                </typ>
+                <attributes>
+                 <attr attrname="restrict"/>
+                </attributes>
+               </typ>
+               <exp etag="const">
+                <constant ctag="cstr" strValue="."/>
+               </exp>
+              </exp>
+             </args>
+             <loc byte="30685" file="src/memtest.c" line="65"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="946" vname="j"/>
+              </lhost>
+             </lval>
+             <exp binop="plusa" etag="binop">
+              <exp1 etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="946" vname="j"/>
+                </lhost>
+               </lval>
+              </exp1>
+              <exp2 etag="const">
+               <constant ctag="cint64" ikind="iint" intValue="1"/>
+              </exp2>
+              <typ ikind="iint" ttag="tint"/>
+             </exp>
+             <loc byte="30639" file="src/memtest.c" line="65"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="2"/>
+          </succs>
+          <preds>
+           <int intValue="3"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </block>
+       <loc byte="30639" file="src/memtest.c" line="65"/>
+      </skind>
+      <succs>
+       <int intValue="3"/>
+      </succs>
+      <preds>
+       <int intValue="5"/>
+       <int intValue="1"/>
+      </preds>
+     </stmt>
+     <stmt sid="6">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="512" vname="printf"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="caste">
+           <typ ttag="tptr">
+            <typ ikind="ichar" ttag="tint">
+             <attributes>
+              <attr attrname="const"/>
+             </attributes>
+            </typ>
+            <attributes>
+             <attr attrname="restrict"/>
+            </attributes>
+           </typ>
+           <exp etag="const">
+            <constant ctag="cstr" strValue="Please keep the test running several minutes per GB of memory.&#10;"/>
+           </exp>
+          </exp>
+         </args>
+         <loc byte="30702" file="src/memtest.c" line="66"/>
+        </instr>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="512" vname="printf"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="caste">
+           <typ ttag="tptr">
+            <typ ikind="ichar" ttag="tint">
+             <attributes>
+              <attr attrname="const"/>
+             </attributes>
+            </typ>
+            <attributes>
+             <attr attrname="restrict"/>
+            </attributes>
+           </typ>
+           <exp etag="const">
+            <constant ctag="cstr" strValue="Also check http://www.memtest86.com/ and http://pyropus.ca/software/memtester/"/>
+           </exp>
+          </exp>
+         </args>
+         <loc byte="30782" file="src/memtest.c" line="67"/>
+        </instr>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="512" vname="printf"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="caste">
+           <typ ttag="tptr">
+            <typ ikind="ichar" ttag="tint">
+             <attributes>
+              <attr attrname="const"/>
+             </attributes>
+            </typ>
+            <attributes>
+             <attr attrname="restrict"/>
+            </attributes>
+           </typ>
+           <exp etag="const">
+            <constant ctag="cstr" strValue="[H[2K"/>
+           </exp>
+          </exp>
+         </args>
+         <loc byte="30876" file="src/memtest.c" line="68"/>
+        </instr>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="512" vname="printf"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="caste">
+           <typ ttag="tptr">
+            <typ ikind="ichar" ttag="tint">
+             <attributes>
+              <attr attrname="const"/>
+             </attributes>
+            </typ>
+            <attributes>
+             <attr attrname="restrict"/>
+            </attributes>
+           </typ>
+           <exp etag="const">
+            <constant ctag="cstr" strValue="%s [%d]&#10;"/>
+           </exp>
+          </exp>
+          <exp etag="lval">
+           <lval>
+            <lhost>
+             <var vid="944" vname="title"/>
+            </lhost>
+           </lval>
+          </exp>
+          <exp etag="lval">
+           <lval>
+            <lhost>
+             <var vid="945" vname="pass"/>
+            </lhost>
+           </lval>
+          </exp>
+         </args>
+         <loc byte="30905" file="src/memtest.c" line="69"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="939" vname="progress_printed"/>
+          </lhost>
+         </lval>
+         <exp etag="caste">
+          <typ tname="size_t" ttag="tnamed"/>
+          <exp etag="const">
+           <constant ctag="cint64" ikind="iint" intValue="0"/>
+          </exp>
+         </exp>
+         <loc byte="30943" file="src/memtest.c" line="70"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="940" vname="progress_full"/>
+          </lhost>
+         </lval>
+         <exp etag="caste">
+          <typ tname="size_t" ttag="tnamed"/>
+          <exp binop="mult" etag="binop">
+           <exp1 etag="caste">
+            <typ ikind="iint" ttag="tint"/>
+            <exp etag="lval">
+             <lval>
+              <offset>
+               <field ckey="14" fname="ws_col"/>
+              </offset>
+              <lhost>
+               <var vid="938" vname="ws"/>
+              </lhost>
+             </lval>
+            </exp>
+           </exp1>
+           <exp2 binop="minusa" etag="binop">
+            <exp1 etag="caste">
+             <typ ikind="iint" ttag="tint"/>
+             <exp etag="lval">
+              <lval>
+               <offset>
+                <field ckey="14" fname="ws_row"/>
+               </offset>
+               <lhost>
+                <var vid="938" vname="ws"/>
+               </lhost>
+              </lval>
+             </exp>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="3"/>
+            </exp2>
+            <typ ikind="iint" ttag="tint"/>
+           </exp2>
+           <typ ikind="iint" ttag="tint"/>
+          </exp>
+         </exp>
+         <loc byte="30969" file="src/memtest.c" line="71"/>
+        </instr>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="478" vname="fflush"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="lval">
+           <lval>
+            <lhost>
+             <var vid="457" vname="stdout"/>
+            </lhost>
+           </lval>
+          </exp>
+         </args>
+         <loc byte="31014" file="src/memtest.c" line="72"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="7"/>
+      </succs>
+      <preds>
+       <int intValue="4"/>
+      </preds>
+     </stmt>
+     <stmt sid="7">
+      <skind stag="return">
+       <loc byte="31030" file="src/memtest.c" line="73"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="6"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

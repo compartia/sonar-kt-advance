@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry delta-checkvalid="16" delta-invariant="11" delta-lifted="3" time="05/24/2016 04:45:10"/>
+  </log>
+  <function name="memtest_non_destructive_invert">
+   <statistics checkvalid="16" invariant="11" invariant_with_api="3" total="33" total-proven="30"/>
+   <open-proof-obligations>
+    <open id="15" line="250" predicate="ptr-upper-bound-deref"/>
+    <open id="20" line="250" predicate="initialized"/>
+    <open id="26" line="250" predicate="ptr-upper-bound-deref"/>
+   </open-proof-obligations>
+   <proof-obligations-discharged>
+    <discharged domain="linear equalities" id="1" method="invariants" time="05/24/2016 04:45:10" type="pointer-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="1" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="addr is a function parameter"/>
+    </discharged>
+    <discharged id="3" method="check-valid" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="size is a function parameter"/>
+    </discharged>
+    <discharged id="4" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="5" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="6" method="check-valid" time="05/24/2016 04:45:10" type="not-zero">
+     <evidence comment="value is size of type"/>
+    </discharged>
+    <discharged id="7" method="check-valid" time="05/24/2016 04:45:10" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 0 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="8" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#249"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="9" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#245"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="10" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#244"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="11" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#249"/>
+    </discharged>
+    <discharged domain="linear equalities" id="12" method="invariants" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="symbolic sets" id="13" method="invariants" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged domain="intervals" id="14" method="invariants" time="05/24/2016 04:45:10" type="ptr-lower-bound">
+     <evidence comment="non-negative lower bound on pointer increment: 0"/>
+    </discharged>
+    <discharged id="16" method="check-valid" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="arguments of pointer arithmetic are checked for null"/>
+    </discharged>
+    <discharged id="17" method="check-valid" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="18" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="19" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy upperbound by inductive hypothesis"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="21" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#244"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="22" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#249"/>
+    </discharged>
+    <discharged domain="linear equalities" id="23" method="invariants" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="symbolic sets" id="24" method="invariants" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged domain="intervals" id="25" method="invariants" time="05/24/2016 04:45:10" type="ptr-lower-bound">
+     <evidence comment="non-negative lower bound on pointer increment: 0"/>
+    </discharged>
+    <discharged id="27" method="check-valid" time="05/24/2016 04:45:10" type="not-null">
+     <evidence comment="arguments of pointer arithmetic are checked for null"/>
+    </discharged>
+    <discharged id="28" method="check-valid" time="05/24/2016 04:45:10" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="29" method="check-valid" time="05/24/2016 04:45:10" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="30" method="check-valid" time="05/24/2016 04:45:10" type="upper-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy upperbound by inductive hypothesis"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="31" method="invariants" time="05/24/2016 04:45:10" type="initialized">
+     <evidence comment="assignedAt#249"/>
+    </discharged>
+    <discharged id="32" method="check-valid" time="05/24/2016 04:45:10" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="33" method="check-valid" time="05/24/2016 04:45:10" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/24/2016 04:45:10">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

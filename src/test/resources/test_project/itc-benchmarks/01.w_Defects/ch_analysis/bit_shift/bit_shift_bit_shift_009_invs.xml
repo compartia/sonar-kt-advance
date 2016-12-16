@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_009" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="135937" file="bit_shift.c" line="120"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="2"/>
+      <node name="stmt" num="17"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="3" pv="0"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="2" pv="2"/>
+      <inv nrv="0" pv="1"/>
+      <inv nrv="3" pv="1"/>
+      <inv nrv="1" pv="3"/>
+      <inv nrv="2" pv="3"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="135963" file="bit_shift.c" line="121"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="3"/>
+      <node name="stmt" num="17"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="3" pv="0"/>
+      <inv nrv="4" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="2" pv="2"/>
+      <inv nrv="4" pv="5"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="6">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="4608" vname="a"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval arg="1" id="1"/>
+    </pvals>
+    <pvals index="2">
+     <pval>
+      <lhost>
+       <var vid="4609" vname="shift"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="3">
+     <pval arg="1" id="2"/>
+     <pval arg="1" id="3"/>
+     <pval arg="1" id="4"/>
+    </pvals>
+    <pvals index="4">
+     <pval>
+      <lhost>
+       <var vid="4610" vname="ret"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="5">
+     <pval arg="1" id="5"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="5">
+    <nrv index="0" tag="range" value="1"/>
+    <nrv byte="135920" etag="fnapp" file="bit_shift.c" index="1" line="119" tag="fv" xstr="fn(rand)@ 119[]">
+     <fn etag="lval" xstr="rand">
+      <lval>
+       <lhost>
+        <var vid="869" vname="rand"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv index="2" tag="ss">
+     <sym name="assignedAt#119">
+      <attr value="return-value"/>
+      <attr value="rand"/>
+     </sym>
+    </nrv>
+    <nrv index="3" tag="ss">
+     <sym name="assignedAt#116"/>
+    </nrv>
+    <nrv index="4" tag="ss">
+     <sym name="assignedAt#120"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:10">
+   <application file="./bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

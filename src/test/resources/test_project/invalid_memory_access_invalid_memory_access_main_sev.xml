@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:08:00"/>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:07:25"/>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:06:50"/>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:06:16"/>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:05:41"/>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:05:07"/>
+   <log-entry delta-checkvalid="2" delta-invariant="6" time="05/31/2016 21:04:32"/>
+   <log-entry delta-checkvalid="8" time="05/31/2016 21:03:55"/>
+   <log-entry time="05/31/2016 21:03:07"/>
+  </log>
+  <function name="invalid_memory_access_main">
+   <statistics checkvalid="22" invariant="42" invariant_with_api="0" total="66" total-proven="64"/>
+   <open-proof-obligations>
+    <open id="75" line="698" predicate="value-constraint"/>
+    <open id="80" line="698" predicate="value-constraint"/>
+   </open-proof-obligations>
+   <proof-obligations-discharged>
+    <discharged id="71" method="check-valid" time="05/31/2016 21:03:55" type="int-underflow">
+     <evidence comment="product of constants (25) is greater than or equal to safe lowerbound (-32768)"/>
+    </discharged>
+    <discharged id="72" method="check-valid" time="05/31/2016 21:03:55" type="int-underflow">
+     <evidence comment="difference of constants (4) is greater than or equal to safe lowerbound (-32768)"/>
+    </discharged>
+    <discharged id="73" method="check-valid" time="05/31/2016 21:03:55" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 5 fits in type unsigned long"/>
+    </discharged>
+    <discharged id="74" method="check-valid" time="05/31/2016 21:03:55" type="int-overflow">
+     <evidence comment="product of constants (25) is less than safe upperbound (32767)"/>
+    </discharged>
+    <discharged id="76" method="check-valid" time="05/31/2016 21:03:55" type="int-underflow">
+     <evidence comment="product of constants (25) is greater than or equal to safe lowerbound (-32768)"/>
+    </discharged>
+    <discharged id="77" method="check-valid" time="05/31/2016 21:03:55" type="int-underflow">
+     <evidence comment="difference of constants (4) is greater than or equal to safe lowerbound (-32768)"/>
+    </discharged>
+    <discharged id="78" method="check-valid" time="05/31/2016 21:03:55" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 5 fits in type unsigned long"/>
+    </discharged>
+    <discharged id="79" method="check-valid" time="05/31/2016 21:03:55" type="int-overflow">
+     <evidence comment="product of constants (25) is less than safe upperbound (32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="81" method="invariants" time="05/31/2016 21:04:32" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 4) &lt;= 32767) and ((5 * 4) &lt;= 32767)"/>
+    </discharged>
+    <discharged id="82" method="check-valid" time="05/31/2016 21:04:32" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 4 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="83" method="invariants" time="05/31/2016 21:04:32" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 4) &gt;= -32768) and ((5 * 4) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="84" method="invariants" time="05/31/2016 21:04:32" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((4 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="85" method="invariants" time="05/31/2016 21:04:32" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 4) &lt;= 32767) and ((5 * 4) &lt;= 32767)"/>
+    </discharged>
+    <discharged id="86" method="check-valid" time="05/31/2016 21:04:32" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 4 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="87" method="invariants" time="05/31/2016 21:04:32" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 4) &gt;= -32768) and ((5 * 4) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="88" method="invariants" time="05/31/2016 21:04:32" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((4 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="89" method="invariants" time="05/31/2016 21:05:07" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 3) &lt;= 32767) and ((5 * 3) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="90" method="invariants" time="05/31/2016 21:05:07" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 3) &gt;= -32768) and ((5 * 3) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="91" method="check-valid" time="05/31/2016 21:05:07" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 3 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="92" method="invariants" time="05/31/2016 21:05:07" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((3 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="93" method="invariants" time="05/31/2016 21:05:07" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 3) &lt;= 32767) and ((5 * 3) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="94" method="invariants" time="05/31/2016 21:05:07" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 3) &gt;= -32768) and ((5 * 3) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="95" method="check-valid" time="05/31/2016 21:05:07" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 3 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="96" method="invariants" time="05/31/2016 21:05:07" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((3 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="97" method="check-valid" time="05/31/2016 21:05:41" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 2 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="98" method="invariants" time="05/31/2016 21:05:41" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 2) &lt;= 32767) and ((5 * 2) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="99" method="invariants" time="05/31/2016 21:05:41" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 2) &gt;= -32768) and ((5 * 2) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="100" method="invariants" time="05/31/2016 21:05:41" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((2 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="101" method="check-valid" time="05/31/2016 21:05:41" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 2 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="102" method="invariants" time="05/31/2016 21:05:41" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 2) &lt;= 32767) and ((5 * 2) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="103" method="invariants" time="05/31/2016 21:05:41" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 2) &gt;= -32768) and ((5 * 2) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="104" method="invariants" time="05/31/2016 21:05:41" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((2 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="105" method="invariants" time="05/31/2016 21:06:16" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 1) &lt;= 32767) and ((5 * 1) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="106" method="invariants" time="05/31/2016 21:06:16" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((1 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="107" method="invariants" time="05/31/2016 21:06:16" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 1) &gt;= -32768) and ((5 * 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="108" method="check-valid" time="05/31/2016 21:06:16" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 1 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="109" method="invariants" time="05/31/2016 21:06:16" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 1) &lt;= 32767) and ((5 * 1) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="110" method="invariants" time="05/31/2016 21:06:16" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((1 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="111" method="invariants" time="05/31/2016 21:06:16" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 1) &gt;= -32768) and ((5 * 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="112" method="check-valid" time="05/31/2016 21:06:16" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 1 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="113" method="invariants" time="05/31/2016 21:06:50" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 0) &lt;= 32767) and ((5 * 0) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="114" method="invariants" time="05/31/2016 21:06:50" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((0 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="115" method="invariants" time="05/31/2016 21:06:50" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 0) &gt;= -32768) and ((5 * 0) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="116" method="check-valid" time="05/31/2016 21:06:50" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 0 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="117" method="invariants" time="05/31/2016 21:06:50" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * 0) &lt;= 32767) and ((5 * 0) &lt;= 32767)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="118" method="invariants" time="05/31/2016 21:06:50" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((0 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="119" method="invariants" time="05/31/2016 21:06:50" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * 0) &gt;= -32768) and ((5 * 0) &gt;= -32768)"/>
+    </discharged>
+    <discharged id="120" method="check-valid" time="05/31/2016 21:06:50" type="signed-to-unsigned-cast">
+     <evidence comment="constant value 0 fits in type unsigned long"/>
+    </discharged>
+    <discharged domain="linear equalities" id="121" method="invariants" time="05/31/2016 21:07:25" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((-1 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="122" method="invariants" time="05/31/2016 21:07:25" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * -1) &gt;= -32768) and ((5 * -1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="123" method="invariants" time="05/31/2016 21:07:25" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * -1) &lt;= 32767) and ((5 * -1) &lt;= 32767)"/>
+    </discharged>
+    <discharged id="124" method="check-valid" time="05/31/2016 21:07:25" type="signed-to-unsigned-cast" violation="true">
+     <evidence comment="casting a negative number to an unsigned: -1"/>
+    </discharged>
+    <discharged domain="linear equalities" id="125" method="invariants" time="05/31/2016 21:07:25" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((-1 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="126" method="invariants" time="05/31/2016 21:07:25" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * -1) &gt;= -32768) and ((5 * -1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="127" method="invariants" time="05/31/2016 21:07:25" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * -1) &lt;= 32767) and ((5 * -1) &lt;= 32767)"/>
+    </discharged>
+    <discharged id="128" method="check-valid" time="05/31/2016 21:07:25" type="signed-to-unsigned-cast" violation="true">
+     <evidence comment="casting a negative number to an unsigned: -1"/>
+    </discharged>
+    <discharged domain="linear equalities" id="129" method="invariants" time="05/31/2016 21:08:00" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * -2) &lt;= 32767) and ((5 * -2) &lt;= 32767)"/>
+    </discharged>
+    <discharged id="130" method="check-valid" time="05/31/2016 21:08:00" type="signed-to-unsigned-cast" violation="true">
+     <evidence comment="casting a negative number to an unsigned: -2"/>
+    </discharged>
+    <discharged domain="linear equalities" id="131" method="invariants" time="05/31/2016 21:08:00" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((-2 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="132" method="invariants" time="05/31/2016 21:08:00" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * -2) &gt;= -32768) and ((5 * -2) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="133" method="invariants" time="05/31/2016 21:08:00" type="int-overflow">
+     <evidence comment="result of multiplication is less than MAX: ((5 * -2) &lt;= 32767) and ((5 * -2) &lt;= 32767)"/>
+    </discharged>
+    <discharged id="134" method="check-valid" time="05/31/2016 21:08:00" type="signed-to-unsigned-cast" violation="true">
+     <evidence comment="casting a negative number to an unsigned: -2"/>
+    </discharged>
+    <discharged domain="linear equalities" id="135" method="invariants" time="05/31/2016 21:08:00" type="int-underflow">
+     <evidence comment="result of subtraction is greater than or equal to MIN: ((-2 - 1) &gt;= -32768)"/>
+    </discharged>
+    <discharged domain="linear equalities" id="136" method="invariants" time="05/31/2016 21:08:00" type="int-underflow">
+     <evidence comment="result of multiplication is greater than or equal to MIN: ((5 * -2) &gt;= -32768) and ((5 * -2) &gt;= -32768)"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/31/2016 21:08:00">
+   <application file="./invalid_memory_access.c" name="application"/>
+  </header>
+ </c-analysis>

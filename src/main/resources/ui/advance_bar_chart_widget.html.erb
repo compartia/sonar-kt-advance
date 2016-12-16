@@ -1,0 +1,227 @@
+<link href="<%=url_for_static(:plugin => 'advance', :path => 'css/advance.css')-%>" media="all" rel="stylesheet" />
+
+ 
+<div 
+    class="kt-advance-logo" 
+    style="background-image: url(<%=url_for_static(:plugin => 'advance', :path => 'img/KT-Advance.land.512.png')-%>);">
+</div>
+
+
+<%
+    kt_per_predicate_distr = measure('kt_per_predicate_distr')
+ 
+    if kt_per_predicate_distr 
+        converted=[]
+        parsed=JSON.parse(kt_per_predicate_distr.data)
+         
+        parsed.each do |p|         
+            
+            if (widget_properties[p["key"]])
+            
+                converted = converted.push( 
+                    p.merge(
+                        :name => message("metric."+p["key"]+".name"),
+                        :url_opn => url_for_drilldown("kt_ppo_open_"+p["key"]),
+                        :url_vlt => url_for_drilldown("kt_ppo_violation_"+p["key"]),
+                        :url_opn_s => url_for_drilldown("kt_spo_open_"+p["key"]),
+                        :url_vlt_s => url_for_drilldown("kt_spo_violation_"+p["key"])
+                    )
+                )
+            end
+        end
+        
+        distrib_violation_split_converted = JSON.generate(converted)
+        
+    end #end of if(kt_per_predicate_distr)
+
+%>
+
+<% if kt_per_predicate_distr %>
+
+
+<h3 title="<%= metric(kt_per_predicate_distr.key).description -%>">
+    <%= message("metric."+kt_per_predicate_distr.key+".name") -%>
+</h3><br>
+
+<div class="kt-chart-a" id="kt-widget-<%=widget.id.to_s-%>"></div> 
+ 
+<script>
+    
+    (function(){
+        
+        var show_ppo_open=<%=widget_properties["wp_show_ppo_open"]-%>;
+        var show_ppo_violation=<%=widget_properties["wp_show_ppo_violation"]-%>;
+        var show_spo_open=<%=widget_properties["wp_show_spo_open"]-%>;
+        var show_spo_violation=<%=widget_properties["wp_show_spo_violation"]-%>;
+
+        var data = <%= distrib_violation_split_converted -%>;
+
+        var barLabel = function(d) { return d.name; };
+        var barValue = function(d) { 
+            
+            var ret=(show_ppo_open ? parseFloat(d.value[0]) : 0) + 
+                (show_ppo_violation ? parseFloat(d.value[1]) : 0) +
+                (show_spo_open ? parseFloat(d.value[2]) : 0) +
+                (show_spo_violation ? parseFloat(d.value[3]) : 0); 
+
+            return ret;
+        };
+        
+        var totalPpoOpen = function(d) { return d.value[0]; };
+        var totalPpoViolations = function(d) { return d.value[1]; };
+        var totalSpoOpen = function(d) { return d.value[2]; };
+        var totalSpoViolations = function(d) { return d.value[3]; };
+        
+        
+        // sorting
+        var sortedData = data
+            .sort(function(a, b) {return d3.descending(barValue(a), barValue(b));})
+            .filter(function(d) { return barValue(d) > 0 }); 
+
+        var x = d3.scale
+            .linear()
+            .domain([0, d3.max(sortedData, barValue) ])
+            .range([0, 85]);
+        
+        var number_format = x.tickFormat();
+        
+        var labelFunc = function(s) { 
+                        return barLabel(s); 
+                    };
+    
+        function buildChartRow(div){   
+
+            div.append("label")
+                .text(labelFunc)
+                .attr("title", labelFunc);
+            
+            var ctr = div.append("div")
+                .attr("class","bar-container");
+
+            if (show_ppo_violation) {
+                var bar2=ctr.append("a")
+                    .attr("class", "bar pev-violation")
+                    .attr("href",function(s) { 
+                            return s.url_vlt; 
+                        }); 
+
+                bar2.style(
+                        "width", 
+                        function(s) { 
+                            return x(totalPpoViolations(s)) + "%"; 
+                        })
+                    .style(
+                        "display", 
+                        function(s) { 
+                            return totalPpoViolations(s) > 0 ? "block":"none";
+                        })
+                    .attr(
+                        "title", 
+                        function(s) { 
+                            return "<%=message("metric.kt_ppo_violation.description")-%>: " +number_format(totalPpoViolations(s));
+                        });
+            }
+            
+            
+            if (show_spo_violation) {
+                var bar2=ctr.append("a")
+                    .attr("class", "bar sev-violation")
+                    .attr("href",function(s) { 
+                            return s.url_vlt_s; 
+                        }); 
+
+                bar2.style(
+                        "width", 
+                        function(s) { 
+                            return x(totalSpoViolations(s)) + "%"; 
+                        })
+                    .style(
+                        "display", 
+                        function(s) { 
+                            return totalSpoViolations(s) > 0 ? "block":"none";
+                        })
+                    .attr(
+                        "title", 
+                        function(s) { 
+                            return "<%=message("metric.kt_spo_violation.description")-%>: " +number_format(totalSpoViolations(s));
+                        });
+            }
+
+            if (show_ppo_open) {
+                var bar=ctr.append("a")
+                    .attr("class", "bar pev-open")
+                    .attr("href",function(s) { 
+                            return s.url_opn; 
+                        }); 
+                
+                bar.style(
+                        "width", 
+                        function(s) { 
+                            return  x(totalPpoOpen(s)) + "%"; 
+                        })
+                    .style(
+                            "display", 
+                            function(s) { 
+                                return totalPpoOpen(s) > 0 ? "block":"none";
+                            })
+                    .attr(
+                        "title", 
+                        function(s) { 
+                            return "<%=message("metric.kt_ppo_open.description")-%>: " +number_format(totalPpoOpen(s));
+                        });
+            }
+            
+            if (show_spo_open) {
+                var bar=ctr.append("a")
+                    .attr("class", "bar sev-open")
+                    .attr("href",function(s) { 
+                            return s.url_opn_s; 
+                        }); 
+                
+                bar.style(
+                        "width", 
+                        function(s) { 
+                            return  x(totalSpoOpen(s)) + "%"; 
+                        })
+                    .style(
+                            "display", 
+                            function(s) { 
+                                return totalSpoOpen(s) > 0 ? "block":"none";
+                            })
+                    .attr(
+                        "title", 
+                        function(s) { 
+                            return "<%=message("metric.kt_spo_open.description")-%>: " +number_format(totalSpoOpen(s));
+                        });
+            }
+
+            var bar1=ctr.append("div").attr("class", "value").text(
+                    function(s) { 
+                        return number_format(barValue(s)); 
+                    });  
+
+        }
+
+        function buildChart(sortedData, x, show_ppo_open, show_ppo_violation){
+            var div = 
+            d3.select("#kt-widget-<%=widget.id.to_s-%>")
+                .selectAll("div")
+                    .data(sortedData)
+                .enter().append("div").attr("class", "row");
+
+            buildChartRow(div);
+
+        };
+    
+        buildChart(sortedData);
+
+        
+        
+    })();
+    
+    
+</script>
+
+<% end %>
+ 
+ 

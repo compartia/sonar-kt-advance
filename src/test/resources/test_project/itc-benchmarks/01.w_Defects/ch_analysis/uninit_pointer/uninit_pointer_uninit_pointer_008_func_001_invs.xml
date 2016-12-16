@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_008_func_001" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="136664" file="uninit_pointer.c" line="151"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="40"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="1"/>
+      <inv nrv="3" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="4" pv="2"/>
+      <inv nrv="5" pv="3"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="3" pv="0"/>
+      <inv nrv="2" pv="0"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="4">
+    <pvals index="0">
+     <pval arg="1" id="1"/>
+     <pval arg="1" id="2"/>
+     <pval arg="1" id="3"/>
+     <pval arg="2" id="4"/>
+     <pval arg="2" id="5"/>
+    </pvals>
+    <pvals index="1">
+     <pval>
+      <lhost>
+       <var vid="4636" vname="p"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="2">
+     <pval>
+      <lhost>
+       <mem etag="lval" xstr="p">
+        <lval>
+         <lhost>
+          <var vid="4636" vname="p"/>
+         </lhost>
+        </lval>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="50" fname="uninit"/>
+      </offset>
+     </pval>
+    </pvals>
+    <pvals index="3">
+     <pval etag="lval" external="yes" property="vm" xstr="p">
+      <lval>
+       <lhost>
+        <var vid="4636" vname="p"/>
+       </lhost>
+      </lval>
+     </pval>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="6">
+    <nrv etag="lval" index="0" tag="fv" xstr="p">
+     <lval>
+      <lhost>
+       <var vid="4636" vname="p"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="1" tag="fv" xstr="p-&gt;uninit">
+     <lval>
+      <lhost>
+       <mem etag="lval" xstr="p">
+        <lval>
+         <lhost>
+          <var vid="4636" vname="p"/>
+         </lhost>
+        </lval>
+       </mem>
+      </lhost>
+      <offset>
+       <field ckey="50" fname="uninit"/>
+      </offset>
+     </lval>
+    </nrv>
+    <nrv address-type="external" index="2" tag="vs" value="0">
+     <base etag="lval" xstr="p">
+      <lval>
+       <lhost>
+        <var vid="4636" vname="p"/>
+       </lhost>
+      </lval>
+     </base>
+    </nrv>
+    <nrv index="3" lb="0" tag="range"/>
+    <nrv index="4" tag="ss">
+     <sym name="parameter">
+      <attr value="p-&gt;uninit"/>
+     </sym>
+    </nrv>
+    <nrv index="5" tag="ss">
+     <sym name="valid"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:33">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

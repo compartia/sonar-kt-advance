@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry time="05/31/2016 17:12:27"/>
+   <log-entry delta-invariant="5" time="05/31/2016 16:57:42"/>
+  </log>
+  <function name="bit_shift_016">
+   <statistics checkvalid="0" invariant="5" invariant_with_api="0" total="7" total-proven="5"/>
+   <open-proof-obligations>
+    <open id="5" line="225" predicate="non-negative"/>
+    <open id="6" line="225" predicate="width-overflow"/>
+   </open-proof-obligations>
+   <proof-obligations-discharged>
+    <discharged domain="symbolic sets" id="1" method="invariants" time="05/31/2016 16:57:42" type="initialized">
+     <evidence comment="assignedAt#219"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="2" method="invariants" time="05/31/2016 16:57:42" type="initialized">
+     <evidence comment="assignedAt#223"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="3" method="invariants" time="05/31/2016 16:57:42" type="initialized">
+     <evidence comment="assignedAt#218"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="4" method="invariants" time="05/31/2016 16:57:42" type="initialized">
+     <evidence comment="assignedAt#224"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="7" method="invariants" time="05/31/2016 16:57:42" type="initialized">
+     <evidence comment="assignedAt#225"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/31/2016 17:12:27">
+   <application file="./bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

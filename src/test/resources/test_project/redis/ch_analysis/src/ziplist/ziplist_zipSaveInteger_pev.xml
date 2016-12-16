@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry delta-checkvalid="66" delta-invariant="14" delta-lifted="12" time="05/24/2016 04:46:01"/>
+  </log>
+  <function name="zipSaveInteger">
+   <statistics checkvalid="66" invariant="14" invariant_with_api="12" total="93" total-proven="92"/>
+   <open-proof-obligations>
+    <open id="32" line="356" predicate="cast"/>
+   </open-proof-obligations>
+   <proof-obligations-discharged>
+    <discharged domain="linear equalities" id="1" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged id="3" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to character type"/>
+    </discharged>
+    <discharged id="4" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="p is a function parameter"/>
+    </discharged>
+    <discharged domain="linear equalities" id="5" method="invariants" time="05/24/2016 04:46:01" type="not-null">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="4" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged domain="symbolic sets" id="6" method="invariants" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged id="7" method="check-valid" time="05/24/2016 04:46:01" type="ptr-lower-bound">
+     <evidence comment="add non-negative number:  value is 0"/>
+    </discharged>
+    <discharged id="8" method="check-valid" time="05/24/2016 04:46:01" type="ptr-upper-bound-deref">
+     <evidence comment="add zero"/>
+    </discharged>
+    <discharged id="9" method="check-valid" time="05/24/2016 04:46:01" type="not-null">
+     <evidence comment="arguments of pointer arithmetic are checked for null"/>
+    </discharged>
+    <discharged id="10" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="11" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged id="12" method="check-valid" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy upperbound by inductive hypothesis"/>
+    </discharged>
+    <discharged domain="linear equalities" id="13" method="invariants" time="05/24/2016 04:46:01" type="cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="6" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="14" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="value is a function parameter"/>
+    </discharged>
+    <discharged domain="linear equalities" id="15" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="16" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged domain="linear equalities" id="17" method="invariants" time="05/24/2016 04:46:01" type="cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="1" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="18" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="value is a function parameter"/>
+    </discharged>
+    <discharged id="19" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="20" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="p is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="21" method="invariants" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged domain="valuesets" id="22" method="invariants" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="non-negative offset from base value: p"/>
+    </discharged>
+    <discharged domain="valuesets" id="23" method="invariants" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="externally provided address; dereferencability is checked as part of precondition"/>
+    </discharged>
+    <discharged id="24" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="25" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="address of a variable is a valid memory region"/>
+    </discharged>
+    <discharged id="26" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="address of a variable"/>
+    </discharged>
+    <discharged id="27" method="check-valid" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="address of a variable"/>
+    </discharged>
+    <discharged domain="linear equalities" id="28" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="29" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged id="30" method="check-valid" time="05/24/2016 04:46:01" type="non-negative">
+     <evidence comment=" value is 4"/>
+    </discharged>
+    <discharged id="31" method="check-valid" time="05/24/2016 04:46:01" type="width-overflow">
+     <evidence comment="value 4 is less than minimum word size (16"/>
+    </discharged>
+    <discharged id="33" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="value is a function parameter"/>
+    </discharged>
+    <discharged id="34" method="check-valid" time="05/24/2016 04:46:01" type="non-negative">
+     <evidence comment=" value is 8"/>
+    </discharged>
+    <discharged id="35" method="check-valid" time="05/24/2016 04:46:01" type="width-overflow">
+     <evidence comment="value 8 is less than minimum word size (32"/>
+    </discharged>
+    <discharged id="36" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="37" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="p is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="38" method="invariants" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged domain="valuesets" id="39" method="invariants" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="non-negative offset from base value: p"/>
+    </discharged>
+    <discharged domain="valuesets" id="40" method="invariants" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="externally provided address; dereferencability is checked as part of precondition"/>
+    </discharged>
+    <discharged id="41" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="42" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to character type"/>
+    </discharged>
+    <discharged id="43" method="check-valid" time="05/24/2016 04:46:01" type="not-null">
+     <evidence comment="address of variable i32"/>
+    </discharged>
+    <discharged id="44" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="address of a variable is a valid memory region"/>
+    </discharged>
+    <discharged id="45" method="check-valid" time="05/24/2016 04:46:01" type="ptr-lower-bound">
+     <evidence comment="add non-negative number:  value is 1"/>
+    </discharged>
+    <discharged domain="linear equalities" id="46" method="invariants" time="05/24/2016 04:46:01" type="ptr-upper-bound-deref">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="5" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="47" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="pointer arithmetic stays within memory region"/>
+    </discharged>
+    <discharged id="48" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="result of pointer arithmetic is guaranteed to satisfy lowerbound by inductive hypothesis"/>
+    </discharged>
+    <discharged domain="linear equalities" id="49" method="invariants" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="zero offset from result of pointer arithmetic: ((addrof (i32) +i 1):(int*)"/>
+    </discharged>
+    <discharged id="50" method="check-valid" time="05/24/2016 04:46:01" type="int-underflow">
+     <evidence comment="underflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged id="51" method="check-valid" time="05/24/2016 04:46:01" type="int-overflow">
+     <evidence comment="overflow is well defined for unsigned types"/>
+    </discharged>
+    <discharged domain="linear equalities" id="52" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="53" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged id="54" method="check-valid" time="05/24/2016 04:46:01" type="non-negative">
+     <evidence comment=" value is 4"/>
+    </discharged>
+    <discharged id="55" method="check-valid" time="05/24/2016 04:46:01" type="width-overflow">
+     <evidence comment="value 4 is less than minimum word size (16"/>
+    </discharged>
+    <discharged domain="linear equalities" id="56" method="invariants" time="05/24/2016 04:46:01" type="cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="3" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="57" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="value is a function parameter"/>
+    </discharged>
+    <discharged id="58" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="59" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="p is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="60" method="invariants" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged domain="valuesets" id="61" method="invariants" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="non-negative offset from base value: p"/>
+    </discharged>
+    <discharged domain="valuesets" id="62" method="invariants" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="externally provided address; dereferencability is checked as part of precondition"/>
+    </discharged>
+    <discharged id="63" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="64" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="address of a variable is a valid memory region"/>
+    </discharged>
+    <discharged id="65" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="address of a variable"/>
+    </discharged>
+    <discharged id="66" method="check-valid" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="address of a variable"/>
+    </discharged>
+    <discharged domain="linear equalities" id="67" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="68" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged id="69" method="check-valid" time="05/24/2016 04:46:01" type="non-negative">
+     <evidence comment=" value is 4"/>
+    </discharged>
+    <discharged id="70" method="check-valid" time="05/24/2016 04:46:01" type="width-overflow">
+     <evidence comment="value 4 is less than minimum word size (16"/>
+    </discharged>
+    <discharged id="71" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="value is a function parameter"/>
+    </discharged>
+    <discharged id="72" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="73" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="p is a function parameter"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="74" method="invariants" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="external address provided by parameter still points to valid memory"/>
+    </discharged>
+    <discharged domain="valuesets" id="75" method="invariants" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="non-negative offset from base value: p"/>
+    </discharged>
+    <discharged domain="valuesets" id="76" method="invariants" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="externally provided address; dereferencability is checked as part of precondition"/>
+    </discharged>
+    <discharged id="77" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="cast to void pointer"/>
+    </discharged>
+    <discharged id="78" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="address of a variable is a valid memory region"/>
+    </discharged>
+    <discharged id="79" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="address of a variable"/>
+    </discharged>
+    <discharged id="80" method="check-valid" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="address of a variable"/>
+    </discharged>
+    <discharged domain="linear equalities" id="81" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="82" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged domain="linear equalities" id="83" method="invariants" time="05/24/2016 04:46:01" type="unsigned-to-signed-cast">
+     <evidence comment="delegating proof obligation to function api"/>
+     <assumptions>
+      <uses a-id="2" a-type="api"/>
+     </assumptions>
+    </discharged>
+    <discharged id="84" method="check-valid" time="05/24/2016 04:46:01" type="initialized">
+     <evidence comment="encoding is a function parameter"/>
+    </discharged>
+    <discharged id="85" method="check-valid" time="05/24/2016 04:46:01" type="cast">
+     <evidence comment="null-pointer cast"/>
+    </discharged>
+    <discharged id="86" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="source and target type are the same"/>
+    </discharged>
+    <discharged id="87" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="88" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="89" method="check-valid" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="90" method="check-valid" time="05/24/2016 04:46:01" type="pointer-cast">
+     <evidence comment="source and target type are the same"/>
+    </discharged>
+    <discharged id="91" method="check-valid" time="05/24/2016 04:46:01" type="valid-mem">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="92" method="check-valid" time="05/24/2016 04:46:01" type="lower-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+    <discharged id="93" method="check-valid" time="05/24/2016 04:46:01" type="upper-bound">
+     <evidence comment="constant string is allocated by compiler"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/24/2016 04:46:01">
+   <application file="src/ziplist.c" name="application"/>
+  </header>
+ </c-analysis>

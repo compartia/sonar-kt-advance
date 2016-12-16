@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_001" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="135136" file="bit_shift.c" line="21"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="1"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="2" pv="2"/>
+      <inv nrv="0" pv="0"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="135159" file="bit_shift.c" line="22"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="2"/>
+      <node name="stmt" num="1"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="3" pv="3"/>
+      <inv nrv="3" pv="4"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="5">
+    <pvals index="0">
+     <pval arg="1" id="2"/>
+     <pval arg="1" id="3"/>
+    </pvals>
+    <pvals index="1">
+     <pval>
+      <lhost>
+       <var vid="4583" vname="a"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="2">
+     <pval arg="1" id="1"/>
+    </pvals>
+    <pvals index="3">
+     <pval>
+      <lhost>
+       <var vid="4584" vname="ret"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="4">
+     <pval arg="1" id="4"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="4">
+    <nrv index="0" tag="range" value="32"/>
+    <nrv index="1" tag="range" value="1"/>
+    <nrv index="2" tag="ss">
+     <sym name="assignedAt#19"/>
+    </nrv>
+    <nrv index="3" tag="ss">
+     <sym name="assignedAt#21"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:10">
+   <application file="./bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

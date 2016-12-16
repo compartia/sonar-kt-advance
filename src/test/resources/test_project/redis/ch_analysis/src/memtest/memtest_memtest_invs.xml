@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="memtest">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="36417" file="src/memtest.c" line="270"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="115"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="11" pv="19"/>
+      <inv nrv="6" pv="8"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36417" file="src/memtest.c" line="270"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="116"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="9" pv="0"/>
+      <inv nrv="10" pv="19"/>
+      <inv nrv="0" pv="9"/>
+      <inv nrv="9" pv="9"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36510" file="src/memtest.c" line="274"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="118"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="9" pv="0"/>
+      <inv nrv="10" pv="19"/>
+      <inv nrv="2" pv="3"/>
+      <inv nrv="1" pv="1"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36546" file="src/memtest.c" line="275"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="118"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="9" pv="0"/>
+      <inv nrv="10" pv="19"/>
+      <inv nrv="8" pv="14"/>
+      <inv nrv="4" pv="6"/>
+      <inv nrv="8" pv="13"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36595" file="src/memtest.c" line="276"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="2"/>
+      <node name="stmt" num="118"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="9" pv="0"/>
+      <inv nrv="10" pv="19"/>
+      <inv nrv="8" pv="16"/>
+      <inv nrv="5" pv="7"/>
+      <inv nrv="8" pv="15"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36674" file="src/memtest.c" line="277"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="3"/>
+      <node name="stmt" num="118"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="9" pv="0"/>
+      <inv nrv="10" pv="19"/>
+      <inv nrv="8" pv="18"/>
+      <inv nrv="7" pv="10"/>
+      <inv nrv="8" pv="17"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36731" file="src/memtest.c" line="278"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="4"/>
+      <node name="stmt" num="118"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="4"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="9" pv="0"/>
+      <inv nrv="10" pv="19"/>
+      <inv nrv="8" pv="12"/>
+      <inv nrv="3" pv="5"/>
+      <inv nrv="8" pv="11"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="20">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="1062" vname="tmp"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval arg="1" id="6"/>
+    </pvals>
+    <pvals index="2">
+     <pval>
+      <lhost>
+       <var vid="1061" vname="passes"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="3">
+     <pval arg="1" id="5"/>
+    </pvals>
+    <pvals index="4">
+     <pval>
+      <lhost>
+       <var vid="1060" vname="megabytes"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="5">
+     <pval arg="4" id="41"/>
+     <pval arg="2" id="42"/>
+    </pvals>
+    <pvals index="6">
+     <pval arg="4" id="11"/>
+     <pval arg="2" id="12"/>
+    </pvals>
+    <pvals index="7">
+     <pval arg="4" id="21"/>
+     <pval arg="2" id="22"/>
+    </pvals>
+    <pvals index="8">
+     <pval arg="1" id="1"/>
+     <pval arg="2" id="2"/>
+     <pval arg="2" id="3"/>
+    </pvals>
+    <pvals index="9">
+     <pval arg="1" id="4"/>
+    </pvals>
+    <pvals index="10">
+     <pval arg="4" id="31"/>
+     <pval arg="2" id="32"/>
+    </pvals>
+    <pvals index="11">
+     <pval arg="1" id="37"/>
+     <pval arg="1" id="38"/>
+     <pval arg="1" id="39"/>
+     <pval arg="2" id="40"/>
+     <pval arg="3" id="41"/>
+     <pval arg="1" id="42"/>
+     <pval arg="1" id="44"/>
+     <pval arg="2" id="45"/>
+     <pval arg="2" id="46"/>
+    </pvals>
+    <pvals index="12">
+     <pval arg="3" id="43"/>
+    </pvals>
+    <pvals index="13">
+     <pval arg="1" id="7"/>
+     <pval arg="1" id="8"/>
+     <pval arg="1" id="9"/>
+     <pval arg="2" id="10"/>
+     <pval arg="3" id="11"/>
+     <pval arg="1" id="12"/>
+     <pval arg="1" id="14"/>
+     <pval arg="2" id="15"/>
+     <pval arg="2" id="16"/>
+    </pvals>
+    <pvals index="14">
+     <pval arg="3" id="13"/>
+    </pvals>
+    <pvals index="15">
+     <pval arg="1" id="17"/>
+     <pval arg="1" id="18"/>
+     <pval arg="1" id="19"/>
+     <pval arg="2" id="20"/>
+     <pval arg="3" id="21"/>
+     <pval arg="1" id="22"/>
+     <pval arg="1" id="24"/>
+     <pval arg="2" id="25"/>
+     <pval arg="2" id="26"/>
+    </pvals>
+    <pvals index="16">
+     <pval arg="3" id="23"/>
+    </pvals>
+    <pvals index="17">
+     <pval arg="1" id="27"/>
+     <pval arg="1" id="28"/>
+     <pval arg="1" id="29"/>
+     <pval arg="2" id="30"/>
+     <pval arg="3" id="31"/>
+     <pval arg="1" id="32"/>
+     <pval arg="1" id="34"/>
+     <pval arg="2" id="35"/>
+     <pval arg="2" id="36"/>
+    </pvals>
+    <pvals index="18">
+     <pval arg="3" id="33"/>
+    </pvals>
+    <pvals index="19">
+     <pval etag="addrof" external="yes" property="vm" xstr="addrof (ws)">
+      <lval>
+       <lhost>
+        <var vid="938" vname="ws"/>
+       </lhost>
+      </lval>
+     </pval>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="12">
+    <nrv byte="36417" etag="fnapp" file="src/memtest.c" index="0" line="270" tag="fv" xstr="fn(ioctl)@ 270[1, 21523, _]">
+     <arg etag="const" xstr="1">
+      <constant ctag="cint64" ikind="iint" intValue="1"/>
+     </arg>
+     <arg etag="const" xstr="21523">
+      <constant ctag="cint64" ikind="iulong" intValue="21523"/>
+     </arg>
+     <arg/>
+     <fn etag="lval" xstr="ioctl">
+      <lval>
+       <lhost>
+        <var vid="929" vname="ioctl"/>
+       </lhost>
+      </lval>
+     </fn>
+    </nrv>
+    <nrv etag="lval" index="1" tag="fv" xstr="passes">
+     <lval>
+      <lhost>
+       <var vid="1061" vname="passes"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="2" tag="fv" xstr="megabytes">
+     <lval>
+      <lhost>
+       <var vid="1060" vname="megabytes"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv cn="null-terminator-pos" etag="cnapp" index="3" tag="fv" xstr="null-terminator-pos[caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))]">
+     <arg etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+      <typ ttag="tptr">
+       <attributes>
+        <attr attrname="restrict"/>
+       </attributes>
+       <typ ikind="ichar" ttag="tint">
+        <attributes>
+         <attr attrname="const"/>
+        </attributes>
+       </typ>
+      </typ>
+      <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+       <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+      </exp>
+     </arg>
+     <typ ikind="iint" ttag="tint"/>
+    </nrv>
+    <nrv cn="null-terminator-pos" etag="cnapp" index="4" tag="fv" xstr="null-terminator-pos[caste (&quot;;Your memory passed this test. ;&quot;:(char*))]">
+     <arg etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+      <typ ttag="tptr">
+       <attributes>
+        <attr attrname="restrict"/>
+       </attributes>
+       <typ ikind="ichar" ttag="tint">
+        <attributes>
+         <attr attrname="const"/>
+        </attributes>
+       </typ>
+      </typ>
+      <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+       <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+      </exp>
+     </arg>
+     <typ ikind="iint" ttag="tint"/>
+    </nrv>
+    <nrv cn="null-terminator-pos" etag="cnapp" index="5" tag="fv" xstr="null-terminator-pos[caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))]">
+     <arg etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+      <typ ttag="tptr">
+       <attributes>
+        <attr attrname="restrict"/>
+       </attributes>
+       <typ ikind="ichar" ttag="tint">
+        <attributes>
+         <attr attrname="const"/>
+        </attributes>
+       </typ>
+      </typ>
+      <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+       <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+      </exp>
+     </arg>
+     <typ ikind="iint" ttag="tint"/>
+    </nrv>
+    <nrv etag="addrof" index="6" tag="fv" xstr="addrof (ws)">
+     <lval>
+      <lhost>
+       <var vid="938" vname="ws"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv cn="null-terminator-pos" etag="cnapp" index="7" tag="fv" xstr="null-terminator-pos[caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))]">
+     <arg etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+      <typ ttag="tptr">
+       <attributes>
+        <attr attrname="restrict"/>
+       </attributes>
+       <typ ikind="ichar" ttag="tint">
+        <attributes>
+         <attr attrname="const"/>
+        </attributes>
+       </typ>
+      </typ>
+      <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+       <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+      </exp>
+     </arg>
+     <typ ikind="iint" ttag="tint"/>
+    </nrv>
+    <nrv index="8" lb="1" tag="range"/>
+    <nrv index="9" tag="ss">
+     <sym name="assignedAt#270">
+      <attr value="return-value"/>
+      <attr value="ioctl"/>
+     </sym>
+    </nrv>
+    <nrv index="10" tag="ss">
+     <sym name="invalid"/>
+    </nrv>
+    <nrv index="11" tag="ss">
+     <sym name="valid"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/24/2016 04:38:37">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

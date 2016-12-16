@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function cfilename="src/memtest.c" gvid="766" name="memtest_progress_start" num-ppo="0">
+   <statistics api-assumptions="0" callers="2" ds-assumptions="0" field-assignments="0" global-assignments="2" global-assumptions="12" rv-assumptions="0"/>
+   <parameters>
+    <param formal-vid="944" index="1" vname="title"/>
+    <param formal-vid="945" index="2" vname="pass"/>
+   </parameters>
+   <callers>
+    <caller cfilename="src/memtest.c" fname="memtest_compare_times" gvid="759" updated="05/24/2016 04:22:02" updated-f="1464063722.08">
+     <call-site byte="34620" file="src/memtest.c" line="202"/>
+     <args>
+      <arg etag="caste" xstr="caste (&quot;Compare&quot;:(char*))">
+       <typ ttag="tptr">
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="const" xstr="&quot;Compare&quot;">
+        <constant ctag="cstr" strValue="Compare"/>
+       </exp>
+      </arg>
+      <arg/>
+     </args>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="92"/>
+      <node name="loop"/>
+      <node name="stmt" num="89"/>
+     </calling-context>
+    </caller>
+    <caller cfilename="src/memtest.c" fname="memtest_test" gvid="758" updated="05/24/2016 04:22:02" updated-f="1464063722.07">
+     <call-site byte="35108" file="src/memtest.c" line="221"/>
+     <args>
+      <arg etag="caste" xstr="caste (&quot;Addressing test&quot;:(char*))">
+       <typ ttag="tptr">
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="const" xstr="&quot;Addressing test&quot;">
+        <constant ctag="cstr" strValue="Addressing test"/>
+       </exp>
+      </arg>
+      <arg/>
+     </args>
+     <calling-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="100"/>
+      <node name="loop"/>
+      <node name="stmt" num="97"/>
+     </calling-context>
+    </caller>
+   </callers>
+   <api-assumptions/>
+   <rv-assumptions/>
+   <ds-assumptions/>
+   <global-assumptions>
+    <global-assumption nr="1">
+     <predicate op="mult" size="iint" tag="int-underflow">
+      <exp1 etag="caste" xstr="caste (ws.ws_col:int)">
+       <typ ikind="iint" ttag="tint"/>
+       <exp etag="lval" xstr="ws.ws_col">
+        <lval>
+         <lhost>
+          <var vid="773" vname="ws"/>
+         </lhost>
+         <offset>
+          <field ckey="129" fname="ws_col"/>
+         </offset>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 binop="minusa" etag="binop" xstr="((caste (ws.ws_row:int) - 2):int">
+       <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+        <typ ikind="iint" ttag="tint"/>
+        <exp etag="lval" xstr="ws.ws_row">
+         <lval>
+          <lhost>
+           <var vid="773" vname="ws"/>
+          </lhost>
+          <offset>
+           <field ckey="129" fname="ws_row"/>
+          </offset>
+         </lval>
+        </exp>
+       </exp1>
+       <exp2 etag="const" xstr="2">
+        <constant ctag="cint64" ikind="iint" intValue="2"/>
+       </exp2>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="18"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="2">
+     <predicate op="mult" size="iint" tag="int-overflow">
+      <exp1 etag="caste" xstr="caste (ws.ws_col:int)">
+       <typ ikind="iint" ttag="tint"/>
+       <exp etag="lval" xstr="ws.ws_col">
+        <lval>
+         <lhost>
+          <var vid="773" vname="ws"/>
+         </lhost>
+         <offset>
+          <field ckey="129" fname="ws_col"/>
+         </offset>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 binop="minusa" etag="binop" xstr="((caste (ws.ws_row:int) - 2):int">
+       <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+        <typ ikind="iint" ttag="tint"/>
+        <exp etag="lval" xstr="ws.ws_row">
+         <lval>
+          <lhost>
+           <var vid="773" vname="ws"/>
+          </lhost>
+          <offset>
+           <field ckey="129" fname="ws_row"/>
+          </offset>
+         </lval>
+        </exp>
+       </exp1>
+       <exp2 etag="const" xstr="2">
+        <constant ctag="cint64" ikind="iint" intValue="2"/>
+       </exp2>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="19"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="3">
+     <predicate from="iushort" tag="unsigned-to-signed-cast" to="iint">
+      <exp etag="lval" xstr="ws.ws_col">
+       <lval>
+        <lhost>
+         <var vid="773" vname="ws"/>
+        </lhost>
+        <offset>
+         <field ckey="129" fname="ws_col"/>
+        </offset>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="12"/>
+      <po id="80"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="4">
+     <predicate from="iushort" tag="unsigned-to-signed-cast" to="iint">
+      <exp etag="lval" xstr="ws.ws_row">
+       <lval>
+        <lhost>
+         <var vid="773" vname="ws"/>
+        </lhost>
+        <offset>
+         <field ckey="129" fname="ws_row"/>
+        </offset>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="14"/>
+      <po id="82"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="5">
+     <predicate from="iint" tag="signed-to-unsigned-cast" to="iulong">
+      <exp binop="mult" etag="binop" xstr="((caste (ws.ws_col:int) * ((caste (ws.ws_row:int) - 3):int):int">
+       <exp1 etag="caste" xstr="caste (ws.ws_col:int)">
+        <typ ikind="iint" ttag="tint"/>
+        <exp etag="lval" xstr="ws.ws_col">
+         <lval>
+          <lhost>
+           <var vid="773" vname="ws"/>
+          </lhost>
+          <offset>
+           <field ckey="129" fname="ws_col"/>
+          </offset>
+         </lval>
+        </exp>
+       </exp1>
+       <exp2 binop="minusa" etag="binop" xstr="((caste (ws.ws_row:int) - 3):int">
+        <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+         <typ ikind="iint" ttag="tint"/>
+         <exp etag="lval" xstr="ws.ws_row">
+          <lval>
+           <lhost>
+            <var vid="773" vname="ws"/>
+           </lhost>
+           <offset>
+            <field ckey="129" fname="ws_row"/>
+           </offset>
+          </lval>
+         </exp>
+        </exp1>
+        <exp2 etag="const" xstr="3">
+         <constant ctag="cint64" ikind="iint" intValue="3"/>
+        </exp2>
+        <typ ikind="iint" ttag="tint"/>
+       </exp2>
+       <typ ikind="iint" ttag="tint"/>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="79"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="6">
+     <predicate op="mult" size="iint" tag="int-overflow">
+      <exp1 etag="caste" xstr="caste (ws.ws_col:int)">
+       <typ ikind="iint" ttag="tint"/>
+       <exp etag="lval" xstr="ws.ws_col">
+        <lval>
+         <lhost>
+          <var vid="773" vname="ws"/>
+         </lhost>
+         <offset>
+          <field ckey="129" fname="ws_col"/>
+         </offset>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 binop="minusa" etag="binop" xstr="((caste (ws.ws_row:int) - 3):int">
+       <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+        <typ ikind="iint" ttag="tint"/>
+        <exp etag="lval" xstr="ws.ws_row">
+         <lval>
+          <lhost>
+           <var vid="773" vname="ws"/>
+          </lhost>
+          <offset>
+           <field ckey="129" fname="ws_row"/>
+          </offset>
+         </lval>
+        </exp>
+       </exp1>
+       <exp2 etag="const" xstr="3">
+        <constant ctag="cint64" ikind="iint" intValue="3"/>
+       </exp2>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="87"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="7">
+     <predicate op="minusa" size="iint" tag="int-underflow">
+      <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+       <typ ikind="iint" ttag="tint"/>
+       <exp etag="lval" xstr="ws.ws_row">
+        <lval>
+         <lhost>
+          <var vid="773" vname="ws"/>
+         </lhost>
+         <offset>
+          <field ckey="129" fname="ws_row"/>
+         </offset>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 etag="const" xstr="3">
+       <constant ctag="cint64" ikind="iint" intValue="3"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="84"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="8">
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <mem etag="lval" xstr="stdout">
+         <lval>
+          <lhost>
+           <var vid="1720" vname="stdout"/>
+          </lhost>
+         </lval>
+        </mem>
+       </lhost>
+      </lval>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="91"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="9">
+     <predicate op="minusa" size="iint" tag="int-underflow">
+      <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+       <typ ikind="iint" ttag="tint"/>
+       <exp etag="lval" xstr="ws.ws_row">
+        <lval>
+         <lhost>
+          <var vid="773" vname="ws"/>
+         </lhost>
+         <offset>
+          <field ckey="129" fname="ws_row"/>
+         </offset>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 etag="const" xstr="2">
+       <constant ctag="cint64" ikind="iint" intValue="2"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="16"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="10">
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="stdout">
+       <lval>
+        <lhost>
+         <var vid="1720" vname="stdout"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="93"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="11">
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="stdout">
+       <lval>
+        <lhost>
+         <var vid="1720" vname="stdout"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="88"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="12">
+     <predicate op="mult" size="iint" tag="int-underflow">
+      <exp1 etag="caste" xstr="caste (ws.ws_col:int)">
+       <typ ikind="iint" ttag="tint"/>
+       <exp etag="lval" xstr="ws.ws_col">
+        <lval>
+         <lhost>
+          <var vid="773" vname="ws"/>
+         </lhost>
+         <offset>
+          <field ckey="129" fname="ws_col"/>
+         </offset>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 binop="minusa" etag="binop" xstr="((caste (ws.ws_row:int) - 3):int">
+       <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+        <typ ikind="iint" ttag="tint"/>
+        <exp etag="lval" xstr="ws.ws_row">
+         <lval>
+          <lhost>
+           <var vid="773" vname="ws"/>
+          </lhost>
+          <offset>
+           <field ckey="129" fname="ws_row"/>
+          </offset>
+         </lval>
+        </exp>
+       </exp1>
+       <exp2 etag="const" xstr="3">
+        <constant ctag="cint64" ikind="iint" intValue="3"/>
+       </exp2>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="86"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+   </global-assumptions>
+   <global-assignments>
+    <global-assignment nr="1">
+     <lhs>
+      <lhost>
+       <var vid="772" vname="progress_printed"/>
+      </lhost>
+     </lhs>
+     <rhs etag="caste" xstr="caste (0:unsigned long)">
+      <typ ikind="iulong" ttag="tint"/>
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </rhs>
+     <loc byte="30943" file="src/memtest.c" line="70"/>
+    </global-assignment>
+    <global-assignment nr="2">
+     <lhs>
+      <lhost>
+       <var vid="771" vname="progress_full"/>
+      </lhost>
+     </lhs>
+     <rhs etag="caste" xstr="caste (((caste (ws.ws_col:int) * ((caste (ws.ws_row:int) - 3):int):int:unsigned long)">
+      <typ ikind="iulong" ttag="tint"/>
+      <exp binop="mult" etag="binop" xstr="((caste (ws.ws_col:int) * ((caste (ws.ws_row:int) - 3):int):int">
+       <exp1 etag="caste" xstr="caste (ws.ws_col:int)">
+        <typ ikind="iint" ttag="tint"/>
+        <exp etag="lval" xstr="ws.ws_col">
+         <lval>
+          <lhost>
+           <var vid="773" vname="ws"/>
+          </lhost>
+          <offset>
+           <field ckey="129" fname="ws_col"/>
+          </offset>
+         </lval>
+        </exp>
+       </exp1>
+       <exp2 binop="minusa" etag="binop" xstr="((caste (ws.ws_row:int) - 3):int">
+        <exp1 etag="caste" xstr="caste (ws.ws_row:int)">
+         <typ ikind="iint" ttag="tint"/>
+         <exp etag="lval" xstr="ws.ws_row">
+          <lval>
+           <lhost>
+            <var vid="773" vname="ws"/>
+           </lhost>
+           <offset>
+            <field ckey="129" fname="ws_row"/>
+           </offset>
+          </lval>
+         </exp>
+        </exp1>
+        <exp2 etag="const" xstr="3">
+         <constant ctag="cint64" ikind="iint" intValue="3"/>
+        </exp2>
+        <typ ikind="iint" ttag="tint"/>
+       </exp2>
+       <typ ikind="iint" ttag="tint"/>
+      </exp>
+     </rhs>
+     <loc byte="30969" file="src/memtest.c" line="71"/>
+    </global-assignment>
+   </global-assignments>
+   <field-assignments/>
+  </function>
+  <header time="05/24/2016 04:45:10">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

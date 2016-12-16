@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="memtest_non_destructive_swap">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="36118" file="src/memtest.c" line="254"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="109"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="1" pv="9"/>
+      <inv nrv="6" pv="9"/>
+      <inv nrv="5" pv="9"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36156" file="src/memtest.c" line="255"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="109"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="0" pv="10"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36221" file="src/memtest.c" line="259"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="4"/>
+      <node name="stmt" num="113"/>
+      <node name="loop"/>
+      <node name="stmt" num="110"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="13" pv="25"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="12" pv="24"/>
+      <inv nrv="6" pv="14"/>
+      <inv nrv="11" pv="14"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="7" pv="15"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="3" pv="4"/>
+      <inv nrv="6" pv="13"/>
+      <inv nrv="11" pv="13"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36221" file="src/memtest.c" line="259"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="111"/>
+      <node name="loop"/>
+      <node name="stmt" num="110"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="6" pv="14"/>
+      <inv nrv="11" pv="14"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="6" pv="19"/>
+      <inv nrv="11" pv="19"/>
+      <inv nrv="8" pv="28"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36221" file="src/memtest.c" line="259"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="2"/>
+      <node name="stmt" num="109"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="2" pv="3"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36291" file="src/memtest.c" line="262"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="113"/>
+      <node name="loop"/>
+      <node name="stmt" num="110"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="6" pv="14"/>
+      <inv nrv="11" pv="14"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="7" pv="15"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="6" pv="20"/>
+      <inv nrv="11" pv="20"/>
+      <inv nrv="1" pv="8"/>
+      <inv nrv="6" pv="8"/>
+      <inv nrv="5" pv="8"/>
+      <inv nrv="9" pv="8"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36309" file="src/memtest.c" line="263"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="113"/>
+      <node name="loop"/>
+      <node name="stmt" num="110"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="13" pv="25"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="6" pv="14"/>
+      <inv nrv="11" pv="14"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="7" pv="15"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="4" pv="11"/>
+      <inv nrv="7" pv="21"/>
+      <inv nrv="6" pv="22"/>
+      <inv nrv="11" pv="22"/>
+      <inv nrv="1" pv="12"/>
+      <inv nrv="6" pv="12"/>
+      <inv nrv="5" pv="12"/>
+      <inv nrv="9" pv="12"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36329" file="src/memtest.c" line="264"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="2"/>
+      <node name="stmt" num="113"/>
+      <node name="loop"/>
+      <node name="stmt" num="110"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="13" pv="25"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="12" pv="24"/>
+      <inv nrv="6" pv="14"/>
+      <inv nrv="11" pv="14"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="7" pv="15"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="12" pv="26"/>
+      <inv nrv="6" pv="16"/>
+      <inv nrv="11" pv="16"/>
+      <inv nrv="1" pv="5"/>
+      <inv nrv="6" pv="5"/>
+      <inv nrv="5" pv="5"/>
+      <inv nrv="9" pv="5"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="36347" file="src/memtest.c" line="265"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="3"/>
+      <node name="stmt" num="113"/>
+      <node name="loop"/>
+      <node name="stmt" num="110"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="13" pv="25"/>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="6" pv="2"/>
+      <inv nrv="5" pv="2"/>
+      <inv nrv="12" pv="24"/>
+      <inv nrv="6" pv="14"/>
+      <inv nrv="11" pv="14"/>
+      <inv nrv="1" pv="1"/>
+      <inv nrv="6" pv="1"/>
+      <inv nrv="5" pv="1"/>
+      <inv nrv="9" pv="1"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="7" pv="15"/>
+      <inv nrv="8" pv="15"/>
+      <inv nrv="10" pv="23"/>
+      <inv nrv="4" pv="6"/>
+      <inv nrv="7" pv="17"/>
+      <inv nrv="13" pv="27"/>
+      <inv nrv="6" pv="18"/>
+      <inv nrv="11" pv="18"/>
+      <inv nrv="1" pv="7"/>
+      <inv nrv="6" pv="7"/>
+      <inv nrv="5" pv="7"/>
+      <inv nrv="9" pv="7"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="29">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="1051" vname="size"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval>
+      <lhost>
+       <var vid="1052" vname="p"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="2">
+     <pval>
+      <lhost>
+       <var vid="1050" vname="addr"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="3">
+     <pval arg="3" id="7"/>
+    </pvals>
+    <pvals index="4">
+     <pval arg="3" id="63"/>
+     <pval arg="3" id="64"/>
+    </pvals>
+    <pvals index="5">
+     <pval arg="1" id="36"/>
+     <pval arg="1" id="38"/>
+     <pval arg="1" id="39"/>
+     <pval arg="3" id="40"/>
+     <pval arg="3" id="41"/>
+    </pvals>
+    <pvals index="6">
+     <pval arg="3" id="50"/>
+     <pval arg="3" id="51"/>
+    </pvals>
+    <pvals index="7">
+     <pval arg="1" id="48"/>
+     <pval arg="1" id="52"/>
+     <pval arg="1" id="53"/>
+     <pval arg="3" id="54"/>
+     <pval arg="3" id="55"/>
+    </pvals>
+    <pvals index="8">
+     <pval arg="1" id="12"/>
+     <pval arg="1" id="14"/>
+     <pval arg="1" id="15"/>
+     <pval arg="3" id="16"/>
+     <pval arg="3" id="17"/>
+    </pvals>
+    <pvals index="9">
+     <pval arg="3" id="1"/>
+     <pval arg="1" id="2"/>
+    </pvals>
+    <pvals index="10">
+     <pval arg="1" id="3"/>
+     <pval arg="2" id="4"/>
+     <pval arg="2" id="5"/>
+    </pvals>
+    <pvals index="11">
+     <pval arg="3" id="26"/>
+     <pval arg="3" id="27"/>
+    </pvals>
+    <pvals index="12">
+     <pval arg="1" id="24"/>
+     <pval arg="1" id="28"/>
+     <pval arg="1" id="29"/>
+     <pval arg="3" id="30"/>
+     <pval arg="3" id="31"/>
+    </pvals>
+    <pvals index="13">
+     <pval arg="1" id="62"/>
+     <pval arg="2" id="63"/>
+     <pval arg="2" id="64"/>
+    </pvals>
+    <pvals index="14">
+     <pval>
+      <lhost>
+       <var vid="1054" vname="j"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="15">
+     <pval>
+      <lhost>
+       <var vid="1053" vname="words"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="16">
+     <pval arg="1" id="37"/>
+     <pval arg="4" id="40"/>
+     <pval arg="4" id="41"/>
+    </pvals>
+    <pvals index="17">
+     <pval arg="4" id="54"/>
+     <pval arg="4" id="55"/>
+    </pvals>
+    <pvals index="18">
+     <pval arg="1" id="49"/>
+     <pval arg="2" id="50"/>
+     <pval arg="2" id="51"/>
+    </pvals>
+    <pvals index="19">
+     <pval arg="1" id="8"/>
+    </pvals>
+    <pvals index="20">
+     <pval arg="1" id="13"/>
+     <pval arg="4" id="16"/>
+     <pval arg="4" id="17"/>
+    </pvals>
+    <pvals index="21">
+     <pval arg="4" id="30"/>
+     <pval arg="4" id="31"/>
+    </pvals>
+    <pvals index="22">
+     <pval arg="1" id="25"/>
+     <pval arg="2" id="26"/>
+     <pval arg="2" id="27"/>
+    </pvals>
+    <pvals index="23">
+     <pval etag="lval" external="yes" property="vm" xstr="addr">
+      <lval>
+       <lhost>
+        <var vid="1050" vname="addr"/>
+       </lhost>
+      </lval>
+     </pval>
+    </pvals>
+    <pvals index="24">
+     <pval>
+      <lhost>
+       <var vid="1056" vname="b"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="25">
+     <pval>
+      <lhost>
+       <var vid="1055" vname="a"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="26">
+     <pval arg="3" id="46"/>
+     <pval arg="1" id="47"/>
+    </pvals>
+    <pvals index="27">
+     <pval arg="3" id="60"/>
+     <pval arg="1" id="61"/>
+    </pvals>
+    <pvals index="28">
+     <pval arg="1" id="9"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="14">
+    <nrv etag="lval" index="0" tag="fv" xstr="size">
+     <lval>
+      <lhost>
+       <var vid="1051" vname="size"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv etag="lval" index="1" tag="fv" xstr="addr">
+     <lval>
+      <lhost>
+       <var vid="1050" vname="addr"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv index="2" tag="range" value="0"/>
+    <nrv index="3" tag="range" value="2"/>
+    <nrv index="4" tag="range" value="1"/>
+    <nrv address-type="external" index="5" tag="vs" value="0">
+     <base etag="lval" xstr="addr">
+      <lval>
+       <lhost>
+        <var vid="1050" vname="addr"/>
+       </lhost>
+      </lval>
+     </base>
+    </nrv>
+    <nrv index="6" lb="0" tag="range"/>
+    <nrv index="7" lb="1" tag="range"/>
+    <nrv index="8" tag="ss">
+     <sym name="assignedAt#255"/>
+    </nrv>
+    <nrv index="9" tag="ss">
+     <sym name="assignedAt#254"/>
+    </nrv>
+    <nrv index="10" tag="ss">
+     <sym name="valid"/>
+    </nrv>
+    <nrv index="11" tag="ss">
+     <sym name="assignedAt#259"/>
+    </nrv>
+    <nrv index="12" tag="ss">
+     <sym name="assignedAt#263"/>
+    </nrv>
+    <nrv index="13" tag="ss">
+     <sym name="assignedAt#262"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/24/2016 04:38:37">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

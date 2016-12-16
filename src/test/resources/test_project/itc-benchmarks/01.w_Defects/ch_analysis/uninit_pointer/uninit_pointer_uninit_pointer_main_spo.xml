@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_main">
+   <secondary-proof-obligations max-spo-id="64" num-ppo="64">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_016" fvid="4701">
+      <location byte="141360" file="uninit_pointer.c" line="497"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="217"/>
+        <node name="if-then"/>
+        <node name="stmt" num="216"/>
+        <node name="if-else"/>
+        <node name="stmt" num="214"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_016" fvid="4701">
+      <location byte="141360" file="uninit_pointer.c" line="497"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="215"/>
+        <node name="if-then"/>
+        <node name="stmt" num="214"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_015" fvid="4688">
+      <location byte="141296" file="uninit_pointer.c" line="492"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="213"/>
+        <node name="if-then"/>
+        <node name="stmt" num="212"/>
+        <node name="if-else"/>
+        <node name="stmt" num="210"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_015" fvid="4688">
+      <location byte="141296" file="uninit_pointer.c" line="492"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="211"/>
+        <node name="if-then"/>
+        <node name="stmt" num="210"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_014" fvid="4682">
+      <location byte="141232" file="uninit_pointer.c" line="487"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="209"/>
+        <node name="if-then"/>
+        <node name="stmt" num="208"/>
+        <node name="if-else"/>
+        <node name="stmt" num="206"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_014" fvid="4682">
+      <location byte="141232" file="uninit_pointer.c" line="487"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="207"/>
+        <node name="if-then"/>
+        <node name="stmt" num="206"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_013" fvid="4667">
+      <location byte="141168" file="uninit_pointer.c" line="482"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="205"/>
+        <node name="if-then"/>
+        <node name="stmt" num="204"/>
+        <node name="if-else"/>
+        <node name="stmt" num="202"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_013" fvid="4667">
+      <location byte="141168" file="uninit_pointer.c" line="482"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="203"/>
+        <node name="if-then"/>
+        <node name="stmt" num="202"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_012" fvid="4663">
+      <location byte="141104" file="uninit_pointer.c" line="477"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="201"/>
+        <node name="if-then"/>
+        <node name="stmt" num="200"/>
+        <node name="if-else"/>
+        <node name="stmt" num="198"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_012" fvid="4663">
+      <location byte="141104" file="uninit_pointer.c" line="477"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="199"/>
+        <node name="if-then"/>
+        <node name="stmt" num="198"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_011" fvid="4658">
+      <location byte="141040" file="uninit_pointer.c" line="472"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="197"/>
+        <node name="if-then"/>
+        <node name="stmt" num="196"/>
+        <node name="if-else"/>
+        <node name="stmt" num="194"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_011" fvid="4658">
+      <location byte="141040" file="uninit_pointer.c" line="472"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="195"/>
+        <node name="if-then"/>
+        <node name="stmt" num="194"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="1" fname="uninit_pointer_010" fvid="4656">
+      <location byte="140976" file="uninit_pointer.c" line="467"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="193"/>
+        <node name="if-then"/>
+        <node name="stmt" num="192"/>
+        <node name="if-else"/>
+        <node name="stmt" num="190"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="1" fname="uninit_pointer_010" fvid="4656">
+      <location byte="140976" file="uninit_pointer.c" line="467"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="191"/>
+        <node name="if-then"/>
+        <node name="stmt" num="190"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_009" fvid="4644">
+      <location byte="140912" file="uninit_pointer.c" line="462"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="189"/>
+        <node name="if-then"/>
+        <node name="stmt" num="188"/>
+        <node name="if-else"/>
+        <node name="stmt" num="186"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_009" fvid="4644">
+      <location byte="140912" file="uninit_pointer.c" line="462"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="187"/>
+        <node name="if-then"/>
+        <node name="stmt" num="186"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_008" fvid="4638">
+      <location byte="140849" file="uninit_pointer.c" line="457"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="185"/>
+        <node name="if-then"/>
+        <node name="stmt" num="184"/>
+        <node name="if-else"/>
+        <node name="stmt" num="182"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_008" fvid="4638">
+      <location byte="140849" file="uninit_pointer.c" line="457"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="183"/>
+        <node name="if-then"/>
+        <node name="stmt" num="182"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_007" fvid="4616">
+      <location byte="140786" file="uninit_pointer.c" line="452"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="181"/>
+        <node name="if-then"/>
+        <node name="stmt" num="180"/>
+        <node name="if-else"/>
+        <node name="stmt" num="178"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_007" fvid="4616">
+      <location byte="140786" file="uninit_pointer.c" line="452"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="179"/>
+        <node name="if-then"/>
+        <node name="stmt" num="178"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_006" fvid="4613">
+      <location byte="140723" file="uninit_pointer.c" line="447"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="177"/>
+        <node name="if-then"/>
+        <node name="stmt" num="176"/>
+        <node name="if-else"/>
+        <node name="stmt" num="174"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_006" fvid="4613">
+      <location byte="140723" file="uninit_pointer.c" line="447"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="175"/>
+        <node name="if-then"/>
+        <node name="stmt" num="174"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_005" fvid="4608">
+      <location byte="140660" file="uninit_pointer.c" line="442"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="173"/>
+        <node name="if-then"/>
+        <node name="stmt" num="172"/>
+        <node name="if-else"/>
+        <node name="stmt" num="170"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_005" fvid="4608">
+      <location byte="140660" file="uninit_pointer.c" line="442"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="171"/>
+        <node name="if-then"/>
+        <node name="stmt" num="170"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_004" fvid="4596">
+      <location byte="140597" file="uninit_pointer.c" line="437"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="169"/>
+        <node name="if-then"/>
+        <node name="stmt" num="168"/>
+        <node name="if-else"/>
+        <node name="stmt" num="166"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_004" fvid="4596">
+      <location byte="140597" file="uninit_pointer.c" line="437"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="167"/>
+        <node name="if-then"/>
+        <node name="stmt" num="166"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="4" fname="uninit_pointer_003" fvid="4587">
+      <location byte="140534" file="uninit_pointer.c" line="432"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="165"/>
+        <node name="if-then"/>
+        <node name="stmt" num="164"/>
+        <node name="if-else"/>
+        <node name="stmt" num="162"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="4" fname="uninit_pointer_003" fvid="4587">
+      <location byte="140534" file="uninit_pointer.c" line="432"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="163"/>
+        <node name="if-then"/>
+        <node name="stmt" num="162"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_002" fvid="4584">
+      <location byte="140471" file="uninit_pointer.c" line="427"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="161"/>
+        <node name="if-then"/>
+        <node name="stmt" num="160"/>
+        <node name="if-else"/>
+        <node name="stmt" num="158"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_002" fvid="4584">
+      <location byte="140471" file="uninit_pointer.c" line="427"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="159"/>
+        <node name="if-then"/>
+        <node name="stmt" num="158"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_001" fvid="4580">
+      <location byte="140408" file="uninit_pointer.c" line="422"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="157"/>
+        <node name="if-then"/>
+        <node name="stmt" num="156"/>
+        <node name="if-else"/>
+        <node name="stmt" num="154"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_001" fvid="4580">
+      <location byte="140408" file="uninit_pointer.c" line="422"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="155"/>
+        <node name="if-then"/>
+        <node name="stmt" num="154"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/31/2016 17:16:52">
+   <application file="uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

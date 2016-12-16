@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="bit_shift" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:08"/>
+  </header>
+  <function filename="bit_shift">
+   <svar vglob="true" vid="4630" vname="bit_shift_014">
+    <vtyp ttag="tfun" vararg="false">
+     <args/>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="136550" file="bit_shift.c" line="188"/>
+   </svar>
+   <sformals/>
+   <slocals>
+    <varinfo vid="4631" vname="a">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="136579" file="bit_shift.c" line="190"/>
+    </varinfo>
+    <varinfo vaddrof="true" vid="4632" vname="shifts">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="5"/>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="136591" file="bit_shift.c" line="191"/>
+    </varinfo>
+    <varinfo vid="4633" vname="ret">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="136629" file="bit_shift.c" line="192"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="30">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4631" vname="a"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="136575" file="bit_shift.c" line="190"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="0"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4632" vname="shifts"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="8"/>
+         </exp>
+         <loc byte="136587" file="bit_shift.c" line="191"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="1"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4632" vname="shifts"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="40"/>
+         </exp>
+         <loc byte="136587" file="bit_shift.c" line="191"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="2"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4632" vname="shifts"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="16"/>
+         </exp>
+         <loc byte="136587" file="bit_shift.c" line="191"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="3"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4632" vname="shifts"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="32"/>
+         </exp>
+         <loc byte="136587" file="bit_shift.c" line="191"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="4"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4632" vname="shifts"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="24"/>
+         </exp>
+         <loc byte="136587" file="bit_shift.c" line="191"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4633" vname="ret"/>
+          </lhost>
+         </lval>
+         <exp binop="shiftlt" etag="binop">
+          <exp1 etag="lval">
+           <lval>
+            <lhost>
+             <var vid="4631" vname="a"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="lval">
+           <lval>
+            <offset>
+             <index etag="const">
+              <constant ctag="cint64" ikind="iint" intValue="3"/>
+             </index>
+            </offset>
+            <lhost>
+             <var vid="4632" vname="shifts"/>
+            </lhost>
+           </lval>
+          </exp2>
+          <typ ikind="iint" ttag="tint"/>
+         </exp>
+         <loc byte="136635" file="bit_shift.c" line="193"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4426" vname="sink"/>
+          </lhost>
+         </lval>
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="4633" vname="ret"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="136665" file="bit_shift.c" line="194"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="31"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="31">
+      <skind stag="return">
+       <loc byte="136677" file="bit_shift.c" line="195"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="30"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

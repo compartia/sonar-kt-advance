@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_013_func_001" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="136449" file="bit_shift.c" line="175"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="1"/>
+      <node name="stmt" num="26"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="1" pv="3"/>
+      <inv nrv="0" pv="1"/>
+      <inv nrv="2" pv="1"/>
+      <inv nrv="1" pv="2"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="136475" file="bit_shift.c" line="176"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="2"/>
+      <node name="stmt" num="26"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="2" pv="0"/>
+      <inv nrv="3" pv="4"/>
+      <inv nrv="1" pv="3"/>
+      <inv nrv="3" pv="5"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="6">
+    <pvals index="0">
+     <pval>
+      <lhost>
+       <var vid="4627" vname="a"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="1">
+     <pval arg="1" id="1"/>
+    </pvals>
+    <pvals index="2">
+     <pval arg="1" id="2"/>
+     <pval arg="1" id="3"/>
+     <pval arg="1" id="4"/>
+    </pvals>
+    <pvals index="3">
+     <pval>
+      <lhost>
+       <var vid="4626" vname="shift"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="4">
+     <pval>
+      <lhost>
+       <var vid="4628" vname="ret"/>
+      </lhost>
+     </pval>
+    </pvals>
+    <pvals index="5">
+     <pval arg="1" id="5"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="4">
+    <nrv index="0" tag="range" value="1"/>
+    <nrv etag="lval" index="1" tag="fv" xstr="shift">
+     <lval>
+      <lhost>
+       <var vid="4626" vname="shift"/>
+      </lhost>
+     </lval>
+    </nrv>
+    <nrv index="2" tag="ss">
+     <sym name="assignedAt#173"/>
+    </nrv>
+    <nrv index="3" tag="ss">
+     <sym name="assignedAt#175"/>
+    </nrv>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:10">
+   <application file="./bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

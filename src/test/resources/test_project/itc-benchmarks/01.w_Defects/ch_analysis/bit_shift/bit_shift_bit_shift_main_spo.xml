@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_main">
+   <secondary-proof-obligations max-spo-id="68" num-ppo="68">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="0" fname="bit_shift_017" fvid="4645">
+      <location byte="138097" file="bit_shift.c" line="329"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="105"/>
+        <node name="if-then"/>
+        <node name="stmt" num="104"/>
+        <node name="if-else"/>
+        <node name="stmt" num="102"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_017" fvid="4645">
+      <location byte="138097" file="bit_shift.c" line="329"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="103"/>
+        <node name="if-then"/>
+        <node name="stmt" num="102"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_016" fvid="4639">
+      <location byte="138038" file="bit_shift.c" line="324"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="101"/>
+        <node name="if-then"/>
+        <node name="stmt" num="100"/>
+        <node name="if-else"/>
+        <node name="stmt" num="98"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_016" fvid="4639">
+      <location byte="138038" file="bit_shift.c" line="324"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="99"/>
+        <node name="if-then"/>
+        <node name="stmt" num="98"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_015" fvid="4634">
+      <location byte="137979" file="bit_shift.c" line="319"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="97"/>
+        <node name="if-then"/>
+        <node name="stmt" num="96"/>
+        <node name="if-else"/>
+        <node name="stmt" num="94"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_015" fvid="4634">
+      <location byte="137979" file="bit_shift.c" line="319"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="95"/>
+        <node name="if-then"/>
+        <node name="stmt" num="94"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_014" fvid="4630">
+      <location byte="137920" file="bit_shift.c" line="314"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="93"/>
+        <node name="if-then"/>
+        <node name="stmt" num="92"/>
+        <node name="if-else"/>
+        <node name="stmt" num="90"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_014" fvid="4630">
+      <location byte="137920" file="bit_shift.c" line="314"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="91"/>
+        <node name="if-then"/>
+        <node name="stmt" num="90"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_013" fvid="4629">
+      <location byte="137861" file="bit_shift.c" line="309"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="89"/>
+        <node name="if-then"/>
+        <node name="stmt" num="88"/>
+        <node name="if-else"/>
+        <node name="stmt" num="86"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_013" fvid="4629">
+      <location byte="137861" file="bit_shift.c" line="309"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="87"/>
+        <node name="if-then"/>
+        <node name="stmt" num="86"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_012" fvid="4620">
+      <location byte="137802" file="bit_shift.c" line="304"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="85"/>
+        <node name="if-then"/>
+        <node name="stmt" num="84"/>
+        <node name="if-else"/>
+        <node name="stmt" num="82"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_012" fvid="4620">
+      <location byte="137802" file="bit_shift.c" line="304"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="83"/>
+        <node name="if-then"/>
+        <node name="stmt" num="82"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_011" fvid="4615">
+      <location byte="137743" file="bit_shift.c" line="299"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="81"/>
+        <node name="if-then"/>
+        <node name="stmt" num="80"/>
+        <node name="if-else"/>
+        <node name="stmt" num="78"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_011" fvid="4615">
+      <location byte="137743" file="bit_shift.c" line="299"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="79"/>
+        <node name="if-then"/>
+        <node name="stmt" num="78"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_010" fvid="4611">
+      <location byte="137684" file="bit_shift.c" line="294"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="77"/>
+        <node name="if-then"/>
+        <node name="stmt" num="76"/>
+        <node name="if-else"/>
+        <node name="stmt" num="74"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_010" fvid="4611">
+      <location byte="137684" file="bit_shift.c" line="294"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="75"/>
+        <node name="if-then"/>
+        <node name="stmt" num="74"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_009" fvid="4607">
+      <location byte="137625" file="bit_shift.c" line="289"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="73"/>
+        <node name="if-then"/>
+        <node name="stmt" num="72"/>
+        <node name="if-else"/>
+        <node name="stmt" num="70"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_009" fvid="4607">
+      <location byte="137625" file="bit_shift.c" line="289"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="71"/>
+        <node name="if-then"/>
+        <node name="stmt" num="70"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_008" fvid="4603">
+      <location byte="137567" file="bit_shift.c" line="284"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="69"/>
+        <node name="if-then"/>
+        <node name="stmt" num="68"/>
+        <node name="if-else"/>
+        <node name="stmt" num="66"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_008" fvid="4603">
+      <location byte="137567" file="bit_shift.c" line="284"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="67"/>
+        <node name="if-then"/>
+        <node name="stmt" num="66"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_007" fvid="4600">
+      <location byte="137509" file="bit_shift.c" line="279"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="65"/>
+        <node name="if-then"/>
+        <node name="stmt" num="64"/>
+        <node name="if-else"/>
+        <node name="stmt" num="62"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_007" fvid="4600">
+      <location byte="137509" file="bit_shift.c" line="279"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="63"/>
+        <node name="if-then"/>
+        <node name="stmt" num="62"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_006" fvid="4597">
+      <location byte="137451" file="bit_shift.c" line="274"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="61"/>
+        <node name="if-then"/>
+        <node name="stmt" num="60"/>
+        <node name="if-else"/>
+        <node name="stmt" num="58"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_006" fvid="4597">
+      <location byte="137451" file="bit_shift.c" line="274"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="59"/>
+        <node name="if-then"/>
+        <node name="stmt" num="58"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_005" fvid="4594">
+      <location byte="137393" file="bit_shift.c" line="269"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="57"/>
+        <node name="if-then"/>
+        <node name="stmt" num="56"/>
+        <node name="if-else"/>
+        <node name="stmt" num="54"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_005" fvid="4594">
+      <location byte="137393" file="bit_shift.c" line="269"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="55"/>
+        <node name="if-then"/>
+        <node name="stmt" num="54"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_004" fvid="4591">
+      <location byte="137335" file="bit_shift.c" line="264"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="53"/>
+        <node name="if-then"/>
+        <node name="stmt" num="52"/>
+        <node name="if-else"/>
+        <node name="stmt" num="50"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_004" fvid="4591">
+      <location byte="137335" file="bit_shift.c" line="264"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="51"/>
+        <node name="if-then"/>
+        <node name="stmt" num="50"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_003" fvid="4588">
+      <location byte="137277" file="bit_shift.c" line="259"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="49"/>
+        <node name="if-then"/>
+        <node name="stmt" num="48"/>
+        <node name="if-else"/>
+        <node name="stmt" num="46"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_003" fvid="4588">
+      <location byte="137277" file="bit_shift.c" line="259"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="47"/>
+        <node name="if-then"/>
+        <node name="stmt" num="46"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_002" fvid="4585">
+      <location byte="137219" file="bit_shift.c" line="254"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="45"/>
+        <node name="if-then"/>
+        <node name="stmt" num="44"/>
+        <node name="if-else"/>
+        <node name="stmt" num="42"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_002" fvid="4585">
+      <location byte="137219" file="bit_shift.c" line="254"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="43"/>
+        <node name="if-then"/>
+        <node name="stmt" num="42"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_001" fvid="4582">
+      <location byte="137161" file="bit_shift.c" line="249"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="41"/>
+        <node name="if-then"/>
+        <node name="stmt" num="40"/>
+        <node name="if-else"/>
+        <node name="stmt" num="38"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="bit_shift_001" fvid="4582">
+      <location byte="137161" file="bit_shift.c" line="249"/>
+      <args/>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="39"/>
+        <node name="if-then"/>
+        <node name="stmt" num="38"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/31/2016 17:16:50">
+   <application file="bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_009">
+   <statistics avg-context-complexity="0.83" avg-predicate-complexity="0.52" context-complexity="19" predicate-complexity="12" size="23"/>
+   <unconstrained-external-functions/>
+   <primary-proof-obligations>
+    <proof-obligation c-complexity="0" id="1" origin="prim-exp" p-complexity="0">
+     <location byte="136993" file="uninit_pointer.c" line="180"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4647" vname="flag"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="48"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="2" origin="prim-exp" p-complexity="0">
+     <location byte="136993" file="uninit_pointer.c" line="180"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4648" vname="tmp"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="49"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="3" origin="prim-exp" p-complexity="0">
+     <location byte="137039" file="uninit_pointer.c" line="182"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint"/>
+      <exp etag="const" xstr="&quot;This is a string&quot;">
+       <constant ctag="cstr" strValue="This is a string"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="50"/>
+       <node name="if-then"/>
+       <node name="stmt" num="49"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="4" origin="prim-exp" p-complexity="0">
+     <location byte="137072" file="uninit_pointer.c" line="184"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4647" vname="flag"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="51"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="5" origin="prim-exp" p-complexity="0">
+     <location byte="137072" file="uninit_pointer.c" line="184"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4650" vname="tmp___0"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="6" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>src</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="7" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="null-terminated">
+      <exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>src</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="8" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>src</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="9" name="deref-read-nt" origin="f-pre" p-complexity="2">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+      <exp1 etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (buf:(char*))]">
+       <arg etag="caste" xstr="caste (buf:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="lval" xstr="buf">
+         <lval>
+          <lhost>
+           <var vid="4645" vname="buf"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>src</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="10" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="initialized-range">
+      <base-exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </base-exp>
+      <len-exp cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (buf:(char*))]">
+       <arg etag="caste" xstr="caste (buf:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="lval" xstr="buf">
+         <lval>
+          <lhost>
+           <var vid="4645" vname="buf"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>src</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="11" name="no-overlap" origin="f-pre" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="no-overlap">
+      <exp1 etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <exp etag="caste" name="dest" nr="1" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="no-overlap">
+      <math>
+       <apply>
+        <no-overlap/>
+        <ci>dest</ci>
+        <ci>src</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="12" name="buffersize" origin="f-pre" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <exp etag="caste" name="dest" nr="1" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="buffersize">
+      <math>
+       <apply>
+        <deref-write/>
+        <ci>dest</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="13" name="buffersize" origin="f-pre" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <exp etag="caste" name="dest" nr="1" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="buffersize">
+      <math>
+       <apply>
+        <deref-write/>
+        <ci>dest</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" fname="strcpy" id="14" name="buffersize" origin="f-pre" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint"/>
+      <exp1 etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (buf:(char*))]">
+       <arg etag="caste" xstr="caste (buf:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="lval" xstr="buf">
+         <lval>
+          <lhost>
+           <var vid="4645" vname="buf"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="src" nr="2" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <exp etag="caste" name="dest" nr="1" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="buffersize">
+      <math>
+       <apply>
+        <deref-write/>
+        <ci>dest</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>src</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="15" origin="prim-exp" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint"/>
+      <exp etag="startof" xstr="startof (buf1)">
+       <lval>
+        <lhost>
+         <var vid="4646" vname="buf1"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="16" origin="prim-exp" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="17" origin="prim-exp" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="18" origin="prim-exp" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (startof (buf1):(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint"/>
+       </typ>
+       <exp etag="startof" xstr="startof (buf1)">
+        <lval>
+         <lhost>
+          <var vid="4646" vname="buf1"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="19" origin="prim-exp" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </tto>
+      <exp etag="lval" xstr="buf">
+       <lval>
+        <lhost>
+         <var vid="4645" vname="buf"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="20" origin="prim-exp" p-complexity="0">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4645" vname="buf"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="arg" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="21" origin="prim-exp" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="22" origin="prim-exp" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="23" origin="prim-exp" p-complexity="1">
+     <location byte="137123" file="uninit_pointer.c" line="186"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (buf:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="lval" xstr="buf">
+        <lval>
+         <lhost>
+          <var vid="4645" vname="buf"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="53"/>
+       <node name="if-then"/>
+       <node name="stmt" num="52"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+   </primary-proof-obligations>
+  </function>
+  <header time="05/31/2016 16:55:52">
+   <application file="uninit_pointer.xml" name="application"/>
+  </header>
+ </c-analysis>

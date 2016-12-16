@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="memtest_progress_end">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="31071" file="src/memtest.c" line="76"/>
+     </locations>
+     <cfg-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="8"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="2"/>
+      <inv nrv="0" pv="0"/>
+      <inv nrv="1" pv="1"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="3">
+    <pvals index="0">
+     <pval arg="4" id="5"/>
+     <pval arg="2" id="6"/>
+    </pvals>
+    <pvals index="1">
+     <pval arg="1" id="1"/>
+     <pval arg="1" id="2"/>
+     <pval arg="1" id="3"/>
+     <pval arg="2" id="4"/>
+     <pval arg="3" id="5"/>
+     <pval arg="1" id="6"/>
+     <pval arg="1" id="8"/>
+     <pval arg="2" id="9"/>
+     <pval arg="2" id="10"/>
+    </pvals>
+    <pvals index="2">
+     <pval arg="3" id="7"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="2">
+    <nrv cn="null-terminator-pos" etag="cnapp" index="0" tag="fv" xstr="null-terminator-pos[caste (&quot;[H[2J&quot;:(char*))]">
+     <arg etag="caste" xstr="caste (&quot;[H[2J&quot;:(char*))">
+      <typ ttag="tptr">
+       <attributes>
+        <attr attrname="restrict"/>
+       </attributes>
+       <typ ikind="ichar" ttag="tint">
+        <attributes>
+         <attr attrname="const"/>
+        </attributes>
+       </typ>
+      </typ>
+      <exp etag="const" xstr="&quot;[H[2J&quot;">
+       <constant ctag="cstr" strValue="[H[2J"/>
+      </exp>
+     </arg>
+     <typ ikind="iint" ttag="tint"/>
+    </nrv>
+    <nrv index="1" lb="1" tag="range"/>
+   </non-relational-value-table>
+  </function>
+  <header time="05/24/2016 04:38:38">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

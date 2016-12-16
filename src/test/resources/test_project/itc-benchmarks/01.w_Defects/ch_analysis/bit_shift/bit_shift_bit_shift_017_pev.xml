@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <log>
+   <log-entry time="05/31/2016 17:12:27"/>
+   <log-entry delta-checkvalid="2" delta-invariant="1" time="05/31/2016 16:57:42"/>
+  </log>
+  <function name="bit_shift_017">
+   <statistics checkvalid="2" invariant="1" invariant_with_api="0" total="3" total-proven="3"/>
+   <open-proof-obligations/>
+   <proof-obligations-discharged>
+    <discharged id="1" method="check-valid" time="05/31/2016 16:57:42" type="non-negative">
+     <evidence comment="value is 32"/>
+    </discharged>
+    <discharged id="2" method="check-valid" time="05/31/2016 16:57:42" type="width-overflow">
+     <evidence comment="value 32 requires a minimum word size of 64"/>
+    </discharged>
+    <discharged domain="symbolic sets" id="3" method="invariants" time="05/31/2016 16:57:42" type="initialized">
+     <evidence comment="assignedAt#236"/>
+    </discharged>
+   </proof-obligations-discharged>
+  </function>
+  <header time="05/31/2016 17:12:27">
+   <application file="./bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

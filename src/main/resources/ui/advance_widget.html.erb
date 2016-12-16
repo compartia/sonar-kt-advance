@@ -1,0 +1,373 @@
+
+<link href="<%=url_for_static(:plugin => 'advance', :path => 'css/advance.css')-%>" media="all" rel="stylesheet" />
+
+ 
+<div 
+    class="kt-advance-logo" 
+    style="background-image: url(<%=url_for_static(:plugin => 'advance', :path => 'img/KT-Advance.land.512.png')-%>);">
+</div>
+<h3>
+    <%= message("kt.metrics.widget.name") -%>
+</h3><br>
+ 
+<%
+
+kd="metric."
+kp="widget."+kd
+
+lines=measure('lines') 
+
+ppo_total=measure('kt_ppo_')
+spo_total=measure('kt_spo_')
+
+#Primary
+ppo_complexity_c=measure('kt_ppo_complexity_c')
+ppo_complexity_p=measure('kt_ppo_complexity_p')
+
+ppo_total_violation=measure('kt_ppo_violation')
+ppo_total_violation_pc=measure('kt_ppo_violation_pc')
+
+ppo_total_open=measure( 'kt_ppo_open')
+ppo_total_open_pc=measure('kt_ppo_open_pc')
+
+ppo_total_proven=measure('kt_ppo_discharged')
+ppo_total_proven_pc=measure('kt_ppo_discharged_pc')
+
+# Secondary
+spo_complexity_c=measure('kt_spo_complexity_c')
+spo_complexity_p=measure('kt_spo_complexity_p')
+spo_complexity_g=measure('kt_spo_complexity_g')
+
+spo_total_open=measure( 'kt_spo_open')
+spo_total_open_pc=measure('kt_spo_open_pc')
+
+spo_total_proven=measure('kt_spo_discharged')
+spo_total_proven_pc=measure('kt_spo_discharged_pc')
+
+spo_total_violation=measure('kt_spo_violation')
+spo_total_violation_pc=measure('kt_spo_violation_pc')
+
+
+#complexities per line
+kt_ppo_complexity_per_line_c=measure('kt_ppo_complexity_per_line_c')
+kt_ppo_complexity_per_line_p=measure('kt_ppo_complexity_per_line_p')
+kt_ppo_complexity_per_line_g=measure('kt_ppo_complexity_per_line_g')
+kt_spo_complexity_per_line_c=measure('kt_spo_complexity_per_line_c')
+kt_spo_complexity_per_line_p=measure('kt_spo_complexity_per_line_p')
+kt_spo_complexity_per_line_g=measure('kt_spo_complexity_per_line_g')
+%>
+
+<!-- =========TOTAL PPOs========= -->
+<div class="widget-row">
+    <div class="widget-span widget-span-12">
+        
+        <% if ppo_total %>
+        
+            <div class="widget-measure-container">
+                <p class="widget-measure widget-measure-main">
+                    <span class="widget-label" title="<%= metric(ppo_total.key).description -%>"><%= message(kp + ppo_total.key+".name") -%></span>
+               
+                    <span><%= format_measure(ppo_total,  :url => url_for_drilldown(ppo_total.key)) -%></span>
+                    <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total) : trend_icon(ppo_total) -%></span>
+               
+                </p>
+            </div>
+        
+        <% end %>
+    </div>
+    
+    
+
+    
+    <!-- Violations -->
+    <div class="widget-span widget-span-4">
+         
+        <% if ppo_total_violation %>
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(ppo_total_violation.key).description  -%>">
+                    <i class="icon-severity-blocker"></i>
+                    <%= message("widget.metric."+ppo_total_violation.key+".name") -%></span>  
+                <span><%= format_measure(ppo_total_violation,  :url => url_for_drilldown(ppo_total_violation.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total_violation) : trend_icon(ppo_total_violation) -%></span>
+            </p>
+        <% end %>
+        <% if ppo_total_violation_pc %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%=metric(ppo_total_violation_pc.key).description -%>"><%= message("widget.metric."+ppo_total_violation_pc.key+".name") -%></span>         
+                <span class="nowrap"><%= format_measure(ppo_total_violation_pc, :url => url_for_drilldown(ppo_total_violation_pc.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total_violation_pc) : trend_icon(ppo_total_violation_pc) -%></span>
+            </p>
+         <% end %>
+         
+    </div>
+
+    <!-- Open -->
+    <div class="widget-span widget-span-4">
+         
+        <!-- total open -->
+        <% if ppo_total_open %>
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(ppo_total_open.key).description -%>"><%= message(kp + ppo_total_open.key+".name") -%></span>
+
+                <span><%= format_measure(ppo_total_open,  :url => url_for_drilldown(ppo_total_open.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total_open) : trend_icon(ppo_total_open) -%></span>
+            </p>
+        <% end %>
+
+        <!-- Open % -->
+        
+        <% if ppo_total_open_pc %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(ppo_total_open_pc.key).description -%>"><%= message(kp + ppo_total_open_pc.key+".name") -%></span>         
+                <span class="nowrap"><%= format_measure(ppo_total_open_pc, :url => url_for_drilldown(ppo_total_open_pc.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total_open_pc) : trend_icon(ppo_total_open_pc) -%></span>
+            </p>
+        <% end %>
+            
+    </div>
+
+
+    <!-- Discharged -->
+    <div class="widget-span widget-span-4"> 
+        <% if ppo_total_proven %>
+            <p class="widget-measure">
+                <span class="widget-label"  title="<%= metric(ppo_total_proven.key).description-%>"><%= message(kp + ppo_total_proven.key+".name") -%></span>         
+                <span><%= format_measure(ppo_total_proven,  :url => url_for_drilldown(ppo_total_proven.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total_proven) : trend_icon(ppo_total_proven) -%></span>
+            </p>
+        <% end %>
+        <% if ppo_total_proven_pc %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(ppo_total_proven_pc.key).description -%>"><%= message(kp + ppo_total_proven_pc.key+".name") -%></span>         
+                <span class="nowrap"><%= format_measure(ppo_total_proven_pc, :url => url_for_drilldown(ppo_total_proven_pc.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_total_proven_pc) : trend_icon(ppo_total_proven_pc) -%></span>
+            </p>
+        <% end %>   
+    </div>
+
+
+
+    <div class="widget-span widget-span-4">
+        <% if ppo_complexity_c %>
+             
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(ppo_complexity_c.key).description -%>"><%= message(kp + ppo_complexity_c.key+".name") -%></span>
+       
+                <span><%= format_measure(ppo_complexity_c, :url => url_for_drilldown(ppo_complexity_c.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_complexity_c) : trend_icon(ppo_complexity_c) -%></span>                 
+            </p>
+             
+        <% end %>
+        <% if kt_ppo_complexity_per_line_c %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(kt_ppo_complexity_per_line_c.key).description -%>"><%= message(kp + kt_ppo_complexity_per_line_c.key+".name") -%></span>         
+                
+                <span><%= format_measure(kt_ppo_complexity_per_line_c, :url => url_for_drilldown(kt_ppo_complexity_per_line_c.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(kt_ppo_complexity_per_line_c) : trend_icon(kt_ppo_complexity_per_line_c) -%></span>
+            </p>
+        <% end %>
+    </div>
+
+
+    <div class="widget-span widget-span-4">
+        <% if ppo_complexity_p %>
+             
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(ppo_complexity_p.key).description -%>"><%= message(kp + ppo_complexity_p.key+".name") -%></span>
+           
+                <span><%= format_measure(ppo_complexity_p,  :url => url_for_drilldown(ppo_complexity_p.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(ppo_complexity_p) : trend_icon(ppo_complexity_p) -%></span>
+             </p>
+            
+        <% end %>
+        <% if kt_ppo_complexity_per_line_p %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(kt_ppo_complexity_per_line_p.key).description -%>"><%= message(kp + kt_ppo_complexity_per_line_p.key+".name") -%></span>         
+                <span class="nowrap"><%= format_measure(kt_ppo_complexity_per_line_p, :url => url_for_drilldown(kt_ppo_complexity_per_line_p.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(kt_ppo_complexity_per_line_p) :                  trend_icon(kt_ppo_complexity_per_line_p) -%></span>
+            </p>
+        <% end %>
+    </div>
+
+</div>
+
+<% if ppo_total and spo_total %>
+<hr>
+<% end %>
+
+<!-- =========TOTAL SPOs============================ -->
+
+<div class="widget-row">
+
+    <div class="widget-span widget-span-12">
+        
+        <% if spo_total %>
+        
+            <div class="widget-measure-container">
+                <p class="widget-measure widget-measure-main">
+                    <span class="widget-label" title="<%= metric(spo_total.key).description -%>"><%= message(kp + spo_total.key+".name") -%></span>
+               
+                    <span><%= format_measure(spo_total,  :url => url_for_drilldown(spo_total.key)) -%></span>
+                    <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total) : trend_icon(spo_total) -%></span>
+               
+                </p>
+            </div>
+        
+        <% end %>
+    </div>
+    
+ 
+    <!-- === SEV violatoins == -->
+    <div class="widget-span widget-span-4">    
+        <% if spo_total_violation %>
+        
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(spo_total_violation.key).description -%>">
+                 <i class="icon-severity-blocker"></i>
+                    <%= message(kp + spo_total_violation.key+".name") -%></span>
+           
+                <span  ><%= format_measure(spo_total_violation,  :url => url_for_drilldown(spo_total_violation.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total_violation) : trend_icon(spo_total_violation) -%></span>
+           
+            </p>
+                  
+        <% end %>
+        <% if spo_total_violation_pc %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%=metric(spo_total_violation_pc.key).description -%>"><%= message("widget.metric."+spo_total_violation_pc.key+".name") -%></span>         
+                <span class="nowrap"><%= format_measure(spo_total_violation_pc, :url => url_for_drilldown(spo_total_violation_pc.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total_violation_pc) : trend_icon(spo_total_violation_pc) -%></span>
+            </p>
+         <% end %>
+    </div>
+
+
+    <!-- Open -->
+    <div class="widget-span widget-span-4">
+        
+            <!-- total open -->
+            <% if spo_total_open %>
+                <p class="widget-measure">
+                    <span class="widget-label" title="<%= metric(spo_total_open.key).description -%>"><%= message(kp + spo_total_open.key+".name") -%></span>
+
+                    <span ><%= format_measure(spo_total_open,  :url => url_for_drilldown(spo_total_open.key)) -%></span>
+                    <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total_open) : trend_icon(spo_total_open) -%></span>
+                </p>
+            <% end %>
+
+            <!-- Open % -->
+            
+            <% if spo_total_open_pc %>
+                <p class="widget-measure-delta">
+                    <span class="widget-label"  title="<%= metric(spo_total_open_pc.key).description -%>"><%= message(kp + spo_total_open_pc.key+".name") -%></span>         
+                    <span class="nowrap"><%= format_measure(spo_total_open_pc,  :url => url_for_drilldown(spo_total_open_pc.key)) -%></span>
+                    <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total_open_pc) : trend_icon(spo_total_open_pc) -%></span>
+                </p>
+            <% end %>
+ 
+    </div>
+
+
+    <!-- Discharged -->
+    <div class="widget-span widget-span-4">
+         
+        <!-- total discharged SPO -->
+        <% if spo_total_proven %>
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(spo_total_proven.key).description -%>"><%= message(kp + spo_total_proven.key+".name") -%></span>
+
+                <span ><%= format_measure(spo_total_proven,  :url => url_for_drilldown(spo_total_proven.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total_proven) : trend_icon(spo_total_proven) -%></span>
+            </p>
+        <% end %>
+
+        <!-- discharged SPO % -->
+        
+        <% if spo_total_proven_pc %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(spo_total_proven_pc.key).description -%>"><%= message(kp + spo_total_proven_pc.key+".name") -%></span>         
+                <span class="nowrap"><%= format_measure(spo_total_proven_pc,  :url => url_for_drilldown(spo_total_proven_pc.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_total_proven_pc) : trend_icon(spo_total_proven_pc) -%></span>
+            </p>
+        <% end %>
+            
+  
+    </div>
+</div>
+
+
+
+<div class="widget-row">
+<!-- 
+    =========== -->
+    <div class="widget-span widget-span-4">
+        <% if spo_complexity_c %>
+             
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(spo_complexity_c.key).description -%>"><%= message(kp + spo_complexity_c.key+".name") -%></span>
+           
+                <span><%= format_measure(spo_complexity_c,  :url => url_for_drilldown(spo_complexity_c.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_complexity_c) : trend_icon(spo_complexity_c) -%></span>        
+            </p>             
+        <% end %>
+        
+        <% if kt_spo_complexity_per_line_c %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(kt_spo_complexity_per_line_c.key).description -%>"><%= message(kp + kt_spo_complexity_per_line_c.key+".name") -%></span>         
+                
+                <span><%= format_measure(kt_spo_complexity_per_line_c, :url => url_for_drilldown(kt_spo_complexity_per_line_c.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(kt_spo_complexity_per_line_c) : trend_icon(kt_spo_complexity_per_line_c) -%></span>
+            </p>
+        <% end %>
+    </div>
+
+
+    <div class="widget-span widget-span-4">
+        <% if spo_complexity_p %>
+             
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(spo_complexity_p.key).description -%>"><%= message(kp + spo_complexity_p.key+".name") -%></span>
+           
+                <span><%= format_measure(spo_complexity_p,  :url => url_for_drilldown(spo_complexity_p.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_complexity_p) : trend_icon(spo_complexity_p) -%></span>
+            </p>
+            
+        <% end %>
+        <% if kt_spo_complexity_per_line_p %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(kt_spo_complexity_per_line_p.key).description -%>"><%= message(kp + kt_spo_complexity_per_line_p.key+".name") -%></span>         
+                
+                <span><%= format_measure(kt_spo_complexity_per_line_p, :url => url_for_drilldown(kt_spo_complexity_per_line_p.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(kt_spo_complexity_per_line_p) : trend_icon(kt_spo_complexity_per_line_p) -%></span>
+            </p>
+        <% end %>
+    </div>
+
+    <div class="widget-span widget-span-4">
+        <% if spo_complexity_g %>
+             
+            <p class="widget-measure">
+                <span class="widget-label" title="<%= metric(spo_complexity_g.key).description -%>"><%= message(kp + spo_complexity_g.key+".name") -%></span>
+           
+                <span><%= format_measure(spo_complexity_g,  :url => url_for_drilldown(spo_complexity_g.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(spo_complexity_g) : trend_icon(spo_complexity_g) -%></span>
+             </p>
+            
+        <% end %>
+        <% if kt_spo_complexity_per_line_g %>
+            <p class="widget-measure-delta">
+                <span class="widget-label"  title="<%= metric(kt_spo_complexity_per_line_g.key).description -%>"><%= message(kp + kt_spo_complexity_per_line_g.key+".name") -%></span>         
+                
+                <span><%= format_measure(kt_spo_complexity_per_line_g, :url => url_for_drilldown(kt_spo_complexity_per_line_g.key)) -%></span>
+                <span class="var"><%= dashboard_configuration.selected_period? ? format_variation(kt_spo_complexity_per_line_g) : trend_icon(kt_spo_complexity_per_line_g) -%></span>
+            </p>
+        <% end %>
+    </div>
+
+    <!-- ======== -->
+
+
+
+
+
+</div>

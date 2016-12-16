@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4599" vname="uninit_pointer_005_func_001">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="pbuf">
+       <typ ttag="tptr">
+        <typ ttag="tptr">
+         <typ ikind="iint" ttag="tint"/>
+        </typ>
+       </typ>
+      </arg>
+     </args>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="135534" file="uninit_pointer.c" line="77"/>
+   </svar>
+   <sformals>
+    <varinfo vid="4601" vname="pbuf">
+     <vtyp ttag="tptr">
+      <typ ttag="tptr">
+       <typ ikind="iint" ttag="tint"/>
+      </typ>
+     </vtyp>
+     <vdecl byte="135572" file="uninit_pointer.c" line="77"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vaddrof="true" vid="4602" vname="buf1">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="6"/>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="135588" file="uninit_pointer.c" line="79"/>
+    </varinfo>
+    <varinfo vid="4603" vname="buf2">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="6"/>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="135623" file="uninit_pointer.c" line="80"/>
+    </varinfo>
+    <varinfo vaddrof="true" vid="4604" vname="buf3">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="6"/>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="135658" file="uninit_pointer.c" line="81"/>
+    </varinfo>
+    <varinfo vaddrof="true" vid="4605" vname="buf4">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="6"/>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="135693" file="uninit_pointer.c" line="82"/>
+    </varinfo>
+    <varinfo vaddrof="true" vid="4606" vname="buf5">
+     <vtyp ttag="tarray">
+      <exp etag="const">
+       <constant ctag="cint64" ikind="iint" intValue="6"/>
+      </exp>
+      <typ ikind="iint" ttag="tint"/>
+     </vtyp>
+     <vdecl byte="135728" file="uninit_pointer.c" line="83"/>
+    </varinfo>
+    <varinfo vid="4607" vname="ret">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="135831" file="uninit_pointer.c" line="88"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="11">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="0"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4602" vname="buf1"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="135584" file="uninit_pointer.c" line="79"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="1"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4602" vname="buf1"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="2"/>
+         </exp>
+         <loc byte="135584" file="uninit_pointer.c" line="79"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="2"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4602" vname="buf1"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="3"/>
+         </exp>
+         <loc byte="135584" file="uninit_pointer.c" line="79"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="3"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4602" vname="buf1"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="4"/>
+         </exp>
+         <loc byte="135584" file="uninit_pointer.c" line="79"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="4"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4602" vname="buf1"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="5"/>
+         </exp>
+         <loc byte="135584" file="uninit_pointer.c" line="79"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="5"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4602" vname="buf1"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="6"/>
+         </exp>
+         <loc byte="135584" file="uninit_pointer.c" line="79"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="0"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4603" vname="buf2"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="135619" file="uninit_pointer.c" line="80"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="1"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4603" vname="buf2"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="2"/>
+         </exp>
+         <loc byte="135619" file="uninit_pointer.c" line="80"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="2"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4603" vname="buf2"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="3"/>
+         </exp>
+         <loc byte="135619" file="uninit_pointer.c" line="80"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="3"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4603" vname="buf2"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="4"/>
+         </exp>
+         <loc byte="135619" file="uninit_pointer.c" line="80"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="4"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4603" vname="buf2"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="5"/>
+         </exp>
+         <loc byte="135619" file="uninit_pointer.c" line="80"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="5"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4603" vname="buf2"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="6"/>
+         </exp>
+         <loc byte="135619" file="uninit_pointer.c" line="80"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="0"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4604" vname="buf3"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="135654" file="uninit_pointer.c" line="81"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="1"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4604" vname="buf3"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="2"/>
+         </exp>
+         <loc byte="135654" file="uninit_pointer.c" line="81"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="2"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4604" vname="buf3"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="3"/>
+         </exp>
+         <loc byte="135654" file="uninit_pointer.c" line="81"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="3"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4604" vname="buf3"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="4"/>
+         </exp>
+         <loc byte="135654" file="uninit_pointer.c" line="81"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="4"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4604" vname="buf3"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="5"/>
+         </exp>
+         <loc byte="135654" file="uninit_pointer.c" line="81"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="5"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4604" vname="buf3"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="6"/>
+         </exp>
+         <loc byte="135654" file="uninit_pointer.c" line="81"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="0"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4605" vname="buf4"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="135689" file="uninit_pointer.c" line="82"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="1"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4605" vname="buf4"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="2"/>
+         </exp>
+         <loc byte="135689" file="uninit_pointer.c" line="82"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="2"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4605" vname="buf4"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="3"/>
+         </exp>
+         <loc byte="135689" file="uninit_pointer.c" line="82"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="3"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4605" vname="buf4"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="4"/>
+         </exp>
+         <loc byte="135689" file="uninit_pointer.c" line="82"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="4"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4605" vname="buf4"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="5"/>
+         </exp>
+         <loc byte="135689" file="uninit_pointer.c" line="82"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="5"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4605" vname="buf4"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="6"/>
+         </exp>
+         <loc byte="135689" file="uninit_pointer.c" line="82"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="0"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4606" vname="buf5"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp>
+         <loc byte="135724" file="uninit_pointer.c" line="83"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="1"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4606" vname="buf5"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="2"/>
+         </exp>
+         <loc byte="135724" file="uninit_pointer.c" line="83"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="2"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4606" vname="buf5"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="3"/>
+         </exp>
+         <loc byte="135724" file="uninit_pointer.c" line="83"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="3"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4606" vname="buf5"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="4"/>
+         </exp>
+         <loc byte="135724" file="uninit_pointer.c" line="83"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="4"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4606" vname="buf5"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="5"/>
+         </exp>
+         <loc byte="135724" file="uninit_pointer.c" line="83"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <offset>
+           <index etag="const">
+            <constant ctag="cint64" ikind="iint" intValue="5"/>
+           </index>
+          </offset>
+          <lhost>
+           <var vid="4606" vname="buf5"/>
+          </lhost>
+         </lval>
+         <exp etag="const">
+          <constant ctag="cint64" ikind="iint" intValue="6"/>
+         </exp>
+         <loc byte="135724" file="uninit_pointer.c" line="83"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <mem binop="indexpi" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="4601" vname="pbuf"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="0"/>
+            </exp2>
+            <typ ttag="tptr">
+             <typ ttag="tptr">
+              <typ ikind="iint" ttag="tint"/>
+             </typ>
+            </typ>
+           </mem>
+          </lhost>
+         </lval>
+         <exp etag="startof">
+          <lval>
+           <lhost>
+            <var vid="4602" vname="buf1"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="135759" file="uninit_pointer.c" line="84"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <mem binop="indexpi" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="4601" vname="pbuf"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="2"/>
+            </exp2>
+            <typ ttag="tptr">
+             <typ ttag="tptr">
+              <typ ikind="iint" ttag="tint"/>
+             </typ>
+            </typ>
+           </mem>
+          </lhost>
+         </lval>
+         <exp etag="startof">
+          <lval>
+           <lhost>
+            <var vid="4604" vname="buf3"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="135776" file="uninit_pointer.c" line="85"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <mem binop="indexpi" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="4601" vname="pbuf"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="3"/>
+            </exp2>
+            <typ ttag="tptr">
+             <typ ttag="tptr">
+              <typ ikind="iint" ttag="tint"/>
+             </typ>
+            </typ>
+           </mem>
+          </lhost>
+         </lval>
+         <exp etag="startof">
+          <lval>
+           <lhost>
+            <var vid="4605" vname="buf4"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="135793" file="uninit_pointer.c" line="86"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <mem binop="indexpi" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="4601" vname="pbuf"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="const">
+             <constant ctag="cint64" ikind="iint" intValue="4"/>
+            </exp2>
+            <typ ttag="tptr">
+             <typ ttag="tptr">
+              <typ ikind="iint" ttag="tint"/>
+             </typ>
+            </typ>
+           </mem>
+          </lhost>
+         </lval>
+         <exp etag="startof">
+          <lval>
+           <lhost>
+            <var vid="4606" vname="buf5"/>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="135810" file="uninit_pointer.c" line="87"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="4607" vname="ret"/>
+          </lhost>
+         </lval>
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <mem binop="indexpi" etag="binop">
+             <exp1 etag="lval">
+              <lval>
+               <lhost>
+                <mem binop="indexpi" etag="binop">
+                 <exp1 etag="lval">
+                  <lval>
+                   <lhost>
+                    <var vid="4601" vname="pbuf"/>
+                   </lhost>
+                  </lval>
+                 </exp1>
+                 <exp2 etag="const">
+                  <constant ctag="cint64" ikind="iint" intValue="1"/>
+                 </exp2>
+                 <typ ttag="tptr">
+                  <typ ttag="tptr">
+                   <typ ikind="iint" ttag="tint"/>
+                  </typ>
+                 </typ>
+                </mem>
+               </lhost>
+              </lval>
+             </exp1>
+             <exp2 etag="const">
+              <constant ctag="cint64" ikind="iint" intValue="1"/>
+             </exp2>
+             <typ ttag="tptr">
+              <typ ikind="iint" ttag="tint"/>
+             </typ>
+            </mem>
+           </lhost>
+          </lval>
+         </exp>
+         <loc byte="135837" file="uninit_pointer.c" line="89"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="12"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="12">
+      <skind stag="return">
+       <loc byte="135855" file="uninit_pointer.c" line="90"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="11"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

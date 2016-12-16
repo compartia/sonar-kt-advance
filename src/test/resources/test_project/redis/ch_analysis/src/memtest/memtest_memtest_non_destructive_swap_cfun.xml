@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="src/memtest" project-directory="/home/vagrant/git/redis" time="05/24/2016 04:14:35"/>
+  </header>
+  <function filename="src/memtest">
+   <svar vglob="true" vid="1047" vname="memtest_non_destructive_swap">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="addr">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+      </arg>
+      <arg aname="size">
+       <typ tname="size_t" ttag="tnamed"/>
+      </arg>
+     </args>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="36053" file="src/memtest.c" line="253"/>
+   </svar>
+   <sformals>
+    <varinfo vid="1050" vname="addr">
+     <vtyp ttag="tptr">
+      <typ ttag="tvoid"/>
+     </vtyp>
+     <vdecl byte="36092" file="src/memtest.c" line="253"/>
+    </varinfo>
+    <varinfo vid="1051" vname="size">
+     <vtyp tname="size_t" ttag="tnamed"/>
+     <vdecl byte="36106" file="src/memtest.c" line="253"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vid="1052" vname="p">
+     <vtyp ttag="tptr">
+      <typ ikind="iulong" ttag="tint">
+       <attributes>
+        <attr attrname="volatile"/>
+       </attributes>
+      </typ>
+     </vtyp>
+     <vdecl byte="36141" file="src/memtest.c" line="254"/>
+    </varinfo>
+    <varinfo vid="1053" vname="words">
+     <vtyp tname="size_t" ttag="tnamed"/>
+     <vdecl byte="36163" file="src/memtest.c" line="255"/>
+    </varinfo>
+    <varinfo vid="1054" vname="j">
+     <vtyp tname="size_t" ttag="tnamed"/>
+     <vdecl byte="36212" file="src/memtest.c" line="256"/>
+    </varinfo>
+    <varinfo vid="1055" vname="a">
+     <vtyp ikind="iulong" ttag="tint"/>
+     <vdecl byte="36276" file="src/memtest.c" line="260"/>
+    </varinfo>
+    <varinfo vid="1056" vname="b">
+     <vtyp ikind="iulong" ttag="tint"/>
+     <vdecl byte="36279" file="src/memtest.c" line="260"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="109">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="1052" vname="p"/>
+          </lhost>
+         </lval>
+         <exp etag="caste">
+          <typ ttag="tptr">
+           <typ ikind="iulong" ttag="tint">
+            <attributes>
+             <attr attrname="volatile"/>
+            </attributes>
+           </typ>
+          </typ>
+          <exp etag="lval">
+           <lval>
+            <lhost>
+             <var vid="1050" vname="addr"/>
+            </lhost>
+           </lval>
+          </exp>
+         </exp>
+         <loc byte="36118" file="src/memtest.c" line="254"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="1053" vname="words"/>
+          </lhost>
+         </lval>
+         <exp binop="div" etag="binop">
+          <exp1 etag="lval">
+           <lval>
+            <lhost>
+             <var vid="1051" vname="size"/>
+            </lhost>
+           </lval>
+          </exp1>
+          <exp2 etag="sizeof">
+           <typ ikind="iulong" ttag="tint"/>
+          </exp2>
+          <typ tname="size_t" ttag="tnamed"/>
+         </exp>
+         <loc byte="36156" file="src/memtest.c" line="255"/>
+        </instr>
+        <instr itag="set">
+         <lval>
+          <lhost>
+           <var vid="1054" vname="j"/>
+          </lhost>
+         </lval>
+         <exp etag="caste">
+          <typ tname="size_t" ttag="tnamed"/>
+          <exp etag="const">
+           <constant ctag="cint64" ikind="iint" intValue="0"/>
+          </exp>
+         </exp>
+         <loc byte="36221" file="src/memtest.c" line="259"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="110"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="110">
+      <skind breakstmtid="114" continuestmtid="110" stag="loop">
+       <block>
+        <bstmts>
+         <stmt sid="111">
+          <skind stag="if">
+           <exp binop="lt" etag="binop">
+            <exp1 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="1054" vname="j"/>
+              </lhost>
+             </lval>
+            </exp1>
+            <exp2 etag="lval">
+             <lval>
+              <lhost>
+               <var vid="1053" vname="words"/>
+              </lhost>
+             </lval>
+            </exp2>
+            <typ ikind="iint" ttag="tint"/>
+           </exp>
+           <thenblock>
+            <bstmts/>
+           </thenblock>
+           <elseblock>
+            <bstmts>
+             <stmt sid="112">
+              <skind stag="break">
+               <loc byte="36221" file="src/memtest.c" line="259"/>
+              </skind>
+              <succs>
+               <int intValue="114"/>
+              </succs>
+              <preds>
+               <int intValue="111"/>
+              </preds>
+             </stmt>
+            </bstmts>
+           </elseblock>
+           <loc byte="36221" file="src/memtest.c" line="259"/>
+          </skind>
+          <succs>
+           <int intValue="113"/>
+           <int intValue="112"/>
+          </succs>
+          <preds>
+           <int intValue="110"/>
+          </preds>
+         </stmt>
+         <stmt sid="113">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="1055" vname="a"/>
+              </lhost>
+             </lval>
+             <exp etag="caste">
+              <typ ikind="iulong" ttag="tint"/>
+              <exp etag="lval">
+               <lval>
+                <lhost>
+                 <mem binop="indexpi" etag="binop">
+                  <exp1 etag="lval">
+                   <lval>
+                    <lhost>
+                     <var vid="1052" vname="p"/>
+                    </lhost>
+                   </lval>
+                  </exp1>
+                  <exp2 etag="lval">
+                   <lval>
+                    <lhost>
+                     <var vid="1054" vname="j"/>
+                    </lhost>
+                   </lval>
+                  </exp2>
+                  <typ ttag="tptr">
+                   <typ ikind="iulong" ttag="tint">
+                    <attributes>
+                     <attr attrname="volatile"/>
+                    </attributes>
+                   </typ>
+                  </typ>
+                 </mem>
+                </lhost>
+               </lval>
+              </exp>
+             </exp>
+             <loc byte="36291" file="src/memtest.c" line="262"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="1056" vname="b"/>
+              </lhost>
+             </lval>
+             <exp etag="caste">
+              <typ ikind="iulong" ttag="tint"/>
+              <exp etag="lval">
+               <lval>
+                <lhost>
+                 <mem binop="indexpi" etag="binop">
+                  <exp1 etag="lval">
+                   <lval>
+                    <lhost>
+                     <var vid="1052" vname="p"/>
+                    </lhost>
+                   </lval>
+                  </exp1>
+                  <exp2 binop="plusa" etag="binop">
+                   <exp1 etag="lval">
+                    <lval>
+                     <lhost>
+                      <var vid="1054" vname="j"/>
+                     </lhost>
+                    </lval>
+                   </exp1>
+                   <exp2 etag="const">
+                    <constant ctag="cint64" ikind="iulong" intValue="1"/>
+                   </exp2>
+                   <typ tname="size_t" ttag="tnamed"/>
+                  </exp2>
+                  <typ ttag="tptr">
+                   <typ ikind="iulong" ttag="tint">
+                    <attributes>
+                     <attr attrname="volatile"/>
+                    </attributes>
+                   </typ>
+                  </typ>
+                 </mem>
+                </lhost>
+               </lval>
+              </exp>
+             </exp>
+             <loc byte="36309" file="src/memtest.c" line="263"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <mem binop="indexpi" etag="binop">
+                <exp1 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="1052" vname="p"/>
+                  </lhost>
+                 </lval>
+                </exp1>
+                <exp2 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="1054" vname="j"/>
+                  </lhost>
+                 </lval>
+                </exp2>
+                <typ ttag="tptr">
+                 <typ ikind="iulong" ttag="tint">
+                  <attributes>
+                   <attr attrname="volatile"/>
+                  </attributes>
+                 </typ>
+                </typ>
+               </mem>
+              </lhost>
+             </lval>
+             <exp etag="caste">
+              <typ ikind="iulong" ttag="tint">
+               <attributes>
+                <attr attrname="volatile"/>
+               </attributes>
+              </typ>
+              <exp etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="1056" vname="b"/>
+                </lhost>
+               </lval>
+              </exp>
+             </exp>
+             <loc byte="36329" file="src/memtest.c" line="264"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <mem binop="indexpi" etag="binop">
+                <exp1 etag="lval">
+                 <lval>
+                  <lhost>
+                   <var vid="1052" vname="p"/>
+                  </lhost>
+                 </lval>
+                </exp1>
+                <exp2 binop="plusa" etag="binop">
+                 <exp1 etag="lval">
+                  <lval>
+                   <lhost>
+                    <var vid="1054" vname="j"/>
+                   </lhost>
+                  </lval>
+                 </exp1>
+                 <exp2 etag="const">
+                  <constant ctag="cint64" ikind="iulong" intValue="1"/>
+                 </exp2>
+                 <typ tname="size_t" ttag="tnamed"/>
+                </exp2>
+                <typ ttag="tptr">
+                 <typ ikind="iulong" ttag="tint">
+                  <attributes>
+                   <attr attrname="volatile"/>
+                  </attributes>
+                 </typ>
+                </typ>
+               </mem>
+              </lhost>
+             </lval>
+             <exp etag="caste">
+              <typ ikind="iulong" ttag="tint">
+               <attributes>
+                <attr attrname="volatile"/>
+               </attributes>
+              </typ>
+              <exp etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="1055" vname="a"/>
+                </lhost>
+               </lval>
+              </exp>
+             </exp>
+             <loc byte="36347" file="src/memtest.c" line="265"/>
+            </instr>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="1054" vname="j"/>
+              </lhost>
+             </lval>
+             <exp binop="plusa" etag="binop">
+              <exp1 etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="1054" vname="j"/>
+                </lhost>
+               </lval>
+              </exp1>
+              <exp2 etag="const">
+               <constant ctag="cint64" ikind="iulong" intValue="2"/>
+              </exp2>
+              <typ tname="size_t" ttag="tnamed"/>
+             </exp>
+             <loc byte="36221" file="src/memtest.c" line="259"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="110"/>
+          </succs>
+          <preds>
+           <int intValue="111"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </block>
+       <loc byte="36221" file="src/memtest.c" line="259"/>
+      </skind>
+      <succs>
+       <int intValue="111"/>
+      </succs>
+      <preds>
+       <int intValue="113"/>
+       <int intValue="109"/>
+      </preds>
+     </stmt>
+     <stmt sid="114">
+      <skind stag="return">
+       <loc byte="36365" file="src/memtest.c" line="267"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="112"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

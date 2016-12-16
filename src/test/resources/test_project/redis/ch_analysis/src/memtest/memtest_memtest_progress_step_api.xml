@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function cfilename="src/memtest.c" gvid="764" name="memtest_progress_step" num-ppo="0">
+   <statistics api-assumptions="1" callers="4" ds-assumptions="0" field-assignments="0" global-assignments="1" global-assumptions="4" rv-assumptions="0"/>
+   <parameters>
+    <param formal-vid="953" index="1" vname="curr"/>
+    <param formal-vid="954" index="2" vname="size"/>
+    <param formal-vid="955" index="3" vname="c"/>
+   </parameters>
+   <callers>
+    <caller cfilename="src/memtest.c" fname="memtest_addressing" gvid="763" updated="05/24/2016 04:22:02" updated-f="1464063722.11">
+     <call-site byte="31613" file="src/memtest.c" line="99"/>
+     <args>
+      <arg/>
+      <arg/>
+      <arg etag="caste" xstr="caste (A:char)">
+       <typ ikind="ichar" ttag="tint"/>
+       <exp etag="const" xstr="A">
+        <constant charValue="65" ctag="cchr"/>
+       </exp>
+      </arg>
+     </args>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="23"/>
+      <node name="if-then"/>
+      <node name="stmt" num="22"/>
+      <node name="loop"/>
+      <node name="stmt" num="18"/>
+     </calling-context>
+    </caller>
+    <caller cfilename="src/memtest.c" fname="memtest_compare" gvid="760" updated="05/24/2016 04:22:02" updated-f="1464063722.09">
+     <call-site byte="34439" file="src/memtest.c" line="194"/>
+     <args>
+      <arg/>
+      <arg/>
+      <arg etag="caste" xstr="caste (=:char)">
+       <typ ikind="ichar" ttag="tint"/>
+       <exp etag="const" xstr="=">
+        <constant charValue="61" ctag="cchr"/>
+       </exp>
+      </arg>
+     </args>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="85"/>
+      <node name="if-then"/>
+      <node name="stmt" num="84"/>
+      <node name="loop"/>
+      <node name="stmt" num="78"/>
+     </calling-context>
+    </caller>
+    <caller cfilename="src/memtest.c" fname="memtest_fill_random" gvid="762" updated="05/24/2016 04:22:02" updated-f="1464063722.1">
+     <call-site byte="32830" file="src/memtest.c" line="141"/>
+     <args>
+      <arg/>
+      <arg/>
+      <arg etag="caste" xstr="caste (R:char)">
+       <typ ikind="ichar" ttag="tint"/>
+       <exp etag="const" xstr="R">
+        <constant charValue="82" ctag="cchr"/>
+       </exp>
+      </arg>
+     </args>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="49"/>
+      <node name="if-then"/>
+      <node name="stmt" num="48"/>
+      <node name="loop"/>
+      <node name="stmt" num="44"/>
+      <node name="loop"/>
+      <node name="stmt" num="40"/>
+     </calling-context>
+    </caller>
+    <caller cfilename="src/memtest.c" fname="memtest_fill_value" gvid="761" updated="05/24/2016 04:22:02" updated-f="1464063722.1">
+     <call-site byte="33801" file="src/memtest.c" line="174"/>
+     <args>
+      <arg/>
+      <arg/>
+      <arg/>
+     </args>
+     <calling-context>
+      <node name="instr" num="0"/>
+      <node name="stmt" num="70"/>
+      <node name="if-then"/>
+      <node name="stmt" num="69"/>
+      <node name="loop"/>
+      <node name="stmt" num="65"/>
+      <node name="loop"/>
+      <node name="stmt" num="57"/>
+     </calling-context>
+    </caller>
+   </callers>
+   <api-assumptions>
+    <api-assumption nr="1">
+     <predicate tag="not-zero">
+      <exp etag="lval" xstr="size">
+       <lval>
+        <lhost>
+         <var vid="954" vname="size"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="12"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </api-assumption>
+   </api-assumptions>
+   <rv-assumptions/>
+   <ds-assumptions/>
+   <global-assumptions>
+    <global-assumption nr="1">
+     <predicate tag="cast">
+      <tfrom ikind="iulonglong" ttag="tint"/>
+      <tto ikind="iulong" ttag="tint"/>
+      <exp binop="div" etag="binop" xstr="((((caste (curr:unsigned long long) * caste (progress_full:unsigned long long)):unsigned long long / caste (size:unsigned long long)):unsigned long long">
+       <exp1 binop="mult" etag="binop" xstr="((caste (curr:unsigned long long) * caste (progress_full:unsigned long long)):unsigned long long">
+        <exp1 etag="caste" xstr="caste (curr:unsigned long long)">
+         <typ ikind="iulonglong" ttag="tint"/>
+         <exp etag="lval" xstr="curr">
+          <lval>
+           <lhost>
+            <var vid="953" vname="curr"/>
+           </lhost>
+          </lval>
+         </exp>
+        </exp1>
+        <exp2 etag="caste" xstr="caste (progress_full:unsigned long long)">
+         <typ ikind="iulonglong" ttag="tint"/>
+         <exp etag="lval" xstr="progress_full">
+          <lval>
+           <lhost>
+            <var vid="771" vname="progress_full"/>
+           </lhost>
+          </lval>
+         </exp>
+        </exp2>
+        <typ ikind="iulonglong" ttag="tint"/>
+       </exp1>
+       <exp2 etag="caste" xstr="caste (size:unsigned long long)">
+        <typ ikind="iulonglong" ttag="tint"/>
+        <exp etag="lval" xstr="size">
+         <lval>
+          <lhost>
+           <var vid="954" vname="size"/>
+          </lhost>
+         </lval>
+        </exp>
+       </exp2>
+       <typ ikind="iulonglong" ttag="tint"/>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="1"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="2">
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="stdout">
+       <lval>
+        <lhost>
+         <var vid="1720" vname="stdout"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="40"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="3">
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <mem etag="lval" xstr="stdout">
+         <lval>
+          <lhost>
+           <var vid="1720" vname="stdout"/>
+          </lhost>
+         </lval>
+        </mem>
+       </lhost>
+      </lval>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="38"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+    <global-assumption nr="4">
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="stdout">
+       <lval>
+        <lhost>
+         <var vid="1720" vname="stdout"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <dependent-primary-proof-obligations>
+      <po id="35"/>
+     </dependent-primary-proof-obligations>
+     <dependent-secondary-proof-obligations/>
+    </global-assumption>
+   </global-assumptions>
+   <global-assignments>
+    <global-assignment nr="1">
+     <lhs>
+      <lhost>
+       <var vid="772" vname="progress_printed"/>
+      </lhost>
+     </lhs>
+     <rhs etag="lval" xstr="chars">
+      <lval>
+       <lhost>
+        <var vid="956" vname="chars"/>
+       </lhost>
+      </lval>
+     </rhs>
+     <loc byte="31301" file="src/memtest.c" line="83"/>
+    </global-assignment>
+   </global-assignments>
+   <field-assignments/>
+  </function>
+  <header time="05/24/2016 04:45:10">
+   <application file="src/memtest.c" name="application"/>
+  </header>
+ </c-analysis>

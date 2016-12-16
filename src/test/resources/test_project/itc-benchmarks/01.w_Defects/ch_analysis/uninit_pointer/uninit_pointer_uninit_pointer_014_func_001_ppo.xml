@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_014_func_001">
+   <statistics avg-context-complexity="0.49" avg-predicate-complexity="0.63" context-complexity="20" predicate-complexity="26" size="41"/>
+   <unconstrained-external-functions/>
+   <primary-proof-obligations>
+    <proof-obligation c-complexity="0" id="1" origin="prim-exp" p-complexity="0">
+     <location byte="138544" file="uninit_pointer.c" line="298"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4678" vname="flag"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="switch-expr"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="2" origin="prim-exp" p-complexity="0">
+     <location byte="138578" file="uninit_pointer.c" line="302"/>
+     <predicate from="iint" tag="signed-to-unsigned-cast" to="iulong">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="105"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="3" origin="prim-exp" p-complexity="1">
+     <location byte="138578" file="uninit_pointer.c" line="302"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tvoid"/>
+      <tto ckey="51" ttag="tcomp"/>
+      <exp etag="lval" xstr="tmp">
+       <lval>
+        <lhost>
+         <var vid="4679" vname="tmp"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="105"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="4" origin="prim-exp" p-complexity="0">
+     <location byte="138578" file="uninit_pointer.c" line="302"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4679" vname="tmp"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="105"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="5" origin="prim-exp" p-complexity="1">
+     <location byte="138578" file="uninit_pointer.c" line="302"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (tmp:(uninit_pointer_014_s_001*))">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+       </typ>
+       <exp etag="lval" xstr="tmp">
+        <lval>
+         <lhost>
+          <var vid="4679" vname="tmp"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="105"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="6" origin="prim-exp" p-complexity="1">
+     <location byte="138578" file="uninit_pointer.c" line="302"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (tmp:(uninit_pointer_014_s_001*))">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+       </typ>
+       <exp etag="lval" xstr="tmp">
+        <lval>
+         <lhost>
+          <var vid="4679" vname="tmp"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="105"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="7" origin="prim-exp" p-complexity="1">
+     <location byte="138578" file="uninit_pointer.c" line="302"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (tmp:(uninit_pointer_014_s_001*))">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+       </typ>
+       <exp etag="lval" xstr="tmp">
+        <lval>
+         <lhost>
+          <var vid="4679" vname="tmp"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="105"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="8" origin="prim-exp" p-complexity="1">
+     <location byte="138657" file="uninit_pointer.c" line="303"/>
+     <predicate tag="cast">
+      <tfrom ttag="tptr">
+       <typ ckey="51" ttag="tcomp"/>
+      </tfrom>
+      <tto ikind="iulong" ttag="tint"/>
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="9" origin="prim-exp" p-complexity="0">
+     <location byte="138657" file="uninit_pointer.c" line="303"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4675" vname="s"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="10" origin="prim-exp" p-complexity="0">
+     <location byte="138657" file="uninit_pointer.c" line="303"/>
+     <predicate tag="cast">
+      <tfrom ttag="tptr">
+       <typ ttag="tvoid"/>
+      </tfrom>
+      <tto ikind="iulong" ttag="tint"/>
+      <exp etag="caste" xstr="caste (0:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="const" xstr="0">
+        <constant ctag="cint64" ikind="iint" intValue="0"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="11" origin="prim-exp" p-complexity="0">
+     <location byte="138657" file="uninit_pointer.c" line="303"/>
+     <predicate tag="cast">
+      <tfrom ikind="iint" ttag="tint"/>
+      <tto ttag="tptr">
+       <typ ttag="tvoid"/>
+      </tto>
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="2op" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="12" origin="prim-exp" p-complexity="0">
+     <location byte="138685" file="uninit_pointer.c" line="305"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4675" vname="s"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="13" origin="prim-lval" p-complexity="1">
+     <location byte="138685" file="uninit_pointer.c" line="305"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="14" origin="prim-lval" p-complexity="1">
+     <location byte="138685" file="uninit_pointer.c" line="305"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="15" origin="prim-lval" p-complexity="1">
+     <location byte="138685" file="uninit_pointer.c" line="305"/>
+     <predicate tag="lower-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="16" origin="prim-lval" p-complexity="1">
+     <location byte="138685" file="uninit_pointer.c" line="305"/>
+     <predicate tag="upper-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="17" origin="prim-exp" p-complexity="0">
+     <location byte="138703" file="uninit_pointer.c" line="306"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4675" vname="s"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="18" origin="prim-lval" p-complexity="1">
+     <location byte="138703" file="uninit_pointer.c" line="306"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="19" origin="prim-lval" p-complexity="1">
+     <location byte="138703" file="uninit_pointer.c" line="306"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="20" origin="prim-lval" p-complexity="1">
+     <location byte="138703" file="uninit_pointer.c" line="306"/>
+     <predicate tag="lower-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="21" origin="prim-lval" p-complexity="1">
+     <location byte="138703" file="uninit_pointer.c" line="306"/>
+     <predicate tag="upper-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="107"/>
+       <node name="if-then"/>
+       <node name="stmt" num="106"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="22" origin="prim-exp" p-complexity="0">
+     <location byte="138750" file="uninit_pointer.c" line="312"/>
+     <predicate from="iint" tag="signed-to-unsigned-cast" to="iulong">
+      <exp etag="const" xstr="1">
+       <constant ctag="cint64" ikind="iint" intValue="1"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="109"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="23" origin="prim-exp" p-complexity="1">
+     <location byte="138750" file="uninit_pointer.c" line="312"/>
+     <predicate tag="pointer-cast">
+      <tfrom ttag="tvoid"/>
+      <tto ckey="51" ttag="tcomp"/>
+      <exp etag="lval" xstr="tmp___0">
+       <lval>
+        <lhost>
+         <var vid="4681" vname="tmp___0"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="109"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="24" origin="prim-exp" p-complexity="0">
+     <location byte="138750" file="uninit_pointer.c" line="312"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4681" vname="tmp___0"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="109"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="25" origin="prim-exp" p-complexity="1">
+     <location byte="138750" file="uninit_pointer.c" line="312"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (tmp___0:(uninit_pointer_014_s_001*))">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+       </typ>
+       <exp etag="lval" xstr="tmp___0">
+        <lval>
+         <lhost>
+          <var vid="4681" vname="tmp___0"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="109"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="26" origin="prim-exp" p-complexity="1">
+     <location byte="138750" file="uninit_pointer.c" line="312"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (tmp___0:(uninit_pointer_014_s_001*))">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+       </typ>
+       <exp etag="lval" xstr="tmp___0">
+        <lval>
+         <lhost>
+          <var vid="4681" vname="tmp___0"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="109"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="27" origin="prim-exp" p-complexity="1">
+     <location byte="138750" file="uninit_pointer.c" line="312"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (tmp___0:(uninit_pointer_014_s_001*))">
+       <typ ttag="tptr">
+        <typ tname="uninit_pointer_014_s_001" ttag="tnamed"/>
+       </typ>
+       <exp etag="lval" xstr="tmp___0">
+        <lval>
+         <lhost>
+          <var vid="4681" vname="tmp___0"/>
+         </lhost>
+        </lval>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="109"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="28" origin="prim-exp" p-complexity="1">
+     <location byte="138829" file="uninit_pointer.c" line="313"/>
+     <predicate tag="cast">
+      <tfrom ttag="tptr">
+       <typ ckey="51" ttag="tcomp"/>
+      </tfrom>
+      <tto ikind="iulong" ttag="tint"/>
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="29" origin="prim-exp" p-complexity="0">
+     <location byte="138829" file="uninit_pointer.c" line="313"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4675" vname="s"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="30" origin="prim-exp" p-complexity="0">
+     <location byte="138829" file="uninit_pointer.c" line="313"/>
+     <predicate tag="cast">
+      <tfrom ttag="tptr">
+       <typ ttag="tvoid"/>
+      </tfrom>
+      <tto ikind="iulong" ttag="tint"/>
+      <exp etag="caste" xstr="caste (0:(void*))">
+       <typ ttag="tptr">
+        <typ ttag="tvoid"/>
+       </typ>
+       <exp etag="const" xstr="0">
+        <constant ctag="cint64" ikind="iint" intValue="0"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="31" origin="prim-exp" p-complexity="0">
+     <location byte="138829" file="uninit_pointer.c" line="313"/>
+     <predicate tag="cast">
+      <tfrom ikind="iint" ttag="tint"/>
+      <tto ttag="tptr">
+       <typ ttag="tvoid"/>
+      </tto>
+      <exp etag="const" xstr="0">
+       <constant ctag="cint64" ikind="iint" intValue="0"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="2op" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="32" origin="prim-exp" p-complexity="0">
+     <location byte="138857" file="uninit_pointer.c" line="315"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4675" vname="s"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="33" origin="prim-lval" p-complexity="1">
+     <location byte="138857" file="uninit_pointer.c" line="315"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="34" origin="prim-lval" p-complexity="1">
+     <location byte="138857" file="uninit_pointer.c" line="315"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="35" origin="prim-lval" p-complexity="1">
+     <location byte="138857" file="uninit_pointer.c" line="315"/>
+     <predicate tag="lower-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="36" origin="prim-lval" p-complexity="1">
+     <location byte="138857" file="uninit_pointer.c" line="315"/>
+     <predicate tag="upper-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="37" origin="prim-exp" p-complexity="0">
+     <location byte="138875" file="uninit_pointer.c" line="316"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4675" vname="s"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="38" origin="prim-lval" p-complexity="1">
+     <location byte="138875" file="uninit_pointer.c" line="316"/>
+     <predicate tag="not-null">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="39" origin="prim-lval" p-complexity="1">
+     <location byte="138875" file="uninit_pointer.c" line="316"/>
+     <predicate tag="valid-mem">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="40" origin="prim-lval" p-complexity="1">
+     <location byte="138875" file="uninit_pointer.c" line="316"/>
+     <predicate tag="lower-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="1" id="41" origin="prim-lval" p-complexity="1">
+     <location byte="138875" file="uninit_pointer.c" line="316"/>
+     <predicate tag="upper-bound">
+      <exp etag="lval" xstr="s">
+       <lval>
+        <lhost>
+         <var vid="4675" vname="s"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="51" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="111"/>
+       <node name="if-then"/>
+       <node name="stmt" num="110"/>
+       <node name="stmt" num="104"/>
+      </cfg-context>
+      <exp-context>
+       <node name="mem"/>
+       <node name="lhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+   </primary-proof-obligations>
+  </function>
+  <header time="05/31/2016 16:55:52">
+   <application file="uninit_pointer.xml" name="application"/>
+  </header>
+ </c-analysis>

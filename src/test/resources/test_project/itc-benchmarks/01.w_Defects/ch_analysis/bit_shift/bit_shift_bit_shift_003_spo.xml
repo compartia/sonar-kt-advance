@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_003">
+   <secondary-proof-obligations max-spo-id="5" num-ppo="5">
+    <indirect-calls/>
+    <callsite-obligations/>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/31/2016 17:16:50">
+   <application file="bit_shift.c" name="application"/>
+  </header>
+ </c-analysis>

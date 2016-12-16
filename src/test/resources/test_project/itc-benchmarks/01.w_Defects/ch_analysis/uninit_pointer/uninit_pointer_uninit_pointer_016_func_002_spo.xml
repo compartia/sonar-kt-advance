@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_016_func_002">
+   <secondary-proof-obligations max-spo-id="59" num-ppo="59">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="0" fname="uninit_pointer_016_func_001" fvid="4690">
+      <location byte="139507" file="uninit_pointer.c" line="377"/>
+      <args>
+       <arg etag="const" xstr="0">
+        <constant ctag="cint64" ikind="iint" intValue="0"/>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="128"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/31/2016 17:16:52">
+   <application file="uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

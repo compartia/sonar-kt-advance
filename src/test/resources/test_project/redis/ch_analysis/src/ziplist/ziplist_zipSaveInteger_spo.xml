@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="zipSaveInteger">
+   <secondary-proof-obligations max-spo-id="93" num-ppo="93">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="0" fname="memcpy" fvid="721">
+      <location byte="49300" file="src/ziplist.c" line="353"/>
+      <args>
+       <arg etag="caste" xstr="caste (p:(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid"/>
+        </typ>
+        <exp etag="lval" xstr="p">
+         <lval>
+          <lhost>
+           <var vid="1483" vname="p"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="caste" xstr="caste (addrof (i16):(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="addrof" xstr="addrof (i16)">
+         <lval>
+          <lhost>
+           <var vid="1486" vname="i16"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="sizeofe" xstr="sizeof(i16)">
+        <exp etag="lval" xstr="i16">
+         <lval>
+          <lhost>
+           <var vid="1486" vname="i16"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="1"/>
+        <node name="stmt" num="108"/>
+        <node name="if-then"/>
+        <node name="stmt" num="107"/>
+        <node name="if-else"/>
+        <node name="stmt" num="105"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="memcpy" fvid="721">
+      <location byte="49424" file="src/ziplist.c" line="358"/>
+      <args>
+       <arg etag="caste" xstr="caste (p:(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid"/>
+        </typ>
+        <exp etag="lval" xstr="p">
+         <lval>
+          <lhost>
+           <var vid="1483" vname="p"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="caste" xstr="caste (((caste (addrof (i32):(uint8_t*)) +i 1):(uint8_t*):(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp binop="pluspi" etag="binop" xstr="((caste (addrof (i32):(uint8_t*)) +i 1):(uint8_t*)">
+         <exp1 etag="caste" xstr="caste (addrof (i32):(uint8_t*))">
+          <typ ttag="tptr">
+           <typ tname="uint8_t" ttag="tnamed"/>
+          </typ>
+          <exp etag="addrof" xstr="addrof (i32)">
+           <lval>
+            <lhost>
+             <var vid="1487" vname="i32"/>
+            </lhost>
+           </lval>
+          </exp>
+         </exp1>
+         <exp2 etag="const" xstr="1">
+          <constant ctag="cint64" ikind="iint" intValue="1"/>
+         </exp2>
+         <typ ttag="tptr">
+          <typ tname="uint8_t" ttag="tnamed"/>
+         </typ>
+        </exp>
+       </arg>
+       <arg binop="minusa" etag="binop" xstr="((sizeof(i32) - sizeof (uint8_t)):unsigned long">
+        <exp1 etag="sizeofe" xstr="sizeof(i32)">
+         <exp etag="lval" xstr="i32">
+          <lval>
+           <lhost>
+            <var vid="1487" vname="i32"/>
+           </lhost>
+          </lval>
+         </exp>
+        </exp1>
+        <exp2 etag="sizeof" xstr="sizeof (uint8_t)">
+         <typ tname="uint8_t" ttag="tnamed"/>
+        </exp2>
+        <typ ikind="iulong" ttag="tint"/>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="1"/>
+        <node name="stmt" num="110"/>
+        <node name="if-then"/>
+        <node name="stmt" num="109"/>
+        <node name="if-else"/>
+        <node name="stmt" num="107"/>
+        <node name="if-else"/>
+        <node name="stmt" num="105"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="memcpy" fvid="721">
+      <location byte="49555" file="src/ziplist.c" line="361"/>
+      <args>
+       <arg etag="caste" xstr="caste (p:(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid"/>
+        </typ>
+        <exp etag="lval" xstr="p">
+         <lval>
+          <lhost>
+           <var vid="1483" vname="p"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="caste" xstr="caste (addrof (i32):(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="addrof" xstr="addrof (i32)">
+         <lval>
+          <lhost>
+           <var vid="1487" vname="i32"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="sizeofe" xstr="sizeof(i32)">
+        <exp etag="lval" xstr="i32">
+         <lval>
+          <lhost>
+           <var vid="1487" vname="i32"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="1"/>
+        <node name="stmt" num="112"/>
+        <node name="if-then"/>
+        <node name="stmt" num="111"/>
+        <node name="if-else"/>
+        <node name="stmt" num="109"/>
+        <node name="if-else"/>
+        <node name="stmt" num="107"/>
+        <node name="if-else"/>
+        <node name="stmt" num="105"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="memcpy" fvid="721">
+      <location byte="49666" file="src/ziplist.c" line="365"/>
+      <args>
+       <arg etag="caste" xstr="caste (p:(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid"/>
+        </typ>
+        <exp etag="lval" xstr="p">
+         <lval>
+          <lhost>
+           <var vid="1483" vname="p"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="caste" xstr="caste (addrof (i64):(void*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ttag="tvoid">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="addrof" xstr="addrof (i64)">
+         <lval>
+          <lhost>
+           <var vid="1488" vname="i64"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+       <arg etag="sizeofe" xstr="sizeof(i64)">
+        <exp etag="lval" xstr="i64">
+         <lval>
+          <lhost>
+           <var vid="1488" vname="i64"/>
+          </lhost>
+         </lval>
+        </exp>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="1"/>
+        <node name="stmt" num="114"/>
+        <node name="if-then"/>
+        <node name="stmt" num="113"/>
+        <node name="if-else"/>
+        <node name="stmt" num="111"/>
+        <node name="if-else"/>
+        <node name="stmt" num="109"/>
+        <node name="if-else"/>
+        <node name="stmt" num="107"/>
+        <node name="if-else"/>
+        <node name="stmt" num="105"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="_redisAssert" fvid="1430">
+      <location byte="49784" file="src/ziplist.c" line="370"/>
+      <args>
+       <arg etag="caste" xstr="caste (&quot;NULL&quot;:(char*))">
+        <typ ttag="tptr">
+         <typ ikind="ichar" ttag="tint"/>
+        </typ>
+        <exp etag="const" xstr="&quot;NULL&quot;">
+         <constant ctag="cstr" strValue="NULL"/>
+        </exp>
+       </arg>
+       <arg etag="caste" xstr="caste (&quot;ziplist.c&quot;:(char*))">
+        <typ ttag="tptr">
+         <typ ikind="ichar" ttag="tint"/>
+        </typ>
+        <exp etag="const" xstr="&quot;ziplist.c&quot;">
+         <constant ctag="cstr" strValue="ziplist.c"/>
+        </exp>
+       </arg>
+       <arg etag="const" xstr="370">
+        <constant ctag="cint64" ikind="iint" intValue="370"/>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="119"/>
+        <node name="if-else"/>
+        <node name="stmt" num="118"/>
+        <node name="if-else"/>
+        <node name="stmt" num="115"/>
+        <node name="if-else"/>
+        <node name="stmt" num="113"/>
+        <node name="if-else"/>
+        <node name="stmt" num="111"/>
+        <node name="if-else"/>
+        <node name="stmt" num="109"/>
+        <node name="if-else"/>
+        <node name="stmt" num="107"/>
+        <node name="if-else"/>
+        <node name="stmt" num="105"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+     <callsite-obligation api-max-id="0" fname="_exit" fvid="1329">
+      <location byte="49784" file="src/ziplist.c" line="370"/>
+      <args>
+       <arg etag="const" xstr="1">
+        <constant ctag="cint64" ikind="iint" intValue="1"/>
+       </arg>
+      </args>
+      <obligations/>
+      <context>
+       <cfg-context>
+        <node name="instr" num="1"/>
+        <node name="stmt" num="119"/>
+        <node name="if-else"/>
+        <node name="stmt" num="118"/>
+        <node name="if-else"/>
+        <node name="stmt" num="115"/>
+        <node name="if-else"/>
+        <node name="stmt" num="113"/>
+        <node name="if-else"/>
+        <node name="stmt" num="111"/>
+        <node name="if-else"/>
+        <node name="stmt" num="109"/>
+        <node name="if-else"/>
+        <node name="stmt" num="107"/>
+        <node name="if-else"/>
+        <node name="stmt" num="105"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/24/2016 04:33:34">
+   <application file="src/ziplist.c" name="application"/>
+  </header>
+ </c-analysis>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_015">
+   <secondary-proof-obligations max-spo-id="5" num-ppo="4">
+    <indirect-calls/>
+    <callsite-obligations>
+     <callsite-obligation api-max-id="1" fname="uninit_pointer_015_func_001" fvid="4684">
+      <location byte="139294" file="uninit_pointer.c" line="357"/>
+      <args>
+       <arg etag="lval" xstr="ptr">
+        <lval>
+         <lhost>
+          <var vid="4689" vname="ptr"/>
+         </lhost>
+        </lval>
+       </arg>
+      </args>
+      <obligations>
+       <obligation api-id="1" id="5">
+        <predicate tag="not-null">
+         <exp etag="lval" xstr="ptr">
+          <lval>
+           <lhost>
+            <var vid="4689" vname="ptr"/>
+           </lhost>
+          </lval>
+         </exp>
+        </predicate>
+       </obligation>
+      </obligations>
+      <context>
+       <cfg-context>
+        <node name="instr" num="0"/>
+        <node name="stmt" num="121"/>
+       </cfg-context>
+       <exp-context/>
+      </context>
+     </callsite-obligation>
+    </callsite-obligations>
+    <return-sites/>
+    <post-expectations/>
+    <ds-expectations/>
+   </secondary-proof-obligations>
+  </function>
+  <header time="05/31/2016 17:16:52">
+   <application file="uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>

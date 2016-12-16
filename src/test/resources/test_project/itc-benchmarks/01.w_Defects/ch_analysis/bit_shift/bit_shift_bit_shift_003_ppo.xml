@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="bit_shift_003">
+   <statistics avg-context-complexity="0.00" avg-predicate-complexity="0.40" context-complexity="0" predicate-complexity="2" size="5"/>
+   <unconstrained-external-functions/>
+   <primary-proof-obligations>
+    <proof-obligation c-complexity="0" id="1" origin="prim-exp" p-complexity="0">
+     <location byte="135334" file="bit_shift.c" line="45"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4589" vname="a"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="5"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="2" origin="prim-op" p-complexity="0">
+     <location byte="135334" file="bit_shift.c" line="45"/>
+     <predicate tag="non-negative">
+      <exp etag="const" xstr="32">
+       <constant ctag="cint64" ikind="iint" intValue="32"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="5"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="3" origin="prim-op" p-complexity="1">
+     <location byte="135334" file="bit_shift.c" line="45"/>
+     <predicate size="iuint" tag="width-overflow">
+      <exp etag="const" xstr="32">
+       <constant ctag="cint64" ikind="iint" intValue="32"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="5"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="4" origin="prim-exp" p-complexity="1">
+     <location byte="135357" file="bit_shift.c" line="46"/>
+     <predicate from="iuint" tag="unsigned-to-signed-cast" to="iint">
+      <exp etag="lval" xstr="ret">
+       <lval>
+        <lhost>
+         <var vid="4590" vname="ret"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="5"/>
+      </cfg-context>
+      <exp-context>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="5" origin="prim-exp" p-complexity="0">
+     <location byte="135357" file="bit_shift.c" line="46"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="4590" vname="ret"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="5"/>
+      </cfg-context>
+      <exp-context>
+       <node name="cast"/>
+       <node name="rhs"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+   </primary-proof-obligations>
+  </function>
+  <header time="05/31/2016 16:55:49">
+   <application file="bit_shift.xml" name="application"/>
+  </header>
+ </c-analysis>

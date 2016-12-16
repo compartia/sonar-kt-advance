@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="bit_shift" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:08"/>
+  </header>
+  <function filename="bit_shift">
+   <svar vglob="true" vid="4629" vname="bit_shift_013">
+    <vtyp ttag="tfun" vararg="false">
+     <args/>
+     <typ ttag="tvoid"/>
+    </vtyp>
+    <vdecl byte="136490" file="bit_shift.c" line="179"/>
+   </svar>
+   <sformals/>
+   <slocals/>
+   <sbody>
+    <bstmts>
+     <stmt sid="28">
+      <skind stag="instr">
+       <instrs>
+        <instr itag="call">
+         <exp etag="lval">
+          <lval>
+           <lhost>
+            <var vid="4624" vname="bit_shift_013_func_001"/>
+           </lhost>
+          </lval>
+         </exp>
+         <args>
+          <exp etag="const">
+           <constant ctag="cint64" ikind="iint" intValue="32"/>
+          </exp>
+         </args>
+         <loc byte="136515" file="bit_shift.c" line="181"/>
+        </instr>
+       </instrs>
+      </skind>
+      <succs>
+       <int intValue="29"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="29">
+      <skind stag="return">
+       <loc byte="136543" file="bit_shift.c" line="182"/>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="28"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

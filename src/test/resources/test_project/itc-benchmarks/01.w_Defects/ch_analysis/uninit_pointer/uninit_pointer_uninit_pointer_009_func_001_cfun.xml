@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <codehawk-c-analysis>
+  <header>
+   <created file="uninit_pointer" project-directory="/home/vagrant/git/itc-benchmarks/01.w_Defects" time="05/31/2016 16:35:17"/>
+  </header>
+  <function filename="uninit_pointer">
+   <svar vglob="true" vid="4640" vname="uninit_pointer_009_func_001">
+    <vtyp ttag="tfun" vararg="false">
+     <args>
+      <arg aname="flag">
+       <typ ikind="iint" ttag="tint"/>
+      </arg>
+     </args>
+     <typ ikind="iint" ttag="tint"/>
+    </vtyp>
+    <vdecl byte="136800" file="uninit_pointer.c" line="165"/>
+   </svar>
+   <sformals>
+    <varinfo vid="4642" vname="flag">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="136836" file="uninit_pointer.c" line="165"/>
+    </varinfo>
+   </sformals>
+   <slocals>
+    <varinfo vid="4643" vname="ret">
+     <vtyp ikind="iint" ttag="tint"/>
+     <vdecl byte="136851" file="uninit_pointer.c" line="167"/>
+    </varinfo>
+   </slocals>
+   <sbody>
+    <bstmts>
+     <stmt sid="44">
+      <skind stag="if">
+       <exp binop="eq" etag="binop">
+        <exp1 etag="lval">
+         <lval>
+          <lhost>
+           <var vid="4642" vname="flag"/>
+          </lhost>
+         </lval>
+        </exp1>
+        <exp2 etag="const">
+         <constant ctag="cint64" ikind="iint" intValue="0"/>
+        </exp2>
+        <typ ikind="iint" ttag="tint"/>
+       </exp>
+       <thenblock>
+        <bstmts>
+         <stmt sid="45">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4643" vname="ret"/>
+              </lhost>
+             </lval>
+             <exp etag="const">
+              <constant ctag="cint64" ikind="iint" intValue="0"/>
+             </exp>
+             <loc byte="136877" file="uninit_pointer.c" line="169"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="47"/>
+          </succs>
+          <preds>
+           <int intValue="44"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </thenblock>
+       <elseblock>
+        <bstmts>
+         <stmt sid="46">
+          <skind stag="instr">
+           <instrs>
+            <instr itag="set">
+             <lval>
+              <lhost>
+               <var vid="4643" vname="ret"/>
+              </lhost>
+             </lval>
+             <exp binop="plusa" etag="binop">
+              <exp1 etag="lval">
+               <lval>
+                <lhost>
+                 <var vid="4642" vname="flag"/>
+                </lhost>
+               </lval>
+              </exp1>
+              <exp2 etag="const">
+               <constant ctag="cint64" ikind="iint" intValue="1"/>
+              </exp2>
+              <typ ikind="iint" ttag="tint"/>
+             </exp>
+             <loc byte="136898" file="uninit_pointer.c" line="171"/>
+            </instr>
+           </instrs>
+          </skind>
+          <succs>
+           <int intValue="47"/>
+          </succs>
+          <preds>
+           <int intValue="44"/>
+          </preds>
+         </stmt>
+        </bstmts>
+       </elseblock>
+       <loc byte="136859" file="uninit_pointer.c" line="168"/>
+      </skind>
+      <succs>
+       <int intValue="45"/>
+       <int intValue="46"/>
+      </succs>
+      <preds/>
+     </stmt>
+     <stmt sid="47">
+      <skind stag="return">
+       <loc byte="136913" file="uninit_pointer.c" line="172"/>
+       <exp etag="lval">
+        <lval>
+         <lhost>
+          <var vid="4643" vname="ret"/>
+         </lhost>
+        </lval>
+       </exp>
+      </skind>
+      <succs/>
+      <preds>
+       <int intValue="46"/>
+       <int intValue="45"/>
+      </preds>
+     </stmt>
+    </bstmts>
+   </sbody>
+  </function>
+ </codehawk-c-analysis>

@@ -1,0 +1,2188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="memtest">
+   <statistics avg-context-complexity="0.00" avg-predicate-complexity="0.09" context-complexity="0" predicate-complexity="4" size="46"/>
+   <unconstrained-external-functions>
+    <efn name="ioctl/ioctl" num="1"/>
+   </unconstrained-external-functions>
+   <primary-proof-obligations>
+    <proof-obligation c-complexity="0" id="1" origin="prim-exp" p-complexity="0">
+     <location byte="36417" file="src/memtest.c" line="270"/>
+     <predicate tag="valid-mem">
+      <exp etag="addrof" xstr="addrof (ws)">
+       <lval>
+        <lhost>
+         <var vid="938" vname="ws"/>
+        </lhost>
+       </lval>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="115"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="2" origin="prim-exp" p-complexity="0">
+     <location byte="36417" file="src/memtest.c" line="270"/>
+     <predicate tag="lower-bound">
+      <exp etag="addrof" xstr="addrof (ws)">
+       <lval>
+        <lhost>
+         <var vid="938" vname="ws"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="14" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="115"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="3" origin="prim-exp" p-complexity="0">
+     <location byte="36417" file="src/memtest.c" line="270"/>
+     <predicate tag="upper-bound">
+      <exp etag="addrof" xstr="addrof (ws)">
+       <lval>
+        <lhost>
+         <var vid="938" vname="ws"/>
+        </lhost>
+       </lval>
+      </exp>
+      <typ ckey="14" ttag="tcomp"/>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="115"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="2"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="4" origin="prim-exp" p-complexity="0">
+     <location byte="36417" file="src/memtest.c" line="270"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="1062" vname="tmp"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="if-expr"/>
+       <node name="stmt" num="116"/>
+      </cfg-context>
+      <exp-context>
+       <node name="2op" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="5" origin="prim-exp" p-complexity="0">
+     <location byte="36510" file="src/memtest.c" line="274"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="1060" vname="megabytes"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="6" origin="prim-exp" p-complexity="0">
+     <location byte="36510" file="src/memtest.c" line="274"/>
+     <predicate tag="initialized">
+      <lval>
+       <lhost>
+        <var vid="1061" vname="passes"/>
+       </lhost>
+      </lval>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="0"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="1"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="7" name="format" origin="f-pre" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="format-string">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="format">
+      <math>
+       <apply>
+        <format-string/>
+        <ci>format</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="8" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="9" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="null-terminated">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="10" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="11" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+      <exp1 etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;;Your memory passed this test. ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+         <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="12" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="initialized-range">
+      <base-exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </base-exp>
+      <len-exp cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;;Your memory passed this test. ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+         <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="13" origin="prim-exp" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </tto>
+      <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+       <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="14" origin="prim-exp" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="15" origin="prim-exp" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="16" origin="prim-exp" p-complexity="0">
+     <location byte="36546" file="src/memtest.c" line="275"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (&quot;;Your memory passed this test. ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;;Your memory passed this test. ;&quot;">
+        <constant ctag="cstr" strValue=";Your memory passed this test. ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="1"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="17" name="format" origin="f-pre" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="format-string">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="format">
+      <math>
+       <apply>
+        <format-string/>
+        <ci>format</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="18" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="19" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="null-terminated">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="20" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="21" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+      <exp1 etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+         <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="22" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="initialized-range">
+      <base-exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </base-exp>
+      <len-exp cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+         <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="23" origin="prim-exp" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </tto>
+      <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+       <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="24" origin="prim-exp" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="25" origin="prim-exp" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="26" origin="prim-exp" p-complexity="0">
+     <location byte="36595" file="src/memtest.c" line="276"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (&quot;Please if you are still in doubt use the following two tools: ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;Please if you are still in doubt use the following two tools: ;&quot;">
+        <constant ctag="cstr" strValue="Please if you are still in doubt use the following two tools: ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="2"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="27" name="format" origin="f-pre" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="format-string">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="format">
+      <math>
+       <apply>
+        <format-string/>
+        <ci>format</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="28" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="29" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="null-terminated">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="30" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="31" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+      <exp1 etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+         <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="32" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="initialized-range">
+      <base-exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </base-exp>
+      <len-exp cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+         <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="33" origin="prim-exp" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </tto>
+      <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+       <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="34" origin="prim-exp" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="35" origin="prim-exp" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="36" origin="prim-exp" p-complexity="0">
+     <location byte="36674" file="src/memtest.c" line="277"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (&quot;1) memtest86: http://www.memtest86.com/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;1) memtest86: http://www.memtest86.com/ ;&quot;">
+        <constant ctag="cstr" strValue="1) memtest86: http://www.memtest86.com/ ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="3"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="37" name="format" origin="f-pre" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="format-string">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="format">
+      <math>
+       <apply>
+        <format-string/>
+        <ci>format</ci>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="38" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="not-null">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="39" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="null-terminated">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="40" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="41" name="deref-read-nt" origin="f-pre" p-complexity="1">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate op="pluspi" tag="ptr-upper-bound">
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+      <exp1 etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp1>
+      <exp2 cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+         <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </exp2>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" fname="printf" id="42" name="deref-read-nt" origin="f-pre" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="initialized-range">
+      <base-exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </base-exp>
+      <len-exp cn="null-terminator-pos" etag="cnapp" xstr="null-terminator-pos[caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))]">
+       <arg etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+        <typ ttag="tptr">
+         <attributes>
+          <attr attrname="restrict"/>
+         </attributes>
+         <typ ikind="ichar" ttag="tint">
+          <attributes>
+           <attr attrname="const"/>
+          </attributes>
+         </typ>
+        </typ>
+        <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+         <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+        </exp>
+       </arg>
+       <typ ikind="iint" ttag="tint"/>
+      </len-exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context/>
+     </context>
+     <args>
+      <exp etag="caste" name="format" nr="1" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </args>
+     <precondition name="deref-read-nt">
+      <math>
+       <apply>
+        <deref-read/>
+        <ci>format</ci>
+        <apply>
+         <index-size/>
+         <apply>
+          <nullterminator-pos/>
+          <ci>format</ci>
+         </apply>
+        </apply>
+       </apply>
+      </math>
+     </precondition>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="43" origin="prim-exp" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="pointer-cast">
+      <tfrom ikind="ichar" ttag="tint"/>
+      <tto ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </tto>
+      <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+       <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="44" origin="prim-exp" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="valid-mem">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="45" origin="prim-exp" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="lower-bound">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+    <proof-obligation c-complexity="0" id="46" origin="prim-exp" p-complexity="0">
+     <location byte="36731" file="src/memtest.c" line="278"/>
+     <predicate tag="upper-bound">
+      <exp etag="caste" xstr="caste (&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;:(char*))">
+       <typ ttag="tptr">
+        <attributes>
+         <attr attrname="restrict"/>
+        </attributes>
+        <typ ikind="ichar" ttag="tint">
+         <attributes>
+          <attr attrname="const"/>
+         </attributes>
+        </typ>
+       </typ>
+       <exp etag="const" xstr="&quot;2) memtester: http://pyropus.ca/software/memtester/ ;&quot;">
+        <constant ctag="cstr" strValue="2) memtester: http://pyropus.ca/software/memtester/ ;"/>
+       </exp>
+      </exp>
+      <typ ikind="ichar" ttag="tint">
+       <attributes>
+        <attr attrname="const"/>
+       </attributes>
+      </typ>
+     </predicate>
+     <context>
+      <cfg-context>
+       <node name="instr" num="4"/>
+       <node name="stmt" num="118"/>
+      </cfg-context>
+      <exp-context>
+       <node name="arg" num="0"/>
+      </exp-context>
+     </context>
+    </proof-obligation>
+   </primary-proof-obligations>
+  </function>
+  <header time="05/24/2016 04:22:02">
+   <application file="src/memtest.xml" name="application"/>
+  </header>
+ </c-analysis>

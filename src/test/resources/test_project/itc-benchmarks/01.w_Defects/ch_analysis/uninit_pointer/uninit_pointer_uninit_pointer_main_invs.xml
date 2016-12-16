@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <c-analysis>
+  <function name="uninit_pointer_main" stable="yes">
+   <program-locations>
+    <program-location>
+     <locations>
+      <loc byte="140372" file="uninit_pointer.c" line="420"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="156"/>
+      <node name="if-else"/>
+      <node name="stmt" num="154"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="23"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140372" file="uninit_pointer.c" line="420"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="154"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="13" pv="20"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140435" file="uninit_pointer.c" line="425"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="160"/>
+      <node name="if-else"/>
+      <node name="stmt" num="158"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="14"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140435" file="uninit_pointer.c" line="425"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="158"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="1" pv="1"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140498" file="uninit_pointer.c" line="430"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="164"/>
+      <node name="if-else"/>
+      <node name="stmt" num="162"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="28"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140498" file="uninit_pointer.c" line="430"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="162"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="10" pv="16"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140561" file="uninit_pointer.c" line="435"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="168"/>
+      <node name="if-else"/>
+      <node name="stmt" num="166"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="13"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140561" file="uninit_pointer.c" line="435"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="166"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="6" pv="7"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140624" file="uninit_pointer.c" line="440"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="172"/>
+      <node name="if-else"/>
+      <node name="stmt" num="170"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="3"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140624" file="uninit_pointer.c" line="440"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="170"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="5" pv="6"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140687" file="uninit_pointer.c" line="445"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="176"/>
+      <node name="if-else"/>
+      <node name="stmt" num="174"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="0"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140687" file="uninit_pointer.c" line="445"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="174"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="4" pv="5"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140750" file="uninit_pointer.c" line="450"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="180"/>
+      <node name="if-else"/>
+      <node name="stmt" num="178"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="9"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140750" file="uninit_pointer.c" line="450"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="178"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="12" pv="19"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140813" file="uninit_pointer.c" line="455"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="184"/>
+      <node name="if-else"/>
+      <node name="stmt" num="182"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="17"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140813" file="uninit_pointer.c" line="455"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="182"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="9" pv="15"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140876" file="uninit_pointer.c" line="460"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="188"/>
+      <node name="if-else"/>
+      <node name="stmt" num="186"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="24"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140876" file="uninit_pointer.c" line="460"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="186"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="11" pv="18"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140939" file="uninit_pointer.c" line="465"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="192"/>
+      <node name="if-else"/>
+      <node name="stmt" num="190"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="12"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="140939" file="uninit_pointer.c" line="465"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="190"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="3" pv="4"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141003" file="uninit_pointer.c" line="470"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="196"/>
+      <node name="if-else"/>
+      <node name="stmt" num="194"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="27"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141003" file="uninit_pointer.c" line="470"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="194"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="7" pv="8"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141067" file="uninit_pointer.c" line="475"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="200"/>
+      <node name="if-else"/>
+      <node name="stmt" num="198"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="21"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141067" file="uninit_pointer.c" line="475"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="198"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="14" pv="22"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141131" file="uninit_pointer.c" line="480"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="204"/>
+      <node name="if-else"/>
+      <node name="stmt" num="202"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="29"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141131" file="uninit_pointer.c" line="480"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="202"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="2" pv="2"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141195" file="uninit_pointer.c" line="485"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="208"/>
+      <node name="if-else"/>
+      <node name="stmt" num="206"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="31"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141195" file="uninit_pointer.c" line="485"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="206"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="15" pv="26"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141259" file="uninit_pointer.c" line="490"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="212"/>
+      <node name="if-else"/>
+      <node name="stmt" num="210"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="25"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141259" file="uninit_pointer.c" line="490"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="210"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="16" pv="30"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141323" file="uninit_pointer.c" line="495"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="216"/>
+      <node name="if-else"/>
+      <node name="stmt" num="214"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="0" pv="10"/>
+     </invariants>
+    </program-location>
+    <program-location>
+     <locations>
+      <loc byte="141323" file="uninit_pointer.c" line="495"/>
+     </locations>
+     <cfg-context>
+      <node name="if-expr"/>
+      <node name="stmt" num="214"/>
+     </cfg-context>
+     <invariants>
+      <inv nrv="8" pv="11"/>
+     </invariants>
+    </program-location>
+   </program-locations>
+   <program-value-table size="32">
+    <pvals index="0">
+     <pval arg="3" id="24"/>
+    </pvals>
+    <pvals index="1">
+     <pval arg="3" id="6"/>
+    </pvals>
+    <pvals index="2">
+     <pval arg="3" id="50"/>
+    </pvals>
+    <pvals index="3">
+     <pval arg="3" id="20"/>
+    </pvals>
+    <pvals index="4">
+     <pval arg="3" id="38"/>
+    </pvals>
+    <pvals index="5">
+     <pval arg="3" id="22"/>
+    </pvals>
+    <pvals index="6">
+     <pval arg="3" id="18"/>
+    </pvals>
+    <pvals index="7">
+     <pval arg="3" id="14"/>
+    </pvals>
+    <pvals index="8">
+     <pval arg="3" id="42"/>
+    </pvals>
+    <pvals index="9">
+     <pval arg="3" id="28"/>
+    </pvals>
+    <pvals index="10">
+     <pval arg="3" id="64"/>
+    </pvals>
+    <pvals index="11">
+     <pval arg="3" id="62"/>
+    </pvals>
+    <pvals index="12">
+     <pval arg="3" id="40"/>
+    </pvals>
+    <pvals index="13">
+     <pval arg="3" id="16"/>
+    </pvals>
+    <pvals index="14">
+     <pval arg="3" id="8"/>
+    </pvals>
+    <pvals index="15">
+     <pval arg="3" id="30"/>
+    </pvals>
+    <pvals index="16">
+     <pval arg="3" id="10"/>
+    </pvals>
+    <pvals index="17">
+     <pval arg="3" id="32"/>
+    </pvals>
+    <pvals index="18">
+     <pval arg="3" id="34"/>
+    </pvals>
+    <pvals index="19">
+     <pval arg="3" id="26"/>
+    </pvals>
+    <pvals index="20">
+     <pval arg="3" id="2"/>
+    </pvals>
+    <pvals index="21">
+     <pval arg="3" id="48"/>
+    </pvals>
+    <pvals index="22">
+     <pval arg="3" id="46"/>
+    </pvals>
+    <pvals index="23">
+     <pval arg="3" id="4"/>
+    </pvals>
+    <pvals index="24">
+     <pval arg="3" id="36"/>
+    </pvals>
+    <pvals index="25">
+     <pval arg="3" id="60"/>
+    </pvals>
+    <pvals index="26">
+     <pval arg="3" id="54"/>
+    </pvals>
+    <pvals index="27">
+     <pval arg="3" id="44"/>
+    </pvals>
+    <pvals index="28">
+     <pval arg="3" id="12"/>
+    </pvals>
+    <pvals index="29">
+     <pval arg="3" id="52"/>
+    </pvals>
+    <pvals index="30">
+     <pval arg="3" id="58"/>
+    </pvals>
+    <pvals index="31">
+     <pval arg="3" id="56"/>
+    </pvals>
+   </program-value-table>
+   <non-relational-value-table size="17">
+    <nrv index="0" tag="range" value="888"/>
+    <nrv index="1" tag="range" value="2"/>
+    <nrv index="2" tag="range" value="13"/>
+    <nrv index="3" tag="range" value="10"/>
+    <nrv index="4" tag="range" value="6"/>
+    <nrv index="5" tag="range" value="5"/>
+    <nrv index="6" tag="range" value="4"/>
+    <nrv index="7" tag="range" value="11"/>
+    <nrv index="8" tag="range" value="16"/>
+    <nrv index="9" tag="range" value="8"/>
+    <nrv index="10" tag="range" value="3"/>
+    <nrv index="11" tag="range" value="9"/>
+    <nrv index="12" tag="range" value="7"/>
+    <nrv index="13" tag="range" value="1"/>
+    <nrv index="14" tag="range" value="12"/>
+    <nrv index="15" tag="range" value="14"/>
+    <nrv index="16" tag="range" value="15"/>
+   </non-relational-value-table>
+  </function>
+  <header time="05/31/2016 16:53:32">
+   <application file="./uninit_pointer.c" name="application"/>
+  </header>
+ </c-analysis>
