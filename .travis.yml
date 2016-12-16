@@ -7,12 +7,13 @@ install: true
 script: ./travis.sh
 env:
 - TEST=CI
-
 deploy:
   provider: releases
-  api_key: $GIT_DEPLOY_API_KEY
-  file: "target/sonar-kt-advance-plugin-5.5.6.jar"
   skip_cleanup: true
+  file: target/sonar-kt-advance-plugin-5.5.6.jar
+  api_key:
+    secure: b+5OuBgZVve6UZukw7MJ+kJXIJdlSYsm6dZGEDs65LZPS1xX7w/r/j5le1PsdMDkgQn6JxuUwh2g8wat6nMcAiFgXwfiVwgrqceSE8tdax4XsLW/hbAA81ErMYLxRRqXR4P3LvbAReOb3aUG7lz6DOw/4Uojm8UHNZPsKZGlZf9AnAe/6F59SW3Q2TS/pX0rr3FgJCPYMCj3wvnHVxYZQNRyLeAy/Fk0BeAGlzB80Ojz7IU4sML3FKDgyBnvkBcuVWiQo119iPw4GCPINJcRmZugTxaAF7l3gLBL6R1/DGVOhPmUU3wzyqwdyVRivyNK7U65M6o4YsvX+sFZGsWE5jNQGNR8moQL42gAniCuFri6wdX3Sz8fvsiJNGkVi1BSXapFzjOwofd33D9FelcBXIy5IqvMFTe/mC3yH2SAZvuVhMS0zVouOYyAuZvvkXAh/ILwR9Uj50YPuBnpA894Uoj42+2nCsICqPGeIqlNjOP8rZ70Ma68FyBjdkR2bUhU7r9hCgVv9nzdXbYbPwrQ+6Cy/Sbu1dFcvcVOycNG9jzKUUn6RTEK8B9fm1mfEAsMC04IYs4JYwRKixJ0KhSi08lFkr/PfyVNrzZfCuQHX65/2hxLNAmxGGlZ+vfiiFcRcZbxxHbVll8n2AreVxTDIFAQ1tYOaQHPMUA5NJ74eXc=
+
   on:
     tags: true
 
