@@ -8,5 +8,13 @@ script: ./travis.sh
 env:
 - TEST=CI
 
+deploy:
+  provider: releases
+  api_key: "92f78a1c246c13459e4346a11dd827544731a285"
+  file: "target/sonar-kt-advance-plugin-5.5.6.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+
 notifications:
-  slack: kestreltechnology:QcOSfR0bHUi92kqkmioIsT4H    
+  slack: kestreltechnology:QcOSfR0bHUi92kqkmioIsT4H
