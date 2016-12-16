@@ -231,7 +231,7 @@ public class KtAdvanceSensor {
 
     /**
      *
-     * saves PO-related data as SonarCube's Issue
+     * saves PO-related data as SonarQube's Issue
      *
      * @param inputFile
      *            a resource PO is related to

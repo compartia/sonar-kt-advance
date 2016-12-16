@@ -1,28 +1,28 @@
-# KT Advance SonarCube Plugin
+# KT Advance SonarQube Plugin
 
 [![Build Status](https://travis-ci.com/mrbkt/kestreltech.svg?token=1L4UwqexWxqBGfsyymrm&branch=master)](https://travis-ci.com/mrbkt/kestreltech)
 
 ## Installation steps
 
-0. Download and install SonarCube 5.5
+0. Download and install SonarQube 5.5
 
-1. Build the plug-in with `mvn package` command and install it. You may look into `redeploy.sh` file, which lists all the required steps. 
- 
+1. Build the plug-in with `mvn package` command and install it. You may look into `redeploy.sh` file, which lists all the required steps.
+
 2. Navigate to **Quality Profiles** section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.
 
->Small note aside: every Sonar’s project has many2many relations with Languages. There’s no C/C++ support out of the box, thus we 
->- either have to define own C Language, which probably may conflict with existing C/C++ plug-ins, 
->- OR we have to “invent" another fake language like “C-analysis”, 
+>Small note aside: every Sonar’s project has many2many relations with Languages. There’s no C/C++ support out of the box, thus we
+>- either have to define own C Language, which probably may conflict with existing C/C++ plug-ins,
+>- OR we have to “invent" another fake language like “C-analysis”,
 >- OR we should depend on 3rd-partie’s C/C++ plug-ins.
 
-3. Navigate to **Rules** section and check Repository filter on the left panel, you should see at least 3 repositories: 
-  - KT Advance (discharged) 
+3. Navigate to **Rules** section and check Repository filter on the left panel, you should see at least 3 repositories:
+  - KT Advance (discharged)
   - KT Advance (open)
   - KT Advance (violations)  
 By default, rules in 'KT Advance (discharged)' group are disabled, so discharged proof obligations will not not be listed.
 
 ## Running the scanner
-To try the scanner on a small Redis src subset, in terminal window, change dir to `/src/test/resources/test_project/redis` and run `sonar-scanner` (In case you don’t have `sonar-scanner CLI`, please refer to (http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) ). 
+To try the scanner on a small Redis src subset, in terminal window, change dir to `/src/test/resources/test_project/redis` and run `sonar-scanner` (In case you don’t have `sonar-scanner CLI`, please refer to (http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) ).
 To log more debug info into console, you may run the scanner in verbose mode: `sonar-scanner -X`.
 
 Alternatively, you may run the scanner in `/src/test/resources/test_project/itc-benchmarks/01.w_Defects` subdir.
@@ -48,7 +48,7 @@ Each Issue corresponds to a Rule. There are 3 groups of rules (and therefore, 3 
 ### Technical Debt (remediation effort) computation
 #### Parameters
 The Technical Debt (TD) per issue is calculated according to this formula:
-	
+
 	TD = coefficient * effort
 where
   - `coefficient` is hardcoded const with time units (`"10min"`)
@@ -73,15 +73,15 @@ Each parameter is taken with configurable **magnitude** `m_X` (AKA *scale factor
 `SQ` | `s` | Discharged PO Multiplier | `effort.discharged.multiplier` | `s` value for **discharged** Proof Obligations | `0.0`
 `SQ` | `s` | Violations Multiplier | `effort.violation.multiplier` | `s` value for proven **violations** | `10.0`
 `SQ` | `m_s` | PO State Scale Factor | `effort.state.scale` | PO **s**tate scale factor | `0.5`
-`SQ` | `l` |  Primary PO Multiplier | `effort.primary.multiplier` | `l` value for **primary** proof obligations | `2.0` 
+`SQ` | `l` |  Primary PO Multiplier | `effort.primary.multiplier` | `l` value for **primary** proof obligations | `2.0`
 `SQ` | `l` |  Secondary PO Multiplier | `effort.secondary.multiplier` | `l` value for **secondary** proof obligations | `4.0`
-`SQ` | `m_l` |  PO Level Scale Factor | `effort.level.scale` | PO **l**evel scale factor | `0.5` 
+`SQ` | `m_l` |  PO Level Scale Factor | `effort.level.scale` | PO **l**evel scale factor | `0.5`
 `SQ` | `t` |  Predicate type Multiplier | `<predicate type>`  | By predicate-**t**ype multiplier. There are 31 by-predicate coefficients, which could be tuned via (/settings?category=kt+advance). The effective list of predicates with default coefficients could be found at [predicates.tsv](https://github.com/compartia/kestreltech/blob/master/src/main/resources/predicates.tsv). | see predicates.tsv
 `SQ` | `m_c[c]` | C-complexity Scale Factor | `effort.complexity.c.multiplier` | Scale Factor c-complexity (`c[c]`) | `0.5`
 `SQ` | `m_c[p]` | P-complexity Scale Factor | `effort.complexity.p.multiplier` | Scale Factor p-complexity (`c[p]`) | `0.5`
 `SQ` | `m_c[g]` | G-complexity Scale Factor | `effort.complexity.g.multiplier` | Scale Factor g-complexity (`c[g]`) | `0.5`
 
- 
+
 ##### NOTE. SonarQube supports three ways of calculating remediation cost.
 Here's the quote from Sonar's API docs. :
 
