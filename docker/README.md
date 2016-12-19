@@ -1,12 +1,12 @@
 # KT Advance SonarQube Plugin Docker
 
 ## SonarQube with H2 database
-Firstly, you need either to build the Docker image
+To run bare SonarQube with only KT-Advance plugin pre-installed, you need either to build the Docker image
 ```
 $ docker build -t compartia/kt-sonarqube:5.5.6 .
 ```
 OR
-to pull it from Docker Hub
+to pull the image from Docker Hub
 
 ```
 $ docker pull compartia/kt-sonarqube:5.5.6
