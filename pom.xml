@@ -6,7 +6,7 @@
 	<artifactId>sonar-kt-advance-plugin</artifactId>
 	<groupId>org.sonar.plugins.kt.advance</groupId>
 	<packaging>sonar-plugin</packaging>
-	<version>5.5.6</version>
+	<version>5.5.7</version>
 
 	<name>KT Advance</name>
 	<description>KT Advance Memory Safety Analyzer for C</description>
@@ -27,12 +27,12 @@
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/mrbkt/kestreltech/issues</url>
+		<url>https://github.com/kestreltechnology/sonar-kt-advance/issues</url>
 	</issueManagement>
 
 	<scm>
-		<url>https://github.com/mrbkt/kestreltech</url>
-		<connection>scm:git:git://github.com/mrbkt/kestreltech.git</connection>
+		<url>https://github.com/kestreltechnology/sonar-kt-advance/</url>
+		<connection>scm:git:git://github.com/kestreltechnology/sonar-kt-advance.git</connection>
 	</scm>
 
 	<developers>
@@ -175,9 +175,6 @@
 		</pluginManagement>
 
 	</build>
-
-
-
 
 
 
