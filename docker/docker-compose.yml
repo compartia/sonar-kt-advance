@@ -6,7 +6,7 @@ services:
     # build:
     #   context: .
     #   dockerfile: Dockerfile-sonar-pg
-    image: compartia/kt-sonarqube-pg:5.5.6
+    image: compartia/kt-sonarqube-pg:5.5.7
     ports:
       - "9000:9000"
     networks:
@@ -16,7 +16,7 @@ services:
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_extensions:/opt/sonarqube/extensions/v2
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
     depends_on:
       - db
