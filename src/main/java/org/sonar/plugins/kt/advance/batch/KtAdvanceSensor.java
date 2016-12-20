@@ -289,15 +289,24 @@ public class KtAdvanceSensor {
             if (ipo == null) {
                 final InputFile resource = fsAbstraction.getResource(po.location.file);
 
-                ipo = IssuableProofObligation.newBuilder(ppo, po)
-                        .setDischarge(dischargedPOs.get(po.id))
-                        .setInputFile(resource)
-                        .build();
+                if (resource != null) {
 
-                putPoToCache(ipo);
+                    ipo = IssuableProofObligation.newBuilder(ppo, po)
+                            .setDischarge(dischargedPOs.get(po.id))
+                            .setInputFile(resource)
+                            .build();
+
+                    putPoToCache(ipo);
+
+                } else {
+                    LOG.warn(
+                        "processing \'" + ppo.getOrigin() + "\': no source with name \'" + po.location.file + "\'");
+                }
             }
 
-            ret.add(ipo);
+            if (ipo != null) {
+                ret.add(ipo);
+            }
         }
         return ret;
     }

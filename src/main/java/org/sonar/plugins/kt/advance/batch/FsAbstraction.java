@@ -271,6 +271,7 @@ public class FsAbstraction {
             inputFile = fileSystem.inputFile(filePredicate);
             if (inputFile == null) {
                 LOG.error("cannot find " + file + " in " + fileSystem.baseDir().getAbsolutePath());
+                return null;
             } else {
                 LOG.info("cached " + inputFile.relativePath());
             }
