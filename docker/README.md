@@ -3,22 +3,22 @@
 ## SonarQube with H2 database
 To run bare SonarQube with only KT-Advance plugin pre-installed, you need either to build the Docker image
 ```
-$ docker build -t compartia/kt-sonarqube:5.5.6 .
+$ docker build -t compartia/kt-sonarqube:5.5.7 .
 ```
 OR
 to pull the image from Docker Hub
 
 ```
-$ docker pull compartia/kt-sonarqube:5.5.6
+$ docker pull compartia/kt-sonarqube:5.5.7
 ```
 Then run it with this command:
 ```
-$ docker run -d --name kt-sonarqube -p 9000:9000 -p 9092:9092 compartia/kt-sonarqube:5.5.6
+$ docker run -d --name kt-sonarqube -p 9000:9000 -p 9092:9092 compartia/kt-sonarqube:5.5.7
 ```
 #### Docker image
 https://hub.docker.com/r/compartia/kt-sonarqube/
 #### KT-Advance plugin for SonarQube
-https://github.com/kestreltechnology/sonar-kt-advance/releases/download/5.5.6-b/sonar-kt-advance-plugin-5.5.6.jar
+https://github.com/kestreltechnology/sonar-kt-advance/releases/download/5.5.7/sonar-kt-advance-plugin-5.5.7.jar
 
 ## SonarQube with Postgres database
 To run SonarQube with Postgres pre-filled with Redis project analysis,
