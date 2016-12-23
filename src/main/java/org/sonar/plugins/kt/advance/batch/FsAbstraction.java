@@ -284,20 +284,13 @@ public class FsAbstraction {
         return Collections.unmodifiableSet(savedKeys);
     }
 
-    public InputFile getXmlAbsoluteResource(final String absoluteFileName) {
+    public InputFile getXmlAbsoluteResource(final File file) {
 
-        final String base = fileSystem.baseDir().getAbsolutePath();
-        String relative = absoluteFileName.substring(base.length());
-        if (relative.startsWith(File.separator)) {
-            relative = relative.substring(File.separator.length());
-        }
-
-        final FilePredicate filePredicate = fileSystem.predicates().hasRelativePath(relative);
+        final FilePredicate filePredicate = fileSystem.predicates().is(file);//hasARelativePath(relative);
         final InputFile inputFile = fileSystem.inputFile(filePredicate);
+
         if (inputFile == null) {
-            LOG.error("cannot find '" + relative + "' in '" + base + "'");
-        } else {
-            LOG.info("cached " + inputFile.relativePath());
+            LOG.error("cannot find '" + file.getAbsolutePath());
         }
         return inputFile;
     }

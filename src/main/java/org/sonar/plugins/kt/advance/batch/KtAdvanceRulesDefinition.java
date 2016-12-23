@@ -22,6 +22,7 @@ package org.sonar.plugins.kt.advance.batch;
 import java.io.InputStream;
 import java.util.Collection;
 
+import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rule.Severity;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
@@ -57,6 +58,8 @@ public final class KtAdvanceRulesDefinition implements RulesDefinition {
         }
     }
 
+    public static final String XML_INCONSISTENCY_RULE = "xml_inconsistency_rule";
+
     /**
      * logger
      */
@@ -66,10 +69,25 @@ public final class KtAdvanceRulesDefinition implements RulesDefinition {
 
     public static final String REPOSITORY_BASE_KEY = KtAdvancePlugin.KEY + ".p.";
 
+    public static final String XML_PROBLEMS_REPO_KEY = REPOSITORY_BASE_KEY + "xml";
+
     private static final String DEFAULT_ISSUE_COST = "10min";
 
     @Override
     public void define(Context context) {
+
+        final NewRepository repositoryXmlIssues = context
+                .createRepository(XML_PROBLEMS_REPO_KEY, KtLanguage.KEY)
+                .setName("KT Advance XML parsing issues");
+
+        final NewRule xmlProblemRule = repositoryXmlIssues.createRule(XML_INCONSISTENCY_RULE)
+
+                .setHtmlDescription("There's a problem with XML")
+                .setStatus(RuleStatus.READY)
+                .setSeverity(Severity.BLOCKER)
+                .setName("XML inconsistency")
+                .setType(RuleType.BUG);
+
         final NewRepository repositoryOpen = context
                 .createRepository(REPOSITORY_BASE_KEY + POState.OPEN, KtLanguage.KEY)
                 .setName("KT Advance (open)");
@@ -100,6 +118,7 @@ public final class KtAdvanceRulesDefinition implements RulesDefinition {
         repositoryDischarged.done();
         repositoryOpen.done();
         repositoryViolations.done();
+        repositoryXmlIssues.done();
     }
 
     Collection<NewRule> loadRulesDefenitions(NewRepository repository) {

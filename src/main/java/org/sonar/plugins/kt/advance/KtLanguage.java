@@ -31,7 +31,7 @@ import org.sonar.api.resources.AbstractLanguage;
  */
 public class KtLanguage extends AbstractLanguage {
 
-    public static final String DEFAULT_FILE_SUFFIXES = "c,h";
+    public static final String DEFAULT_FILE_SUFFIXES = "c,h,xml";
     public static final String KEY = "kt.c.analysis.1";
     public static final String NAME = "C-analysis";
 

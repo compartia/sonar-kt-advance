@@ -117,7 +117,7 @@ public class KtAdvanceSensor {
             }
 
         } catch (final JAXBException e) {
-            LOG.error("Failed parsing file " + ppoXml, e);
+            handleParsingError(ppoXml, "XML parsing failed: " + e.getMessage());
         }
     }
 
@@ -139,9 +139,20 @@ public class KtAdvanceSensor {
         statistics.save(sensorContext);
     }
 
+    /**
+     * returns cached IssuableProofObligation if any. if IpoKey is not in the
+     * cache, it parses the given XML file.
+     *
+     * @param ppoXml
+     *            file to parse in case there's no IPO in the cache
+     * @param id
+     * @return
+     * @throws JAXBException
+     */
     private IssuableProofObligation getPoThroughCache(File ppoXml, int id) throws JAXBException {
         final IpoKey ppoKey = new IpoKey(ppoXml, id, POLevel.PRIMARY);
         final IssuableProofObligation primaryIpo = fsAbstraction.get(ppoKey);
+
         if (primaryIpo == null) {
             final PpoFile ppoFile = FsAbstraction.readPpoXml(ppoXml);
             processPPOs(ppoFile);
@@ -152,12 +163,20 @@ public class KtAdvanceSensor {
 
     }
 
+    private void handleParsingError(File xmlFile, String msg) {
+        LOG.error("XML: " + xmlFile.getAbsolutePath() + " : " + msg);
+        final XmlParsingIssue pi = new XmlParsingIssue();
+        pi.setFile(xmlFile);
+        pi.setMessage(msg);
+        saveParsingIssueToSq(pi);
+    }
+
     /**
      * link SPO to PPO via assumptions
      *
      * @throws JAXBException
      */
-    private void linkAssumptions(
+    private void linkAssumptions(File assumptionOrigin,
             ApiAssumption assumption,
             final IssuableProofObligation secondaryIpo,
             final CallSiteObligation co,
@@ -178,48 +197,73 @@ public class KtAdvanceSensor {
                 putPoToCache(primaryIpo);
 
             } else {
-                LOG.error("an assumption refers non-existent PPO with id " + ref.id + " in file " + co.fname);
+                /**
+                 * check if we're looking for it in the proper file
+                 */
+                handleParsingError(assumptionOrigin, "api-assumption nr=" + assumption.nr +
+                        " refers dependent-primary-proof-obligation with id=" + ref.id
+                        + "; but that PPO id is not found in file " + ppoOriginXml);
+
             }
         }
     }
 
     private void processCallSiteObligation(
-            SpoFile originXml,
+            SpoFile spoXml,
             final CallSiteObligation spoCallSiteObligation,
             final Map<Integer, PO> dischargedSPOs) throws JAXBException {
 
         if (!spoCallSiteObligation.proofObligations.isEmpty()) {
-            Map<Integer, ApiAssumption> apiAssumptionsById = null;
 
-            File ppoXml = null;
+            File ppoXmlFile = null;
+            ApiFile api = null;
+
+            final File spoXmlFile = spoXml.getOrigin();
+
             if (spoCallSiteObligation.fname != null) {
-                final String filePattern = originXml.getOrigin().getParentFile().getName() + "_"
+                final String filePattern = spoXmlFile.getParentFile().getName() + "_"
                         + spoCallSiteObligation.fname;
                 LOG.trace("reading API, pattern:" + filePattern);
 
-                final ApiFile api = readApiXml(xmlFilename(originXml.getOrigin(), filePattern, API_SUFFIX));
-                if (api != null) {
-                    apiAssumptionsById = api.function.getApiAssumptionsAsMap();
-                }
+                api = readApiXml(xmlFilename(spoXmlFile, filePattern, API_SUFFIX));
 
-                ppoXml = xmlFilename(originXml.getOrigin(), filePattern, PPO_SUFFIX);
+                ppoXmlFile = xmlFilename(spoXmlFile, filePattern, PPO_SUFFIX);
             }
 
-            final SPOBuilder builder = IssuableProofObligation.newBuilder(originXml, spoCallSiteObligation);
-            builder.setInputFile(fsAbstraction.getResource(spoCallSiteObligation.location.file));
+            final InputFile resource = fsAbstraction.getResource(spoCallSiteObligation.location.file);
+            if (resource != null) {
 
-            for (final SecondaryProofObligation spo : spoCallSiteObligation.proofObligations) {
+                final SPOBuilder builder = IssuableProofObligation.newBuilder(spoXml, spoCallSiteObligation);
+                builder.setInputFile(resource);
 
-                final IssuableProofObligation newSecondaryIpo = builder
-                        .setSpo(spo)
-                        .setDischarge(dischargedSPOs.get(spo.id))
-                        .build();
+                final Map<Integer, ApiAssumption> apiAssumptionsById = (api == null) ? null
+                        : api.function.getApiAssumptionsAsMap();
 
-                if (apiAssumptionsById != null) {
-                    linkAssumptions(apiAssumptionsById.get(spo.apiId), newSecondaryIpo, spoCallSiteObligation, ppoXml);
+                for (final SecondaryProofObligation spo : spoCallSiteObligation.proofObligations) {
+
+                    final IssuableProofObligation newSecondaryIpo = builder
+                            .setSpo(spo)
+                            .setDischarge(dischargedSPOs.get(spo.id))
+                            .build();
+
+                    if (apiAssumptionsById != null) {
+                        final ApiAssumption assumption = apiAssumptionsById.get(spo.apiId);
+                        if (null == assumption) {
+                            handleParsingError(spoXmlFile, "obligation with id " + spo.id + " refers api-id="
+                                    + spo.apiId + ", but no assumption with nr=" + spo.apiId + " found in "
+                                    + api.getOrigin().getAbsolutePath());
+                        } else {
+                            linkAssumptions(api.getOrigin(), assumption, newSecondaryIpo, spoCallSiteObligation,
+                                ppoXmlFile);
+                        }
+                    }
+
+                    putPoToCache(newSecondaryIpo);
                 }
-
-                putPoToCache(newSecondaryIpo);
+            } else {
+                handleParsingError(spoXmlFile,
+                    "callsite-obligation fvid= " + spoCallSiteObligation.fvid + " refers non-existent file \'"
+                            + spoCallSiteObligation.location.file + "\'");
             }
         }
     }
@@ -227,6 +271,36 @@ public class KtAdvanceSensor {
     private boolean putPoToCache(IssuableProofObligation proofObligation) {
         fsAbstraction.save(proofObligation);
         return true;
+    }
+
+    private boolean saveParsingIssueToSq(XmlParsingIssue pi) {
+
+        Preconditions.checkNotNull(pi.getFile());
+
+        final InputFile inputFile = fsAbstraction.getXmlAbsoluteResource(pi.getFile());
+        Preconditions.checkNotNull(inputFile);
+
+        final Issuable issuable = perspectives.as(Issuable.class, inputFile);
+
+        if (null == issuable) {
+            LOG.error(
+                "Can't find an Issuable corresponding to InputFile:" + inputFile.absolutePath());
+            return false;
+        } else {
+            try {
+                final Issue issue = pi.toIssue(inputFile, issuable, activeRules, settings, fsAbstraction);
+                final boolean result = issuable.addIssue(issue);
+                return result;
+
+            } catch (final org.sonar.api.utils.MessageException me) {
+                LOG.error(String.format("Can't add issue on file %s ",
+                    inputFile.absolutePath()),
+                    me);
+            }
+
+        }
+
+        return false;
     }
 
     /**
@@ -299,8 +373,9 @@ public class KtAdvanceSensor {
                     putPoToCache(ipo);
 
                 } else {
-                    LOG.warn(
-                        "processing \'" + ppo.getOrigin() + "\': no source with name \'" + po.location.file + "\'");
+                    handleParsingError(ppo.getOrigin(),
+                        "proof-obligation id=" + po.id + " refers non existing source file: \'" + po.location.file
+                                + "\'");
                 }
             }
 
