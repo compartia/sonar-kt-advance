@@ -28,12 +28,12 @@ import static org.sonar.plugins.kt.advance.util.StringTools.findVarLocation;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
@@ -141,7 +141,7 @@ public class IssuableProofObligation implements Serializable {
         }
 
         IssuableProofObligation buildTmp() {
-
+            Preconditions.checkState(this.getInputFile() != null);
             final IssuableProofObligation ipo = new IssuableProofObligation();
 
             ipo.originXml = getOriginXml();
@@ -216,54 +216,6 @@ public class IssuableProofObligation implements Serializable {
 
     }
 
-    public static class IPOTextRange implements Serializable {
-        /**
-         *
-         */
-        private static final long serialVersionUID = 7972064605806555395L;
-        public Integer line;
-        Integer offset;
-
-        Integer endLine;
-        Integer endLineOffset;
-
-        public IPOTextRange(Integer line, Integer offset, Integer endLine, Integer endLineOffset) {
-            super();
-            this.line = line;
-            this.offset = offset;
-            this.endLine = endLine;
-            this.endLineOffset = endLineOffset;
-        }
-
-        /**
-         * means, it is not bound to the entire line of code, but to some
-         * specific fragment
-         *
-         * @return
-         */
-        public boolean isBoudToVar() {
-            return !(offset == null || (offset == endLineOffset && line == endLine));
-        }
-
-        public String key() {
-            return line + "-" + offset + "-" + endLine + "-" + endLineOffset;
-        }
-
-        @Override
-        public String toString() {
-            return "IPOTextRange [line=" + line + ", offset=" + offset + ", endLine=" + endLine + ", endLineOffset="
-                    + endLineOffset + "]";
-        }
-
-        public TextRange toTextRange(InputFile inputFile) {
-            if (isBoudToVar()) {
-                return inputFile.newRange(line, offset, endLine, endLineOffset);
-            } else {
-                return inputFile.selectLine(line);
-            }
-        }
-    }
-
     public static final class POBuilder extends AbstractPOBuilder {
 
         private final PrimaryProofObligation po;
@@ -276,7 +228,7 @@ public class IssuableProofObligation implements Serializable {
 
         @Override
         public IssuableProofObligation build() {
-
+            Preconditions.checkState(this.getInputFile() != null);
             final IssuableProofObligation ipo = super.buildTmp();
             ipo.level = POLevel.PRIMARY;
             ipo.complexity[POComplexity.C.ordinal()] = po.complexityC;
@@ -315,7 +267,9 @@ public class IssuableProofObligation implements Serializable {
     public static final class Reference implements Serializable {
 
         private static final long serialVersionUID = 1768805251161836506L;
+
         public final String file;
+
         public final String message;
         public final String referenceKey;
         public final IPOTextRange textRange;
@@ -326,6 +280,60 @@ public class IssuableProofObligation implements Serializable {
             this.textRange = textRange;
             this.message = message;
             this.referenceKey = referenceKey;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final Reference other = (Reference) obj;
+            if (file == null) {
+                if (other.file != null) {
+                    return false;
+                }
+            } else if (!file.equals(other.file)) {
+                return false;
+            }
+            if (message == null) {
+                if (other.message != null) {
+                    return false;
+                }
+            } else if (!message.equals(other.message)) {
+                return false;
+            }
+            if (referenceKey == null) {
+                if (other.referenceKey != null) {
+                    return false;
+                }
+            } else if (!referenceKey.equals(other.referenceKey)) {
+                return false;
+            }
+            if (textRange == null) {
+                if (other.textRange != null) {
+                    return false;
+                }
+            } else if (!textRange.equals(other.textRange)) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((file == null) ? 0 : file.hashCode());
+            result = prime * result + ((message == null) ? 0 : message.hashCode());
+            result = prime * result + ((referenceKey == null) ? 0 : referenceKey.hashCode());
+            result = prime * result + ((textRange == null) ? 0 : textRange.hashCode());
+            return result;
         }
 
         @Override
@@ -346,7 +354,7 @@ public class IssuableProofObligation implements Serializable {
 
         @Override
         public IssuableProofObligation build() {
-
+            Preconditions.checkState(this.getInputFile() != null);
             final IssuableProofObligation ipo = super.buildTmp();
             ipo.level = POLevel.SECONDARY;
             /**
@@ -403,20 +411,18 @@ public class IssuableProofObligation implements Serializable {
      * C,P,G -- this is the order
      */
     private final Integer[] complexity = { 0, 0, 0 };
-    private String description, shortDescription;
+    private String description;
+    private String shortDescription;
 
     private PpoLocation location;
     private String time;
 
     private PredicateKey predicateType;
-
     private POLevel level;
-    private final List<Reference> references = new ArrayList<>();
-
     private POState state;
 
     private IPOTextRange textRange;
-
+    private final Set<Reference> references = new HashSet<>();
     /**
      * TODO: use string?
      */
@@ -455,15 +461,6 @@ public class IssuableProofObligation implements Serializable {
     public void addReference(Reference ref) {
         references.add(ref);
     }
-
-    //    public Reference addReference(String targetFile, IPOTextRange targetTextRange, String message) {
-    //        final Reference ref = new Reference(targetFile,
-    //                targetTextRange,
-    //                message);
-    //
-    //        addReference(ref);
-    //        return ref;
-    //    }
 
     public Double computeEffort(ActiveRules activeRules, Settings settings) {
 
@@ -554,7 +551,7 @@ public class IssuableProofObligation implements Serializable {
         return shortDescription.hashCode() + "-" + id + "-" + level + "-" + originXml.getAbsolutePath().hashCode();
     }
 
-    public List<Reference> getReferences() {
+    public Set<Reference> getReferences() {
         return references;
     }
 

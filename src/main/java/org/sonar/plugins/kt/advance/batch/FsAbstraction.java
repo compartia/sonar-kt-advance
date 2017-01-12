@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -240,17 +239,11 @@ public class FsAbstraction {
      * @param handler
      */
     public void forEachPpoFile(PpoFileParser handler) {
-
         LOG.info("Analysing. Source root: " + baseDir.getAbsolutePath());
-
-        final Iterator<File> iter = FileUtils.iterateFiles(baseDir, new String[] { XML_EXT }, true);
-
-        while (iter.hasNext()) {
-            final File file = iter.next();
-
-            if (file.isFile() && ppoFileFilter.accept(file)) {
-                handler.parse(file);
-            }
+        final FilePredicate filePredicate = fileSystem.predicates().matchesPathPattern("**/*_ppo.xml");
+        final Iterable<InputFile> files = fileSystem.inputFiles(filePredicate);
+        for (final InputFile file : files) {
+            handler.parse(file.file());
         }
     }
 
@@ -313,8 +306,8 @@ public class FsAbstraction {
                     IpoKey.class,
                     IssuableProofObligation.class,
                     ResourcePoolsBuilder.newResourcePoolsBuilder()
-                            .heap(1, MemoryUnit.GB)//TODO: should be configurable
-                            .disk(10, MemoryUnit.GB, false));
+                            .heap(2, MemoryUnit.GB)//TODO: should be configurable
+                            .disk(20, MemoryUnit.GB, false));
 
         final File cacheDir = new File(baseDir, ".sonar.kt.data");
         cacheMan = CacheManagerBuilder.newCacheManagerBuilder()

@@ -82,10 +82,10 @@ public class IssueBuilderTest {
     public void testAddReferences() {
         final int numberOfRefs = 10;
         final IssuableProofObligation ipo = Factory.createPrimaryPO(new PredicateKey("tag"));
-        final IssuableProofObligation targetipo = Factory.createPrimaryPO(new PredicateKey("tag"));
+
         for (int f = 0; f < numberOfRefs; f++) {
-            //            final IPOTextRange ipoTextRange = new IPOTextRange(1, 1, 1, 1);
-            //targetipo.s
+            final IssuableProofObligation targetipo = Factory.createPrimaryPO(new PredicateKey("tag"));
+            targetipo.setShortDescription("descr " + f);
             ipo.addReference(targetipo);
         }
 

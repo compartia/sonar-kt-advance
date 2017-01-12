@@ -34,8 +34,10 @@ import static org.sonar.plugins.kt.advance.batch.FsAbstraction.xmlFilename;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.JAXBException;
 
@@ -80,6 +82,10 @@ public class KtAdvanceSensor {
 
     final FsAbstraction fsAbstraction;
 
+    private int errorsCounterXml = 0;
+
+    private final Set<XmlParsingIssue> xmlParsingIssues = new HashSet<>();
+
     public KtAdvanceSensor(FsAbstraction fs) {
         fsAbstraction = fs;
         settings = null;
@@ -90,8 +96,8 @@ public class KtAdvanceSensor {
 
     public KtAdvanceSensor(final Settings settings, final FileSystem fileSystem, final ActiveRules ruleFinder,
             final ResourcePerspectives perspectives) throws JAXBException {
-        this.settings = settings;
 
+        this.settings = settings;
         this.activeRules = ruleFinder;
         this.perspectives = perspectives;
 
@@ -102,6 +108,9 @@ public class KtAdvanceSensor {
 
     public void analyse(SensorContext sensorContext) throws JAXBException {
         fsAbstraction.doInCache(() -> analyseImpl(sensorContext));
+        if (errorsCounterXml > 0) {
+            LOG.error("There are " + errorsCounterXml + " error(s) in XMLs; ");
+        }
     }
 
     public void analysePpoXml(final File ppoXml) {
@@ -121,10 +130,6 @@ public class KtAdvanceSensor {
         }
     }
 
-    public FsAbstraction getFsContext() {
-        return fsAbstraction;
-    }
-
     public Statistics getStatistics() {
         return statistics;
     }
@@ -137,6 +142,9 @@ public class KtAdvanceSensor {
         }
 
         statistics.save(sensorContext);
+        for (final XmlParsingIssue pi : xmlParsingIssues) {
+            saveParsingIssueToSq(pi);
+        }
     }
 
     /**
@@ -164,11 +172,17 @@ public class KtAdvanceSensor {
     }
 
     private void handleParsingError(File xmlFile, String msg) {
-        LOG.error("XML: " + xmlFile.getAbsolutePath() + " : " + msg);
         final XmlParsingIssue pi = new XmlParsingIssue();
         pi.setFile(xmlFile);
         pi.setMessage(msg);
-        saveParsingIssueToSq(pi);
+
+        if (!xmlParsingIssues.contains(pi)) {
+            errorsCounterXml++;
+            LOG.error("XML: (#" + errorsCounterXml + ") " + xmlFile.getAbsolutePath() + " : " + msg);
+            if (xmlParsingIssues.size() < 5000) {
+                xmlParsingIssues.add(pi);
+            }
+        }
     }
 
     /**
@@ -202,7 +216,7 @@ public class KtAdvanceSensor {
                  */
                 handleParsingError(assumptionOrigin, "api-assumption nr=" + assumption.nr +
                         " refers dependent-primary-proof-obligation with id=" + ref.id
-                        + "; but that PPO id is not found in file " + ppoOriginXml);
+                        + "; but that PPO id is not found in file " + relativize(ppoOriginXml));
 
             }
         }
@@ -251,7 +265,7 @@ public class KtAdvanceSensor {
                         if (null == assumption) {
                             handleParsingError(spoXmlFile, "obligation with id " + spo.id + " refers api-id="
                                     + spo.apiId + ", but no assumption with nr=" + spo.apiId + " found in "
-                                    + api.getOrigin().getAbsolutePath());
+                                    + relativize(api.getOrigin()));
                         } else {
                             linkAssumptions(api.getOrigin(), assumption, newSecondaryIpo, spoCallSiteObligation,
                                 ppoXmlFile);
@@ -347,6 +361,10 @@ public class KtAdvanceSensor {
         return false;
     }
 
+    FsAbstraction getFsContext() {
+        return fsAbstraction;
+    }
+
     List<IssuableProofObligation> processPPOs(PpoFile ppo)
             throws JAXBException {
 
@@ -395,6 +413,10 @@ public class KtAdvanceSensor {
             processCallSiteObligation(spo, co, dischargedPOs);
         }
 
+    }
+
+    String relativize(File f) {
+        return fsAbstraction.getBaseDir().toPath().relativize(f.toPath()).toString();
     }
 
 }

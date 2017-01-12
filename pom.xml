@@ -6,7 +6,7 @@
 	<artifactId>sonar-kt-advance-plugin</artifactId>
 	<groupId>org.sonar.plugins.kt.advance</groupId>
 	<packaging>sonar-plugin</packaging>
-	<version>5.5.7</version>
+	<version>5.6.0</version>
 
 	<name>KT Advance</name>
 	<description>KT Advance Memory Safety Analyzer for C</description>
