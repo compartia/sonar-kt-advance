@@ -454,12 +454,8 @@ public class IssuableProofObligation implements Serializable {
         final Reference ref = new Reference(target.getLocation().file,//TOD: check if it is source or target!!!
                 target.getTextRange(),
                 makeReferenceName(this, target), target.getReferenceKey());
-        addReference(ref);
-        return ref;
-    }
-
-    public void addReference(Reference ref) {
         references.add(ref);
+        return ref;
     }
 
     public Double computeEffort(ActiveRules activeRules, Settings settings) {

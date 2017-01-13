@@ -120,10 +120,7 @@ public class KtAdvanceSensor {
             processPPOs(ppoFile);
 
             final File spoXml = replaceSuffix(ppoXml, PPO_SUFFIX, SPO_SUFFIX);
-            final SpoFile spo = readSpoXml(spoXml);
-            if (spo != null) {
-                processSPOs(spo);
-            }
+            processSPOs(spoXml, false);
 
         } catch (final JAXBException e) {
             handleParsingError(ppoXml, "XML parsing failed: " + e.getMessage());
@@ -157,7 +154,7 @@ public class KtAdvanceSensor {
      * @return
      * @throws JAXBException
      */
-    private IssuableProofObligation getPoThroughCache(File ppoXml, int id) throws JAXBException {
+    private IssuableProofObligation getPPoThroughCache(File ppoXml, int id) throws JAXBException {
         final IpoKey ppoKey = new IpoKey(ppoXml, id, POLevel.PRIMARY);
         final IssuableProofObligation primaryIpo = fsAbstraction.get(ppoKey);
 
@@ -169,6 +166,16 @@ public class KtAdvanceSensor {
             return primaryIpo;
         }
 
+    }
+
+    private IssuableProofObligation getSPoTroughCache(File spoXml, int id) throws JAXBException {
+        final IpoKey spoKey = new IpoKey(spoXml, id, POLevel.SECONDARY);
+        final IssuableProofObligation secondaryIpo = fsAbstraction.get(spoKey);
+        if (secondaryIpo == null) {
+            processSPOs(spoXml, true);
+            return fsAbstraction.get(spoKey);
+        }
+        return secondaryIpo;
     }
 
     private void handleParsingError(File xmlFile, String msg) {
@@ -190,35 +197,103 @@ public class KtAdvanceSensor {
      *
      * @throws JAXBException
      */
-    private void linkAssumptions(File assumptionOrigin,
+    private void linkAssumptions(File assumptionOriginApiFile,
             ApiAssumption assumption,
             final IssuableProofObligation secondaryIpo,
             final CallSiteObligation co,
-            File ppoOriginXml) throws JAXBException {
+            File ppoOriginXml, File spoOriginFile) throws JAXBException {
 
         Preconditions.checkNotNull(assumption);
 
         for (final PoRef ref : assumption.dependentPPOs) {
 
-            final IssuableProofObligation primaryIpo = getPoThroughCache(ppoOriginXml, ref.id);
+            IssuableProofObligation targetIpo = getPPoThroughCache(ppoOriginXml, ref.id);
+            if (targetIpo == null) {
+                LOG.error("api-assumption nr=" + assumption.nr +
+                        " refers dependent-primary-proof-obligation with id=" + ref.id
+                        + "; but that PPO id is not found in file " + relativize(ppoOriginXml)
+                        + "; trying to find SPO");
 
-            if (primaryIpo != null) {
+                /**
+                 * this is fallback solution. Actually, there is an
+                 * inconsistency in XMLs: secondary POs are referenced the way
+                 * as they were primary.
+                 */
+                targetIpo = getSPoTroughCache(spoOriginFile, ref.id);
+                //XXX: there might be nothing in cache yet, if id refers another file/funciton.
+            }
 
-                secondaryIpo.addReference(primaryIpo);
-                primaryIpo.addReference(secondaryIpo);
+            if (targetIpo != null) {
+
+                secondaryIpo.addReference(targetIpo);
+                targetIpo.addReference(secondaryIpo);
 
                 putPoToCache(secondaryIpo);
-                putPoToCache(primaryIpo);
+                putPoToCache(targetIpo);
 
             } else {
                 /**
                  * check if we're looking for it in the proper file
                  */
-                handleParsingError(assumptionOrigin, "api-assumption nr=" + assumption.nr +
-                        " refers dependent-primary-proof-obligation with id=" + ref.id
-                        + "; but that PPO id is not found in file " + relativize(ppoOriginXml));
+                handleParsingError(assumptionOriginApiFile, "api-assumption with nr=" + assumption.nr +
+                        " refers to dependent proof obligation with id=" + ref.id
+                        + " but neither PPO nor SPO was found in files " + relativize(ppoOriginXml) + " and "
+                        + relativize(spoOriginFile));
 
             }
+        }
+    }
+
+    private void linkAssumptions(
+            SpoFile spoXml,
+            final CallSiteObligation spoCallSiteObligation) throws JAXBException {
+
+        if (!spoCallSiteObligation.proofObligations.isEmpty()) {
+
+            File ppoXmlFile = null;
+            File spoXmlFileRef = null;
+            ApiFile api = null;
+
+            if (spoCallSiteObligation.fname != null) {
+                final File spoXmlFile = spoXml.getOrigin();
+                final String filePattern = spoXmlFile.getParentFile().getName() + "_"
+                        + spoCallSiteObligation.fname;
+                LOG.trace("reading API, pattern:" + filePattern);
+
+                api = readApiXml(xmlFilename(spoXmlFile, filePattern, API_SUFFIX));
+
+                ppoXmlFile = xmlFilename(spoXmlFile, filePattern, PPO_SUFFIX);
+                spoXmlFileRef = xmlFilename(spoXmlFile, filePattern, SPO_SUFFIX);
+            }
+
+            final Map<Integer, ApiAssumption> apiAssumptionsById = (api == null) ? null
+                    : api.function.getApiAssumptionsAsMap();
+
+            /**
+             * link assumptions
+             */
+            if (apiAssumptionsById != null) {
+                for (final SecondaryProofObligation spo : spoCallSiteObligation.proofObligations) {
+                    /**
+                     * get SPO from cache
+                     */
+                    final IssuableProofObligation newSecondaryIpo = fsAbstraction
+                            .get(new IpoKey(spoXml.getOrigin(), spo.id, POLevel.SECONDARY));
+                    Preconditions.checkNotNull(newSecondaryIpo);
+                    final ApiAssumption assumption = apiAssumptionsById.get(spo.apiId);
+
+                    if (null == assumption) {
+                        handleParsingError(spoXml.getOrigin(), "obligation with id " + spo.id + " refers api-id="
+                                + spo.apiId + ", but no assumption with nr=" + spo.apiId + " found in "
+                                + relativize(api.getOrigin()));
+                    } else {
+                        linkAssumptions(api.getOrigin(), assumption, newSecondaryIpo, spoCallSiteObligation,
+                            ppoXmlFile, spoXmlFileRef);
+                    }
+
+                }
+            }
+
         }
     }
 
@@ -229,29 +304,13 @@ public class KtAdvanceSensor {
 
         if (!spoCallSiteObligation.proofObligations.isEmpty()) {
 
-            File ppoXmlFile = null;
-            ApiFile api = null;
-
             final File spoXmlFile = spoXml.getOrigin();
 
-            if (spoCallSiteObligation.fname != null) {
-                final String filePattern = spoXmlFile.getParentFile().getName() + "_"
-                        + spoCallSiteObligation.fname;
-                LOG.trace("reading API, pattern:" + filePattern);
-
-                api = readApiXml(xmlFilename(spoXmlFile, filePattern, API_SUFFIX));
-
-                ppoXmlFile = xmlFilename(spoXmlFile, filePattern, PPO_SUFFIX);
-            }
-
-            final InputFile resource = fsAbstraction.getResource(spoCallSiteObligation.location.file);
-            if (resource != null) {
+            final InputFile callsiteSource = fsAbstraction.getResource(spoCallSiteObligation.location.file);
+            if (callsiteSource != null) {
 
                 final SPOBuilder builder = IssuableProofObligation.newBuilder(spoXml, spoCallSiteObligation);
-                builder.setInputFile(resource);
-
-                final Map<Integer, ApiAssumption> apiAssumptionsById = (api == null) ? null
-                        : api.function.getApiAssumptionsAsMap();
+                builder.setInputFile(callsiteSource);
 
                 for (final SecondaryProofObligation spo : spoCallSiteObligation.proofObligations) {
 
@@ -260,20 +319,9 @@ public class KtAdvanceSensor {
                             .setDischarge(dischargedSPOs.get(spo.id))
                             .build();
 
-                    if (apiAssumptionsById != null) {
-                        final ApiAssumption assumption = apiAssumptionsById.get(spo.apiId);
-                        if (null == assumption) {
-                            handleParsingError(spoXmlFile, "obligation with id " + spo.id + " refers api-id="
-                                    + spo.apiId + ", but no assumption with nr=" + spo.apiId + " found in "
-                                    + relativize(api.getOrigin()));
-                        } else {
-                            linkAssumptions(api.getOrigin(), assumption, newSecondaryIpo, spoCallSiteObligation,
-                                ppoXmlFile);
-                        }
-                    }
-
                     putPoToCache(newSecondaryIpo);
                 }
+
             } else {
                 handleParsingError(spoXmlFile,
                     "callsite-obligation fvid= " + spoCallSiteObligation.fvid + " refers non-existent file \'"
@@ -282,9 +330,8 @@ public class KtAdvanceSensor {
         }
     }
 
-    private boolean putPoToCache(IssuableProofObligation proofObligation) {
+    private void putPoToCache(IssuableProofObligation proofObligation) {
         fsAbstraction.save(proofObligation);
-        return true;
     }
 
     private boolean saveParsingIssueToSq(XmlParsingIssue pi) {
@@ -404,15 +451,27 @@ public class KtAdvanceSensor {
         return ret;
     }
 
-    void processSPOs(SpoFile spo) throws JAXBException {
+    void processSPOs(final File spoXml, boolean ignoreAssumptions) throws JAXBException {
+        final SpoFile spo = readSpoXml(spoXml);
 
-        final SevFile sev = readSevXml(replaceSuffix(spo.getOrigin(), SPO_SUFFIX, SEV_SUFFIX));
-        final Map<Integer, PO> dischargedPOs = (sev == null) ? new HashMap<>() : sev.getDischargedPOsAsMap();
+        if (spo != null) {
+            final SevFile sev = readSevXml(replaceSuffix(spo.getOrigin(), SPO_SUFFIX, SEV_SUFFIX));
+            final Map<Integer, PO> dischargedPOs = (sev == null) ? new HashMap<>() : sev.getDischargedPOsAsMap();
 
-        for (final CallSiteObligation co : spo.function.spoWrapper.proofObligations) {
-            processCallSiteObligation(spo, co, dischargedPOs);
+            for (final CallSiteObligation co : spo.function.spoWrapper.proofObligations) {
+                processCallSiteObligation(spo, co, dischargedPOs);
+            }
+
+            /**
+             * XXX: there are <post-expectations> as well!
+             */
+
+            if (!ignoreAssumptions) {
+                for (final CallSiteObligation co : spo.function.spoWrapper.proofObligations) {
+                    linkAssumptions(spo, co);
+                }
+            }
         }
-
     }
 
     String relativize(File f) {
