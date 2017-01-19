@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.kt.advance.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
 import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
 
 @XmlRootElement(name = "c-analysis")
-public class ApiFile {
+public class ApiFile implements HasOriginFile {
     public static class ApiAssumption {
 
         @XmlElement(name = "predicate")
@@ -148,5 +149,24 @@ public class ApiFile {
 
     @XmlElement(name = "function")
     public ApiFunction function;
+
+    private File origin;
+
+    @Override
+    public File getOrigin() {
+        return origin;
+    }
+
+    @Override
+    public String getTime() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setOrigin(File originatingFile) {
+        this.origin = originatingFile;
+
+    }
 
 }

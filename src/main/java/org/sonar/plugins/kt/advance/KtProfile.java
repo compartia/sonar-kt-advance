@@ -56,6 +56,8 @@ public class KtProfile extends ProfileDefinition {
         activateRulesInRepo(profile, KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + POState.OPEN);
         activateRulesInRepo(profile, KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + POState.VIOLATION);
 
+        activateRulesInRepo(profile, KtAdvanceRulesDefinition.XML_PROBLEMS_REPO_KEY);
+
         profile.setDefaultProfile(true);
         return profile;
     }

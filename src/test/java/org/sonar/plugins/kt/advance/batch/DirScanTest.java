@@ -30,16 +30,17 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.batch.fs.FilePredicate;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputPath;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -101,17 +102,24 @@ public class DirScanTest {
         MODULE_BASEDIR = new File(BASEDIR, "redis/");
 
         fileSystem = new DefaultFileSystem(MODULE_BASEDIR.toPath());
-        //FsAbstraction.getReader(clazz)
 
         fileSystem.add(Factory.makeDefaultInputFile(MODULE_BASEDIR, SRC_MEMTEST_C, 282));
-        fileSystem.add(Factory.makeDefaultInputFile(MODULE_BASEDIR, TEST_PPO_FILE, 282));
+        {
+            final Iterator<File> iter = FileUtils.iterateFiles(MODULE_BASEDIR, new String[] { FsAbstraction.XML_EXT },
+                true);
 
+            while (iter.hasNext()) {
+                final File file = iter.next();
+
+                if (file.isFile() && FsAbstraction.ppoFileFilter.accept(file)) {
+                    fileSystem.add(Factory.makeDefaultInputFile(MODULE_BASEDIR, file.getAbsolutePath(), 282));
+                }
+            }
+        }
         resourcePerspectives = mock(ResourcePerspectives.class);
         final Issuable issuable = mock(Issuable.class);
         final IssueBuilder issueBuilderMock = mock(IssueBuilder.class);
-        //		when(issueBuilderMock.message(any())).thenReturn(issueBuilderMock);
         when(issueBuilderMock.ruleKey(any())).thenReturn(issueBuilderMock);
-        //		when(issueBuilderMock.line(any())).thenReturn(issueBuilderMock);
         when(issueBuilderMock.effortToFix(any())).thenReturn(issueBuilderMock);
         when(issueBuilderMock.severity(any())).thenReturn(issueBuilderMock);
         when(issueBuilderMock.at(any())).thenReturn(issueBuilderMock);
@@ -140,14 +148,11 @@ public class DirScanTest {
     @Test
     public void testAnalyseFile() throws JAXBException, IOException {
         final File baseDir2 = new File(BASEDIR, "itc-benchmarks/01.w_Defects");
-        //		final Statistics stats = mock(Statistics.class);
         final DefaultFileSystem fs = new DefaultFileSystem(baseDir2);
 
         final DefaultInputFile uninit_pointer = Factory.makeDefaultInputFile(baseDir2, "uninit_pointer.c", 10000);
         fs.add(uninit_pointer);
 
-        //		when(mock.baseDir()).thenReturn(new File(BASEDIR, "itc-benchmarks/01.w_Defects"));
-        //		final FsAbstraction ctx = sensor.buildFsContext();
         final File ppoFileL = new File(BASEDIR,
                 "/itc-benchmarks/01.w_Defects/ch_analysis/uninit_pointer/"
                         + "uninit_pointer_uninit_pointer_015_ppo.xml");
@@ -206,13 +211,12 @@ public class DirScanTest {
 
     @Test
     public void testListPPOs() throws JAXBException {
-        final FileSystem mock = mock(FileSystem.class);
-        when(mock.baseDir()).thenReturn(new File(BASEDIR, "redis"));
 
-        final FsAbstraction fs = new FsAbstraction(mock);
+        final FsAbstraction fs = new FsAbstraction(fileSystem);
         counter = 0;
         fs.forEachPpoFile(file -> {
             counter++;
+            System.out.println("testListPPOs:" + file.getAbsolutePath());
             assertTrue(file.getAbsolutePath().endsWith("_ppo.xml"));
         });
         assertEquals(13, counter);
