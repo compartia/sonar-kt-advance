@@ -27,6 +27,12 @@ To log more debug info into console, you may run the scanner in verbose mode: `s
 
 Alternatively, you may run the scanner in `/src/test/resources/test_project/itc-benchmarks/01.w_Defects` subdir.
 
+Before the first scanner run, put `sonar-project.properties` file into the root dir of you C project. A sample `.properties` file could be found here: [here](https://github.com/kestreltechnology/sonar-kt-advance/blob/master/src/test/resources/test_project/redis/sonar-project.properties)
+Please mind the `sonar.exclusions` property.
+
+
+
+
   - Note 1:  after sonar-scanner has finished its task, the SonarQube itself should perform some internal work (navigate to Administration/Background Tasks section to check if there are active ones). For instance, the entire Redis analysis lists about 180000 issues, thus SonarQube takes 5-10 minutes before you can see any results on UI.
 
   - Note 2: SQ's display of issues on a file is limited to 100. To soften this unlovely feature, the rules in `KT Advance (discharged)` repository are disabled by default, thus discharged proof obligations are not submitted into Sonar Qube.
@@ -76,7 +82,7 @@ Each parameter is taken with configurable **magnitude** `m_X` (AKA *scale factor
 `SQ` | `l` |  Primary PO Multiplier | `effort.primary.multiplier` | `l` value for **primary** proof obligations | `2.0`
 `SQ` | `l` |  Secondary PO Multiplier | `effort.secondary.multiplier` | `l` value for **secondary** proof obligations | `4.0`
 `SQ` | `m_l` |  PO Level Scale Factor | `effort.level.scale` | PO **l**evel scale factor | `0.5`
-`SQ` | `t` |  Predicate type Multiplier | `<predicate type>`  | By predicate-**t**ype multiplier. There are 31 by-predicate coefficients, which could be tuned via (/settings?category=kt+advance). The effective list of predicates with default coefficients could be found at [predicates.tsv](https://github.com/compartia/kestreltech/blob/master/src/main/resources/predicates.tsv). | see predicates.tsv
+`SQ` | `t` |  Predicate type Multiplier | `<predicate type>`  | By predicate-**t**ype multiplier. There are 31 by-predicate coefficients, which could be tuned via (/settings?category=kt+advance). The effective list of predicates with default coefficients could be found at [predicates.tsv](https://github.com/kestreltechnology/sonar-kt-advance/blob/master/src/main/resources/predicates.tsv). | see predicates.tsv
 `SQ` | `m_c[c]` | C-complexity Scale Factor | `effort.complexity.c.multiplier` | Scale Factor c-complexity (`c[c]`) | `0.5`
 `SQ` | `m_c[p]` | P-complexity Scale Factor | `effort.complexity.p.multiplier` | Scale Factor p-complexity (`c[p]`) | `0.5`
 `SQ` | `m_c[g]` | G-complexity Scale Factor | `effort.complexity.g.multiplier` | Scale Factor g-complexity (`c[g]`) | `0.5`
