@@ -194,7 +194,7 @@ public class IssuableProofObligation implements Serializable {
             return null;
         }
 
-        abstract int getId();
+        abstract String getId();
 
         abstract PpoLocation getLocation();
 
@@ -243,8 +243,8 @@ public class IssuableProofObligation implements Serializable {
         }
 
         @Override
-        int getId() {
-            return po.id;
+        String getId() {
+            return po.getId();
         }
 
         @Override
@@ -377,8 +377,8 @@ public class IssuableProofObligation implements Serializable {
         }
 
         @Override
-        int getId() {
-            return spo.id;
+        String getId() {
+            return spo.getId();
         }
 
         @Override
@@ -405,7 +405,7 @@ public class IssuableProofObligation implements Serializable {
     /**
      * context-specific ID, not project-global
      */
-    private int id;
+    private String id;
 
     /**
      * C,P,G -- this is the order

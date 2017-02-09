@@ -246,7 +246,7 @@ public class DirScanTest {
         final ApiAssumption apiAssumption = assumptions.get(0);
         assertEquals(1, apiAssumption.dependentPPOs.size());
         final PoRef poRef = apiAssumption.dependentPPOs.get(0);
-        assertEquals(2, poRef.id);
+        assertEquals("2", poRef.getId());
 
         //
 
@@ -257,12 +257,12 @@ public class DirScanTest {
         assertEquals(158, caller.callSite.line);
 
         //
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
+        final Map<String, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
         for (final ApiAssumption a : assumptions) {
             LOG.info("" + a);
             for (final PoRef ref : a.dependentPPOs) {
-                LOG.info("dependentPPO: " + ref.id + " " + ppOsAsMap.get(ref.id));
-                assertNotNull(ppOsAsMap.get(ref.id));
+                LOG.info("dependentPPO: " + ref.getId() + " " + ppOsAsMap.get(ref.getId()));
+                assertNotNull(ppOsAsMap.get(ref.getId()));
             }
         }
 

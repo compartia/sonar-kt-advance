@@ -53,11 +53,11 @@ public class SpoFile implements HasOriginFile {
         @XmlElement(name = "obligation")
         public List<SecondaryProofObligation> proofObligations = new ArrayList<>();
 
-        public Map<Integer, SecondaryProofObligation> getSPOsAsMap() {
-            final Map<Integer, SecondaryProofObligation> ret = new HashMap<>();
+        public Map<String, SecondaryProofObligation> getSPOsAsMap() {
+            final Map<String, SecondaryProofObligation> ret = new HashMap<>();
 
             for (final SecondaryProofObligation spo : proofObligations) {
-                ret.put(spo.id, spo);
+                ret.put(spo.getId(), spo);
             }
 
             return ret;
@@ -76,11 +76,20 @@ public class SpoFile implements HasOriginFile {
      *
      */
     public static class SecondaryProofObligation extends ProofObligation {
-        @XmlAttribute(name = "api-id")
-        public int apiId;
+
+        private String apiId;
 
         @XmlAttribute(name = "g-complexity")
         public Integer complexityG;
+
+        @XmlAttribute(name = "api-id")
+        public String getApiId() {
+            return apiId;
+        }
+
+        public void setApiId(String apiId) {
+            this.apiId = apiId;
+        }
     }
 
     public static class SpoFunction {

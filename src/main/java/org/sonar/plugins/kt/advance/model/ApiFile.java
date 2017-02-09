@@ -139,12 +139,21 @@ public class ApiFile implements HasOriginFile {
     }
 
     public static class CallSite extends PpoLocation {
-
+        private static final long serialVersionUID = 8574970888560338925L;
     }
 
     public static class PoRef {
+
+        private String id;
+
         @XmlAttribute(name = "id")
-        public int id;
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
     }
 
     @XmlElement(name = "function")

@@ -79,9 +79,9 @@ public class Factory {
         return ppo;
     }
 
-    public static PrimaryProofObligation createPPO(final PredicateKey predicateType, int id) {
+    public static PrimaryProofObligation createPPO(final PredicateKey predicateType, String id) {
         final PrimaryProofObligation ppo = createPPO(predicateType);
-        ppo.id = id;
+        ppo.setId(id);
         return ppo;
     }
 
@@ -93,7 +93,7 @@ public class Factory {
         return ipo;
     }
 
-    public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType, int id) {
+    public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType, String id) {
         final PrimaryProofObligation ppo = Factory.createPPO(predicateType, id);
         final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
                 .setInputFile(mock(InputFile.class))

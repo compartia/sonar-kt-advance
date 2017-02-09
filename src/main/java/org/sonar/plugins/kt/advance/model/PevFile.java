@@ -54,8 +54,8 @@ public class PevFile {
         @XmlElement(name = "statistics")
         public Statistics statistics;
 
-        public Map<Integer, PO> getDischargedPOsAsMap() {
-            final Map<Integer, PO> ret = new HashMap<>();
+        public Map<String, PO> getDischargedPOsAsMap() {
+            final Map<String, PO> ret = new HashMap<>();
 
             for (final PO po : dischargedProofObligations) {
                 ret.put(po.id, po);
@@ -72,7 +72,7 @@ public class PevFile {
         public Evidence evidence;
 
         @XmlAttribute(required = true)
-        public int id;
+        public String id;
 
         @XmlAttribute
         public String method;
@@ -115,12 +115,12 @@ public class PevFile {
 
     public Function function;
 
-    public Map<Integer, PO> getDischargedPOsAsMap() {
+    public Map<String, PO> getDischargedPOsAsMap() {
         return function.getDischargedPOsAsMap();
     }
 
-    public Map<Integer, PO> getOpenPOsAsMap() {
-        final Map<Integer, PO> ret = new HashMap<>();
+    public Map<String, PO> getOpenPOsAsMap() {
+        final Map<String, PO> ret = new HashMap<>();
 
         for (final PO po : function.openProofObligations) {
             ret.put(po.id, po);

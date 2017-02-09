@@ -322,6 +322,40 @@ public class PpoFile implements HasOriginFile {
         public int line;
 
         @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final PpoLocation other = (PpoLocation) obj;
+            if (byteNo != other.byteNo) {
+                return false;
+            }
+            if (file == null) {
+                if (other.file != null) {
+                    return false;
+                }
+            } else if (!file.equals(other.file)) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + byteNo;
+            result = prime * result + ((file == null) ? 0 : file.hashCode());
+            return result;
+        }
+
+        @Override
         public String toString() {
             return "" + file + ":" + line;
         }
@@ -357,21 +391,29 @@ public class PpoFile implements HasOriginFile {
         @Override
         public String toString() {
             return "PrimaryProofObligation [name=" + name + ", fname=" + fname + ", location=" + location + ", origin="
-                    + origin + ", id=" + id + "]";
+                    + origin + ", id=" + getId() + "]";
         }
 
     }
 
     public static class ProofObligation {
 
-        @XmlAttribute(name = "id", required = true)
-        public int id;
+        private String id;
 
         @XmlElement(name = "predicate")
         public PoPredicate predicate;
 
         public String getDescription() {
             return predicate.toString();
+        }
+
+        @XmlAttribute(name = "id", required = true)
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 
     }
@@ -454,11 +496,11 @@ public class PpoFile implements HasOriginFile {
         return origin;
     }
 
-    public Map<Integer, PrimaryProofObligation> getPPOsAsMap() {
-        final Map<Integer, PrimaryProofObligation> ret = new HashMap<>();
+    public Map<String, PrimaryProofObligation> getPPOsAsMap() {
+        final Map<String, PrimaryProofObligation> ret = new HashMap<>();
 
         for (final PrimaryProofObligation po : function.proofObligations) {
-            ret.put(po.id, po);
+            ret.put(po.getId(), po);
         }
 
         return ret;
