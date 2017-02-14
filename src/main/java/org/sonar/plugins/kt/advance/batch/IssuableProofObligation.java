@@ -67,6 +67,7 @@ public class IssuableProofObligation implements Serializable {
         private PO discharge;
         private InputFile inputFile;
         private final HasOriginFile xml;
+        protected String functionName;
 
         public AbstractPOBuilder(HasOriginFile xml) {
             this.xml = xml;
@@ -100,7 +101,7 @@ public class IssuableProofObligation implements Serializable {
                         traceVarName(varname, line, string);
                         return new IPOTextRange(line, start, line, start + varname.length());
                     } else {
-                        LOG.warn(inputFile.absolutePath() + ": " + line + "\t" +
+                        LOG.trace(inputFile.absolutePath() + ": " + line + "\t" +
                                 StringTools.quote(varname) + " not found  " + line + " in "
                                 + StringTools.quote(string.trim()) + " refer (" + getOriginXml() + ")");
                     }
@@ -154,12 +155,14 @@ public class IssuableProofObligation implements Serializable {
             ipo.description = getDescription();
             ipo.shortDescription = getShortDescription();
             ipo.state = getRule();
+            ipo.functionName = functionName;
             return ipo;
         }
 
         String formatDescription(String prefix, String defaultBody, String suffix) {
 
             final StringBuilder sb = new StringBuilder();
+
             if (prefix != null) {
                 sb.append(prefix);
             }
@@ -223,11 +226,12 @@ public class IssuableProofObligation implements Serializable {
         POBuilder(PpoFile origin, PrimaryProofObligation po) {
             super(origin);
             this.po = po;
-
+            this.functionName = origin.function.name;
         }
 
         @Override
         public IssuableProofObligation build() {
+            Preconditions.checkState(functionName != null);
             Preconditions.checkState(this.getInputFile() != null);
             final IssuableProofObligation ipo = super.buildTmp();
             ipo.level = POLevel.PRIMARY;
@@ -272,14 +276,17 @@ public class IssuableProofObligation implements Serializable {
 
         public final String message;
         public final String referenceKey;
+        public final String targetFuncName;
         public final IPOTextRange textRange;
 
-        public Reference(String file, IPOTextRange textRange, String message, String referenceKey) {
+        public Reference(String file, IPOTextRange textRange, String message, String referenceKey,
+                String targetFuncName) {
             super();
             this.file = file;
             this.textRange = textRange;
             this.message = message;
             this.referenceKey = referenceKey;
+            this.targetFuncName = targetFuncName;
         }
 
         @Override
@@ -350,6 +357,7 @@ public class IssuableProofObligation implements Serializable {
         SPOBuilder(SpoFile origin, CallSiteObligation cso) {
             super(origin);
             this.cso = cso;
+            super.functionName = origin.function.name;
         }
 
         @Override
@@ -412,23 +420,25 @@ public class IssuableProofObligation implements Serializable {
      */
     private final Integer[] complexity = { 0, 0, 0 };
     private String description;
+    private String functionName;
     private String shortDescription;
 
     private PpoLocation location;
+
     private String time;
 
     private PredicateKey predicateType;
     private POLevel level;
-    private POState state;
 
+    private POState state;
     private IPOTextRange textRange;
     private final Set<Reference> references = new HashSet<>();
+
     /**
      * TODO: use string?
      */
     @JsonIgnore
     private File originXml;
-
     private String fnameContext;
 
     private IssuableProofObligation() {
@@ -451,9 +461,12 @@ public class IssuableProofObligation implements Serializable {
     }
 
     public Reference addReference(IssuableProofObligation target) {
-        final Reference ref = new Reference(target.getLocation().file,//TOD: check if it is source or target!!!
+        final Reference ref = new Reference(
+                target.getLocation().file,//TOD: check if it is source or target!!!
                 target.getTextRange(),
-                makeReferenceName(this, target), target.getReferenceKey());
+                makeReferenceName(this, target),
+                target.getReferenceKey(),
+                target.getFunctionName());
         references.add(ref);
         return ref;
     }
@@ -525,6 +538,10 @@ public class IssuableProofObligation implements Serializable {
         return description;
     }
 
+    public String getFunctionName() {
+        return functionName;
+    }
+
     @JsonIgnore
     public IpoKey getKey() {
         return new IpoKey(originXml.getAbsolutePath(), fnameContext, id, level);
@@ -544,7 +561,7 @@ public class IssuableProofObligation implements Serializable {
     }
 
     public String getReferenceKey() {
-        return shortDescription.hashCode() + "-" + id + "-" + level + "-" + originXml.getAbsolutePath().hashCode();
+        return getShortDescription().hashCode() + "." + id + "." + level + "." + originXml.getAbsolutePath().hashCode();
     }
 
     public Set<Reference> getReferences() {
@@ -587,6 +604,10 @@ public class IssuableProofObligation implements Serializable {
     @JsonIgnore
     public boolean isViolation() {
         return POState.VIOLATION == getState();
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
     }
 
     public void setShortDescription(String shortDescription) {

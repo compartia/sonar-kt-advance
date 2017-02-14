@@ -483,7 +483,7 @@ public class PpoFile implements HasOriginFile {
             .build();
 
     @XmlElement(name = "function")
-    public Function function;
+    public Function function = new Function();
 
     @XmlElement(name = "header")
     public PpoHeader header = new PpoHeader();

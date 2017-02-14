@@ -93,6 +93,9 @@ public class SpoFile implements HasOriginFile {
     }
 
     public static class SpoFunction {
+        @XmlAttribute
+        public String name;
+
         @XmlElement(name = "secondary-proof-obligations")
         public SpoWrapper spoWrapper;
     }
@@ -124,7 +127,7 @@ public class SpoFile implements HasOriginFile {
     private File origin;
 
     @XmlElement(name = "function")
-    public SpoFunction function;
+    public SpoFunction function = new SpoFunction();
 
     @Override
     public File getOrigin() {

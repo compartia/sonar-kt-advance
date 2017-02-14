@@ -42,9 +42,11 @@ public class Factory {
     private static SpoFile fakeSPo;
     static {
         fakePPo = new PpoFile();
+        fakePPo.function.name = "fake_func";
         fakePPo.setOrigin(FAKE_XML_FILE);
 
         fakeSPo = new SpoFile();
+        fakeSPo.function.name = "fake_func";
         fakeSPo.setOrigin(FAKE_XML_FILE);
     }
 

@@ -266,7 +266,7 @@ public class KtAdvanceSensor {
                 spoXmlFileRef = xmlFilename(spoXmlFile, filePattern, SPO_SUFFIX);
             }
 
-            final Map<Integer, ApiAssumption> apiAssumptionsById = (api == null) ? null
+            final Map<String, ApiAssumption> apiAssumptionsById = (api == null) ? null
                     : api.function.getApiAssumptionsAsMap();
 
             /**

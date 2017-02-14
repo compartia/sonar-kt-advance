@@ -41,7 +41,7 @@ public class ApiFile implements HasOriginFile {
         public PoPredicate predicate;
 
         @XmlAttribute(name = "nr")
-        public Integer nr;
+        public String nr;
 
         @XmlElementWrapper(name = "dependent-primary-proof-obligations")
         @XmlElement(name = "po")
@@ -104,8 +104,8 @@ public class ApiFile implements HasOriginFile {
             return true;
         }
 
-        public Map<Integer, ApiAssumption> getApiAssumptionsAsMap() {
-            final Map<Integer, ApiAssumption> ret = new HashMap<>();
+        public Map<String, ApiAssumption> getApiAssumptionsAsMap() {
+            final Map<String, ApiAssumption> ret = new HashMap<>();
 
             for (final ApiAssumption aa : apiAssumptions) {
                 ret.put(aa.nr, aa);
