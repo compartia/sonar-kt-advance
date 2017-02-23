@@ -265,7 +265,8 @@ public class KtAdvanceSensor {
 
             File ppoXmlFile = null;
             File spoXmlFileRef = null;
-            final ApiFile api = fsAbstraction.getApiByFunc(spoCallSiteObligation.fname);
+            final ApiFile api = fsAbstraction.getApiByFunc(spoCallSiteObligation.fname,
+                spoCallSiteObligation.location.file);
             Preconditions.checkNotNull(api, "no API file *" + spoCallSiteObligation.fname + "_api.xml");
 
             if (spoCallSiteObligation.fname != null) {

@@ -28,5 +28,5 @@ src/**/ehcache-disk-store.meta
 
 src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export/**
 
-src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export_5.5.*/**
+src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export_5.*/**
 *.log

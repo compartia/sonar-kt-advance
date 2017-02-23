@@ -226,6 +226,7 @@ public class FsAbstraction {
         try {
             final ApiFile api = FsAbstraction.readApiXml(apiXml);
             functionNameToApiMap.put(api.function.name, api);
+            functionNameToApiMap.put(api.function.cfilename + "::" + api.function.name, api);
 
         } catch (final JAXBException e) {
             LOG.error("XML parsing failed: " + e.getMessage());
@@ -267,12 +268,19 @@ public class FsAbstraction {
         return cache.get(key);
     }
 
-    public ApiFile getApiByFunc(String funcname) {
-        final ApiFile apiFile = functionNameToApiMap.get(funcname);
+    @Deprecated
+    public ApiFile getApiByFunc(String funcname, String preferableSourceFileName) {
+        //XXX: this is completely vague.
+        ApiFile apiFile = functionNameToApiMap.get(funcname);
         if (apiFile == null) {
             this.cacheApiFiles(funcname);
         }
-        return functionNameToApiMap.get(funcname);
+        apiFile = functionNameToApiMap.get(preferableSourceFileName + "::" + funcname);
+        if (apiFile == null) {
+            return functionNameToApiMap.get(funcname);
+        } else {
+            return apiFile;
+        }
     }
 
     public File getBaseDir() {
