@@ -38,7 +38,7 @@ public class ApiFile implements HasOriginFile {
     public static class ApiAssumption {
 
         @XmlElement(name = "predicate")
-        public PoPredicate predicate;
+        public PoPredicate predicate = new PoPredicate();
 
         @XmlAttribute(name = "nr")
         public String nr;
@@ -47,6 +47,9 @@ public class ApiFile implements HasOriginFile {
         @XmlElement(name = "po")
         public List<PoRef> dependentPPOs = new ArrayList<>();
 
+        /**
+         * Warning, this list seems to be always empty.
+         */
         @XmlElementWrapper(name = "dependent-secondary-proof-obligations")
         @XmlElement(name = "po")
         public List<PoRef> dependentSPOs = new ArrayList<>();
@@ -82,6 +85,8 @@ public class ApiFile implements HasOriginFile {
         @XmlElement(name = "rv-assumption")
         public List<ApiAssumption> rvAssumptions = new ArrayList<>();
 
+        private Map<String, ApiAssumption> apiAssumptionsAsMap;
+
         @Override
         public boolean equals(Object obj) {
             if (this == obj) {
@@ -105,13 +110,16 @@ public class ApiFile implements HasOriginFile {
         }
 
         public Map<String, ApiAssumption> getApiAssumptionsAsMap() {
-            final Map<String, ApiAssumption> ret = new HashMap<>();
+            if (apiAssumptionsAsMap != null) {
+                return apiAssumptionsAsMap;
+            }
+            apiAssumptionsAsMap = new HashMap<>();
 
             for (final ApiAssumption aa : apiAssumptions) {
-                ret.put(aa.nr, aa);
+                apiAssumptionsAsMap.put(aa.nr, aa);
             }
 
-            return ret;
+            return apiAssumptionsAsMap;
         }
 
         @Override

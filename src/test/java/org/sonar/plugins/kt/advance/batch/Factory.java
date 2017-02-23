@@ -127,15 +127,15 @@ public class Factory {
     }
 
     public static DefaultInputFile makeDefaultInputFile(File basedir, String filename, int len) {
-        final DefaultInputFile memtest = new DefaultInputFile("", filename);
-        memtest.setModuleBaseDir(basedir.toPath());
-        memtest.setLines(len);
+        final DefaultInputFile dif = new DefaultInputFile("", filename);
+        dif.setModuleBaseDir(basedir.toPath());
+        dif.setLines(len);
         final int[] originalLineOffsets = new int[len];
         for (int f = 0; f < originalLineOffsets.length; f++) {
             originalLineOffsets[f] = f * 200;
         }
-        memtest.setOriginalLineOffsets(originalLineOffsets);
-        return memtest;
+        dif.setOriginalLineOffsets(originalLineOffsets);
+        return dif;
     }
 
 }

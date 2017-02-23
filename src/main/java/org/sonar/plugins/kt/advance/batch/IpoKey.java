@@ -26,6 +26,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
+import org.sonar.plugins.kt.advance.model.SpoFile;
 
 public class IpoKey implements Serializable {
     /**
@@ -56,16 +57,17 @@ public class IpoKey implements Serializable {
     public IpoKey() {
     }
 
-    public IpoKey(File originXml, String id, POLevel level) {
-        this(originXml.getAbsolutePath(), IpoKey.ANY_FNAME_CONTEXT, id, level);
+    public IpoKey(File originXml, String fname, String poId, POLevel level) {
+        super();
+        this.originXml = originXml.getName().substring(0, originXml.getName().lastIndexOf('.'));
+        this.fname = fname;
+        this.setId(poId);
+        this.level = level;
     }
 
-    public IpoKey(String originXml, String fname, String id, POLevel level) {
-        super();
-        this.originXml = originXml;
-        this.fname = fname;
-        this.setId(id);
-        this.level = level;
+    public static IpoKey secondary(SpoFile spoXml, String id) {
+        return new IpoKey(spoXml.getOrigin(), spoXml.function.name,
+                id, POLevel.SECONDARY);
     }
 
     @Override
@@ -128,7 +130,7 @@ public class IpoKey implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s:%s %s:%s", level.name(), getId(), originXml, fname);
+        return level.ordinal() + "." + id + "." + fname + "." + originXml;
     }
 
 }

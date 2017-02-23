@@ -116,26 +116,27 @@ public class FsAbstraction {
 
     public static final String XML_EXT = "xml";
     public static final String SEV_SUFFIX = "_sev";
+
     public static final String API_SUFFIX = "_api";
+
     public static final String SPO_SUFFIX = "_spo";
+
     public static final String PPO_SUFFIX = "_ppo";
-
     public static final String PEV_SUFFIX = "_pev";
-
     static final IOFileFilter ppoFileFilter = new SuffixFileFilter(
             FsAbstraction.xmlSuffix(PPO_SUFFIX),
             IOCase.INSENSITIVE);
-
     /**
      * lazy JAXBContext & Unmarshaller cache
      */
     static final Map<Class<?>, FsAbstraction.XMLType<?>> xmlTypes = new HashMap<>();
     private static final Map<String, List<String>> fileContentsCache = new MapMaker().softValues().makeMap();
 
+    private final Map<String, ApiFile> functionNameToApiMap = new HashMap<>();
+
     final FileSystem fileSystem;
 
     private final Map<String, InputFile> fsCache = new MapMaker().softValues().makeMap();
-
     private PersistentCacheManager cacheMan;
 
     Cache<IpoKey, IssuableProofObligation> cache;
@@ -221,6 +222,21 @@ public class FsAbstraction {
         return getReader(SpoFile.class).readXml(file);
     }
 
+    public void cacheApiFile(final File apiXml) {
+        try {
+            final ApiFile api = FsAbstraction.readApiXml(apiXml);
+            functionNameToApiMap.put(api.function.name, api);
+
+        } catch (final JAXBException e) {
+            LOG.error("XML parsing failed: " + e.getMessage());
+        }
+    }
+
+    public void cacheApiFiles(String funcname) {
+        forEachApiFile(funcname, this::cacheApiFile);
+        LOG.info("cached " + functionNameToApiMap.size() + " function APIs");
+    }
+
     public void doInCache(InCacheJob job) {
         try {
             openFile();
@@ -249,6 +265,14 @@ public class FsAbstraction {
 
     public IssuableProofObligation get(IpoKey key) {
         return cache.get(key);
+    }
+
+    public ApiFile getApiByFunc(String funcname) {
+        final ApiFile apiFile = functionNameToApiMap.get(funcname);
+        if (apiFile == null) {
+            this.cacheApiFiles(funcname);
+        }
+        return functionNameToApiMap.get(funcname);
     }
 
     public File getBaseDir() {
@@ -292,6 +316,7 @@ public class FsAbstraction {
         final IpoKey key = ipo.getKey();
         savedKeys.add(key);
         cache.put(key, ipo);
+
     }
 
     private synchronized void closeFile() {
@@ -316,6 +341,16 @@ public class FsAbstraction {
                 .build(true);
 
         cache = cacheMan.getCache(PERSISTENT_CACHE_NAME, IpoKey.class, IssuableProofObligation.class);
+    }
+
+    protected void forEachApiFile(String funcname, PpoFileParser handler) {
+        LOG.info("Analysing. Source root: " + baseDir.getAbsolutePath());
+        final String inclusionPattern = "**/*" + funcname + "_api.xml";
+        final FilePredicate filePredicate = fileSystem.predicates().matchesPathPattern(inclusionPattern);
+        final Iterable<InputFile> files = fileSystem.inputFiles(filePredicate);
+        for (final InputFile file : files) {
+            handler.parse(file.file());
+        }
     }
 
 }

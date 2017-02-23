@@ -324,7 +324,7 @@ public class VarLocationTest {
     private void testVarName(final Map<String, ? extends ProofObligation> ppOsAsMap, String id, String varname) {
         final ProofObligation primaryProofObligation = ppOsAsMap.get(id);
 
-        assertEquals("var name of PO " + id, varname, primaryProofObligation.predicate.getVarName());
+        assertEquals("var name of PO " + id, varname, primaryProofObligation.predicate.getVarName().value);
     }
 
     Map<String, PrimaryProofObligation> readPpoMap(final File ppoFile) throws JAXBException {

@@ -68,6 +68,9 @@ public class PpoFile implements HasOriginFile {
         @XmlElement(name = "exp1")
         Expression exp1;
 
+        @XmlElement(name = "exp2")
+        Expression exp2;
+
         @XmlElement(name = "constant")
         Constant constant;
 
@@ -79,25 +82,39 @@ public class PpoFile implements HasOriginFile {
         @XmlAttribute
         public int line;
 
-        public String getVarName() {
+        public Symbol getVarName() {
+            Symbol v = null;
             if ("const".equals(etag)) {
                 if (constant != null && "cstr".equals(constant.ctag)) {
-                    return constant.strValue;
+                    v = new Symbol(SymbolType.CONST, constant.strValue);
+                } else {
+                    v = new Symbol(SymbolType.CONST, xstr);
                 }
-                return xstr;
 
             } else if ("lval".equals(etag) || "startof".equals(etag) || "addrof".equals(etag)) {
                 if (lval != null) {
-                    return lval.getVarName();
-                } else {
-                    return null;
+                    v = lval.getVarName();
                 }
             } else if (exp != null) {
-                return exp.getVarName();
+                /**
+                 * unary
+                 */
+                v = exp.getVarName();
+
             } else if (exp1 != null) {
-                return exp1.getVarName();
+                /**
+                 * binary
+                 */
+                v = exp1.getVarName();
+                if (v == null && exp2 != null) {
+                    v = exp2.getVarName();
+                }
             }
-            return xstr;
+
+            if (v == null) {
+                v = new Symbol(SymbolType.CONST, xstr);
+            }
+            return v;
         }
 
         public PpoLocation location() {
@@ -124,7 +141,7 @@ public class PpoFile implements HasOriginFile {
         @XmlElement(name = "exp")
         public Expression exp;
 
-        public String getVarName() {
+        public Symbol getVarName() {
             if (exp != null) {
                 return exp.getVarName();
             } else {
@@ -169,11 +186,11 @@ public class PpoFile implements HasOriginFile {
         @XmlElement(name = "var")
         Var var;
 
-        public String getVarName() {
+        public Symbol getVarName() {
             if (mem != null) {
                 return mem.getVarName();
             } else {
-                return var.vname;
+                return new Symbol(SymbolType.ID, var.vname);
             }
         }
 
@@ -192,7 +209,7 @@ public class PpoFile implements HasOriginFile {
         @XmlElement(name = "lhost")
         public LHost lhost;
 
-        public String getVarName() {
+        public Symbol getVarName() {
             return lhost.getVarName();
         }
 
@@ -262,7 +279,7 @@ public class PpoFile implements HasOriginFile {
             return expStr.trim();
         }
 
-        public String getVarName() {
+        public Symbol getVarName() {
             if (baseExp != null) {
                 return baseExp.getVarName();
             } else if (exp != null) {
@@ -422,6 +439,29 @@ public class PpoFile implements HasOriginFile {
         @XmlAttribute(name = "size")
         public int size;
 
+    }
+
+    public static class Symbol implements Serializable {
+        /**
+         *
+         */
+        private static final long serialVersionUID = -6317397648718840694L;
+        public SymbolType type = SymbolType.ID;
+        public String value;
+
+        public Symbol() {
+        }
+
+        public Symbol(SymbolType type, String value) {
+            super();
+            this.type = type;
+            this.value = value;
+        }
+
+    }
+
+    public enum SymbolType {
+        ID, CONST;
     }
 
     /** <var vid="4743" vname="fptr1"/> **/

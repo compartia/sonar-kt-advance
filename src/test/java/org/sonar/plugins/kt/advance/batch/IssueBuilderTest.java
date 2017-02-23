@@ -44,6 +44,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
+import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
 
 public class IssueBuilderTest {
 
@@ -86,7 +87,8 @@ public class IssueBuilderTest {
         for (int f = 0; f < numberOfRefs; f++) {
             final IssuableProofObligation targetipo = Factory.createPrimaryPO(new PredicateKey("tag"));
             targetipo.setShortDescription("descr " + f);
-            ipo.addReference(targetipo);
+            targetipo.setFunctionName("function." + f);
+            ipo.addReference(targetipo, new ApiAssumption());
         }
 
         final Issuable issuableMock = mock(Issuable.class);

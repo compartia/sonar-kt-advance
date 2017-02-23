@@ -47,12 +47,15 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
+import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
 import org.sonar.plugins.kt.advance.model.PevFile.PO;
 import org.sonar.plugins.kt.advance.model.PpoFile;
 import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
 import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
 import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
+import org.sonar.plugins.kt.advance.model.PpoFile.Symbol;
+import org.sonar.plugins.kt.advance.model.PpoFile.SymbolType;
 import org.sonar.plugins.kt.advance.model.SpoFile;
 import org.sonar.plugins.kt.advance.model.SpoFile.CallSiteObligation;
 import org.sonar.plugins.kt.advance.model.SpoFile.SecondaryProofObligation;
@@ -88,22 +91,27 @@ public class IssuableProofObligation implements Serializable {
         }
 
         public IPOTextRange getTextRange(PoPredicate predicate) {
-            final String varname = predicate.getVarName();
-            if (StringUtils.isNotBlank(varname)) {
-                final List<String> lines = FsAbstraction.readInputFile(inputFile);
-                if (!lines.isEmpty()) {
+            final Symbol symbol = predicate.getVarName();
+            if (symbol != null) {
 
-                    final int line = getLocation().line;
-                    final String string = lines.get(line - 1);
-                    final int start = findVarLocation(varname, string);
+                final String varname = symbol.value;
 
-                    if (start >= 0) {
-                        traceVarName(varname, line, string);
-                        return new IPOTextRange(line, start, line, start + varname.length());
-                    } else {
-                        LOG.trace(inputFile.absolutePath() + ": " + line + "\t" +
-                                StringTools.quote(varname) + " not found  " + line + " in "
-                                + StringTools.quote(string.trim()) + " refer (" + getOriginXml() + ")");
+                if (StringUtils.isNotBlank(varname)) {
+                    final List<String> lines = FsAbstraction.readInputFile(inputFile);
+                    if (!lines.isEmpty()) {
+
+                        final int line = getLocation().line;
+                        final String string = lines.get(line - 1);
+                        final int start = findVarLocation(varname, string);
+
+                        if (start >= 0) {
+                            traceVarName(varname, line, string);
+                            return new IPOTextRange(line, start, line, start + varname.length());
+                        } else {
+                            LOG.trace(inputFile.absolutePath() + ": " + line + "\t" +
+                                    StringTools.quote(varname) + " not found  " + line + " in "
+                                    + StringTools.quote(string.trim()) + " refer (" + getOriginXml() + ")");
+                        }
                     }
                 }
             }
@@ -156,6 +164,17 @@ public class IssuableProofObligation implements Serializable {
             ipo.shortDescription = getShortDescription();
             ipo.state = getRule();
             ipo.functionName = functionName;
+
+            Symbol varName = getPredicate().getVarName();
+            if (varName == null) {
+                varName = new Symbol();
+            }
+
+            if (StringUtils.isBlank(varName.value)) {
+                varName.value = getPredicate().getExpression();
+                varName.type = SymbolType.CONST;
+            }
+            ipo.symbol = varName;
             return ipo;
         }
 
@@ -275,18 +294,27 @@ public class IssuableProofObligation implements Serializable {
         public final String file;
 
         public final String message;
+        public final String predicate;
         public final String referenceKey;
         public final String targetFuncName;
         public final IPOTextRange textRange;
 
-        public Reference(String file, IPOTextRange textRange, String message, String referenceKey,
-                String targetFuncName) {
+        public final POState state;
+        public final POLevel level;
+
+        public Reference(String predicate,
+                String file, IPOTextRange textRange, String message, String referenceKey,
+                String targetFuncName,
+                POLevel level, POState state) {
             super();
+            this.predicate = predicate;
             this.file = file;
             this.textRange = textRange;
             this.message = message;
             this.referenceKey = referenceKey;
             this.targetFuncName = targetFuncName;
+            this.level = level;
+            this.state = state;
         }
 
         @Override
@@ -363,6 +391,7 @@ public class IssuableProofObligation implements Serializable {
         @Override
         public IssuableProofObligation build() {
             Preconditions.checkState(this.getInputFile() != null);
+
             final IssuableProofObligation ipo = super.buildTmp();
             ipo.level = POLevel.SECONDARY;
             /**
@@ -421,6 +450,7 @@ public class IssuableProofObligation implements Serializable {
     private final Integer[] complexity = { 0, 0, 0 };
     private String description;
     private String functionName;
+    private Symbol symbol;
     private String shortDescription;
 
     private PpoLocation location;
@@ -428,18 +458,21 @@ public class IssuableProofObligation implements Serializable {
     private String time;
 
     private PredicateKey predicateType;
+
     private POLevel level;
 
     private POState state;
     private IPOTextRange textRange;
-    private final Set<Reference> references = new HashSet<>();
 
+    private final Set<Reference> references = new HashSet<>();
     /**
      * TODO: use string?
      */
     @JsonIgnore
     private File originXml;
     private String fnameContext;
+
+    int inReferencesCount = 0;
 
     private IssuableProofObligation() {
     }
@@ -460,14 +493,18 @@ public class IssuableProofObligation implements Serializable {
         return "L" + source.getLocation().line + ": " + target.getDescription();
     }
 
-    public Reference addReference(IssuableProofObligation target) {
+    public Reference addReference(IssuableProofObligation target, ApiAssumption assumption) {
         final Reference ref = new Reference(
+                assumption.predicate.tag,
                 target.getLocation().file,//TOD: check if it is source or target!!!
                 target.getTextRange(),
                 makeReferenceName(this, target),
                 target.getReferenceKey(),
-                target.getFunctionName());
+                target.getFunctionName(),
+                target.getLevel(),
+                target.getState());
         references.add(ref);
+        target.inReferencesCount++;
         return ref;
     }
 
@@ -538,13 +575,21 @@ public class IssuableProofObligation implements Serializable {
         return description;
     }
 
+    public String getFile() {
+        return getLocation().file;
+    }
+
     public String getFunctionName() {
         return functionName;
     }
 
+    public int getInReferencesCount() {
+        return inReferencesCount;
+    }
+
     @JsonIgnore
     public IpoKey getKey() {
-        return new IpoKey(originXml.getAbsolutePath(), fnameContext, id, level);
+        return new IpoKey(originXml, functionName, id, level);
     }
 
     public POLevel getLevel() {
@@ -561,7 +606,8 @@ public class IssuableProofObligation implements Serializable {
     }
 
     public String getReferenceKey() {
-        return getShortDescription().hashCode() + "." + id + "." + level + "." + originXml.getAbsolutePath().hashCode();
+        return getKey().toString();
+
     }
 
     public Set<Reference> getReferences() {
@@ -581,6 +627,10 @@ public class IssuableProofObligation implements Serializable {
 
     public POState getState() {
         return state;
+    }
+
+    public Symbol getSymbol() {
+        return symbol;
     }
 
     public IPOTextRange getTextRange() {
@@ -612,6 +662,10 @@ public class IssuableProofObligation implements Serializable {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public void setSymbol(Symbol symbol) {
+        this.symbol = symbol;
     }
 
     public Issue toIssue(Issuable issuable, ActiveRules activeRules, Settings settings, FsAbstraction fs) {
