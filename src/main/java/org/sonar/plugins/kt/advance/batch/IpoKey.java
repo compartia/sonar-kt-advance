@@ -26,6 +26,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
+import org.sonar.plugins.kt.advance.model.SpoFile;
 
 public class IpoKey implements Serializable {
     /**
@@ -36,7 +37,7 @@ public class IpoKey implements Serializable {
     public static final String ANY_FNAME_CONTEXT = "-";
 
     @XmlAttribute(name = "id")
-    public int id;
+    private String id;
 
     @XmlAttribute(name = "fname")
     public String fname;
@@ -56,16 +57,17 @@ public class IpoKey implements Serializable {
     public IpoKey() {
     }
 
-    public IpoKey(File originXml, int id, POLevel level) {
-        this(originXml.getAbsolutePath(), IpoKey.ANY_FNAME_CONTEXT, id, level);
+    public IpoKey(File originXml, String fname, String poId, POLevel level) {
+        super();
+        this.originXml = originXml.getName().substring(0, originXml.getName().lastIndexOf('.'));
+        this.fname = fname;
+        this.setId(poId);
+        this.level = level;
     }
 
-    public IpoKey(String originXml, String fname, int id, POLevel level) {
-        super();
-        this.originXml = originXml;
-        this.fname = fname;
-        this.id = id;
-        this.level = level;
+    public static IpoKey secondary(SpoFile spoXml, String id) {
+        return new IpoKey(spoXml.getOrigin(), spoXml.function.name,
+                id, POLevel.SECONDARY);
     }
 
     @Override
@@ -87,7 +89,11 @@ public class IpoKey implements Serializable {
         } else if (!fname.equals(other.fname)) {
             return false;
         }
-        if (id != other.id) {
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
             return false;
         }
         if (level != other.level) {
@@ -103,20 +109,28 @@ public class IpoKey implements Serializable {
         return true;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((fname == null) ? 0 : fname.hashCode());
-        result = prime * result + id;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((level == null) ? 0 : level.hashCode());
         result = prime * result + ((originXml == null) ? 0 : originXml.hashCode());
         return result;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s:%d %s:%s", level.name(), id, originXml, fname);
+        return level.ordinal() + "." + id + "." + fname + "." + originXml;
     }
 
 }

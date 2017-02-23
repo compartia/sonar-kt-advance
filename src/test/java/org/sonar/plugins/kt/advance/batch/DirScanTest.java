@@ -147,18 +147,27 @@ public class DirScanTest {
 
     @Test
     public void testAnalyseFile() throws JAXBException, IOException {
-        final File baseDir2 = new File(BASEDIR, "itc-benchmarks/01.w_Defects");
-        final DefaultFileSystem fs = new DefaultFileSystem(baseDir2);
+        final File baseDir = new File(BASEDIR, "itc-benchmarks/01.w_Defects");
+        final DefaultFileSystem fs = new DefaultFileSystem(baseDir);
 
-        final DefaultInputFile uninit_pointer = Factory.makeDefaultInputFile(baseDir2, "uninit_pointer.c", 10000);
+        final DefaultInputFile uninit_pointer = Factory.makeDefaultInputFile(baseDir, "uninit_pointer.c", 10000);
         fs.add(uninit_pointer);
+        fs.add(Factory.makeDefaultInputFile(baseDir,
+            "ch_analysis/uninit_pointer/uninit_pointer_uninit_pointer_015_func_001_api.xml", 10000));
+
+        final FilePredicate filePredicate = fs.predicates().all();
+
+        System.err.println("listing FS");
+        for (final File f : fs.files(filePredicate)) {
+            System.err.println(f);
+        }
 
         final File ppoFileL = new File(BASEDIR,
                 "/itc-benchmarks/01.w_Defects/ch_analysis/uninit_pointer/"
                         + "uninit_pointer_uninit_pointer_015_ppo.xml");
 
         session = new KtAdvanceSensor(settings, fs, activeRules, resourcePerspectives);
-        session.getFsContext().doInCache(() -> session.analysePpoXml(ppoFileL));
+        session.getFsContext().doInCache(() -> session.analysePpoSpoXml(ppoFileL));
 
     }
 
@@ -246,7 +255,7 @@ public class DirScanTest {
         final ApiAssumption apiAssumption = assumptions.get(0);
         assertEquals(1, apiAssumption.dependentPPOs.size());
         final PoRef poRef = apiAssumption.dependentPPOs.get(0);
-        assertEquals(2, poRef.id);
+        assertEquals("2", poRef.getId());
 
         //
 
@@ -257,12 +266,12 @@ public class DirScanTest {
         assertEquals(158, caller.callSite.line);
 
         //
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
+        final Map<String, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
         for (final ApiAssumption a : assumptions) {
             LOG.info("" + a);
             for (final PoRef ref : a.dependentPPOs) {
-                LOG.info("dependentPPO: " + ref.id + " " + ppOsAsMap.get(ref.id));
-                assertNotNull(ppOsAsMap.get(ref.id));
+                LOG.info("dependentPPO: " + ref.getId() + " " + ppOsAsMap.get(ref.getId()));
+                assertNotNull(ppOsAsMap.get(ref.getId()));
             }
         }
 

@@ -40,6 +40,7 @@ public class CacheTest {
     private static File BASEDIR;
     private static File MODULE_BASEDIR;
 
+    @SuppressWarnings("unused")
     private static final Logger LOG = Loggers.get(CacheTest.class.getName());
     private static DefaultFileSystem fileSystem;
     private static FsAbstraction fs;
@@ -63,7 +64,7 @@ public class CacheTest {
         final int numberOfIssues = 1000;
         fs.doInCache(() -> {
             for (int a = 0; a < numberOfIssues; a++) {
-                final IssuableProofObligation ipo = Factory.createPrimaryPO(new PredicateKey(""), a);
+                final IssuableProofObligation ipo = Factory.createPrimaryPO(new PredicateKey(""), Integer.toString(a));
                 fs.save(ipo);
             }
 

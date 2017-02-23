@@ -38,15 +38,18 @@ public class ApiFile implements HasOriginFile {
     public static class ApiAssumption {
 
         @XmlElement(name = "predicate")
-        public PoPredicate predicate;
+        public PoPredicate predicate = new PoPredicate();
 
         @XmlAttribute(name = "nr")
-        public Integer nr;
+        public String nr;
 
         @XmlElementWrapper(name = "dependent-primary-proof-obligations")
         @XmlElement(name = "po")
         public List<PoRef> dependentPPOs = new ArrayList<>();
 
+        /**
+         * Warning, this list seems to be always empty.
+         */
         @XmlElementWrapper(name = "dependent-secondary-proof-obligations")
         @XmlElement(name = "po")
         public List<PoRef> dependentSPOs = new ArrayList<>();
@@ -82,6 +85,8 @@ public class ApiFile implements HasOriginFile {
         @XmlElement(name = "rv-assumption")
         public List<ApiAssumption> rvAssumptions = new ArrayList<>();
 
+        private Map<String, ApiAssumption> apiAssumptionsAsMap;
+
         @Override
         public boolean equals(Object obj) {
             if (this == obj) {
@@ -104,14 +109,17 @@ public class ApiFile implements HasOriginFile {
             return true;
         }
 
-        public Map<Integer, ApiAssumption> getApiAssumptionsAsMap() {
-            final Map<Integer, ApiAssumption> ret = new HashMap<>();
+        public Map<String, ApiAssumption> getApiAssumptionsAsMap() {
+            if (apiAssumptionsAsMap != null) {
+                return apiAssumptionsAsMap;
+            }
+            apiAssumptionsAsMap = new HashMap<>();
 
             for (final ApiAssumption aa : apiAssumptions) {
-                ret.put(aa.nr, aa);
+                apiAssumptionsAsMap.put(aa.nr, aa);
             }
 
-            return ret;
+            return apiAssumptionsAsMap;
         }
 
         @Override
@@ -139,12 +147,21 @@ public class ApiFile implements HasOriginFile {
     }
 
     public static class CallSite extends PpoLocation {
-
+        private static final long serialVersionUID = 8574970888560338925L;
     }
 
     public static class PoRef {
+
+        private String id;
+
         @XmlAttribute(name = "id")
-        public int id;
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
     }
 
     @XmlElement(name = "function")

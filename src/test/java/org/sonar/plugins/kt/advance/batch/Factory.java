@@ -42,9 +42,11 @@ public class Factory {
     private static SpoFile fakeSPo;
     static {
         fakePPo = new PpoFile();
+        fakePPo.function.name = "fake_func";
         fakePPo.setOrigin(FAKE_XML_FILE);
 
         fakeSPo = new SpoFile();
+        fakeSPo.function.name = "fake_func";
         fakeSPo.setOrigin(FAKE_XML_FILE);
     }
 
@@ -79,9 +81,9 @@ public class Factory {
         return ppo;
     }
 
-    public static PrimaryProofObligation createPPO(final PredicateKey predicateType, int id) {
+    public static PrimaryProofObligation createPPO(final PredicateKey predicateType, String id) {
         final PrimaryProofObligation ppo = createPPO(predicateType);
-        ppo.id = id;
+        ppo.setId(id);
         return ppo;
     }
 
@@ -93,7 +95,7 @@ public class Factory {
         return ipo;
     }
 
-    public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType, int id) {
+    public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType, String id) {
         final PrimaryProofObligation ppo = Factory.createPPO(predicateType, id);
         final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
                 .setInputFile(mock(InputFile.class))
@@ -125,15 +127,15 @@ public class Factory {
     }
 
     public static DefaultInputFile makeDefaultInputFile(File basedir, String filename, int len) {
-        final DefaultInputFile memtest = new DefaultInputFile("", filename);
-        memtest.setModuleBaseDir(basedir.toPath());
-        memtest.setLines(len);
+        final DefaultInputFile dif = new DefaultInputFile("", filename);
+        dif.setModuleBaseDir(basedir.toPath());
+        dif.setLines(len);
         final int[] originalLineOffsets = new int[len];
         for (int f = 0; f < originalLineOffsets.length; f++) {
             originalLineOffsets[f] = f * 200;
         }
-        memtest.setOriginalLineOffsets(originalLineOffsets);
-        return memtest;
+        dif.setOriginalLineOffsets(originalLineOffsets);
+        return dif;
     }
 
 }

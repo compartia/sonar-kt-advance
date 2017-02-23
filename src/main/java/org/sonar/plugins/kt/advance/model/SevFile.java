@@ -30,7 +30,7 @@ import org.sonar.plugins.kt.advance.model.PevFile.PO;
 public class SevFile {
     public Function function;
 
-    public Map<Integer, PO> getDischargedPOsAsMap() {
+    public Map<String, PO> getDischargedPOsAsMap() {
         return function.getDischargedPOsAsMap();
     }
 }

@@ -125,11 +125,11 @@ public class VarLocationTest {
     public void testReadPpo_hyperloglog_pfdebugCommand() throws JAXBException {
 
         final File ppoFile = new File(BASEDIR2, "hyperloglog_pfdebugCommand_ppo.xml");
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = readPpoMap(ppoFile);
+        final Map<String, PrimaryProofObligation> ppOsAsMap = readPpoMap(ppoFile);
 
         for (int f = 388; f <= 398; f++) {
             if (f < 391 && f > 933) {
-                testVarName(ppOsAsMap, f, "decoded");
+                testVarName(ppOsAsMap, Integer.toString(f), "decoded");
             }
         }
 
@@ -145,10 +145,10 @@ public class VarLocationTest {
         final String fname = "memtest_memtest_fill_value_ppo.xml";
         final File ppoFile = new File(BASEDIR2, fname);
         final PpoFile ppo = FsAbstraction.readPpoXml(ppoFile);
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap1 = ppo.getPPOsAsMap();
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = ppOsAsMap1;
+        final Map<String, PrimaryProofObligation> ppOsAsMap1 = ppo.getPPOsAsMap();
+        final Map<String, PrimaryProofObligation> ppOsAsMap = ppOsAsMap1;
 
-        testVarName(ppOsAsMap, 17, "(bytes & 4095) == 0");
+        testVarName(ppOsAsMap, Integer.toString(17), "(bytes & 4095) == 0");
 
     }
 
@@ -156,11 +156,11 @@ public class VarLocationTest {
     public void testReadPpo_uninit_pointer_005() throws JAXBException {
 
         final String fname = "uninit_pointer_uninit_pointer_005_ppo.xml";
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
+        final Map<String, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
 
-        testVarName(ppOsAsMap, 1, "pbuf");
-        testVarName(ppOsAsMap, 2, "pbuf");
-        testVarName(ppOsAsMap, 3, "pbuf");
+        testVarName(ppOsAsMap, Integer.toString(1), "pbuf");
+        testVarName(ppOsAsMap, Integer.toString(2), "pbuf");
+        testVarName(ppOsAsMap, Integer.toString(3), "pbuf");
 
     }
 
@@ -168,19 +168,19 @@ public class VarLocationTest {
     public void testReadPpo_uninit_pointer_007() throws JAXBException {
 
         final String fname = "uninit_pointer_uninit_pointer_007_ppo.xml";
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
+        final Map<String, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
 
-        testVarName(ppOsAsMap, 81, "buf1");
-        testVarName(ppOsAsMap, 82, "buf1");
-        testVarName(ppOsAsMap, 83, "buf1");
-        testVarName(ppOsAsMap, 84, "buf1");
-        testVarName(ppOsAsMap, 85, "buf1");
+        testVarName(ppOsAsMap, Integer.toString(81), "buf1");
+        testVarName(ppOsAsMap, Integer.toString(82), "buf1");
+        testVarName(ppOsAsMap, Integer.toString(83), "buf1");
+        testVarName(ppOsAsMap, Integer.toString(84), "buf1");
+        testVarName(ppOsAsMap, Integer.toString(85), "buf1");
 
-        testVarName(ppOsAsMap, 86, "buf3");
-        testVarName(ppOsAsMap, 87, "buf3");
-        testVarName(ppOsAsMap, 88, "buf3");
+        testVarName(ppOsAsMap, Integer.toString(86), "buf3");
+        testVarName(ppOsAsMap, Integer.toString(87), "buf3");
+        testVarName(ppOsAsMap, Integer.toString(88), "buf3");
 
-        testVarName(ppOsAsMap, 1, "String1");
+        testVarName(ppOsAsMap, Integer.toString(1), "String1");
 
     }
 
@@ -188,14 +188,14 @@ public class VarLocationTest {
     public void testReadPpo_uninit_pointer_009() throws JAXBException {
 
         final String fname = "uninit_pointer_uninit_pointer_009_ppo.xml";
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
+        final Map<String, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
 
-        testVarName(ppOsAsMap, 6, "buf");
-        testVarName(ppOsAsMap, 7, "buf");
-        testVarName(ppOsAsMap, 8, "buf");
-        testVarName(ppOsAsMap, 9, "buf");
-        testVarName(ppOsAsMap, 10, "buf");
-        testVarName(ppOsAsMap, 11, "buf1");
+        testVarName(ppOsAsMap, Integer.toString(6), "buf");
+        testVarName(ppOsAsMap, Integer.toString(7), "buf");
+        testVarName(ppOsAsMap, Integer.toString(8), "buf");
+        testVarName(ppOsAsMap, Integer.toString(9), "buf");
+        testVarName(ppOsAsMap, Integer.toString(10), "buf");
+        testVarName(ppOsAsMap, Integer.toString(11), "buf1");
 
     }
 
@@ -203,44 +203,44 @@ public class VarLocationTest {
     public void testReadPpo_uninit_pointer_013() throws JAXBException {
 
         final String fname = "uninit_pointer_uninit_pointer_013_ppo.xml";
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
+        final Map<String, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
 
-        testVarName(ppOsAsMap, 1, "5");
-        testVarName(ppOsAsMap, 2, "5");
+        testVarName(ppOsAsMap, Integer.toString(1), "5");
+        testVarName(ppOsAsMap, Integer.toString(2), "5");
 
-        testVarName(ppOsAsMap, 3, "tmp");
-        testVarName(ppOsAsMap, 4, "tmp");
-        testVarName(ppOsAsMap, 5, "i");
-        testVarName(ppOsAsMap, 6, "5");
+        testVarName(ppOsAsMap, Integer.toString(3), "tmp");
+        testVarName(ppOsAsMap, Integer.toString(4), "tmp");
+        testVarName(ppOsAsMap, Integer.toString(5), "i");
+        testVarName(ppOsAsMap, Integer.toString(6), "5");
 
-        testVarName(ppOsAsMap, 6, "5");
-        testVarName(ppOsAsMap, 8, "ptr");
-        testVarName(ppOsAsMap, 10, "ptr");
-        testVarName(ppOsAsMap, 11, "ptr");
-        testVarName(ppOsAsMap, 12, "ptr");
-        testVarName(ppOsAsMap, 9, "i");
+        testVarName(ppOsAsMap, Integer.toString(6), "5");
+        testVarName(ppOsAsMap, Integer.toString(8), "ptr");
+        testVarName(ppOsAsMap, Integer.toString(10), "ptr");
+        testVarName(ppOsAsMap, Integer.toString(11), "ptr");
+        testVarName(ppOsAsMap, Integer.toString(12), "ptr");
+        testVarName(ppOsAsMap, Integer.toString(9), "i");
     }
 
     @Test
     public void testReadPpo_uninit_pointer_016() throws JAXBException {
 
         final String fname = "uninit_pointer_uninit_pointer_016_ppo.xml";
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
+        final Map<String, PrimaryProofObligation> ppOsAsMap = readPpoMap(fname);
 
-        testVarName(ppOsAsMap, 12, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 13, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 14, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 15, "i");
-        testVarName(ppOsAsMap, 16, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 17, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 18, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 19, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 20, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 21, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 22, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 23, "uninit_pointer_016_gbl_doubleptr");
-        testVarName(ppOsAsMap, 24, "0");
-        testVarName(ppOsAsMap, 25, "0");
+        testVarName(ppOsAsMap, Integer.toString(12), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(13), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(14), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(15), "i");
+        testVarName(ppOsAsMap, Integer.toString(16), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(17), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(18), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(19), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(20), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(21), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(22), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(23), "uninit_pointer_016_gbl_doubleptr");
+        testVarName(ppOsAsMap, Integer.toString(24), "0");
+        testVarName(ppOsAsMap, Integer.toString(25), "0");
     }
 
     @Test
@@ -253,24 +253,23 @@ public class VarLocationTest {
         final String fname = "ziplist_zipSaveInteger_ppo.xml";
         final File ppoFile = new File(BASEDIR2, fname);
         final PpoFile ppo = FsAbstraction.readPpoXml(ppoFile);
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap1 = ppo.getPPOsAsMap();
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = ppOsAsMap1;
+        final Map<String, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
 
-        testVarName(ppOsAsMap, 41, "i32");
-        testVarName(ppOsAsMap, 42, "i32");
-        testVarName(ppOsAsMap, 43, "i32");
-        testVarName(ppOsAsMap, 44, "i32");
-        testVarName(ppOsAsMap, 45, "i32");
-        testVarName(ppOsAsMap, 46, "i32");
-        testVarName(ppOsAsMap, 47, "i32");
-        testVarName(ppOsAsMap, 48, "i32");
-        testVarName(ppOsAsMap, 49, "i32");
-        testVarName(ppOsAsMap, 50, "i32");
+        testVarName(ppOsAsMap, Integer.toString(41), "i32");
+        testVarName(ppOsAsMap, Integer.toString(42), "i32");
+        testVarName(ppOsAsMap, Integer.toString(43), "i32");
+        testVarName(ppOsAsMap, Integer.toString(44), "i32");
+        testVarName(ppOsAsMap, Integer.toString(45), "i32");
+        testVarName(ppOsAsMap, Integer.toString(46), "i32");
+        testVarName(ppOsAsMap, Integer.toString(47), "i32");
+        testVarName(ppOsAsMap, Integer.toString(48), "i32");
+        testVarName(ppOsAsMap, Integer.toString(49), "i32");
+        testVarName(ppOsAsMap, Integer.toString(50), "i32");
 
-        testVarName(ppOsAsMap, 63, "i32");
-        testVarName(ppOsAsMap, 64, "i32");
-        testVarName(ppOsAsMap, 65, "i32");
-        testVarName(ppOsAsMap, 66, "i32");
+        testVarName(ppOsAsMap, Integer.toString(63), "i32");
+        testVarName(ppOsAsMap, Integer.toString(64), "i32");
+        testVarName(ppOsAsMap, Integer.toString(65), "i32");
+        testVarName(ppOsAsMap, Integer.toString(66), "i32");
 
     }
 
@@ -280,17 +279,17 @@ public class VarLocationTest {
         final String fname = "uninit_pointer_uninit_pointer_005_spo.xml";
         final CallSiteObligation callSiteObligation = readSpoMap(fname).get(0);
 
-        final Map<Integer, SecondaryProofObligation> spOsAsMap = callSiteObligation.getSPOsAsMap();
+        final Map<String, SecondaryProofObligation> spOsAsMap = callSiteObligation.getSPOsAsMap();
 
-        testVarName(spOsAsMap, 4, "pbuf");
-        testVarName(spOsAsMap, 5, "pbuf");
-        testVarName(spOsAsMap, 6, "pbuf");
-        testVarName(spOsAsMap, 7, "pbuf");
-        testVarName(spOsAsMap, 8, "pbuf");
-        testVarName(spOsAsMap, 9, "pbuf");
-        testVarName(spOsAsMap, 10, "pbuf");
-        testVarName(spOsAsMap, 11, "pbuf");
-        testVarName(spOsAsMap, 12, "pbuf");
+        testVarName(spOsAsMap, Integer.toString(4), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(5), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(6), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(7), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(8), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(9), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(10), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(11), "pbuf");
+        testVarName(spOsAsMap, Integer.toString(12), "pbuf");
 
     }
 
@@ -300,17 +299,17 @@ public class VarLocationTest {
         final String fname = "uninit_pointer_uninit_pointer_006_spo.xml";
         final CallSiteObligation callSiteObligation = readSpoMap(fname).get(0);
 
-        final Map<Integer, SecondaryProofObligation> spOsAsMap = callSiteObligation.getSPOsAsMap();
+        final Map<String, SecondaryProofObligation> spOsAsMap = callSiteObligation.getSPOsAsMap();
 
-        testVarName(spOsAsMap, 4, "p");
-        testVarName(spOsAsMap, 5, "p");
-        testVarName(spOsAsMap, 6, "p");
-        testVarName(spOsAsMap, 7, "p");
-        testVarName(spOsAsMap, 8, "p");
+        testVarName(spOsAsMap, Integer.toString(4), "p");
+        testVarName(spOsAsMap, Integer.toString(5), "p");
+        testVarName(spOsAsMap, Integer.toString(6), "p");
+        testVarName(spOsAsMap, Integer.toString(7), "p");
+        testVarName(spOsAsMap, Integer.toString(8), "p");
 
     }
 
-    private Map<Integer, PrimaryProofObligation> readPpoMap(String fname) throws JAXBException {
+    private Map<String, PrimaryProofObligation> readPpoMap(String fname) throws JAXBException {
         final File ppoFile = new File(BASEDIR, fname);
 
         return readPpoMap(ppoFile);
@@ -322,16 +321,16 @@ public class VarLocationTest {
         return spo.function.spoWrapper.proofObligations;
     }
 
-    private void testVarName(final Map<Integer, ? extends ProofObligation> ppOsAsMap, int id, String varname) {
+    private void testVarName(final Map<String, ? extends ProofObligation> ppOsAsMap, String id, String varname) {
         final ProofObligation primaryProofObligation = ppOsAsMap.get(id);
 
-        assertEquals("var name of PO " + id, varname, primaryProofObligation.predicate.getVarName());
+        assertEquals("var name of PO " + id, varname, primaryProofObligation.predicate.getVarName().value);
     }
 
-    Map<Integer, PrimaryProofObligation> readPpoMap(final File ppoFile) throws JAXBException {
+    Map<String, PrimaryProofObligation> readPpoMap(final File ppoFile) throws JAXBException {
         Preconditions.checkArgument(ppoFile.isFile(), ppoFile.getAbsolutePath());
         final PpoFile ppo = FsAbstraction.readPpoXml(ppoFile);
-        final Map<Integer, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
+        final Map<String, PrimaryProofObligation> ppOsAsMap = ppo.getPPOsAsMap();
         return ppOsAsMap;
     }
 }
