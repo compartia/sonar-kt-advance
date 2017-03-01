@@ -22,19 +22,19 @@ package org.sonar.plugins.kt.advance.batch;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.kt.advance.model.GoodForCache;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 
 public class PredicateTypes {
-    public static class PredicateKey implements Comparable<PredicateKey>, Serializable {
+    public static class PredicateKey implements Comparable<PredicateKey>, GoodForCache {
 
         private static final long serialVersionUID = -5866248534907435282L;
 

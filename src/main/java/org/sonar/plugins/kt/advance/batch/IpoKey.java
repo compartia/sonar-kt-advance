@@ -21,14 +21,14 @@
 package org.sonar.plugins.kt.advance.batch;
 
 import java.io.File;
-import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
+import org.sonar.plugins.kt.advance.model.GoodForCache;
 import org.sonar.plugins.kt.advance.model.SpoFile;
 
-public class IpoKey implements Serializable {
+public class IpoKey implements GoodForCache {
     /**
      *
      */

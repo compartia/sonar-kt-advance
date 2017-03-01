@@ -31,10 +31,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.BooleanUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement(name = "c-analysis")
 public class PevFile {
 
-    public static class Evidence {
+    public static class Evidence implements GoodForCache {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 3792035626380612971L;
         @XmlAttribute
         public String comment;
     }
@@ -66,28 +72,55 @@ public class PevFile {
 
     }
 
-    public static class PO {
+    public static class Lifting implements GoodForCache {
+
+        private static final long serialVersionUID = -5886596927509452158L;
+
+        @XmlAttribute(name = "a-type")
+        public String type;
+
+        @XmlAttribute(name = "a-id")
+        public String apiId;
+    }
+
+    public static class PO implements GoodForCache {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1180976511685537595L;
 
         @XmlElement(name = "evidence")
         public Evidence evidence;
 
+        @JsonIgnore
         @XmlAttribute(required = true)
         public String id;
 
         @XmlAttribute
         public String method;
 
+        @XmlAttribute
+        public String domain;
+
+        @JsonIgnore
         @XmlAttribute(name = "predicate")
         public String predicate;
 
+        @JsonIgnore
         @XmlAttribute(name = "type")
         public String predicateTag;
 
         @XmlAttribute
         public String time;
 
+        @JsonIgnore
         @XmlAttribute(name = "violation")
         public Boolean violation;
+
+        @XmlElementWrapper(name = "assumptions")
+        @XmlElement(name = "uses")
+        public List<Lifting> assumptions = new ArrayList<>();
 
         public boolean isViolated() {
             return BooleanUtils.toBoolean(violation);

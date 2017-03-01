@@ -27,7 +27,6 @@ import static org.sonar.plugins.kt.advance.batch.PluginParameters.paramKey;
 import static org.sonar.plugins.kt.advance.util.StringTools.findVarLocation;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,6 +47,7 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
 import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
+import org.sonar.plugins.kt.advance.model.GoodForCache;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
 import org.sonar.plugins.kt.advance.model.PevFile.PO;
 import org.sonar.plugins.kt.advance.model.PpoFile;
@@ -64,8 +64,7 @@ import org.sonar.plugins.kt.advance.util.StringTools;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
 
-public class IssuableProofObligation implements Serializable {
-
+public class IssuableProofObligation implements GoodForCache {
     public abstract static class AbstractPOBuilder {
         private PO discharge;
         private InputFile inputFile;
@@ -164,6 +163,7 @@ public class IssuableProofObligation implements Serializable {
             ipo.shortDescription = getShortDescription();
             ipo.state = getRule();
             ipo.functionName = functionName;
+            ipo.discharge = discharge;
 
             Symbol varName = getPredicate().getVarName();
             if (varName == null) {
@@ -287,11 +287,12 @@ public class IssuableProofObligation implements Serializable {
 
     }
 
-    public static final class Reference implements Serializable {
+    public static final class Reference implements GoodForCache {
 
         private static final long serialVersionUID = 1768805251161836506L;
 
         public final String file;
+        public String apiId;
 
         public final String message;
         public final String predicate;
@@ -439,6 +440,8 @@ public class IssuableProofObligation implements Serializable {
 
     private static final Logger LOG = Loggers.get(IssuableProofObligation.class.getName());
 
+    private PO discharge;
+
     /**
      * context-specific ID, not project-global
      */
@@ -448,11 +451,11 @@ public class IssuableProofObligation implements Serializable {
      * C,P,G -- this is the order
      */
     private final Integer[] complexity = { 0, 0, 0 };
+
     private String description;
     private String functionName;
     private Symbol symbol;
     private String shortDescription;
-
     private PpoLocation location;
 
     private String time;
@@ -462,16 +465,16 @@ public class IssuableProofObligation implements Serializable {
     private POLevel level;
 
     private POState state;
-    private IPOTextRange textRange;
 
+    private IPOTextRange textRange;
     private final Set<Reference> references = new HashSet<>();
+
     /**
      * TODO: use string?
      */
     @JsonIgnore
     private File originXml;
     private String fnameContext;
-
     int inReferencesCount = 0;
 
     private IssuableProofObligation() {
@@ -503,6 +506,7 @@ public class IssuableProofObligation implements Serializable {
                 target.getFunctionName(),
                 target.getLevel(),
                 target.getState());
+        ref.apiId = assumption.nr;
         references.add(ref);
         target.inReferencesCount++;
         return ref;
@@ -573,6 +577,10 @@ public class IssuableProofObligation implements Serializable {
     @JsonIgnore
     public String getDescription() {
         return description;
+    }
+
+    public PO getDischarge() {
+        return discharge;
     }
 
     public String getFile() {

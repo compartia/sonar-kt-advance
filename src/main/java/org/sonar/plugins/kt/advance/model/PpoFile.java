@@ -325,7 +325,7 @@ public class PpoFile implements HasOriginFile {
      * @author artem
      *
      */
-    public static class PpoLocation implements Serializable {
+    public static class PpoLocation implements GoodForCache {
 
         private static final long serialVersionUID = 7420557529782621945L;
 
