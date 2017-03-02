@@ -24,9 +24,7 @@ import java.io.File;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
 import org.sonar.plugins.kt.advance.model.GoodForCache;
-import org.sonar.plugins.kt.advance.model.SpoFile;
 
 public class IpoKey implements GoodForCache {
     /**
@@ -48,26 +46,15 @@ public class IpoKey implements GoodForCache {
     @XmlAttribute(name = "xml")
     public String originXml;
 
-    /**
-     * true for PPO, false for SPO
-     */
-    @XmlAttribute
-    public POLevel level;
-
     public IpoKey() {
     }
 
-    public IpoKey(File originXml, String fname, String poId, POLevel level) {
+    public IpoKey(File originXml, String fname, String poId) {
         super();
         this.originXml = originXml.getName().substring(0, originXml.getName().lastIndexOf('.'));
         this.fname = fname;
         this.setId(poId);
-        this.level = level;
-    }
 
-    public static IpoKey secondary(SpoFile spoXml, String id) {
-        return new IpoKey(spoXml.getOrigin(), spoXml.function.name,
-                id, POLevel.SECONDARY);
     }
 
     @Override
@@ -96,9 +83,7 @@ public class IpoKey implements GoodForCache {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (level != other.level) {
-            return false;
-        }
+
         if (originXml == null) {
             if (other.originXml != null) {
                 return false;
@@ -119,7 +104,6 @@ public class IpoKey implements GoodForCache {
         int result = 1;
         result = prime * result + ((fname == null) ? 0 : fname.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((level == null) ? 0 : level.hashCode());
         result = prime * result + ((originXml == null) ? 0 : originXml.hashCode());
         return result;
     }
@@ -130,7 +114,7 @@ public class IpoKey implements GoodForCache {
 
     @Override
     public String toString() {
-        return level.ordinal() + "." + id + "." + fname + "." + originXml;
+        return id + "." + fname + "." + originXml;
     }
 
 }

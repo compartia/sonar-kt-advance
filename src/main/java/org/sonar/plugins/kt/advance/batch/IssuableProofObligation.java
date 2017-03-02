@@ -436,6 +436,8 @@ public class IssuableProofObligation implements GoodForCache {
 
     }
 
+    static final IssuableProofObligation MISSING = new IssuableProofObligation();
+
     private static final long serialVersionUID = 8626969892385862673L;
 
     private static final Logger LOG = Loggers.get(IssuableProofObligation.class.getName());
@@ -467,6 +469,7 @@ public class IssuableProofObligation implements GoodForCache {
     private POState state;
 
     private IPOTextRange textRange;
+
     private final Set<Reference> references = new HashSet<>();
 
     /**
@@ -475,6 +478,7 @@ public class IssuableProofObligation implements GoodForCache {
     @JsonIgnore
     private File originXml;
     private String fnameContext;
+
     int inReferencesCount = 0;
 
     private IssuableProofObligation() {
@@ -497,6 +501,9 @@ public class IssuableProofObligation implements GoodForCache {
     }
 
     public Reference addReference(IssuableProofObligation target, ApiAssumption assumption) {
+
+        Preconditions.checkArgument(!this.equals(target), "self connections are prohibited");
+
         final Reference ref = new Reference(
                 assumption.predicate.tag,
                 target.getLocation().file,//TOD: check if it is source or target!!!
@@ -597,7 +604,7 @@ public class IssuableProofObligation implements GoodForCache {
 
     @JsonIgnore
     public IpoKey getKey() {
-        return new IpoKey(originXml, functionName, id, level);
+        return new IpoKey(originXml, functionName, id);
     }
 
     public POLevel getLevel() {

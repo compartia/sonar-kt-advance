@@ -183,7 +183,7 @@ public class DirScanTest {
 
             for (final IssuableProofObligation ipo : processPPOs) {
 
-                final IssuableProofObligation fromCache = fsContext.get(ipo.getKey());
+                final IssuableProofObligation fromCache = fsContext.getFromCache(ipo.getKey(), true);
                 assertNotNull(StringTools.quote(ipo.getKey().toString()) + " not found in cache", fromCache);
                 assertEquals(ipo.getKey(), fromCache.getKey());
             }
