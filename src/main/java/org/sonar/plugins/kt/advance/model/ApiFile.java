@@ -86,6 +86,7 @@ public class ApiFile implements HasOriginFile {
         public List<ApiAssumption> rvAssumptions = new ArrayList<>();
 
         private Map<String, ApiAssumption> apiAssumptionsAsMap;
+        private Map<String, ApiAssumption> rvAssumptionsAsMap;
 
         @Override
         public boolean equals(Object obj) {
@@ -120,6 +121,19 @@ public class ApiFile implements HasOriginFile {
             }
 
             return apiAssumptionsAsMap;
+        }
+
+        public Map<String, ApiAssumption> getRvAssumptionsAsMap() {
+            if (rvAssumptionsAsMap != null) {
+                return rvAssumptionsAsMap;
+            }
+            rvAssumptionsAsMap = new HashMap<>();
+
+            for (final ApiAssumption aa : rvAssumptions) {
+                rvAssumptionsAsMap.put(aa.nr, aa);
+            }
+
+            return rvAssumptionsAsMap;
         }
 
         @Override

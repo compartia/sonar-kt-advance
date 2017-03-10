@@ -232,19 +232,20 @@ public class Statistics {
     }
 
     public void handle(IssuableProofObligation ipo) {
+        if (!ipo.isMissing()) {
 
-        final InputFile resource = fileSystem.getResource(ipo.getLocation().file);
-        /**
-         * per project
-         */
-        handle(ipo, null);
+            final InputFile resource = fileSystem.getResource(ipo.getLocation().file);
+            /**
+             * per project
+             */
+            handle(ipo, null);
 
-        /**
-         * per resource
-         */
-        handle(ipo, resource);
-        perFileStatistics.handle(resource);
-
+            /**
+             * per resource
+             */
+            handle(ipo, resource);
+            perFileStatistics.handle(resource);
+        }
     }
 
     public void save(SensorContext sensorContext) {

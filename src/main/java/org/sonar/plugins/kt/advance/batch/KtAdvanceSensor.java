@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.kt.advance.batch;
 
+import static org.sonar.plugins.kt.advance.batch.FsAbstraction.API_SUFFIX;
 import static org.sonar.plugins.kt.advance.batch.FsAbstraction.PEV_SUFFIX;
 import static org.sonar.plugins.kt.advance.batch.FsAbstraction.PPO_SUFFIX;
 import static org.sonar.plugins.kt.advance.batch.FsAbstraction.SEV_SUFFIX;
@@ -49,15 +50,17 @@ import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.kt.advance.batch.IssuableProofObligation.EVBuilder;
 import org.sonar.plugins.kt.advance.batch.IssuableProofObligation.SPOBuilder;
+import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
 import org.sonar.plugins.kt.advance.model.ApiFile;
 import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
 import org.sonar.plugins.kt.advance.model.ApiFile.PoRef;
-import org.sonar.plugins.kt.advance.model.PevFile;
-import org.sonar.plugins.kt.advance.model.PevFile.PO;
+import org.sonar.plugins.kt.advance.model.EvFile;
+import org.sonar.plugins.kt.advance.model.EvFile.Lifting;
+import org.sonar.plugins.kt.advance.model.EvFile.PO;
 import org.sonar.plugins.kt.advance.model.PpoFile;
 import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
-import org.sonar.plugins.kt.advance.model.SevFile;
 import org.sonar.plugins.kt.advance.model.SpoFile;
 import org.sonar.plugins.kt.advance.model.SpoFile.CallSiteObligation;
 import org.sonar.plugins.kt.advance.model.SpoFile.SecondaryProofObligation;
@@ -139,6 +142,9 @@ public class KtAdvanceSensor {
 
         fsAbstraction.forEachPpoFile(this::analysePpoSpoXml);
 
+        /**
+         * save issues
+         */
         for (final IpoKey key : fsAbstraction.getSavedKeys()) {
             saveProofObligationAsIssueToSq(fsAbstraction.getFromCache(key, true));
         }
@@ -167,6 +173,28 @@ public class KtAdvanceSensor {
 
             targetIpo = getSPoTroughCache(spoOriginFile, targetIpoKey);
             //XXX: there might be nothing in cache yet, if id refers another file/funciton.
+        }
+
+        if (targetIpo == null) {
+            final File pevXml = replaceSuffix(ppoOriginXml, PPO_SUFFIX, PEV_SUFFIX);
+            final EvFile pev = fsAbstraction.readPevXml(pevXml);
+            final PO discharge = pev.getDischargedPOsAsMap().get(ref.getId());
+            if (discharge != null) {
+                final EVBuilder newBuilder = IssuableProofObligation.newBuilder(pev, discharge);
+                newBuilder.setLevel(POLevel.PRIMARY);
+                return newBuilder.build();
+            }
+        }
+
+        if (targetIpo == null) {
+            final File pevXml = replaceSuffix(ppoOriginXml, PPO_SUFFIX, SEV_SUFFIX);
+            final EvFile sev = fsAbstraction.readSevXml(pevXml);
+            final PO discharge = sev.getDischargedPOsAsMap().get(ref.getId());
+            if (discharge != null) {
+                final EVBuilder newBuilder = IssuableProofObligation.newBuilder(sev, discharge);
+                newBuilder.setLevel(POLevel.SECONDARY);
+                return newBuilder.build();
+            }
         }
 
         return targetIpo;
@@ -248,7 +276,7 @@ public class KtAdvanceSensor {
 
             if (targetIpo != null) {
 
-                sourceIpo.addReference(targetIpo, assumption);
+                sourceIpo.addReference(targetIpo, assumption, "api");
                 // targetIpo.addReference(sourceIpo, assumption); XXX: are we okay with one-way references?
 
                 putPoToCache(sourceIpo);
@@ -328,6 +356,34 @@ public class KtAdvanceSensor {
             }
 
         }
+    }
+
+    private void linkDischargeInfo(IssuableProofObligation ipo) throws JAXBException {
+        final PO discharge = ipo.getDischarge();
+        if (discharge != null) {
+            final Lifting lifting = discharge.getDefaultUsedAssumption();
+            if (lifting != null && "rv".equals(lifting.type)) {
+
+                //find rv-assumption in api file.
+                final File ppoOriginXml = ipo.getOriginXml();
+                final File apiXml = replaceSuffix(ppoOriginXml, PPO_SUFFIX, API_SUFFIX);
+                final File spoOriginFile = replaceSuffix(ppoOriginXml, PPO_SUFFIX, SPO_SUFFIX);
+                final ApiFile api = FsAbstraction.readApiXml(apiXml);
+                final Map<String, ApiAssumption> rvAssumptionsAsMap = api.function.getRvAssumptionsAsMap();
+
+                final ApiAssumption assumption = rvAssumptionsAsMap.get(lifting.apiId);
+
+                for (final PoRef ref : assumption.dependentPPOs) {
+                    final IssuableProofObligation dependentPo = findIPO(api, ppoOriginXml, spoOriginFile, ref);
+
+                    ipo.addReference(dependentPo, assumption, lifting.type);
+                    putPoToCache(dependentPo);
+                    putPoToCache(ipo);
+
+                }
+            }
+        }
+
     }
 
     private void processCallSiteObligation(
@@ -410,6 +466,9 @@ public class KtAdvanceSensor {
      * @return
      */
     private boolean saveProofObligationAsIssueToSq(IssuableProofObligation proofObligation) {
+        if (proofObligation.isMissing()) {
+            return true;
+        }
 
         Preconditions.checkNotNull(proofObligation);
 
@@ -454,10 +513,12 @@ public class KtAdvanceSensor {
         Preconditions.checkNotNull(ppo);
 
         final List<IssuableProofObligation> pposList = new ArrayList<>();
-        final PevFile pev = readPevXml(replaceSuffix(ppo.getOrigin(), PPO_SUFFIX, PEV_SUFFIX));
+
+        final EvFile pev = readPevXml(replaceSuffix(ppo.getOrigin(), PPO_SUFFIX, PEV_SUFFIX));
         final Map<String, PO> dischargedPOs = (pev == null) ? new HashMap<>() : pev.getDischargedPOsAsMap();
 
         for (final PrimaryProofObligation po : ppo.function.proofObligations) {
+
             final IpoKey key = new IpoKey(ppo.getOrigin(), ppo.function.name, po.getId());
             IssuableProofObligation ipo = fsAbstraction.getFromCache(key, false);
 
@@ -466,11 +527,13 @@ public class KtAdvanceSensor {
 
                 if (resource != null) {
 
+                    final PO discharge = dischargedPOs.get(po.getId());
+
                     ipo = IssuableProofObligation.newBuilder(ppo, po)
-                            .setDischarge(dischargedPOs.get(po.getId()))
+                            .setDischarge(discharge)
                             .setInputFile(resource)
                             .build();
-
+                    linkDischargeInfo(ipo);
                     putPoToCache(ipo);
 
                 } else {
@@ -481,6 +544,9 @@ public class KtAdvanceSensor {
             }
 
             if (ipo != null) {
+                /**
+                 * the list is used for testing only
+                 */
                 pposList.add(ipo);
             }
         }
@@ -491,7 +557,7 @@ public class KtAdvanceSensor {
         final SpoFile spo = readSpoXml(spoXml);
 
         if (spo != null) {
-            final SevFile sev = readSevXml(replaceSuffix(spo.getOrigin(), SPO_SUFFIX, SEV_SUFFIX));
+            final EvFile sev = readSevXml(replaceSuffix(spo.getOrigin(), SPO_SUFFIX, SEV_SUFFIX));
             final Map<String, PO> dischargedPOs = (sev == null) ? new HashMap<>() : sev.getDischargedPOsAsMap();
 
             final List<CallSiteObligation> proofObligations = spo.function.spoWrapper.proofObligations;

@@ -53,6 +53,7 @@ import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.model.ApiFile;
+import org.sonar.plugins.kt.advance.model.EvFile;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
 import org.sonar.plugins.kt.advance.model.PevFile;
 import org.sonar.plugins.kt.advance.model.PpoFile;
@@ -139,6 +140,8 @@ public class FsAbstraction {
 
     private final static Map<String, ApiFile> functionNameToApiMap = new HashMap<>();
 
+    private final static Map<File, EvFile> filenameToEvFileMap = new HashMap<>();
+
     final FileSystem fileSystem;
     private final Map<String, InputFile> fsCache = new MapMaker().softValues().makeMap();
 
@@ -216,16 +219,30 @@ public class FsAbstraction {
         return getReader(ApiFile.class).readXml(file);
     }
 
-    static PevFile readPevXml(File file) throws JAXBException {
-        return getReader(PevFile.class).readXml(file);
+    static EvFile readPevXml(File file) throws JAXBException {
+        if (filenameToEvFileMap.containsKey(file)) {
+            return filenameToEvFileMap.get(file);
+        } else {
+
+            final PevFile read = getReader(PevFile.class).readXml(file);
+            filenameToEvFileMap.put(file, read);
+            return read;
+        }
     }
 
     static PpoFile readPpoXml(File file) throws JAXBException {
         return getReader(PpoFile.class).readXml(file);
     }
 
-    static SevFile readSevXml(File file) throws JAXBException {
-        return getReader(SevFile.class).readXml(file);
+    static EvFile readSevXml(File file) throws JAXBException {
+        if (filenameToEvFileMap.containsKey(file)) {
+            return filenameToEvFileMap.get(file);
+        } else {
+
+            final SevFile read = getReader(SevFile.class).readXml(file);
+            filenameToEvFileMap.put(file, read);
+            return read;
+        }
     }
 
     static SpoFile readSpoXml(File file) throws JAXBException {

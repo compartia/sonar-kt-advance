@@ -47,9 +47,10 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
 import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
+import org.sonar.plugins.kt.advance.model.EvFile;
+import org.sonar.plugins.kt.advance.model.EvFile.PO;
 import org.sonar.plugins.kt.advance.model.GoodForCache;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
-import org.sonar.plugins.kt.advance.model.PevFile.PO;
 import org.sonar.plugins.kt.advance.model.PpoFile;
 import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
 import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
@@ -65,6 +66,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
 
 public class IssuableProofObligation implements GoodForCache {
+
     public abstract static class AbstractPOBuilder {
         private PO discharge;
         private InputFile inputFile;
@@ -90,6 +92,10 @@ public class IssuableProofObligation implements GoodForCache {
         }
 
         public IPOTextRange getTextRange(PoPredicate predicate) {
+            if (getLocation() == null) {
+                //                /XXX
+                return new IPOTextRange(0, 0, 0, 0);
+            }
             final Symbol symbol = predicate.getVarName();
             if (symbol != null) {
 
@@ -149,7 +155,7 @@ public class IssuableProofObligation implements GoodForCache {
         }
 
         IssuableProofObligation buildTmp() {
-            Preconditions.checkState(this.getInputFile() != null);
+            //            Preconditions.checkState(this.getInputFile() != null);
             final IssuableProofObligation ipo = new IssuableProofObligation();
 
             ipo.originXml = getOriginXml();
@@ -238,6 +244,69 @@ public class IssuableProofObligation implements GoodForCache {
 
     }
 
+    public static final class EVBuilder extends AbstractPOBuilder {
+        EvFile origin;
+        POLevel level;
+        String sourceFileName;
+        String functionName;
+
+        public EVBuilder(EvFile origin, PO po) {
+            super(origin);
+            this.origin = origin;
+            this.sourceFileName = origin.header.application.getFileNormalized();
+            this.functionName = origin.function.name;
+            super.setDischarge(po);
+        }
+
+        @Override
+        public IssuableProofObligation build() {
+            final IssuableProofObligation ipo = buildTmp();
+            ipo.location = new PpoLocation();
+            ipo.location.file = sourceFileName;
+            ipo.level = level;
+            ipo.functionName = functionName;
+
+            ipo.missing = true;
+            return ipo;
+        }
+
+        public POLevel getLevel() {
+            return level;
+        }
+
+        public void setLevel(POLevel level) {
+            this.level = level;
+        }
+
+        @Override
+        String getDescription() {
+            return getDischarge().evidence.comment;
+        }
+
+        @Override
+        String getId() {
+            return getDischarge().id;
+        }
+
+        @Override
+        PpoLocation getLocation() {
+            return null;
+        }
+
+        @Override
+        PoPredicate getPredicate() {
+            final PoPredicate p = new PoPredicate();
+            p.tag = getDischarge().predicateTag;
+            return p;
+        }
+
+        @Override
+        String getShortDescription() {
+            return getDischarge().evidence.comment;
+        }
+
+    }
+
     public static final class POBuilder extends AbstractPOBuilder {
 
         private final PrimaryProofObligation po;
@@ -293,6 +362,8 @@ public class IssuableProofObligation implements GoodForCache {
 
         public final String file;
         public String apiId;
+        public String type;
+        public boolean missing;
 
         public final String message;
         public final String predicate;
@@ -442,6 +513,12 @@ public class IssuableProofObligation implements GoodForCache {
 
     private static final Logger LOG = Loggers.get(IssuableProofObligation.class.getName());
 
+    /**
+     * no info in PPO and SPO files. But might be something in SEV/PEV
+     */
+    @Deprecated
+    private boolean missing = false;
+
     private PO discharge;
 
     /**
@@ -455,11 +532,11 @@ public class IssuableProofObligation implements GoodForCache {
     private final Integer[] complexity = { 0, 0, 0 };
 
     private String description;
+
     private String functionName;
     private Symbol symbol;
     private String shortDescription;
     private PpoLocation location;
-
     private String time;
 
     private PredicateKey predicateType;
@@ -468,7 +545,7 @@ public class IssuableProofObligation implements GoodForCache {
 
     private POState state;
 
-    private IPOTextRange textRange;
+    private IPOTextRange textRange = new IPOTextRange(0, 0, 0, 0);
 
     private final Set<Reference> references = new HashSet<>();
 
@@ -477,11 +554,16 @@ public class IssuableProofObligation implements GoodForCache {
      */
     @JsonIgnore
     private File originXml;
-    private String fnameContext;
 
+    private String fnameContext;
     int inReferencesCount = 0;
 
     private IssuableProofObligation() {
+
+    }
+
+    public static EVBuilder newBuilder(EvFile origin, PO po) {
+        return new EVBuilder(origin, po);
     }
 
     public static POBuilder newBuilder(PpoFile originXml, PrimaryProofObligation po) {
@@ -500,9 +582,11 @@ public class IssuableProofObligation implements GoodForCache {
         return "L" + source.getLocation().line + ": " + target.getDescription();
     }
 
-    public Reference addReference(IssuableProofObligation target, ApiAssumption assumption) {
-
+    public Reference addReference(IssuableProofObligation target, ApiAssumption assumption, String type) {
+        Preconditions.checkNotNull(target);
         Preconditions.checkArgument(!this.equals(target), "self connections are prohibited");
+        Preconditions.checkNotNull(target.getLocation().file);
+        Preconditions.checkNotNull(target.getFunctionName());
 
         final Reference ref = new Reference(
                 assumption.predicate.tag,
@@ -513,7 +597,10 @@ public class IssuableProofObligation implements GoodForCache {
                 target.getFunctionName(),
                 target.getLevel(),
                 target.getState());
+
+        ref.missing = target.isMissing();
         ref.apiId = assumption.nr;
+        ref.type = type;
         references.add(ref);
         target.inReferencesCount++;
         return ref;
@@ -616,6 +703,11 @@ public class IssuableProofObligation implements GoodForCache {
         return location;
     }
 
+    @JsonIgnore
+    public File getOriginXml() {
+        return originXml;
+    }
+
     public PredicateKey getPredicateType() {
         return predicateType;
     }
@@ -659,6 +751,11 @@ public class IssuableProofObligation implements GoodForCache {
     @JsonIgnore
     public boolean isDischarged() {
         return POState.DISCHARGED == getState();
+    }
+
+    @Deprecated
+    public boolean isMissing() {
+        return missing;
     }
 
     @JsonIgnore
@@ -711,17 +808,25 @@ public class IssuableProofObligation implements GoodForCache {
 
     }
 
+    @Override
+    public String toString() {
+        return "IssuableProofObligation [id=" + id + ", functionName=" + functionName + ", predicateType="
+                + predicateType + ", level=" + level + ", state=" + state + "]";
+    }
+
     private Issuable.IssueBuilder addLocationsToIssue(final Issuable.IssueBuilder issueBuilder, FsAbstraction fs) {
 
         for (final Reference r : getReferences()) {
-            final InputFile file = fs.getResource(r.file);
+            if (!r.missing) {
+                final InputFile file = fs.getResource(r.file);
 
-            final NewIssueLocation loc = issueBuilder.newLocation()
-                    .on(file)
-                    .at(r.textRange.toTextRange(file))
-                    .message(r.message);
+                final NewIssueLocation loc = issueBuilder.newLocation()
+                        .on(file)
+                        .at(r.textRange.toTextRange(file))
+                        .message(r.message);
 
-            issueBuilder.addLocation(loc);
+                issueBuilder.addLocation(loc);
+            }
         }
 
         return issueBuilder;

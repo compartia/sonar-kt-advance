@@ -26,8 +26,8 @@ import java.io.File;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
-import org.sonar.plugins.kt.advance.model.PevFile.Evidence;
-import org.sonar.plugins.kt.advance.model.PevFile.PO;
+import org.sonar.plugins.kt.advance.model.EvFile.Evidence;
+import org.sonar.plugins.kt.advance.model.EvFile.PO;
 import org.sonar.plugins.kt.advance.model.PpoFile;
 import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
 import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
@@ -78,6 +78,7 @@ public class Factory {
         ppo.predicate.tag = predicateType.getTag();
         ppo.location = new PpoLocation();
         ppo.location.line = 1;
+        ppo.location.file = "foo/bar/fake.c";
         return ppo;
     }
 
@@ -89,6 +90,7 @@ public class Factory {
 
     public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType) {
         final PrimaryProofObligation ppo = Factory.createPPO(predicateType);
+
         final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
                 .setInputFile(mock(InputFile.class))
                 .build();
