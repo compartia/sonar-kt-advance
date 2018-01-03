@@ -88,7 +88,7 @@ public class IssueBuilderTest {
             final IssuableProofObligation targetipo = Factory.createPrimaryPO(new PredicateKey("tag"));
             targetipo.setShortDescription("descr " + f);
             targetipo.setFunctionName("function." + f);
-            ipo.addReference(targetipo, new ApiAssumption());
+            ipo.addReference(targetipo, new ApiAssumption(), "api");
         }
 
         final Issuable issuableMock = mock(Issuable.class);

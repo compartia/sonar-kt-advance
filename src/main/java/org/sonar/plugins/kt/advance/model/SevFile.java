@@ -19,18 +19,10 @@
  */
 package org.sonar.plugins.kt.advance.model;
 
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.sonar.plugins.kt.advance.model.PevFile.Function;
-import org.sonar.plugins.kt.advance.model.PevFile.PO;
-
 @XmlRootElement(name = "c-analysis")
-public class SevFile {
-    public Function function;
-
-    public Map<String, PO> getDischargedPOsAsMap() {
-        return function.getDischargedPOsAsMap();
+public class SevFile extends EvFile {
+    public SevFile() {
     }
 }

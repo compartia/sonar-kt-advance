@@ -60,10 +60,9 @@ import org.sonar.plugins.kt.advance.model.ApiFile;
 import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
 import org.sonar.plugins.kt.advance.model.ApiFile.Caller;
 import org.sonar.plugins.kt.advance.model.ApiFile.PoRef;
-import org.sonar.plugins.kt.advance.model.PevFile;
+import org.sonar.plugins.kt.advance.model.EvFile;
 import org.sonar.plugins.kt.advance.model.PpoFile;
 import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
-import org.sonar.plugins.kt.advance.model.SevFile;
 import org.sonar.plugins.kt.advance.model.SpoFile;
 import org.sonar.plugins.kt.advance.model.SpoFile.CallSiteObligation;
 import org.sonar.plugins.kt.advance.model.SpoFile.SecondaryProofObligation;
@@ -183,7 +182,7 @@ public class DirScanTest {
 
             for (final IssuableProofObligation ipo : processPPOs) {
 
-                final IssuableProofObligation fromCache = fsContext.get(ipo.getKey());
+                final IssuableProofObligation fromCache = fsContext.getFromCache(ipo.getKey(), true);
                 assertNotNull(StringTools.quote(ipo.getKey().toString()) + " not found in cache", fromCache);
                 assertEquals(ipo.getKey(), fromCache.getKey());
             }
@@ -281,7 +280,7 @@ public class DirScanTest {
     public void testReadPev() throws JAXBException {
 
         final PpoFile ppo = FsAbstraction.readPpoXml(ppoFile);
-        final PevFile pev = FsAbstraction
+        final EvFile pev = FsAbstraction
                 .readPevXml(
                     FsAbstraction.replaceSuffix(ppoFile, FsAbstraction.PPO_SUFFIX, FsAbstraction.PEV_SUFFIX));
 
@@ -313,7 +312,7 @@ public class DirScanTest {
     @Test
     public void testReadSev() throws JAXBException {
 
-        final SevFile sev = FsAbstraction
+        final EvFile sev = FsAbstraction
                 .readSevXml(new File(BASEDIR, "invalid_memory_access_invalid_memory_access_main_sev.xml"));
 
         assertEquals(sev.function.statistics.total - sev.function.statistics.totalProven,
@@ -333,7 +332,7 @@ public class DirScanTest {
         final File sevFile = new File(BASEDIR,
                 "/itc-benchmarks/01.w_Defects/ch_analysis/uninit_pointer/"
                         + "uninit_pointer_uninit_pointer_005_sev.xml");
-        final SevFile sev = FsAbstraction
+        final EvFile sev = FsAbstraction
                 .readSevXml(sevFile);
 
         assertEquals(5,
@@ -364,7 +363,7 @@ public class DirScanTest {
     @Test
     public void testReadWrongPev() throws JAXBException {
         final File nonExistentFile = FsAbstraction.replaceSuffix(ppoFile, FsAbstraction.PPO_SUFFIX, "NOISE");
-        final PevFile pev = FsAbstraction.readPevXml(nonExistentFile);
+        final EvFile pev = FsAbstraction.readPevXml(nonExistentFile);
         assertNull(pev);
     }
 

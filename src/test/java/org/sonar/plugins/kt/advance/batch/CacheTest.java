@@ -71,7 +71,7 @@ public class CacheTest {
             assertEquals(numberOfIssues, fs.getSavedKeys().size());
 
             for (final IpoKey key : fs.getSavedKeys()) {
-                assertNotNull(fs.get(key));
+                assertNotNull(fs.getFromCache(key, false));
             }
 
         });

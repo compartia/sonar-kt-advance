@@ -53,6 +53,7 @@ import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.model.ApiFile;
+import org.sonar.plugins.kt.advance.model.EvFile;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
 import org.sonar.plugins.kt.advance.model.PevFile;
 import org.sonar.plugins.kt.advance.model.PpoFile;
@@ -64,6 +65,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.MapMaker;
 
 public class FsAbstraction {
+    @FunctionalInterface
+    public interface CachedDataProvider {
+        public void read() throws JAXBException;
+    }
+
     ///////////////////////////
     @FunctionalInterface
     public interface InCacheJob {
@@ -132,11 +138,13 @@ public class FsAbstraction {
     static final Map<Class<?>, FsAbstraction.XMLType<?>> xmlTypes = new HashMap<>();
     private static final Map<String, List<String>> fileContentsCache = new MapMaker().softValues().makeMap();
 
-    private final Map<String, ApiFile> functionNameToApiMap = new HashMap<>();
+    private final static Map<String, ApiFile> functionNameToApiMap = new HashMap<>();
+
+    private final static Map<File, EvFile> filenameToEvFileMap = new HashMap<>();
 
     final FileSystem fileSystem;
-
     private final Map<String, InputFile> fsCache = new MapMaker().softValues().makeMap();
+
     private PersistentCacheManager cacheMan;
 
     Cache<IpoKey, IssuableProofObligation> cache;
@@ -144,6 +152,8 @@ public class FsAbstraction {
     private final File baseDir;
 
     private final Set<IpoKey> savedKeys = new HashSet<>();
+
+    private final HashSet<IpoKey> missingKeys = new HashSet<>();
 
     public FsAbstraction(File baseDir) {
         fileSystem = new DefaultFileSystem(baseDir);
@@ -172,7 +182,7 @@ public class FsAbstraction {
 
         if (lines == null) {
             try {
-                LOG.info("reading " + inputFile.absolutePath());
+                LOG.info("reading  source" + inputFile.absolutePath());
                 lines = FileUtils.readLines(inputFile.file(), (String) null);
             } catch (final IOException e) {
                 lines = new ArrayList<>();
@@ -203,28 +213,50 @@ public class FsAbstraction {
     }
 
     static ApiFile readApiXml(File file) throws JAXBException {
+        if (functionNameToApiMap.containsKey(file.getAbsolutePath())) {
+            return functionNameToApiMap.get(file.getAbsolutePath());
+        }
         return getReader(ApiFile.class).readXml(file);
     }
 
-    static PevFile readPevXml(File file) throws JAXBException {
-        return getReader(PevFile.class).readXml(file);
+    static EvFile readPevXml(File file) throws JAXBException {
+        if (filenameToEvFileMap.containsKey(file)) {
+            return filenameToEvFileMap.get(file);
+        } else {
+
+            final PevFile read = getReader(PevFile.class).readXml(file);
+            filenameToEvFileMap.put(file, read);
+            return read;
+        }
     }
 
     static PpoFile readPpoXml(File file) throws JAXBException {
         return getReader(PpoFile.class).readXml(file);
     }
 
-    static SevFile readSevXml(File file) throws JAXBException {
-        return getReader(SevFile.class).readXml(file);
+    static EvFile readSevXml(File file) throws JAXBException {
+        if (filenameToEvFileMap.containsKey(file)) {
+            return filenameToEvFileMap.get(file);
+        } else {
+
+            final SevFile read = getReader(SevFile.class).readXml(file);
+            filenameToEvFileMap.put(file, read);
+            return read;
+        }
     }
 
     static SpoFile readSpoXml(File file) throws JAXBException {
         return getReader(SpoFile.class).readXml(file);
     }
 
+    static <X> X readXml(Class<X> c, File file) throws JAXBException {
+        return getReader(c).readXml(file);
+    }
+
     public void cacheApiFile(final File apiXml) {
         try {
             final ApiFile api = FsAbstraction.readApiXml(apiXml);
+            functionNameToApiMap.put(apiXml.getAbsolutePath(), api);
             functionNameToApiMap.put(api.function.name, api);
             functionNameToApiMap.put(api.function.cfilename + "::" + api.function.name, api);
 
@@ -264,10 +296,6 @@ public class FsAbstraction {
         }
     }
 
-    public IssuableProofObligation get(IpoKey key) {
-        return cache.get(key);
-    }
-
     @Deprecated
     public ApiFile getApiByFunc(String funcname, String preferableSourceFileName) {
         //XXX: this is completely vague.
@@ -285,6 +313,37 @@ public class FsAbstraction {
 
     public File getBaseDir() {
         return baseDir;
+    }
+
+    public IssuableProofObligation getFromCache(IpoKey key, boolean requred) {
+        final IssuableProofObligation ipo = cache.get(key);
+        if (requred) {
+            Preconditions.checkNotNull(ipo);
+        }
+        return ipo;
+    }
+
+    public IssuableProofObligation getFromCache(IpoKey key, CachedDataProvider reader) {
+
+        if (missingKeys.contains(key)) {
+            return null;
+        }
+
+        final IssuableProofObligation issuableProofObligation = cache.get(key);
+
+        if (issuableProofObligation == null) {
+            missingKeys.add(key);
+            if (reader != null) {
+                try {
+                    reader.read();
+                } catch (final JAXBException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return cache.get(key);
+        } else {
+            return issuableProofObligation;
+        }
     }
 
     public InputFile getResource(final String file) {
@@ -321,9 +380,13 @@ public class FsAbstraction {
     }
 
     public void save(IssuableProofObligation ipo) {
+        if (ipo == IssuableProofObligation.MISSING) {
+            throw new IllegalStateException();
+        }
         final IpoKey key = ipo.getKey();
         savedKeys.add(key);
         cache.put(key, ipo);
+        missingKeys.remove(key);
 
     }
 

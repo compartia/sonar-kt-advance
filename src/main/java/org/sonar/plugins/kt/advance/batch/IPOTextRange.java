@@ -1,11 +1,10 @@
 package org.sonar.plugins.kt.advance.batch;
 
-import java.io.Serializable;
-
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
+import org.sonar.plugins.kt.advance.model.GoodForCache;
 
-public class IPOTextRange implements Serializable {
+public class IPOTextRange implements GoodForCache {
 
     private static final long serialVersionUID = 7972064605806555395L;
 
