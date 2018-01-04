@@ -28,11 +28,12 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
 import org.sonar.plugins.kt.advance.model.EvFile.Evidence;
 import org.sonar.plugins.kt.advance.model.EvFile.PO;
-import org.sonar.plugins.kt.advance.model.PpoFile;
-import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
-import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
-import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
-import org.sonar.plugins.kt.advance.model.SpoFile;
+
+import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.SpoFile;
+import com.kt.advance.xml.model.PpoFile.PoPredicate;
+import com.kt.advance.xml.model.PpoFile.PpoLocation;
+import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
 
 public class Factory {
     private final static String FAKE_XML_NAME = "dir/__xml.xml";

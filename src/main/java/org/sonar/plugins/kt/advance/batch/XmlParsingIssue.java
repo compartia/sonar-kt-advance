@@ -10,6 +10,12 @@ import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.rule.RuleKey;
 
+/**
+ * represents an error during XML parsing
+ *
+ * @author artem
+ *
+ */
 public class XmlParsingIssue {
     private File file;
     private String message;

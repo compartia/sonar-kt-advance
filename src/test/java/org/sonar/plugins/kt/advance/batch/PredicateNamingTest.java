@@ -30,12 +30,13 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.sonar.plugins.kt.advance.model.PpoFile;
-import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
-import org.sonar.plugins.kt.advance.model.PpoFile.ProofObligation;
-import org.sonar.plugins.kt.advance.model.SpoFile;
-import org.sonar.plugins.kt.advance.model.SpoFile.CallSiteObligation;
-import org.sonar.plugins.kt.advance.model.SpoFile.SecondaryProofObligation;
+
+import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.SpoFile;
+import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
+import com.kt.advance.xml.model.PpoFile.ProofObligationBase;
+import com.kt.advance.xml.model.SpoFile.CallSiteObligation;
+import com.kt.advance.xml.model.SpoFile.SecondaryProofObligation;
 
 public class PredicateNamingTest {
 
@@ -192,8 +193,8 @@ public class PredicateNamingTest {
 
     }
 
-    private void testPredicateName(final Map<String, ? extends ProofObligation> ppOsAsMap, String id, String varname) {
-        final ProofObligation primaryProofObligation = ppOsAsMap.get(id);
+    private void testPredicateName(final Map<String, ? extends ProofObligationBase> ppOsAsMap, String id, String varname) {
+        final ProofObligationBase primaryProofObligation = ppOsAsMap.get(id);
         assertEquals(varname, primaryProofObligation.predicate.toString());
     }
 }

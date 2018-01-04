@@ -52,17 +52,17 @@ import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 //---
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonar.plugins.kt.advance.model.ApiFile;
 import org.sonar.plugins.kt.advance.model.EvFile;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
 import org.sonar.plugins.kt.advance.model.PevFile;
-import org.sonar.plugins.kt.advance.model.PpoFile;
 import org.sonar.plugins.kt.advance.model.SevFile;
-import org.sonar.plugins.kt.advance.model.SpoFile;
 import org.sonar.plugins.kt.advance.util.XmlParser;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.MapMaker;
+import com.kt.advance.xml.model.ApiFile;
+import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.SpoFile;
 
 public class FsAbstraction {
     @FunctionalInterface
@@ -121,15 +121,14 @@ public class FsAbstraction {
     private static final Logger LOG = Loggers.get(FsAbstraction.class.getName());
 
     public static final String XML_EXT = "xml";
+
     public static final String SEV_SUFFIX = "_sev";
-
     public static final String API_SUFFIX = "_api";
-
     public static final String SPO_SUFFIX = "_spo";
-
     public static final String PPO_SUFFIX = "_ppo";
     public static final String PEV_SUFFIX = "_pev";
-    static final IOFileFilter ppoFileFilter = new SuffixFileFilter(
+
+    public static final IOFileFilter ppoFileFilter = new SuffixFileFilter(
             FsAbstraction.xmlSuffix(PPO_SUFFIX),
             IOCase.INSENSITIVE);
     /**
@@ -193,6 +192,14 @@ public class FsAbstraction {
         return lines;
     }
 
+    public static PpoFile readPpoXml(File file) throws JAXBException {
+        return getReader(PpoFile.class).readXml(file);
+    }
+
+    public static SpoFile readSpoXml(File file) throws JAXBException {
+        return getReader(SpoFile.class).readXml(file);
+    }
+
     public static File replaceSuffix(File file, String oldSuffix, String newuffix) {
         final String name = file.getName();
         final String newName = name.replace(oldSuffix, newuffix);
@@ -230,10 +237,6 @@ public class FsAbstraction {
         }
     }
 
-    static PpoFile readPpoXml(File file) throws JAXBException {
-        return getReader(PpoFile.class).readXml(file);
-    }
-
     static EvFile readSevXml(File file) throws JAXBException {
         if (filenameToEvFileMap.containsKey(file)) {
             return filenameToEvFileMap.get(file);
@@ -243,10 +246,6 @@ public class FsAbstraction {
             filenameToEvFileMap.put(file, read);
             return read;
         }
-    }
-
-    static SpoFile readSpoXml(File file) throws JAXBException {
-        return getReader(SpoFile.class).readXml(file);
     }
 
     static <X> X readXml(Class<X> c, File file) throws JAXBException {

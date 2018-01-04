@@ -44,7 +44,8 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
-import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
+
+import com.kt.advance.xml.model.ApiFile.ApiAssumption;
 
 public class IssueBuilderTest {
 

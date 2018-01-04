@@ -56,17 +56,18 @@ import org.sonar.api.issue.Issue;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonar.plugins.kt.advance.model.ApiFile;
-import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
-import org.sonar.plugins.kt.advance.model.ApiFile.Caller;
-import org.sonar.plugins.kt.advance.model.ApiFile.PoRef;
 import org.sonar.plugins.kt.advance.model.EvFile;
-import org.sonar.plugins.kt.advance.model.PpoFile;
-import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
-import org.sonar.plugins.kt.advance.model.SpoFile;
-import org.sonar.plugins.kt.advance.model.SpoFile.CallSiteObligation;
-import org.sonar.plugins.kt.advance.model.SpoFile.SecondaryProofObligation;
 import org.sonar.plugins.kt.advance.util.StringTools;
+
+import com.kt.advance.xml.model.ApiFile;
+import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.SpoFile;
+import com.kt.advance.xml.model.ApiFile.ApiAssumption;
+import com.kt.advance.xml.model.ApiFile.Caller;
+import com.kt.advance.xml.model.ApiFile.PoRef;
+import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
+import com.kt.advance.xml.model.SpoFile.CallSiteObligation;
+import com.kt.advance.xml.model.SpoFile.SecondaryProofObligation;
 
 public class DirScanTest {
 

@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.kt.advance.model;
+package com.kt.advance.xml.model;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,8 +30,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
-import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
+import org.sonar.plugins.kt.advance.model.HasOriginFile;
+
+import com.kt.advance.xml.model.PpoFile.PoPredicate;
 
 @XmlRootElement(name = "c-analysis")
 public class ApiFile implements HasOriginFile {

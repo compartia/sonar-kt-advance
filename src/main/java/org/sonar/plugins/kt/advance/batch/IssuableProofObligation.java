@@ -46,24 +46,24 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
 import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
-import org.sonar.plugins.kt.advance.model.ApiFile.ApiAssumption;
 import org.sonar.plugins.kt.advance.model.EvFile;
 import org.sonar.plugins.kt.advance.model.EvFile.PO;
 import org.sonar.plugins.kt.advance.model.GoodForCache;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
-import org.sonar.plugins.kt.advance.model.PpoFile;
-import org.sonar.plugins.kt.advance.model.PpoFile.PoPredicate;
-import org.sonar.plugins.kt.advance.model.PpoFile.PpoLocation;
-import org.sonar.plugins.kt.advance.model.PpoFile.PrimaryProofObligation;
-import org.sonar.plugins.kt.advance.model.PpoFile.Symbol;
-import org.sonar.plugins.kt.advance.model.PpoFile.SymbolType;
-import org.sonar.plugins.kt.advance.model.SpoFile;
-import org.sonar.plugins.kt.advance.model.SpoFile.CallSiteObligation;
-import org.sonar.plugins.kt.advance.model.SpoFile.SecondaryProofObligation;
 import org.sonar.plugins.kt.advance.util.StringTools;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
+import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.SpoFile;
+import com.kt.advance.xml.model.ApiFile.ApiAssumption;
+import com.kt.advance.xml.model.PpoFile.PoPredicate;
+import com.kt.advance.xml.model.PpoFile.PpoLocation;
+import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
+import com.kt.advance.xml.model.PpoFile.Symbol;
+import com.kt.advance.xml.model.PpoFile.SymbolType;
+import com.kt.advance.xml.model.SpoFile.CallSiteObligation;
+import com.kt.advance.xml.model.SpoFile.SecondaryProofObligation;
 
 public class IssuableProofObligation implements GoodForCache {
 
