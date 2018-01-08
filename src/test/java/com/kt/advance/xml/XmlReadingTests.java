@@ -35,7 +35,9 @@ import org.junit.Test;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.FsAbstraction;
+import org.sonar.plugins.kt.advance.util.MapCounter;
 
+import com.kt.advance.xml.model.PodFile;
 import com.kt.advance.xml.model.PpoFile;
 import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
 import com.kt.advance.xml.model.SpoFile;
@@ -56,12 +58,19 @@ public class XmlReadingTests {
         final Collection<File> iter = FileUtils.listFiles(dir,
             FsAbstraction.ppoFileFilter,
             TrueFileFilter.INSTANCE);
-
+        final MapCounter<String> mapCounter = new MapCounter<>(1);
         for (final File ppoFile : iter) {
             counter++;
             if (ppoFile.isFile()) {
                 try {
                     final PpoFile ppos = FsAbstraction.readPpoXml(ppoFile);
+                    final Map<String, PrimaryProofObligation> map = ppos.getPPOsAsMap();
+
+                    for (final String key : map.keySet()) {
+
+                        mapCounter.inc(map.get(key).getStatusCode().label, 0, 1);
+                        mapCounter.inc("total", 0, 1);
+                    }
 
                     verifyPPO(ppos, ppoFile.getName());
                 } catch (final Exception e) {
@@ -71,7 +80,57 @@ public class XmlReadingTests {
             }
         }
 
+        System.out.println(mapCounter.toStringTable());
         assertEquals(4258, counter);
+    }
+
+    @Test
+    public void testListSPOs() throws JAXBException {
+
+        int counter = 0;
+
+        final File dir = new File(APP_BASEDIR);
+        final Collection<File> iter = FileUtils.listFiles(dir,
+            FsAbstraction.spoFileFilter,
+            TrueFileFilter.INSTANCE);
+        int c = 0;
+        final MapCounter<String> mapCounter = new MapCounter<>(1);
+        for (final File spoFile : iter) {
+            counter++;
+            if (spoFile.isFile()) {
+                try {
+                    final SpoFile spos = FsAbstraction.readSpoXml(spoFile);
+                    //                    final Map<String, PrimaryProofObligation> map = ppos.getSPOsAsMap();
+                    //
+                    //                    for (final String key : map.keySet()) {
+                    //
+                    //                        mapCounter.inc(map.get(key).getStatusCode().toString(), 0, 1);
+                    //                        mapCounter.inc("total", 0, 1);
+                    //                    }
+
+                } catch (final Exception e) {
+                    c++;
+                    LOG.error(c + "\t" +
+                            spoFile.getParentFile().getName() + "/" + spoFile.getName() + ":"
+                            + e.getLocalizedMessage());
+                    //                    throw new RuntimeException(spoFile.getAbsolutePath() + "", e);
+                }
+
+            }
+        }
+
+        System.out.println(mapCounter.toStringTable());
+        assertEquals(4258, counter);
+    }
+
+    @Test
+    public void testReadPodXml() throws JAXBException {
+        final File podFile = new File(APP_BASEDIR,
+                "/CWE121/s01/char_type_overrun_memcpy/semantics/ktadvance/x01/x01_CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_01_bad_pod.xml");
+
+        /*************/
+        final PodFile ppos = FsAbstraction.readPodXml(podFile);
+        /*************/
     }
 
     @Test
@@ -87,7 +146,7 @@ public class XmlReadingTests {
         assertEquals(73, ppos.function.proofObligations.size());
 
         final Map<String, PrimaryProofObligation> map = ppos.getPPOsAsMap();
-        final PrimaryProofObligation po30 = map.get(ppos.functionId() + "30");
+        final PrimaryProofObligation po30 = map.get(ppos.functionId() + "32");
         assertNotNull(po30.toString() + " has no S", po30.status);
 
         assertNotNull(po30.toString() + " has no invs", po30.getInvariants());
@@ -116,7 +175,7 @@ public class XmlReadingTests {
         assertEquals(12, ppos.function.proofObligations.size());
 
         final Map<String, PrimaryProofObligation> map = ppos.getPPOsAsMap();
-        assertEquals(11, map.size());
+        assertEquals(12, map.size());
         for (final String key : map.keySet()) {
             LOG.info(key);
         }

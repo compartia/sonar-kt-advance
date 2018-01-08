@@ -20,7 +20,6 @@
 
 package com.kt.advance.xml.model;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,13 +35,11 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.model.GoodForCache;
-import org.sonar.plugins.kt.advance.model.HasOriginFile;
 
 import com.google.common.collect.ImmutableMap;
-import com.kt.advance.xml.model.SpoFile.PoHeader;
 
 @XmlRootElement(name = "c-analysis")
-public class PpoFile implements HasOriginFile {
+public class PpoFile extends AnalysisXml {
     public static class ArgElement {
         @XmlElement(name = "msg")
         public MsgElement message;
@@ -151,6 +148,24 @@ public class PpoFile implements HasOriginFile {
     }
 
     /**
+     * po_status = { 'g': 'safe', 'o': 'open', 'r': 'violation', 'x':
+     * 'dead-code' }
+     *
+     * -- refer CFunctionPPOs.py
+     */
+
+    public enum PPOStatus {
+        g("safe"), o("open"), r("violation"), x("dead-code"), unknown("unknown");
+
+        public final String label;
+
+        PPOStatus(String label) {
+            this.label = label;
+        }
+
+    }
+
+    /**
      *
      * @author artem <ppo deps="f" id="15" invs="50" ippo="15" s="g" ts=
      *         "2018-01-02 20:23:19">
@@ -175,7 +190,7 @@ public class PpoFile implements HasOriginFile {
         public String status;
 
         @XmlAttribute(name = "ippo", required = true)
-        public Integer ippo;
+        public Integer ippo;;
 
         @XmlAttribute(name = "ids")
         public Integer ids;
@@ -187,15 +202,16 @@ public class PpoFile implements HasOriginFile {
         public DElement d;
 
         public Integer[] getInvariants() {
-            if (this.invsString == null) {
-                return new Integer[0];
+            return splitStringIntoIntegers(this.invsString);
+        }
+
+        @XmlTransient
+        public PPOStatus getStatusCode() {
+            if (this.status != null) {
+                return PPOStatus.valueOf(this.status);
+            } else {
+                return PPOStatus.unknown;
             }
-            final String[] split = this.invsString.split(",");
-            final Integer[] ret = new Integer[split.length];
-            for (int x = 0; x < split.length; x++) {
-                ret[x] = Integer.parseInt(split[x]);
-            }
-            return ret;
         }
 
         @Override
@@ -333,19 +349,8 @@ public class PpoFile implements HasOriginFile {
     @XmlElement(name = "function")
     public PpoFunction function;
 
-    @XmlElement(name = "header")
-    public PoHeader header;
-
-    @XmlTransient
-    private File origin;
-
     public String functionId() {
         return this.header.application.file + "/" + this.function.name + "/";
-    }
-
-    @Override
-    public File getOrigin() {
-        return origin;
     }
 
     public Map<String, PrimaryProofObligation> getPPOsAsMap() {
@@ -355,23 +360,15 @@ public class PpoFile implements HasOriginFile {
 
             final String key = functionId + po.id;
             if (ret.containsKey(key)) {
-                LOG.warn("duplicated PPO ID: file(" + this.getOrigin().getName() + "), PPO key: " + key
+                LOG.warn("duplicated PPO ID: file(" +
+                //                        this.getOrigin().getParentFile().getName() + "/" +
+                        this.getOrigin().getAbsolutePath() + "), PPO key: " + key
                         + "; file PPO id: " + po.id);
             }
             ret.put(key, po);
         }
 
         return ret;
-    }
-
-    @Override
-    public String getTime() {
-        return header.time;
-    }
-
-    @Override
-    public void setOrigin(File origin) {
-        this.origin = origin;
     }
 
     @Override

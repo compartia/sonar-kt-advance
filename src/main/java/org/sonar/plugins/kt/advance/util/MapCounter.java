@@ -97,4 +97,26 @@ public class MapCounter<K> {
         return sb.toString();
     }
 
+    public String toStringTable() {
+        final StringBuilder sb = new StringBuilder();
+
+        final SortedSet<K> set = new TreeSet<>(keySet());
+        final Iterator<K> iterator = set.iterator();
+        while (iterator.hasNext()) {
+
+            final K key = iterator.next();
+
+            sb.append(key).append("\t");
+
+            sb.append(StringUtils.join(map.get(key), "\t"));
+
+            if (iterator.hasNext()) {
+                sb.append("\n");
+            }
+
+        }
+
+        return sb.toString();
+    }
+
 }

@@ -61,6 +61,7 @@ import org.sonar.plugins.kt.advance.util.XmlParser;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.MapMaker;
 import com.kt.advance.xml.model.ApiFile;
+import com.kt.advance.xml.model.PodFile;
 import com.kt.advance.xml.model.PpoFile;
 import com.kt.advance.xml.model.SpoFile;
 
@@ -131,6 +132,10 @@ public class FsAbstraction {
     public static final IOFileFilter ppoFileFilter = new SuffixFileFilter(
             FsAbstraction.xmlSuffix(PPO_SUFFIX),
             IOCase.INSENSITIVE);
+
+    public static final IOFileFilter spoFileFilter = new SuffixFileFilter(
+            FsAbstraction.xmlSuffix(SPO_SUFFIX),
+            IOCase.INSENSITIVE);
     /**
      * lazy JAXBContext & Unmarshaller cache
      */
@@ -190,6 +195,10 @@ public class FsAbstraction {
             fileContentsCache.put(key, lines);
         }
         return lines;
+    }
+
+    public static PodFile readPodXml(File file) throws JAXBException {
+        return getReader(PodFile.class).readXml(file);
     }
 
     public static PpoFile readPpoXml(File file) throws JAXBException {

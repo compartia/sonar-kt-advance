@@ -20,7 +20,6 @@
 
 package com.kt.advance.xml.model;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +27,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.sonar.plugins.kt.advance.model.HasOriginFile;
 
 import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
 
 @XmlRootElement(name = "c-analysis")
-public class SpoFile implements HasOriginFile {
+
+public class SpoFile extends AnalysisXml {
     public static class ApiCondition {
         @XmlAttribute(name = "iapi")
         public Integer iapi;
@@ -97,52 +94,12 @@ public class SpoFile implements HasOriginFile {
         public SposWrapper spos;
     }
 
-    public static class PoHeader {
-        @XmlAttribute
-        public String time;
-
-        @XmlElement(name = "name")
-        public String name;
-
-        @XmlElement(name = "info")
-        public String info;
-
-        @XmlElement(name = "application")
-        public HeaderApp application;
-
-    }
-
-    public static class HeaderApp {
-        @XmlAttribute
-        public String file;
-    }
-
     public static class SposWrapper {
         @XmlElement(name = "callsites")
         public CallsitesWrapper callsites;
     }
 
-    @XmlElement(name = "header")
-    public PoHeader header;
-
-    @XmlTransient
-    private File origin;
     @XmlElement(name = "function")
     public SpoFunction function;
-
-    @Override
-    public File getOrigin() {
-        return origin;
-    }
-
-    @Override
-    public String getTime() {
-        return header.time;
-    }
-
-    @Override
-    public void setOrigin(File origin) {
-        this.origin = origin;
-    }
 
 }
