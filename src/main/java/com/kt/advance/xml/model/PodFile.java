@@ -76,6 +76,7 @@ public class PodFile extends AnalysisXml {
             return IndexedTableNode.asMapByIndex(ppoTypes);
         }
 
+        @Deprecated
         public Map<Integer, SpoTypeNode> getSpoTypesAsMap() {
             return IndexedTableNode.asMapByIndex(spoTypes);
         }
@@ -87,9 +88,9 @@ public class PodFile extends AnalysisXml {
 
         private PpoTypeRef ppoTypeRefCache;
 
-        public PpoTypeRef asPpoTypeRef(AnalysisXml origin, File baseDir) {
+        public PpoTypeRef asPpoTypeRef(AnalysisXml origin) {
             if (ppoTypeRefCache == null) {
-                ppoTypeRefCache = new PpoTypeRef(this, origin, baseDir);
+                ppoTypeRefCache = new PpoTypeRef(this, origin, origin.getBaseDir());
             }
             return ppoTypeRefCache;
         }
@@ -216,12 +217,12 @@ public class PodFile extends AnalysisXml {
     @XmlElement(name = "function")
     public PodFunction function;
 
-    public Map<PpoTypeRefKey, PpoTypeRef> getPpoTypeRefAsMap(File baseDir) {
+    public Map<PpoTypeRefKey, PpoTypeRef> getPpoTypeRefAsMap() {
 
         final Map<PpoTypeRefKey, PpoTypeRef> map = new HashMap<>();
         for (final PpoTypeNode x : this.function.ppoTypes) {
-            final PpoTypeRefKey key = new PpoTypeRefKey(baseDir, this, x.index);
-            map.put(key, x.asPpoTypeRef(this, baseDir));
+            final PpoTypeRefKey key = new PpoTypeRefKey(this.getBaseDir(), this, x.index);
+            map.put(key, x.asPpoTypeRef(this));
         }
         return map;
 

@@ -130,6 +130,8 @@ public abstract class AnalysisXml implements HasOriginFile {
 
     }
 
+    private File baseDir;
+
     @XmlElement(name = "header")
     public PoHeader header;
 
@@ -157,6 +159,11 @@ public abstract class AnalysisXml implements HasOriginFile {
     }
 
     @Override
+    public File getBaseDir() {
+        return baseDir;
+    }
+
+    @Override
     public File getOrigin() {
         return origin;
     }
@@ -175,6 +182,11 @@ public abstract class AnalysisXml implements HasOriginFile {
     @Override
     public String getTime() {
         return header.time;
+    }
+
+    @Override
+    public void setBaseDir(File baseDir) {
+        this.baseDir = baseDir;
     }
 
     @Override

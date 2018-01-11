@@ -67,6 +67,7 @@ import com.kt.advance.xml.model.PodFile;
 import com.kt.advance.xml.model.PodFile.PpoTypeRef;
 import com.kt.advance.xml.model.PodFile.PpoTypeRefKey;
 import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
 import com.kt.advance.xml.model.PrdFile;
 import com.kt.advance.xml.model.PrdFile.Predicate;
 import com.kt.advance.xml.model.PrdFile.PredicateKey;
@@ -111,7 +112,7 @@ public class FsAbstraction {
         }
 
         @SuppressWarnings("unchecked")
-        public T readXml(File file) throws JAXBException {
+        public T readXml(File file, File baseDir) throws JAXBException {
 
             if (!file.isFile()) {
                 KtAdvanceSensorRunner.LOG.warn("not found " + file.getAbsolutePath());
@@ -125,6 +126,7 @@ public class FsAbstraction {
 
             if (obj instanceof HasOriginFile) {
                 ((HasOriginFile) obj).setOrigin(file);
+                ((HasOriginFile) obj).setBaseDir(baseDir);
             }
             return obj;
         }
@@ -198,6 +200,15 @@ public class FsAbstraction {
         this.baseDir = fileSystem.baseDir();
     }
 
+    public static void bindPod2Ppo(PpoFile ppoFile, PodFile podFile, File baseDir) {
+        final Map<PpoTypeRefKey, PpoTypeRef> ppoTypeRefAsMap = podFile.getPpoTypeRefAsMap();
+
+        for (final PrimaryProofObligation ppo : ppoFile.function.proofObligations) {
+            final PpoTypeRef ppoTypeRef = ppoTypeRefAsMap.get(ppo.getPpoTypeRefKey(ppoFile));
+            ppo.type = ppoTypeRef;
+        }
+    }
+
     public static void bindPredicates(Map<PredicateKey, Predicate> allPredicatesMap,
             Collection<? extends HasPredicateKey> proofObligationTypes) {
 
@@ -240,8 +251,8 @@ public class FsAbstraction {
         for (final File podFile : pods) {
 
             try {
-                final PodFile dict = readPodXml(podFile);
-                final Map<PpoTypeRefKey, PpoTypeRef> ppoPpoTypeRefAsMap = dict.getPpoTypeRefAsMap(baseDir);
+                final PodFile dict = readPodXml(podFile, baseDir);
+                final Map<PpoTypeRefKey, PpoTypeRef> ppoPpoTypeRefAsMap = dict.getPpoTypeRefAsMap();
                 mergeMapsStrictly(map, ppoPpoTypeRefAsMap, "PpoTypeRefKey:" + dict.getOrigin().getAbsolutePath());
 
             } catch (final Exception ex) {
@@ -252,13 +263,13 @@ public class FsAbstraction {
         return map;
     }
 
-    public static Map<PredicateKey, Predicate> readAllPredicateXmls(Collection<File> predicatesFiles, File base)
+    public static Map<PredicateKey, Predicate> readAllPredicateXmls(Collection<File> predicatesFiles, File baseDir)
             throws JAXBException {
         final Map<PredicateKey, Predicate> appPredicates = new HashMap<>();
 
         for (final File f : predicatesFiles) {
-            final PrdFile prdXml = readPrdXml(f);
-            final Map<PredicateKey, Predicate> predicatesAsMap = prdXml.getPredicatesAsMap(base);
+            final PrdFile prdXml = readPrdXml(f, baseDir);
+            final Map<PredicateKey, Predicate> predicatesAsMap = prdXml.getPredicatesAsMap(baseDir);
 
             mergeMapsStrictly(appPredicates, predicatesAsMap, "PredicateKey: " + prdXml.getOrigin().getAbsolutePath());
 
@@ -285,58 +296,58 @@ public class FsAbstraction {
         return lines;
     }
 
-    public static PodFile readPodXml(File file) throws JAXBException {
-        return getReader(PodFile.class).readXml(file);
+    public static PodFile readPodXml(File file, File baseDir) throws JAXBException {
+        return getReader(PodFile.class).readXml(file, baseDir);
     }
 
-    public static PpoFile readPpoXml(File file) throws JAXBException {
-        return getReader(PpoFile.class).readXml(file);
+    public static PpoFile readPpoXml(File file, File baseDir) throws JAXBException {
+        return getReader(PpoFile.class).readXml(file, baseDir);
     }
 
-    public static PrdFile readPrdXml(File file) throws JAXBException {
-        return getReader(PrdFile.class).readXml(file);
+    public static PrdFile readPrdXml(File file, File baseDir) throws JAXBException {
+        return getReader(PrdFile.class).readXml(file, baseDir);
     }
 
-    public static SpoFile readSpoXml(File file) throws JAXBException {
-        return getReader(SpoFile.class).readXml(file);
+    public static SpoFile readSpoXml(File file, File baseDir) throws JAXBException {
+        return getReader(SpoFile.class).readXml(file, baseDir);
     }
 
-    static ApiFile readApiXml(File file) throws JAXBException {
+    static ApiFile readApiXml(File file, File baseDir) throws JAXBException {
         if (functionNameToApiMap.containsKey(file.getAbsolutePath())) {
             return functionNameToApiMap.get(file.getAbsolutePath());
         }
-        return getReader(ApiFile.class).readXml(file);
+        return getReader(ApiFile.class).readXml(file, baseDir);
     }
 
-    static EvFile readPevXml(File file) throws JAXBException {
+    static EvFile readPevXml(File file, File baseDir) throws JAXBException {
         if (filenameToEvFileMap.containsKey(file)) {
             return filenameToEvFileMap.get(file);
         } else {
 
-            final PevFile read = getReader(PevFile.class).readXml(file);
+            final PevFile read = getReader(PevFile.class).readXml(file, baseDir);
             filenameToEvFileMap.put(file, read);
             return read;
         }
     }
 
-    static EvFile readSevXml(File file) throws JAXBException {
+    static EvFile readSevXml(File file, File baseDir) throws JAXBException {
         if (filenameToEvFileMap.containsKey(file)) {
             return filenameToEvFileMap.get(file);
         } else {
 
-            final SevFile read = getReader(SevFile.class).readXml(file);
+            final SevFile read = getReader(SevFile.class).readXml(file, baseDir);
             filenameToEvFileMap.put(file, read);
             return read;
         }
     }
 
-    static <X> X readXml(Class<X> c, File file) throws JAXBException {
-        return getReader(c).readXml(file);
+    static <X> X readXml(Class<X> c, File file, File baseDir) throws JAXBException {
+        return getReader(c).readXml(file, baseDir);
     }
 
-    public void cacheApiFile(final File apiXml) {
+    public void cacheApiFile(final File apiXml, File baseDir) {
         try {
-            final ApiFile api = FsAbstraction.readApiXml(apiXml);
+            final ApiFile api = FsAbstraction.readApiXml(apiXml, baseDir);
             functionNameToApiMap.put(apiXml.getAbsolutePath(), api);
             functionNameToApiMap.put(api.function.name, api);
             functionNameToApiMap.put(api.function.cfilename + "::" + api.function.name, api);
@@ -344,11 +355,6 @@ public class FsAbstraction {
         } catch (final JAXBException e) {
             LOG.error("XML parsing failed: " + e.getMessage());
         }
-    }
-
-    public void cacheApiFiles(String funcname) {
-        forEachApiFile(funcname, this::cacheApiFile);
-        LOG.info("cached " + functionNameToApiMap.size() + " function APIs");
     }
 
     public void doInCache(InCacheJob job) {
@@ -374,21 +380,6 @@ public class FsAbstraction {
         final Iterable<InputFile> files = fileSystem.inputFiles(filePredicate);
         for (final InputFile file : files) {
             handler.parse(file.file());
-        }
-    }
-
-    @Deprecated
-    public ApiFile getApiByFunc(String funcname, String preferableSourceFileName) {
-        //XXX: this is completely vague.
-        ApiFile apiFile = functionNameToApiMap.get(funcname);
-        if (apiFile == null) {
-            this.cacheApiFiles(funcname);
-        }
-        apiFile = functionNameToApiMap.get(preferableSourceFileName + "::" + funcname);
-        if (apiFile == null) {
-            return functionNameToApiMap.get(funcname);
-        } else {
-            return apiFile;
         }
     }
 
@@ -458,6 +449,22 @@ public class FsAbstraction {
             LOG.error("cannot find '" + file.getAbsolutePath());
         }
         return inputFile;
+    }
+
+    public PodFile readPodXml(File file) throws JAXBException {
+        return getReader(PodFile.class).readXml(file, baseDir);
+    }
+
+    public PpoFile readPpoXml(File file) throws JAXBException {
+        return getReader(PpoFile.class).readXml(file, baseDir);
+    }
+
+    public PrdFile readPrdXml(File file) throws JAXBException {
+        return getReader(PrdFile.class).readXml(file, baseDir);
+    }
+
+    public SpoFile readSpoXml(File file) throws JAXBException {
+        return getReader(SpoFile.class).readXml(file, baseDir);
     }
 
     public void save(IssuableProofObligation ipo) {

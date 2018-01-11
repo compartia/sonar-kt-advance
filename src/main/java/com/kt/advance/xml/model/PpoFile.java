@@ -38,6 +38,7 @@ import org.sonar.plugins.kt.advance.model.GoodForCache;
 
 import com.google.common.collect.ImmutableMap;
 import com.kt.advance.xml.model.PodFile.PpoTypeRef;
+import com.kt.advance.xml.model.PodFile.PpoTypeRefKey;
 
 @XmlRootElement(name = "c-analysis")
 public class PpoFile extends AnalysisXml {
@@ -275,8 +276,13 @@ public class PpoFile extends AnalysisXml {
     public static class ProofObligationBase {
         @XmlAttribute(name = "id", required = true)
         public Integer id;
+
         @XmlAttribute(name = "ts", required = true)
         public String timeStamp;
+
+        public PpoTypeRefKey getPpoTypeRefKey(AnalysisXml xml) {
+            return new PpoTypeRefKey(xml.getBaseDir(), xml, id);
+        }
 
     }
 
