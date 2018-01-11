@@ -33,6 +33,9 @@ public class MapCounter<K> {
     private final Map<K, Double[]> map = new HashMap<>();
     private final int numberOfColumns;
 
+    private final Map<Integer, String> columnNames = new HashMap<>();
+    private final Map<String, Integer> columnNamesReverse = new HashMap<>();
+
     public MapCounter(int numberOfColumns) {
         super();
         this.numberOfColumns = numberOfColumns;
@@ -62,8 +65,19 @@ public class MapCounter<K> {
         value[col] += inc;
     }
 
+    public void inc(K key, String col, double inc) {
+        final Integer cname = columnNamesReverse.get(col);
+
+        this.inc(key, cname, inc);
+    }
+
     public Set<K> keySet() {
         return map.keySet();
+    }
+
+    public void setColumnName(Integer idx, String name) {
+        this.columnNames.put(idx, name);
+        this.columnNamesReverse.put(name, idx);
     }
 
     /**
@@ -106,7 +120,7 @@ public class MapCounter<K> {
 
             final K key = iterator.next();
 
-            sb.append(key).append("\t");
+            sb.append(key).append("\t\t");
 
             sb.append(StringUtils.join(map.get(key), "\t"));
 

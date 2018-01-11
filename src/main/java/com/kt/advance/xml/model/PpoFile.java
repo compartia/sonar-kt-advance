@@ -37,6 +37,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.model.GoodForCache;
 
 import com.google.common.collect.ImmutableMap;
+import com.kt.advance.xml.model.PodFile.PpoTypeRef;
 
 @XmlRootElement(name = "c-analysis")
 public class PpoFile extends AnalysisXml {
@@ -62,6 +63,27 @@ public class PpoFile extends AnalysisXml {
     public static class MsgElement {
         @XmlAttribute(name = "t")
         public String text;
+
+    }
+
+    /**
+     * 'cs': lambda x:PP.CallsiteSPOType(*x), 'rs': lambda
+     * x:PP.ReturnsiteSPOType(*x)
+     */
+    public enum PoType {
+
+        cs("Callsite"), rs("Returnsite"), p("PPO"), pl("PPOLib");
+        //        public String label;
+        //
+        //        SpoType(String label) {
+        //            this.label = label;
+        //        }
+
+        public String label;
+
+        PoType(String label) {
+            this.label = label;
+        }
 
     }
 
@@ -177,6 +199,9 @@ public class PpoFile extends AnalysisXml {
         @XmlAttribute(name = "domain")
         public String domain;
 
+        @XmlTransient
+        public PpoTypeRef type;
+
         @XmlAttribute(name = "invs")
         public String invsString;
 
@@ -249,7 +274,7 @@ public class PpoFile extends AnalysisXml {
 
     public static class ProofObligationBase {
         @XmlAttribute(name = "id", required = true)
-        public String id;
+        public Integer id;
         @XmlAttribute(name = "ts", required = true)
         public String timeStamp;
 

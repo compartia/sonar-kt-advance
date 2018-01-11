@@ -24,6 +24,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -37,24 +38,204 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.FsAbstraction;
 import org.sonar.plugins.kt.advance.util.MapCounter;
 
+import com.kt.advance.xml.model.AnalysisXml;
 import com.kt.advance.xml.model.PodFile;
+import com.kt.advance.xml.model.PodFile.PpoTypeNode;
+import com.kt.advance.xml.model.PodFile.PpoTypeRef;
+import com.kt.advance.xml.model.PodFile.PpoTypeRefKey;
+import com.kt.advance.xml.model.PodFile.SpoTypeNode;
+import com.kt.advance.xml.model.PodFile.SpoTypeRef;
 import com.kt.advance.xml.model.PpoFile;
 import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
+import com.kt.advance.xml.model.PrdFile;
+import com.kt.advance.xml.model.PrdFile.Predicate;
+import com.kt.advance.xml.model.PrdFile.PredicateKey;
 import com.kt.advance.xml.model.SpoFile;
 import com.kt.advance.xml.model.SpoFile.ApiCondition;
 import com.kt.advance.xml.model.SpoFile.SPOCall;
 
 public class XmlReadingTests {
-    static String APP_BASEDIR = "/Users/artem/work/KestrelTechnology/IN/juliet_v1.3";
-    static String MODULE_BASEDIR = "/Users/artem/work/KestrelTechnology/IN/juliet_v1.3/CWE121/s01/CWE129_large/semantics/ktadvance/std_thread";
+    static String naim_APP_BASEDIR = "/Users/artem/work/KestrelTechnology/IN/naim-0.11.8.3.1";
+    static String juliet_APP_BASEDIR = "/Users/artem/work/KestrelTechnology/IN/juliet_v1.3";
+    static String nagios_APP_BASEDIR = "/Users/artem/work/KestrelTechnology/IN/nagios-2.10";
+
+    //    static String MODULE_BASEDIR = "/Users/artem/work/KestrelTechnology/IN/juliet_v1.3/CWE121/s01/CWE129_large/semantics/ktadvance/std_thread";
     private static final Logger LOG = Loggers.get(XmlReadingTests.class.getName());
+
+    final static String LINE = "****************";
+
+    @Test
+    public void testBindAllPod2Ppo() throws JAXBException {
+        int errors = 0;
+        final File dir = new File(juliet_APP_BASEDIR);
+        final Collection<File> pods = FileUtils.listFiles(dir,
+            FsAbstraction.podFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        for (final File pod : pods) {
+            try {
+
+                testBindPod2Ppo(pod, dir);
+
+            } catch (final Error e) {
+                errors++;
+                LOG.error(errors + "\t " + e.getLocalizedMessage());
+            } catch (final Exception e) {
+                errors++;
+                LOG.error(errors + "\t " + e.getLocalizedMessage());
+            }
+
+        }
+
+        assertEquals(0, errors);
+
+    }
+
+    @Test
+    public void testBindAllPod2Prd() throws JAXBException {
+
+        ///
+        final MapCounter<String> stats = new MapCounter<>(3);
+        //
+        final File base = new File(naim_APP_BASEDIR);
+
+        final Collection<File> predicatesFiles = FileUtils.listFiles(base,
+            FsAbstraction.prdFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Map<PredicateKey, Predicate> allPredicatesMap = FsAbstraction.readAllPredicateXmls(predicatesFiles,
+            base);
+        ///////
+        line();
+        LOG.info("total number of UNIQUE predicates keys in " + predicatesFiles.size() + " files is "
+                + allPredicatesMap.size());
+        line();
+
+        ///////
+        int bound = 0;
+        int exceptions = 0;
+        int errors = 0;
+
+        ///////
+        final Collection<File> pods = FileUtils.listFiles(base,
+            FsAbstraction.podFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        for (final File podFile : pods) {
+
+            try {
+                final PodFile dict = FsAbstraction.readPodXml(podFile);
+                validateHeader(dict);
+
+                //                                final Map<Integer, PpoTypeNode> ppoTypesAsMap = dict.function.getPpoTypesAsMap();
+                final Map<PpoTypeRefKey, PpoTypeRef> ppoPpoTypeRefAsMap = dict.getPpoTypeRefAsMap(base);
+
+                for (final PpoTypeRef ppoTypeRef : ppoPpoTypeRefAsMap.values()) {
+
+                    try {
+                        //                        final PpoTypeRef ppoTypeRef = pt.asPpoTypeRef(dict, base);
+                        final Predicate predicate = allPredicatesMap.get(ppoTypeRef.predicateIndex);
+                        assertNotNull("no predicate with key " + ppoTypeRef.predicateIndex, predicate);
+                        ppoTypeRef.setPredicate(predicate);
+
+                        stats.inc(predicate.type.label, 0, 1);
+                        stats.inc(predicate.type.label, ppoTypeRef.proofObligationType.ordinal(), 1);
+
+                        stats.inc("=total", 0, 1);
+
+                        bound++;
+                    } catch (final Error e) {
+                        errors++;
+                        LOG.error(e.getMessage());
+                    }
+
+                }
+
+            } catch (final Error e) {
+                exceptions++;
+                LOG.error(e.getLocalizedMessage());
+            }
+
+        }
+
+        line();
+        LOG.info("\n\n Primary Proof Obligations in " + base);
+        LOG.info("\n" + stats.toStringTable());
+        line();
+        LOG.info("total PPOs with valid predicates:" + bound);
+        LOG.info("errors (PPOs with no  predicates):" + errors);
+        LOG.info("exceptions :" + exceptions);
+        line();
+
+        assertEquals(0, exceptions);
+        assertEquals(0, errors);
+
+    }
+
+    @Test
+    public void testBindAllPredicateXmlsApi() throws JAXBException {
+        final File base = new File(nagios_APP_BASEDIR);
+
+        final Collection<File> pods = FileUtils.listFiles(base,
+            FsAbstraction.podFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Collection<File> predicatesFiles = FileUtils.listFiles(base,
+            FsAbstraction.prdFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Map<PredicateKey, Predicate>//
+        allPredicatesMap = FsAbstraction.readAllPredicateXmls(predicatesFiles, base);
+        final Map<PpoTypeRefKey, PpoTypeRef> //
+        allPodFilesMap = FsAbstraction.readAllPodFilesMap(pods, base);
+
+        FsAbstraction.bindPredicates(allPredicatesMap, allPodFilesMap.values());
+    }
+
+    @Test
+    public void testBindPodPpoSpoXml() throws JAXBException {
+        final File base = new File(juliet_APP_BASEDIR);
+        final File pod = new File(base,
+                "/CWE121/s01/CWE129_large/semantics/ktadvance/x11/x11_CWE121_Stack_Based_Buffer_Overflow__CWE129_large_11_bad_pod.xml");
+
+        testBindPod2Ppo(pod, base);
+
+    }
+
+    @Test
+    public void testCountFiles() throws JAXBException {
+
+        final File dir = new File(juliet_APP_BASEDIR);
+
+        final Collection<File> spos = FileUtils.listFiles(dir,
+            FsAbstraction.spoFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Collection<File> ppos = FileUtils.listFiles(dir,
+            FsAbstraction.ppoFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Collection<File> pods = FileUtils.listFiles(dir,
+            FsAbstraction.podFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Collection<File> apis = FileUtils.listFiles(dir,
+            FsAbstraction.apiFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final int expectedNumberOfFiles = 4258;
+        assertEquals(expectedNumberOfFiles, apis.size());
+        assertEquals(expectedNumberOfFiles, spos.size());
+        assertEquals(expectedNumberOfFiles, ppos.size());
+        assertEquals(expectedNumberOfFiles, pods.size());
+    }
 
     @Test
     public void testListPPOs() throws JAXBException {
 
         int counter = 0;
 
-        final File dir = new File(APP_BASEDIR);
+        final File dir = new File(juliet_APP_BASEDIR);
         final Collection<File> iter = FileUtils.listFiles(dir,
             FsAbstraction.ppoFileFilter,
             TrueFileFilter.INSTANCE);
@@ -63,8 +244,11 @@ public class XmlReadingTests {
             counter++;
             if (ppoFile.isFile()) {
                 try {
-                    final PpoFile ppos = FsAbstraction.readPpoXml(ppoFile);
-                    final Map<String, PrimaryProofObligation> map = ppos.getPPOsAsMap();
+                    final PpoFile ppoXMl = FsAbstraction.readPpoXml(ppoFile);
+
+                    validateHeader(ppoXMl);
+
+                    final Map<String, PrimaryProofObligation> map = ppoXMl.getPPOsAsMap();
 
                     for (final String key : map.keySet()) {
 
@@ -72,16 +256,20 @@ public class XmlReadingTests {
                         mapCounter.inc("total", 0, 1);
                     }
 
-                    verifyPPO(ppos, ppoFile.getName());
+                    verifyPPO(ppoXMl, ppoFile.getName());
                 } catch (final Exception e) {
                     throw new RuntimeException(ppoFile.getAbsolutePath() + "", e);
                 }
 
             }
         }
-
+        line();
         System.out.println(mapCounter.toStringTable());
         assertEquals(4258, counter);
+        line();
+        System.out.println("total SPO files read: " + counter);
+
+        line();
     }
 
     @Test
@@ -89,53 +277,106 @@ public class XmlReadingTests {
 
         int counter = 0;
 
-        final File dir = new File(APP_BASEDIR);
+        final File dir = new File(juliet_APP_BASEDIR);
         final Collection<File> iter = FileUtils.listFiles(dir,
             FsAbstraction.spoFileFilter,
             TrueFileFilter.INSTANCE);
         int c = 0;
-        final MapCounter<String> mapCounter = new MapCounter<>(1);
+        //        final MapCounter<String> mapCounter = new MapCounter<>(1);
         for (final File spoFile : iter) {
             counter++;
             if (spoFile.isFile()) {
                 try {
                     final SpoFile spos = FsAbstraction.readSpoXml(spoFile);
-                    //                    final Map<String, PrimaryProofObligation> map = ppos.getSPOsAsMap();
-                    //
-                    //                    for (final String key : map.keySet()) {
-                    //
-                    //                        mapCounter.inc(map.get(key).getStatusCode().toString(), 0, 1);
-                    //                        mapCounter.inc("total", 0, 1);
-                    //                    }
+                    validateHeader(spos);
 
                 } catch (final Exception e) {
                     c++;
                     LOG.error(c + "\t" +
                             spoFile.getParentFile().getName() + "/" + spoFile.getName() + ":"
                             + e.getLocalizedMessage());
-                    //                    throw new RuntimeException(spoFile.getAbsolutePath() + "", e);
+                }
+
+                catch (final Error e) {
+                    c++;
+                    LOG.error(c + "\t" +
+                            spoFile.getParentFile().getName() + "/" + spoFile.getName() + ":"
+                            + e.getLocalizedMessage());
                 }
 
             }
         }
-
-        System.out.println(mapCounter.toStringTable());
+        assertEquals(0, c);
+        line();
+        System.out.println("total SPO files read: " + counter);
+        line();
+        //        System.out.println(mapCounter.toStringTable());
         assertEquals(4258, counter);
     }
 
     @Test
+    public void testReadAllPrd() throws JAXBException {
+
+        final File dir = new File(juliet_APP_BASEDIR);
+
+        final Collection<File> predicatesFiles = FileUtils.listFiles(dir,
+            FsAbstraction.prdFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        int count = 0;
+        for (final File f : predicatesFiles) {
+            final PrdFile prdXml = FsAbstraction.readPrdXml(f);
+            validateHeader(prdXml);
+            count += prdXml.predicatesDictionary.predicates.size();
+        }
+        line();
+        LOG.info("total number of predicates in " + predicatesFiles.size() + " files is " + count);
+        line();
+    }
+
+    @Test
+    public void testReadPodPpoSpoXml() throws JAXBException {
+        final File podFile = new File(juliet_APP_BASEDIR,
+                "/CWE121/s01/CWE129_large/semantics/ktadvance/x11/x11_CWE121_Stack_Based_Buffer_Overflow__CWE129_large_11_bad_pod.xml");
+
+        final File ppoFile = XmlNamesUtils.replaceSuffix(podFile, FsAbstraction.POD_SUFFIX, FsAbstraction.PPO_SUFFIX);
+        final File spoFile = XmlNamesUtils.replaceSuffix(podFile, FsAbstraction.POD_SUFFIX, FsAbstraction.SPO_SUFFIX);
+        /*************/
+        final PodFile dict = FsAbstraction.readPodXml(podFile);
+        final PpoFile ppos = FsAbstraction.readPpoXml(ppoFile);
+        final SpoFile spos = FsAbstraction.readSpoXml(spoFile);
+        /*************/
+
+        assertEquals(ppos.function.proofObligations.size(), dict.function.ppoTypes.size());
+
+    }
+
+    @Test
     public void testReadPodXml() throws JAXBException {
-        final File podFile = new File(APP_BASEDIR,
-                "/CWE121/s01/char_type_overrun_memcpy/semantics/ktadvance/x01/x01_CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_01_bad_pod.xml");
+        final File podFile = new File(juliet_APP_BASEDIR,
+                "/CWE122/s06/CWE135/semantics/ktadvance/x66b/x66b_CWE122_Heap_Based_Buffer_Overflow__CWE135_66b_goodG2BSink_pod.xml");
 
         /*************/
-        final PodFile ppos = FsAbstraction.readPodXml(podFile);
+        final PodFile dict = FsAbstraction.readPodXml(podFile);
         /*************/
+
+        validateHeader(dict);
+
+        assertNotNull(dict.function);
+
+        assertNotNull(dict.function.assumptions);
+        assertNotNull(dict.function.ppoTypes);
+        assertNotNull(dict.function.spoTypes);
+
+        assertEquals(1, dict.function.spoTypes.size());
+        assertEquals(58, dict.function.ppoTypes.size());
+        assertEquals(2, dict.function.assumptions.size());
     }
 
     @Test
     public void testReadPpoXml() throws JAXBException {
-        final File ppoFile = new File(MODULE_BASEDIR, "std_thread_stdThreadCreate_ppo.xml");
+        final File ppoFile = new File(juliet_APP_BASEDIR,
+                "CWE121/s01/CWE129_large/semantics/ktadvance/std_thread/std_thread_stdThreadCreate_ppo.xml");
 
         /*************/
         final PpoFile ppos = FsAbstraction.readPpoXml(ppoFile);
@@ -162,8 +403,8 @@ public class XmlReadingTests {
     }
 
     @Test
-    public void testReadPpoXml2() throws JAXBException {
-        final File ppoFile = new File(APP_BASEDIR,
+    public void testReadSinglePpo() throws JAXBException {
+        final File ppoFile = new File(juliet_APP_BASEDIR,
                 "/CWE121/s01/char_type_overrun_memcpy/semantics/ktadvance/main_linux/main_linux_main_ppo.xml");
 
         /*************/
@@ -176,15 +417,70 @@ public class XmlReadingTests {
 
         final Map<String, PrimaryProofObligation> map = ppos.getPPOsAsMap();
         assertEquals(12, map.size());
-        for (final String key : map.keySet()) {
-            LOG.info(key);
+
+    }
+
+    @Test
+    public void testReadSinglePrd() throws JAXBException {
+        final File base = new File(juliet_APP_BASEDIR);
+        final File prd = new File(base, "CWE121/s02/CWE193_char_alloca_loop/semantics/ktadvance/x15_prd.xml");
+
+        //        final File pod = new File(base,
+        //                "CWE121/s02/CWE193_char_alloca_loop/semantics/ktadvance/x15/x15_CWE121_Stack_Based_Buffer_Overflow__CWE193_char_alloca_loop_15_bad_pod.xml");
+
+        final File dir = new File(base,
+                "CWE121/s02/CWE193_char_alloca_loop/semantics/ktadvance/x15");
+        final Collection<File> predicatesFiles = Collections.singleton(prd);
+        //        final Collection<File> pods = Collections.singleton(pod);
+
+        final Collection<File> pods = FileUtils.listFiles(dir,
+            FsAbstraction.podFileFilter,
+            TrueFileFilter.INSTANCE);
+
+        final Map<PredicateKey, Predicate> allPredicatesMap = FsAbstraction.readAllPredicateXmls(predicatesFiles,
+            base);
+
+        final Map<PpoTypeRefKey, PpoTypeRef> proofObligationTypes = FsAbstraction.readAllPodFilesMap(pods, base);
+
+        //        for (final PredicateKey p : allPredicatesMap.keySet()) {
+        //            System.err.println(p.toString());
+        //        }
+        //
+        //        line();
+        //        for (final PpoTypeRef p : proofObligationTypes.values()) {
+        //            System.err.println(p.getPredicateKey());
+        //        }
+
+        FsAbstraction.bindPredicates(allPredicatesMap, proofObligationTypes.values());
+
+        for (final PpoTypeRef p : proofObligationTypes.values()) {
+            assertNotNull(p.getPredicate());
+            //            System.err.println(p.getPredicate());
+        }
+    }
+
+    @Test
+    public void testReadSinglePrd2() throws JAXBException {
+        final File base = new File(juliet_APP_BASEDIR);
+        final File file = new File(base,
+                "/CWE121/s01/CWE129_rand/semantics/ktadvance/x01_prd.xml");
+
+        final PrdFile prdXml = FsAbstraction.readPrdXml(file);
+        final Map<PredicateKey, Predicate> predicatesAsMap = prdXml.getPredicatesAsMap(base);
+        final PredicateKey predicateKey = PrdFile.makePredicateKey(prdXml, 18, base);
+        final Predicate predicate = predicatesAsMap.get(predicateKey);
+        assertNotNull("no predicate found for the key " + predicateKey, predicate);
+        assertEquals("iu", predicate.type);
+
+        for (final PredicateKey k : predicatesAsMap.keySet()) {
+            System.out.println(k);
         }
 
     }
 
     @Test
-    public void testReadSpoXml() throws JAXBException {
-        final File spoFile = new File(APP_BASEDIR,
+    public void testReadSingleSpo() throws JAXBException {
+        final File spoFile = new File(juliet_APP_BASEDIR,
                 "/CWE121/s01/CWE129_large/semantics/ktadvance/x44/x44_CWE121_Stack_Based_Buffer_Overflow__CWE129_large_44_bad_spo.xml");
 
         /*************/
@@ -207,16 +503,17 @@ public class XmlReadingTests {
         final ApiCondition apiCondition = spoCall.apiConditions.get(0);
         assertNotNull(apiCondition);
         assertNotNull(apiCondition.iapi);
-        assertNotNull(apiCondition.po);
-        assertEquals("r", apiCondition.po.status);
-        assertNotNull(apiCondition.po.evaluation);
-        assertEquals("lower bound of index value: 10, exceeds length: 10", apiCondition.po.evaluation.text);
+        assertNotNull(apiCondition.proofObligation);
+        assertEquals("r", apiCondition.proofObligation.status);
+        assertNotNull(apiCondition.proofObligation.evaluation);
+        assertEquals("lower bound of index value: 10, exceeds length: 10",
+            apiCondition.proofObligation.evaluation.text);
 
     }
 
     @Test
     public void testReadSpoXml2() throws JAXBException {
-        final File spoFile = new File(APP_BASEDIR,
+        final File spoFile = new File(juliet_APP_BASEDIR,
                 "/CWE121/s01/char_type_overrun_memcpy/semantics/ktadvance/main_linux/main_linux_main_spo.xml");
 
         /*************/
@@ -242,12 +539,99 @@ public class XmlReadingTests {
             assertNotNull(call.iloc);
             assertNotNull(call.ivinfo);
             assertNotNull(call.ictxt);
-            LOG.info(call.iloc + ",");
+            //            LOG.info(call.iloc + ",");
         }
+    }
+
+    public void validateHeader(AnalysisXml xml) {
+        final String message = "Invalid or missing header in file " + xml.getOrigin();
+        assertNotNull(message, xml.header);
+        assertNotNull("no <application> tag: " + message, xml.header.application);
+        assertNotNull("no file attr in <application> tag: " + message, xml.header.application.file);
+    }
+
+    void bindSpoCallsApiConditions(final Map<Integer, SpoTypeNode> spoTypesAsMap, List<SPOCall> spoCalls,
+            AnalysisXml origin, File baseDir) {
+
+        for (final SPOCall spoCall : spoCalls) {
+
+            for (final ApiCondition apiCondition : spoCall.apiConditions) {
+                final Integer id = apiCondition.proofObligation.id;
+
+                final SpoTypeRef spoTypeRef = spoTypesAsMap.get(id).asSpoTypeRef(origin, baseDir);
+
+                assertNotNull(spoTypeRef.contexIndex);
+                assertNotNull(spoTypeRef.locationIndex);
+                assertNotNull(spoTypeRef.postconditionIndex);
+                assertNotNull(spoTypeRef.predicateIndex);
+
+                apiCondition.proofObligation.type = spoTypeRef;
+                assertNotNull(apiCondition.proofObligation.type);
+
+            }
+
+        }
+    }
+
+    void line() {
+        LOG.info(LINE);
+    }
+
+    void testBindPod2Ppo(final File pod, File baseDir) throws JAXBException {
+        final File podFile = pod;
+        final File ppoFile = XmlNamesUtils.replaceSuffix(podFile, FsAbstraction.POD_SUFFIX, FsAbstraction.PPO_SUFFIX);
+        final File spoFile = XmlNamesUtils.replaceSuffix(podFile, FsAbstraction.POD_SUFFIX, FsAbstraction.SPO_SUFFIX);
+
+        /*************/
+        final PodFile dict = FsAbstraction.readPodXml(podFile);
+        final PpoFile ppos = FsAbstraction.readPpoXml(ppoFile);
+        final SpoFile spos = FsAbstraction.readSpoXml(spoFile);
+        /*************/
+
+        validateHeader(dict);
+        validateHeader(ppos);
+        validateHeader(spos);
+
+        //        if (dict.function.assumptions.size() > 0 && dict.function.ppoTypes.size() > 0
+        //                && dict.function.spoTypes.size() > 0) {
+        //            System.err.println(podFile.getAbsolutePath());
+        //        }
+
+        final Map<Integer, PpoTypeNode> ppoTypesAsMap = dict.function.getPpoTypesAsMap();
+        final Map<Integer, SpoTypeNode> spoTypesAsMap = dict.function.getSpoTypesAsMap();
+
+        assertEquals("The number of ppo tags in file [" + ppoFile.getAbsolutePath()
+                + "] does not correspond the number of nodes of ppo-type-table in [" + pod.getAbsolutePath() + "]",
+            ppos.function.proofObligations.size(), ppoTypesAsMap.size());
+
+        //        final int spoCount = spoCalls.size() + spos.getCallsites().indirectCalls.size()
+        //                + spos.getCallsites().returnSites.size();
+
+        //        assertEquals("The number of spo tags in file [" + spoFile.getAbsolutePath()
+        //                + "] does not correspond the number of nodes of spo-type-table in [" + pod.getAbsolutePath() + "]",
+        //
+        //            spoCount, spoTypesAsMap.size());
+
+        for (final PrimaryProofObligation ppo : ppos.function.proofObligations) {
+            try {
+                final PpoTypeRef PpoTypeRef = ppoTypesAsMap.get(ppo.id).asPpoTypeRef(dict, baseDir);
+                ppo.type = PpoTypeRef;
+            } catch (final Exception e) {
+                LOG.error(e.getLocalizedMessage() + " when parsing " + podFile);
+            }
+
+        }
+
+        //        List<SPOCall> spoCalls = spos.getCallsites().directCalls;
+
+        bindSpoCallsApiConditions(spoTypesAsMap, spos.getCallsites().directCalls, dict, baseDir);
+        bindSpoCallsApiConditions(spoTypesAsMap, spos.getCallsites().indirectCalls, dict, baseDir);
+        bindSpoCallsApiConditions(spoTypesAsMap, spos.getCallsites().returnSites, dict, baseDir);
     }
 
     void verifyPPO(final PpoFile ppos, String filename) {
         assertNotNull(ppos);
+        validateHeader(ppos);
         assertNotNull(filename + "-" + ppos.toString() + " has no function", ppos.function);
         assertNotNull(ppos.function.name);
         for (final PrimaryProofObligation po : ppos.function.proofObligations) {

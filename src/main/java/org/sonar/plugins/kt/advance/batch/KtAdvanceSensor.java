@@ -58,6 +58,9 @@ import org.sonar.plugins.kt.advance.model.EvFile.Lifting;
 import org.sonar.plugins.kt.advance.model.EvFile.PO;
 
 import com.google.common.base.Preconditions;
+import com.kt.advance.xml.XmlNamesUtils;
+import com.kt.advance.xml.XmlNamesUtils.replaceSuffix;
+import com.kt.advance.xml.XmlNamesUtils.xmlFilename;
 import com.kt.advance.xml.model.ApiFile;
 import com.kt.advance.xml.model.PpoFile;
 import com.kt.advance.xml.model.SpoFile;
@@ -127,7 +130,7 @@ public class KtAdvanceSensor {
                 processPPOs(ppoFile);
             }
 
-            final File spoXml = replaceSuffix(ppoXml, PPO_SUFFIX, SPO_SUFFIX);
+            final File spoXml = XmlNamesUtils.replaceSuffix(ppoXml, PPO_SUFFIX, SPO_SUFFIX);
             if (!analyzed.contains(spoXml)) {
                 analyzed.add(spoXml);
                 processSPOs(spoXml, false);
@@ -180,7 +183,7 @@ public class KtAdvanceSensor {
         }
 
         if (targetIpo == null) {
-            final File pevXml = replaceSuffix(ppoOriginXml, PPO_SUFFIX, PEV_SUFFIX);
+            final File pevXml = XmlNamesUtils.replaceSuffix(ppoOriginXml, PPO_SUFFIX, PEV_SUFFIX);
             final EvFile pev = fsAbstraction.readPevXml(pevXml);
             final PO discharge = pev.getDischargedPOsAsMap().get(ref.getId());
             if (discharge != null) {
@@ -191,7 +194,7 @@ public class KtAdvanceSensor {
         }
 
         if (targetIpo == null) {
-            final File pevXml = replaceSuffix(ppoOriginXml, PPO_SUFFIX, SEV_SUFFIX);
+            final File pevXml = XmlNamesUtils.replaceSuffix(ppoOriginXml, PPO_SUFFIX, SEV_SUFFIX);
             final EvFile sev = fsAbstraction.readSevXml(pevXml);
             final PO discharge = sev.getDischargedPOsAsMap().get(ref.getId());
             if (discharge != null) {
@@ -323,8 +326,8 @@ public class KtAdvanceSensor {
                     final String nameFilePattern = apiXmlFile.getParentFile().getName() + "_"
                             + spoCallSiteObligation.fname;
 
-                    ppoXmlFile = xmlFilename(apiXmlFile, nameFilePattern, PPO_SUFFIX);
-                    spoXmlFileRef = xmlFilename(apiXmlFile, nameFilePattern, SPO_SUFFIX);
+                    ppoXmlFile = XmlNamesUtils.xmlFilename(apiXmlFile, nameFilePattern, PPO_SUFFIX);
+                    spoXmlFileRef = XmlNamesUtils.xmlFilename(apiXmlFile, nameFilePattern, SPO_SUFFIX);
                 }
                 final Map<String, ApiAssumption> apiAssumptionsById = (api == null) ? null
                         : api.function.getApiAssumptionsAsMap();
@@ -370,8 +373,8 @@ public class KtAdvanceSensor {
 
                 //find rv-assumption in api file.
                 final File ppoOriginXml = ipo.getOriginXml();
-                final File apiXml = replaceSuffix(ppoOriginXml, PPO_SUFFIX, API_SUFFIX);
-                final File spoOriginFile = replaceSuffix(ppoOriginXml, PPO_SUFFIX, SPO_SUFFIX);
+                final File apiXml = XmlNamesUtils.replaceSuffix(ppoOriginXml, PPO_SUFFIX, API_SUFFIX);
+                final File spoOriginFile = XmlNamesUtils.replaceSuffix(ppoOriginXml, PPO_SUFFIX, SPO_SUFFIX);
                 final ApiFile api = FsAbstraction.readApiXml(apiXml);
                 final Map<String, ApiAssumption> rvAssumptionsAsMap = api.function.getRvAssumptionsAsMap();
 
@@ -518,7 +521,7 @@ public class KtAdvanceSensor {
 
         final List<IssuableProofObligation> pposList = new ArrayList<>();
 
-        final EvFile pev = readPevXml(replaceSuffix(ppo.getOrigin(), PPO_SUFFIX, PEV_SUFFIX));
+        final EvFile pev = readPevXml(XmlNamesUtils.replaceSuffix(ppo.getOrigin(), PPO_SUFFIX, PEV_SUFFIX));
         final Map<String, PO> dischargedPOs = (pev == null) ? new HashMap<>() : pev.getDischargedPOsAsMap();
 
         for (final PrimaryProofObligation po : ppo.function.proofObligations) {
@@ -561,7 +564,7 @@ public class KtAdvanceSensor {
         final SpoFile spo = readSpoXml(spoXml);
 
         if (spo != null) {
-            final EvFile sev = readSevXml(replaceSuffix(spo.getOrigin(), SPO_SUFFIX, SEV_SUFFIX));
+            final EvFile sev = readSevXml(XmlNamesUtils.replaceSuffix(spo.getOrigin(), SPO_SUFFIX, SEV_SUFFIX));
             final Map<String, PO> dischargedPOs = (sev == null) ? new HashMap<>() : sev.getDischargedPOsAsMap();
 
             final List<CallSiteObligation> proofObligations = spo.function.spoWrapper.proofObligations;

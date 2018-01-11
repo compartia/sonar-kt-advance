@@ -21,6 +21,9 @@
 package com.kt.advance.xml.model;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -32,6 +35,84 @@ public abstract class AnalysisXml implements HasOriginFile {
     public static class HeaderApp {
         @XmlAttribute
         public String file;
+    }
+
+    /**
+     * a="19,37,58" ix="33" t="p"
+     *
+     * @author artem
+     *
+     */
+    public static class IndexedTableNode {
+        @XmlAttribute(name = "a")
+        public String arguments;
+
+        @XmlAttribute(name = "ix")
+        public Integer index;
+
+        @XmlAttribute(name = "t")
+        public String tags;
+
+        public static <T extends IndexedTableNode> Map<Integer, T> asMapByIndex(List<T> list) {
+            final Map<Integer, T> map = new HashMap<>();
+            for (final T x : list) {
+                map.put(x.index, x);
+            }
+            return map;
+        }
+
+        @Deprecated
+        public static <T extends IndexedTableNode> Map<Integer, IndexedTableNodeRep> asRepMapByIndex(List<T> list) {
+            final Map<Integer, IndexedTableNodeRep> map = new HashMap<>();
+            for (final T x : list) {
+                map.put(x.index, x.asIndexedTableNodeRep());
+            }
+            return map;
+        }
+
+        @Deprecated
+        public IndexedTableNodeRep asIndexedTableNodeRep() {
+            return new IndexedTableNodeRep(this);
+        }
+
+        /**
+         *
+         *
+         * @return
+         */
+
+        public Integer[] getArguments() {
+            return splitStringIntoIntegers(this.arguments);
+        }
+
+    }
+
+    public static class IndexedTableNodeRep {
+        public Integer[] args;
+        public String[] tags;
+        public Integer index;
+
+        public IndexedTableNodeRep(IndexedTableNode node) {
+            this.args = splitStringIntoIntegers(node.arguments);
+            this.tags = splitString(node.tags);
+            this.index = node.index;
+        }
+
+        @Deprecated
+        public Integer getFirstArg() {
+            if (args != null && args.length > 0) {
+                return args[0];
+            }
+            return null;
+        }
+
+        @Deprecated
+        public String getFirstTag() {
+            if (tags != null && tags.length > 0) {
+                return tags[0];
+            }
+            return null;
+        }
     }
 
     public static class PoHeader {
@@ -55,6 +136,14 @@ public abstract class AnalysisXml implements HasOriginFile {
     @XmlTransient
     private File origin;
 
+    public static String[] splitString(String str) {
+        if (str == null) {
+            return new String[0];
+        }
+        final String[] split = str.split(",");
+        return split;
+    }
+
     public static Integer[] splitStringIntoIntegers(String str) {
         if (str == null) {
             return new Integer[0];
@@ -70,6 +159,17 @@ public abstract class AnalysisXml implements HasOriginFile {
     @Override
     public File getOrigin() {
         return origin;
+    }
+
+    public File getOriginAnalysisDir() {
+        return getOrigin().getParentFile().getParentFile();
+    }
+
+    public String getSourceFilename() {
+        if (this.header.application == null) {
+            throw new IllegalStateException(origin + " file has no header/applicatoin tag");
+        }
+        return this.header.application.file;
     }
 
     @Override

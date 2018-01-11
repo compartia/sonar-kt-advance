@@ -23,6 +23,7 @@ package org.sonar.plugins.kt.advance.batch;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,15 +61,27 @@ import org.sonar.plugins.kt.advance.util.XmlParser;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.MapMaker;
+import com.kt.advance.xml.XmlNamesUtils;
 import com.kt.advance.xml.model.ApiFile;
 import com.kt.advance.xml.model.PodFile;
+import com.kt.advance.xml.model.PodFile.PpoTypeRef;
+import com.kt.advance.xml.model.PodFile.PpoTypeRefKey;
 import com.kt.advance.xml.model.PpoFile;
+import com.kt.advance.xml.model.PrdFile;
+import com.kt.advance.xml.model.PrdFile.Predicate;
+import com.kt.advance.xml.model.PrdFile.PredicateKey;
 import com.kt.advance.xml.model.SpoFile;
 
 public class FsAbstraction {
     @FunctionalInterface
     public interface CachedDataProvider {
         public void read() throws JAXBException;
+    }
+
+    public interface HasPredicateKey {
+        PredicateKey getPredicateKey();
+
+        void setPredicate(Predicate pk);
     }
 
     ///////////////////////////
@@ -118,35 +131,51 @@ public class FsAbstraction {
     }
 
     private static final String PERSISTENT_CACHE_NAME = "persistent-cache";
-
     private static final Logger LOG = Loggers.get(FsAbstraction.class.getName());
-
-    public static final String XML_EXT = "xml";
-
+    @Deprecated
     public static final String SEV_SUFFIX = "_sev";
     public static final String API_SUFFIX = "_api";
     public static final String SPO_SUFFIX = "_spo";
+
     public static final String PPO_SUFFIX = "_ppo";
+
+    public static final String POD_SUFFIX = "_pod";
+
+    public static final String PRD_SUFFIX = "_prd";
+
+    @Deprecated
     public static final String PEV_SUFFIX = "_pev";
 
     public static final IOFileFilter ppoFileFilter = new SuffixFileFilter(
-            FsAbstraction.xmlSuffix(PPO_SUFFIX),
+            XmlNamesUtils.xmlSuffix(PPO_SUFFIX),
+            IOCase.INSENSITIVE);
+
+    public static final IOFileFilter prdFileFilter = new SuffixFileFilter(
+            XmlNamesUtils.xmlSuffix(PRD_SUFFIX),
             IOCase.INSENSITIVE);
 
     public static final IOFileFilter spoFileFilter = new SuffixFileFilter(
-            FsAbstraction.xmlSuffix(SPO_SUFFIX),
+            XmlNamesUtils.xmlSuffix(SPO_SUFFIX),
+            IOCase.INSENSITIVE);
+
+    public static final IOFileFilter podFileFilter = new SuffixFileFilter(
+            XmlNamesUtils.xmlSuffix(POD_SUFFIX),
+            IOCase.INSENSITIVE);
+    public static final IOFileFilter apiFileFilter = new SuffixFileFilter(
+            XmlNamesUtils.xmlSuffix(API_SUFFIX),
             IOCase.INSENSITIVE);
     /**
      * lazy JAXBContext & Unmarshaller cache
      */
     static final Map<Class<?>, FsAbstraction.XMLType<?>> xmlTypes = new HashMap<>();
+
     private static final Map<String, List<String>> fileContentsCache = new MapMaker().softValues().makeMap();
 
     private final static Map<String, ApiFile> functionNameToApiMap = new HashMap<>();
 
     private final static Map<File, EvFile> filenameToEvFileMap = new HashMap<>();
-
     final FileSystem fileSystem;
+
     private final Map<String, InputFile> fsCache = new MapMaker().softValues().makeMap();
 
     private PersistentCacheManager cacheMan;
@@ -169,6 +198,19 @@ public class FsAbstraction {
         this.baseDir = fileSystem.baseDir();
     }
 
+    public static void bindPredicates(Map<PredicateKey, Predicate> allPredicatesMap,
+            Collection<? extends HasPredicateKey> proofObligationTypes) {
+
+        for (final HasPredicateKey pt : proofObligationTypes) {
+            final Predicate predicate = allPredicatesMap.get(pt.getPredicateKey());
+            if (predicate == null) {
+                LOG.error("no predicate found for the key " + pt.getPredicateKey());
+            }
+            pt.setPredicate(predicate);
+        }
+
+    }
+
     public static <X> FsAbstraction.XMLType<X> getReader(Class<X> clazz) throws JAXBException {
         XMLType xmlType = xmlTypes.get(clazz);
         if (xmlType == null) {
@@ -176,6 +218,52 @@ public class FsAbstraction {
             xmlTypes.put(clazz, xmlType);
         }
         return xmlType;
+    }
+
+    public static <K, V> Map<K, V> mergeMapsStrictly(Map<K, V> dest, Map<K, V> src, String errorMsg) {
+        for (final Map.Entry<K, V> e : src.entrySet()) {
+            if (dest.containsKey(e.getKey())) {
+                throw new IllegalArgumentException(errorMsg + ":non unique key " + e.getKey());
+                //                LOG.warn("non unique   key " + e.getKey());
+            } else {
+                dest.put(e.getKey(), e.getValue());
+            }
+        }
+        return dest;
+    }
+
+    public static Map<PpoTypeRefKey, PpoTypeRef> readAllPodFilesMap(Collection<File> pods, File baseDir)
+            throws JAXBException {
+
+        final Map<PpoTypeRefKey, PpoTypeRef> map = new HashMap<>();
+
+        for (final File podFile : pods) {
+
+            try {
+                final PodFile dict = readPodXml(podFile);
+                final Map<PpoTypeRefKey, PpoTypeRef> ppoPpoTypeRefAsMap = dict.getPpoTypeRefAsMap(baseDir);
+                mergeMapsStrictly(map, ppoPpoTypeRefAsMap, "PpoTypeRefKey:" + dict.getOrigin().getAbsolutePath());
+
+            } catch (final Exception ex) {
+                LOG.error(ex.getLocalizedMessage());
+            }
+
+        }
+        return map;
+    }
+
+    public static Map<PredicateKey, Predicate> readAllPredicateXmls(Collection<File> predicatesFiles, File base)
+            throws JAXBException {
+        final Map<PredicateKey, Predicate> appPredicates = new HashMap<>();
+
+        for (final File f : predicatesFiles) {
+            final PrdFile prdXml = readPrdXml(f);
+            final Map<PredicateKey, Predicate> predicatesAsMap = prdXml.getPredicatesAsMap(base);
+
+            mergeMapsStrictly(appPredicates, predicatesAsMap, "PredicateKey: " + prdXml.getOrigin().getAbsolutePath());
+
+        }
+        return appPredicates;
     }
 
     public static List<String> readInputFile(InputFile inputFile) {
@@ -205,27 +293,12 @@ public class FsAbstraction {
         return getReader(PpoFile.class).readXml(file);
     }
 
+    public static PrdFile readPrdXml(File file) throws JAXBException {
+        return getReader(PrdFile.class).readXml(file);
+    }
+
     public static SpoFile readSpoXml(File file) throws JAXBException {
         return getReader(SpoFile.class).readXml(file);
-    }
-
-    public static File replaceSuffix(File file, String oldSuffix, String newuffix) {
-        final String name = file.getName();
-        final String newName = name.replace(oldSuffix, newuffix);
-        return new File(file.getParentFile(), newName);
-    }
-
-    public static File xmlFilename(final File file, final String filePattern, String suff) {
-        final StringBuilder sb = new StringBuilder()
-                .append(filePattern)
-                .append(suff)
-                .append('.')
-                .append(XML_EXT);
-        return new File(file.getParentFile(), sb.toString());
-    }
-
-    public static String xmlSuffix(String postfix) {
-        return postfix + "." + XML_EXT;
     }
 
     static ApiFile readApiXml(File file) throws JAXBException {

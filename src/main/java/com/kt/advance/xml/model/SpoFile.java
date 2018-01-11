@@ -38,7 +38,7 @@ public class SpoFile extends AnalysisXml {
         public Integer iapi;
 
         @XmlElement(name = "po")
-        public PrimaryProofObligation po;
+        public PrimaryProofObligation proofObligation;
     }
 
     public static class CallsitesWrapper {
@@ -101,5 +101,12 @@ public class SpoFile extends AnalysisXml {
 
     @XmlElement(name = "function")
     public SpoFunction function;
+
+    /**
+     * shortcut
+     */
+    public CallsitesWrapper getCallsites() {
+        return this.function.spos.callsites;
+    }
 
 }

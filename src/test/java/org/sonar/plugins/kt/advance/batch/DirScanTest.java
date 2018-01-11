@@ -59,6 +59,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.model.EvFile;
 import org.sonar.plugins.kt.advance.util.StringTools;
 
+import com.kt.advance.xml.XmlNamesUtils;
 import com.kt.advance.xml.model.ApiFile;
 import com.kt.advance.xml.model.PpoFile;
 import com.kt.advance.xml.model.SpoFile;
@@ -105,7 +106,7 @@ public class DirScanTest {
 
         fileSystem.add(Factory.makeDefaultInputFile(MODULE_BASEDIR, SRC_MEMTEST_C, 282));
         {
-            final Iterator<File> iter = FileUtils.iterateFiles(MODULE_BASEDIR, new String[] { FsAbstraction.XML_EXT },
+            final Iterator<File> iter = FileUtils.iterateFiles(MODULE_BASEDIR, new String[] { XmlNamesUtils.XML_EXT },
                 true);
 
             while (iter.hasNext()) {
@@ -283,7 +284,7 @@ public class DirScanTest {
         final PpoFile ppo = FsAbstraction.readPpoXml(ppoFile);
         final EvFile pev = FsAbstraction
                 .readPevXml(
-                    FsAbstraction.replaceSuffix(ppoFile, FsAbstraction.PPO_SUFFIX, FsAbstraction.PEV_SUFFIX));
+                    XmlNamesUtils.replaceSuffix(ppoFile, FsAbstraction.PPO_SUFFIX, FsAbstraction.PEV_SUFFIX));
 
         assertEquals(ppo.function.proofObligations.size(), pev.function.statistics.total);
         assertEquals(pev.function.statistics.total - pev.function.statistics.totalProven,
@@ -363,14 +364,14 @@ public class DirScanTest {
 
     @Test
     public void testReadWrongPev() throws JAXBException {
-        final File nonExistentFile = FsAbstraction.replaceSuffix(ppoFile, FsAbstraction.PPO_SUFFIX, "NOISE");
+        final File nonExistentFile = XmlNamesUtils.replaceSuffix(ppoFile, FsAbstraction.PPO_SUFFIX, "NOISE");
         final EvFile pev = FsAbstraction.readPevXml(nonExistentFile);
         assertNull(pev);
     }
 
     @Test
     public void testReplaceSuffix() {
-        final File apiFile = FsAbstraction.replaceSuffix(ppoFile, "ppo", "api");
+        final File apiFile = XmlNamesUtils.replaceSuffix(ppoFile, "ppo", "api");
         assertEquals(apiFile.getName(), FILE_NAME_STEM + "_api.xml");
         System.out.println("filename change:");
         System.out.println(ppoFile);

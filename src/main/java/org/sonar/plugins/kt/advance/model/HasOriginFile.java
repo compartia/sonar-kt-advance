@@ -22,7 +22,11 @@ package org.sonar.plugins.kt.advance.model;
 import java.io.File;
 
 public interface HasOriginFile extends HasTimeStamp {
+    //    File getBaseDir();
+
     File getOrigin();
 
+    //    void setBaseDir(File base);
+    //
     void setOrigin(File originatingFile);
 }
