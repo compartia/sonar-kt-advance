@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "c-analysis")
 public class PrdFile extends AnalysisXml {
-
     /**
      *
      *
@@ -68,8 +67,9 @@ public class PrdFile extends AnalysisXml {
     }
 
     public static class PredicateKey extends ObjectKey {
+
         public PredicateKey(File base, AnalysisXml file, Integer id) {
-            super(base, file, id);
+            super(base, file, id, NO_FUNCTION);
         }
     }
 
@@ -152,17 +152,19 @@ public class PrdFile extends AnalysisXml {
         }
     }
 
+    public final static String NO_FUNCTION = "*";
+
     @XmlElement(name = "po-dictionary")
     public PredicatesDictionary predicatesDictionary;
 
     public static PredicateKey makePredicateKey(AnalysisXml file, Integer index, File base) {
 
-        //        String path = "/var/data/stuff/xyz.dat";
-        //        String base = "/var/data";
-        final String relative = base
-                .toURI().relativize(new File(file.getOrigin().getAbsolutePath()).toURI()).getPath();
-
         return new PredicateKey(base, file, index);
+    }
+
+    @Override
+    public String getFunctionName() {
+        return NO_FUNCTION;
     }
 
     @Override

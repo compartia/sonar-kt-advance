@@ -42,6 +42,7 @@ import com.kt.advance.xml.model.PodFile.PpoTypeRefKey;
 
 @XmlRootElement(name = "c-analysis")
 public class PpoFile extends AnalysisXml {
+
     public static class ArgElement {
         @XmlElement(name = "msg")
         public MsgElement message;
@@ -286,13 +287,13 @@ public class PpoFile extends AnalysisXml {
 
     }
 
-    //    <ppo deps="f" id="15" invs="50" ippo="15" s="g" ts="2018-01-02 20:23:19">
-
     public static class Statistics {
         @XmlAttribute(name = "size")
         public int size;
 
     }
+
+    //    <ppo deps="f" id="15" invs="50" ippo="15" s="g" ts="2018-01-02 20:23:19">
 
     public static class Symbol implements Serializable {
         /**
@@ -382,6 +383,11 @@ public class PpoFile extends AnalysisXml {
 
     public String functionId() {
         return this.header.application.file + "/" + this.function.name + "/";
+    }
+
+    @Override
+    public String getFunctionName() {
+        return this.function.name;
     }
 
     public Map<String, PrimaryProofObligation> getPPOsAsMap() {

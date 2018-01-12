@@ -200,7 +200,7 @@ public class FsAbstraction {
         this.baseDir = fileSystem.baseDir();
     }
 
-    public static void bindPod2Ppo(PpoFile ppoFile, PodFile podFile, File baseDir) {
+    public static void bindPod2Ppo(PpoFile ppoFile, PodFile podFile) {
         final Map<PpoTypeRefKey, PpoTypeRef> ppoTypeRefAsMap = podFile.getPpoTypeRefAsMap();
 
         for (final PrimaryProofObligation ppo : ppoFile.function.proofObligations) {
@@ -209,9 +209,23 @@ public class FsAbstraction {
         }
     }
 
-    public static void bindPredicates(Map<PredicateKey, Predicate> allPredicatesMap,
+    public static void bindPrd2Pod(Map<PredicateKey, Predicate> allPredicatesMap,
             Collection<? extends HasPredicateKey> proofObligationTypes) {
 
+        for (final HasPredicateKey pt : proofObligationTypes) {
+            final Predicate predicate = allPredicatesMap.get(pt.getPredicateKey());
+            if (predicate == null) {
+                LOG.error("no predicate found for the key " + pt.getPredicateKey());
+            }
+            pt.setPredicate(predicate);
+        }
+
+    }
+
+    public static void bindPrd2Pod(Map<PredicateKey, Predicate> allPredicatesMap,
+            PodFile podFileModel) {
+
+        final Collection<? extends HasPredicateKey> proofObligationTypes = podFileModel.getPpoTypeRefAsMap().values();
         for (final HasPredicateKey pt : proofObligationTypes) {
             final Predicate predicate = allPredicatesMap.get(pt.getPredicateKey());
             if (predicate == null) {
@@ -235,7 +249,6 @@ public class FsAbstraction {
         for (final Map.Entry<K, V> e : src.entrySet()) {
             if (dest.containsKey(e.getKey())) {
                 throw new IllegalArgumentException(errorMsg + ":non unique key " + e.getKey());
-                //                LOG.warn("non unique   key " + e.getKey());
             } else {
                 dest.put(e.getKey(), e.getValue());
             }
@@ -253,9 +266,11 @@ public class FsAbstraction {
             try {
                 final PodFile dict = readPodXml(podFile, baseDir);
                 final Map<PpoTypeRefKey, PpoTypeRef> ppoPpoTypeRefAsMap = dict.getPpoTypeRefAsMap();
+
                 mergeMapsStrictly(map, ppoPpoTypeRefAsMap, "PpoTypeRefKey:" + dict.getOrigin().getAbsolutePath());
 
             } catch (final Exception ex) {
+
                 LOG.error(ex.getLocalizedMessage());
             }
 
@@ -418,6 +433,12 @@ public class FsAbstraction {
         }
     }
 
+    public String getRelativeFile(File file) {
+        final String relative = baseDir
+                .toURI().relativize(file.toURI()).getPath();
+        return relative;
+    }
+
     public InputFile getResource(final String file) {
         Preconditions.checkNotNull(file);
 
@@ -449,6 +470,17 @@ public class FsAbstraction {
             LOG.error("cannot find '" + file.getAbsolutePath());
         }
         return inputFile;
+    }
+
+    public Map<PpoTypeRefKey, PpoTypeRef> readAllPodFilesMap(Collection<File> pods)
+            throws JAXBException {
+        return readAllPodFilesMap(pods, baseDir);
+    }
+
+    public Map<PredicateKey, Predicate> readAllPredicateXmls(Collection<File> predicatesFiles)
+            throws JAXBException {
+
+        return readAllPredicateXmls(predicatesFiles, baseDir);
     }
 
     public PodFile readPodXml(File file) throws JAXBException {

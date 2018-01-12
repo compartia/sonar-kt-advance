@@ -16,7 +16,15 @@ public class ObjectKey {
         final String relative = base
                 .toURI().relativize(file.getOriginAnalysisDir().toURI()).getPath();
 
-        this.key = relative + "" + file.getSourceFilename() + "/" + id;
+        this.key = relative + "::" + file.getSourceFilename() + "::" + file.getFunctionName() + "::" + id;
+    }
+
+    public ObjectKey(File base, AnalysisXml file, Integer id, String func) {
+
+        final String relative = base
+                .toURI().relativize(file.getOriginAnalysisDir().toURI()).getPath();
+
+        this.key = relative + "::" + file.getSourceFilename() + "::" + func + "::" + id;
     }
 
     @Override

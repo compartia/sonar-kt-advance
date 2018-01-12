@@ -160,7 +160,6 @@ public class PodFile extends AnalysisXml {
         public PpoTypeRefKey(File base, AnalysisXml file, Integer id) {
             super(base, file, id);
         }
-
     }
 
     /**
@@ -216,6 +215,11 @@ public class PodFile extends AnalysisXml {
 
     @XmlElement(name = "function")
     public PodFunction function;
+
+    @Override
+    public String getFunctionName() {
+        return this.function.name;
+    }
 
     public Map<PpoTypeRefKey, PpoTypeRef> getPpoTypeRefAsMap() {
 

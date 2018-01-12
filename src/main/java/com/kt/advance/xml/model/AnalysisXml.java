@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.sonar.plugins.kt.advance.batch.ScanFailedException;
 import org.sonar.plugins.kt.advance.model.HasOriginFile;
 
 public abstract class AnalysisXml implements HasOriginFile {
@@ -163,6 +164,8 @@ public abstract class AnalysisXml implements HasOriginFile {
         return baseDir;
     }
 
+    public abstract String getFunctionName();
+
     @Override
     public File getOrigin() {
         return origin;
@@ -172,9 +175,15 @@ public abstract class AnalysisXml implements HasOriginFile {
         return getOrigin().getParentFile().getParentFile();
     }
 
+    public String getRelativeOrigin() {
+        final String relative = baseDir
+                .toURI().relativize(getOrigin().toURI()).getPath();
+        return relative;
+    }
+
     public String getSourceFilename() {
         if (this.header.application == null) {
-            throw new IllegalStateException(origin + " file has no header/applicatoin tag");
+            throw new ScanFailedException(origin + " file has no header/applicatoin tag");
         }
         return this.header.application.file;
     }

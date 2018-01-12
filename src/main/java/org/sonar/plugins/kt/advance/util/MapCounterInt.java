@@ -29,8 +29,8 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang.StringUtils;
 
-public class MapCounter<K> {
-    private final Map<K, Double[]> map = new HashMap<>();
+public class MapCounterInt<K> {
+    private final Map<K, Integer[]> map = new HashMap<>();
     private final int numberOfColumns;
 
     //    private final Map<Integer, String> columnNames = new HashMap<>();
@@ -38,18 +38,18 @@ public class MapCounter<K> {
 
     private final String[] columns;
 
-    public MapCounter(int numberOfColumns) {
+    public MapCounterInt(int numberOfColumns) {
         super();
         this.numberOfColumns = numberOfColumns;
         columns = new String[numberOfColumns];
     }
 
-    public Double get(K key, int col) {
+    public Integer get(K key, int col) {
         return map.get(key)[col];
     }
 
-    public Double get(K key, int col, double defaultVal) {
-        final Double[] val = map.get(key);
+    public Integer get(K key, int col, int defaultVal) {
+        final Integer[] val = map.get(key);
 
         if (null == val) {
             return defaultVal;
@@ -58,17 +58,17 @@ public class MapCounter<K> {
         }
     }
 
-    public void inc(K key, int col, double inc) {
-        Double[] value = map.get(key);
+    public void inc(K key, int col, int inc) {
+        Integer[] value = map.get(key);
         if (value == null) {
-            value = new Double[numberOfColumns];
-            Arrays.fill(value, Double.valueOf(0));
+            value = new Integer[numberOfColumns];
+            Arrays.fill(value, Integer.valueOf(0));
             map.put(key, value);
         }
         value[col] += inc;
     }
 
-    public void inc(K key, String col, double inc) {
+    public void inc(K key, String col, int inc) {
         final Integer cname = columnNamesReverse.get(col);
         if (cname == null) {
             this.setColumnName(columnNamesReverse.size(), col);

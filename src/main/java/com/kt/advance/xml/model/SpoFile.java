@@ -109,4 +109,9 @@ public class SpoFile extends AnalysisXml {
         return this.function.spos.callsites;
     }
 
+    @Override
+    public String getFunctionName() {
+        return this.function.name;
+    }
+
 }
