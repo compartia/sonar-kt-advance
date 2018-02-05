@@ -30,11 +30,13 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.measures.Metric;
 import org.sonar.plugins.kt.advance.KtMetrics;
 
+@Ignore
 public class PropertyDefinitionsTest {
 
     @Test

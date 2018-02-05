@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>com.github.compartia</groupId>
 			<artifactId>xml-kt-advance-java</artifactId>
-			<version>-SNAPSHOT</version>
+			<version>242bf4bb8f</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>log4j</artifactId>
@@ -136,7 +136,7 @@
 	    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
 	
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native2ascii-maven-plugin</artifactId>
 				<executions>
@@ -146,7 +146,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 			<plugin>
 				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
