@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.kt.advance;
 
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState.DISCHARGED;
-
 import java.util.Collection;
 
 import org.sonar.api.profiles.ProfileDefinition;
@@ -32,7 +30,8 @@ import org.sonar.api.utils.ValidationMessages;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
+
+import kt.advance.model.Definitions.POStatus;
 
 public class KtProfile extends ProfileDefinition {
     private static final Logger LOG = Loggers.get(KtProfile.class.getName());
@@ -53,8 +52,8 @@ public class KtProfile extends ProfileDefinition {
         /**
          * keep POState.DISCHARGED not active by default
          */
-        activateRulesInRepo(profile, KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + POState.OPEN);
-        activateRulesInRepo(profile, KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + POState.VIOLATION);
+        activateRulesInRepo(profile, KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + POStatus.open);
+        activateRulesInRepo(profile, KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + POStatus.violation);
 
         activateRulesInRepo(profile, KtAdvanceRulesDefinition.XML_PROBLEMS_REPO_KEY);
 
@@ -69,7 +68,7 @@ public class KtProfile extends ProfileDefinition {
         for (final Rule r : rules) {
 
             final String key = r.getKey();
-            if (!key.startsWith(DISCHARGED.name())) {
+            if (!key.startsWith(POStatus.discharged.name())) {
                 profile.activateRule(r, r.getSeverity());
                 LOG.info("Activating rule " + key + " severity=" + r.getSeverity());
             }

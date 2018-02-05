@@ -74,8 +74,7 @@ public class XmlParsingIssue {
         this.message = message;
     }
 
-    public Issue toIssue(InputFile inputFile, Issuable issuable, ActiveRules activeRules, Settings settings,
-            FsAbstraction fs) {
+    public Issue toIssue(InputFile inputFile, Issuable issuable, ActiveRules activeRules, Settings settings) {
 
         final RuleKey ruleKey = RuleKey.of(KtAdvanceRulesDefinition.XML_PROBLEMS_REPO_KEY,
             KtAdvanceRulesDefinition.XML_INCONSISTENCY_RULE);

@@ -32,26 +32,12 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.KtAdvancePlugin;
 import org.sonar.plugins.kt.advance.KtLanguage;
 
+import kt.advance.model.Definitions.POStatus;
+
 public final class KtAdvanceRulesDefinition implements RulesDefinition {
 
     public enum POComplexity {
         C, P, G;
-
-        public String key() {
-            return this.name().toLowerCase();
-        }
-    }
-
-    public enum POLevel {
-        PRIMARY, SECONDARY;
-
-        public String key() {
-            return this == PRIMARY ? "ppo" : "spo";
-        }
-    }
-
-    public enum POState {
-        OPEN, DISCHARGED, VIOLATION;
 
         public String key() {
             return this.name().toLowerCase();
@@ -89,16 +75,18 @@ public final class KtAdvanceRulesDefinition implements RulesDefinition {
                 .setType(RuleType.BUG);
 
         final NewRepository repositoryOpen = context
-                .createRepository(REPOSITORY_BASE_KEY + POState.OPEN, KtLanguage.KEY)
+                .createRepository(REPOSITORY_BASE_KEY + POStatus.open, KtLanguage.KEY)
                 .setName("KT Advance (open)");
 
         final NewRepository repositoryDischarged = context
-                .createRepository(REPOSITORY_BASE_KEY + POState.DISCHARGED, KtLanguage.KEY)
+                .createRepository(REPOSITORY_BASE_KEY + POStatus.discharged, KtLanguage.KEY)
                 .setName("KT Advance (discharged)");
 
         final NewRepository repositoryViolations = context
-                .createRepository(REPOSITORY_BASE_KEY + POState.VIOLATION, KtLanguage.KEY)
+                .createRepository(REPOSITORY_BASE_KEY + POStatus.violation, KtLanguage.KEY)
                 .setName("KT Advance (violations)");
+
+        //        XXX: support DEAD CODE status
 
         makeRulesSubSet(repositoryOpen,
             Severity.MINOR,

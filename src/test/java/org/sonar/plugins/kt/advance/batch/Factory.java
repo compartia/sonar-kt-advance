@@ -19,118 +19,32 @@
  */
 package org.sonar.plugins.kt.advance.batch;
 
-import static org.mockito.Mockito.mock;
-
 import java.io.File;
+import java.util.Iterator;
 
-import org.sonar.api.batch.fs.InputFile;
+import org.apache.commons.io.FileUtils;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputDir;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
-import org.sonar.plugins.kt.advance.model.EvFile.Evidence;
-import org.sonar.plugins.kt.advance.model.EvFile.PO;
 
-import com.kt.advance.xml.model.PpoFile;
-import com.kt.advance.xml.model.SpoFile;
-import com.kt.advance.xml.model.PpoFile.PoPredicate;
-import com.kt.advance.xml.model.PpoFile.PpoLocation;
-import com.kt.advance.xml.model.PpoFile.PrimaryProofObligation;
+import com.kt.advance.xml.XmlNamesUtils;
 
 public class Factory {
-    private final static String FAKE_XML_NAME = "dir/__xml.xml";
-    private final static File FAKE_XML_FILE = new File(FAKE_XML_NAME);
 
-    private static PpoFile fakePPo;
-    private static SpoFile fakeSPo;
-    static {
-        fakePPo = new PpoFile();
-        fakePPo.function.name = "fake_func";
-        fakePPo.setOrigin(FAKE_XML_FILE);
+    public static DefaultInputDir makeDefaultInputDir(File basedir, String _filename) {
+        final String rel = basedir.toPath().relativize(new File(_filename).toPath()).toString();
 
-        fakeSPo = new SpoFile();
-        fakeSPo.function.name = "fake_func";
-        fakeSPo.setOrigin(FAKE_XML_FILE);
+        final DefaultInputDir dir = new DefaultInputDir("", rel);
+        dir.setModuleBaseDir(basedir.toPath());
+
+        return dir;
     }
 
-    public static IssuableProofObligation createDischargedPO(final PredicateKey predicateType) {
-        final PrimaryProofObligation ppo = Factory.createPPO(predicateType);
+    public static DefaultInputFile makeDefaultInputFile(File basedir, String _filename, int len) {
 
-        final PO proof = new PO();
-        proof.evidence = new Evidence();
-        proof.evidence.comment = "evidence";
-        final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
-                .setInputFile(mock(InputFile.class))
-                .setDischarge(proof).build();
+        final String rel = basedir.toPath().relativize(new File(_filename).toPath()).toString();
 
-        return ipo;
-    }
-
-    public static IssuableProofObligation createOpenPO(final PredicateKey predicateType) {
-        final PrimaryProofObligation ppo = Factory.createPPO(predicateType);
-        final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
-                .setInputFile(mock(InputFile.class))
-                .build();
-
-        return ipo;
-    }
-
-    public static PrimaryProofObligation createPPO(final PredicateKey predicateType) {
-        final PrimaryProofObligation ppo = new PrimaryProofObligation();
-        ppo.predicate = new PoPredicate();
-        ppo.predicate.tag = predicateType.getTag();
-        ppo.location = new PpoLocation();
-        ppo.location.line = 1;
-        ppo.location.file = "foo/bar/fake.c";
-        return ppo;
-    }
-
-    public static PrimaryProofObligation createPPO(final PredicateKey predicateType, String id) {
-        final PrimaryProofObligation ppo = createPPO(predicateType);
-        ppo.setId(id);
-        return ppo;
-    }
-
-    public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType) {
-        final PrimaryProofObligation ppo = Factory.createPPO(predicateType);
-
-        final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
-                .setInputFile(mock(InputFile.class))
-                .build();
-        return ipo;
-    }
-
-    public static IssuableProofObligation createPrimaryPO(final PredicateKey predicateType, String id) {
-        final PrimaryProofObligation ppo = Factory.createPPO(predicateType, id);
-        final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
-                .setInputFile(mock(InputFile.class))
-                .build();
-        return ipo;
-    }
-
-    public static IssuableProofObligation createViolatedPO(final PredicateKey predicateType) {
-        return Factory.createViolatedPO(predicateType, mock(InputFile.class));
-    }
-
-    public static IssuableProofObligation createViolatedPO(final PredicateKey predicateType, InputFile inputFile) {
-        final PrimaryProofObligation ppo = Factory.createPPO(predicateType);
-
-        ppo.complexityC = 1;
-        ppo.complexityP = 1;
-
-        final PO proof = new PO();
-        proof.evidence = new Evidence();
-        proof.evidence.comment = "evidence";
-        proof.violation = true;
-
-        final IssuableProofObligation ipo = IssuableProofObligation.newBuilder(fakePPo, ppo)
-                .setDischarge(proof)
-                .setInputFile(inputFile)
-                .build();
-
-        return ipo;
-    }
-
-    public static DefaultInputFile makeDefaultInputFile(File basedir, String filename, int len) {
-        final DefaultInputFile dif = new DefaultInputFile("", filename);
+        final DefaultInputFile dif = new DefaultInputFile("", rel);
         dif.setModuleBaseDir(basedir.toPath());
         dif.setLines(len);
         final int[] originalLineOffsets = new int[len];
@@ -139,6 +53,28 @@ public class Factory {
         }
         dif.setOriginalLineOffsets(originalLineOffsets);
         return dif;
+    }
+
+    public static DefaultFileSystem makeFileSystem(final File MODULE_BASEDIR) {
+        final DefaultFileSystem fileSystem = new DefaultFileSystem(MODULE_BASEDIR.toPath());
+        {
+            final Iterator<File> iter = FileUtils.iterateFiles(MODULE_BASEDIR,
+                new String[] { XmlNamesUtils.XML_EXT, "c" },
+                true);
+
+            while (iter.hasNext()) {
+                final File file = iter.next();
+                if (file.getName().endsWith("_cdict.xml")) {
+                    System.err.println(file.getAbsolutePath());
+                }
+
+                if (file.isFile()) {
+                    fileSystem.add(Factory.makeDefaultInputFile(MODULE_BASEDIR, file.getAbsolutePath(), 282));
+                }
+            }
+        }
+
+        return fileSystem;
     }
 
 }

@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.measures.Metric;
@@ -68,13 +69,15 @@ public class PropertyDefinitionsTest {
         //p.load(GetAndRemoveOutcome);
         final KtMetrics km = new KtMetrics();
         final List<Metric> metrics = km.getMetrics();
-        final Properties p = getStrings();
+        final Properties properties = getStrings();
 
         for (final Metric<?> pd : metrics) {
             final String descrKey = "metric." + pd.key() + ".description";
 
             if (pd.key().indexOf("_predicate_") == -1) {
-                assertTrue("no description for metric key " + descrKey, p.containsKey(descrKey));
+                assertTrue("no description for metric key " + descrKey + "; valid keys are: "
+                        + StringUtils.join(properties.keySet().toArray(), ", "),
+                    properties.containsKey(descrKey));
             }
         }
 

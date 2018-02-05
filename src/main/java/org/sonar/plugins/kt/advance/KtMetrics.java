@@ -19,14 +19,12 @@
  */
 package org.sonar.plugins.kt.advance;
 
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity.C;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity.G;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity.P;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel.PRIMARY;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel.SECONDARY;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState.DISCHARGED;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState.OPEN;
-import static org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState.VIOLATION;
+import static kt.advance.model.Definitions.POLevel.PRIMARY;
+import static kt.advance.model.Definitions.POLevel.SECONDARY;
+import static kt.advance.model.Definitions.POStatus.dead;
+import static kt.advance.model.Definitions.POStatus.discharged;
+import static kt.advance.model.Definitions.POStatus.open;
+import static kt.advance.model.Definitions.POStatus.violation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,13 +39,13 @@ import org.sonar.api.measures.Metrics;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
-import org.sonar.plugins.kt.advance.batch.PredicateTypes;
-import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
-import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateType;
+//import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
 
 import com.google.common.base.Preconditions;
+
+import kt.advance.model.Definitions.POLevel;
+import kt.advance.model.Definitions.POStatus;
+import kt.advance.model.PredicatesFactory.PredicateType;
 
 public final class KtMetrics implements Metrics {
 
@@ -68,7 +66,7 @@ public final class KtMetrics implements Metrics {
                     .create();
 
     public static final Metric<Integer> METRIC_PPO_DISCHARGED = new Metric.Builder(
-            metricKey(PRIMARY, DISCHARGED),
+            metricKey(PRIMARY, discharged),
             "Discharged Proof Obligations",
             Metric.ValueType.INT)
                     .setDirection(Metric.DIRECTION_BETTER)
@@ -77,7 +75,7 @@ public final class KtMetrics implements Metrics {
                     .create();
 
     public static final Metric<Integer> METRIC_SPO_DISCHARGED = new Metric.Builder(
-            metricKey(SECONDARY, DISCHARGED),
+            metricKey(SECONDARY, discharged),
             "Discharged Proof Obligations",
             Metric.ValueType.INT)
                     .setDirection(Metric.DIRECTION_BETTER)
@@ -86,19 +84,13 @@ public final class KtMetrics implements Metrics {
                     .create();
 
     public static final Metric<Integer> METRIC_PPO_OPEN = makeIssueCounterMetric(
-        metricKey(PRIMARY, OPEN), "Open Primary Proof Obligations");
+        metricKey(PRIMARY, open), "Open Primary Proof Obligations");
 
     public static final Metric<Integer> METRIC_SPO_OPEN = makeIssueCounterMetric(
-        metricKey(SECONDARY, OPEN), "Open Secondary Proof Obligations");
-
-    public static final Metric<Double> METRIC_PPO_OPEN_PC = makeIssuePercentMetric(
-        metricKeyPc(PRIMARY, OPEN), "% Of Open Primary Proof Obligations");
-
-    public static final Metric<Double> METRIC_SPO_OPEN_PC = makeIssuePercentMetric(
-        metricKeyPc(SECONDARY, OPEN), "% Of Open Secondary Proof Obligations");
+        metricKey(SECONDARY, open), "Open Secondary Proof Obligations");
 
     public static final Metric<Double> METRIC_PPO_DISCHARGED_PC = new Metric.Builder(
-            metricKeyPc(PRIMARY, DISCHARGED),
+            metricKeyPc(PRIMARY, discharged),
             "% Of Discharged Primary Proof Obligations",
             Metric.ValueType.PERCENT)
                     .setDirection(Metric.DIRECTION_BETTER)
@@ -107,25 +99,13 @@ public final class KtMetrics implements Metrics {
                     .create();
 
     public static final Metric<Double> METRIC_SPO_DISCHARGED_PC = new Metric.Builder(
-            metricKeyPc(SECONDARY, DISCHARGED),
+            metricKeyPc(SECONDARY, discharged),
             "% Of Discharged Secondary Proof Obligations",
             Metric.ValueType.PERCENT)
                     .setDirection(Metric.DIRECTION_BETTER)
                     .setQualitative(true)
                     .setDomain(CoreMetrics.DOMAIN_ISSUES)
                     .create();
-    public static final Metric<Integer> METRIC_PPO_VIOLATIONS = makeIssueCounterMetric(
-        metricKey(PRIMARY, VIOLATION), "Violations, Primary");
-
-    public static final Metric<Double> METRIC_PPO_VIOLATIONS_PC = makeIssuePercentMetric(
-        metricKeyPc(PRIMARY, VIOLATION), "% Of Primary Violations");
-
-    public static final Metric<Double> METRIC_SPO_VIOLATIONS_PC = makeIssuePercentMetric(
-        metricKeyPc(SECONDARY, VIOLATION), "% Of Secondary Violations");
-
-    public static final Metric<Integer> METRIC_SPO_VIOLATIONS = makeIssueCounterMetric(
-        metricKey(SECONDARY, VIOLATION), "Violations, Secondary");
-
     public static final Metric<Integer> METRIC_PPO = new Metric.Builder(
             metricKey(PRIMARY),
             "Primary Proof Obligations",
@@ -143,35 +123,6 @@ public final class KtMetrics implements Metrics {
                     .setDomain(CoreMetrics.DOMAIN_GENERAL)
                     .create();
 
-    public static final Metric<Float> METRIC_PPO_COMPLEXITY_PER_LINE_C = makeComplexityMetric(
-        compexityPerLineMetricKey(PRIMARY, C), "PPO C-complexity per line");
-    public static final Metric<Float> METRIC_PPO_COMPLEXITY_PER_LINE_P = makeComplexityMetric(
-        compexityPerLineMetricKey(PRIMARY, P), "PPO P-complexity per line");
-    public static final Metric<Float> METRIC_PPO_COMPLEXITY_PER_LINE_G = makeComplexityMetric(
-        compexityPerLineMetricKey(PRIMARY, G), "PPO G-complexity per line");
-
-    public static final Metric<Float> METRIC_SPO_COMPLEXITY_PER_LINE_C = makeComplexityMetric(
-        compexityPerLineMetricKey(SECONDARY, C), "SPO C-complexity per line");
-    public static final Metric<Float> METRIC_SPO_COMPLEXITY_PER_LINE_P = makeComplexityMetric(
-        compexityPerLineMetricKey(SECONDARY, P), "SPO P-complexity per line");
-    public static final Metric<Float> METRIC_SPO_COMPLEXITY_PER_LINE_G = makeComplexityMetric(
-        compexityPerLineMetricKey(SECONDARY, G), "SPO G-complexity per line");
-
-    //primary
-    public static final Metric<Integer> METRIC_PPO_COMPLEXITY_C = makeComplexityIntMetric(
-        compexityMetricKey(PRIMARY, C), "PPO C-complexity");
-    public static final Metric<Integer> METRIC_PPO_COMPLEXITY_P = makeComplexityIntMetric(
-        compexityMetricKey(PRIMARY, P), "PPO P-complexity");
-    public static final Metric<Integer> METRIC_PPO_COMPLEXITY_G = makeComplexityIntMetric(
-        compexityMetricKey(PRIMARY, G), "PPO G-complexity");
-
-    //secondary:
-    public static final Metric<Integer> METRIC_SPO_COMPLEXITY_C = makeComplexityIntMetric(
-        compexityMetricKey(SECONDARY, C), "SPO C-complexity");
-    public static final Metric<Integer> METRIC_SPO_COMPLEXITY_P = makeComplexityIntMetric(
-        compexityMetricKey(SECONDARY, P), "SPO P-complexity");
-    public static final Metric<Integer> METRIC_SPO_COMPLEXITY_G = makeComplexityIntMetric(
-        compexityMetricKey(SECONDARY, G), "SPO G-complexity");
     //---------------------
     private static final Logger LOG = Loggers.get(KtMetrics.class.getName());
 
@@ -180,17 +131,23 @@ public final class KtMetrics implements Metrics {
      */
     private static final Map<String, Map<String, Metric<Integer>>> PER_PREDICATE_METRICS = new HashMap<>();
     static {
-        createMetricsForPredicates(metricKey(PRIMARY, OPEN), "OPN", "Open PPOs by",
+        createMetricsForPredicates(metricKey(PRIMARY, open), "OPN", "Open PPOs by",
             "Open PPOs by Predicate Type");
 
-        createMetricsForPredicates(metricKey(PRIMARY, VIOLATION), "VL1", "Violations by",
+        createMetricsForPredicates(metricKey(PRIMARY, violation), "VL1", "Violations by",
             "Violations by Predicate Type");
 
-        createMetricsForPredicates(metricKey(SECONDARY, OPEN), "OPN", "Open SPOs by",
+        createMetricsForPredicates(metricKey(SECONDARY, open), "OPN", "Open SPOs by",
             "Open SPOs by Predicate Type");
 
-        createMetricsForPredicates(metricKey(SECONDARY, VIOLATION), "VL2", "Secondary Violations by",
+        createMetricsForPredicates(metricKey(SECONDARY, violation), "VL2", "Secondary Violations by",
             "Secondary Violations by Predicate Type");
+
+        createMetricsForPredicates(metricKey(PRIMARY, dead), "DEAD", "Dead-code PPOs by",
+            "Dead-code PPOs by Predicate Type");
+
+        createMetricsForPredicates(metricKey(SECONDARY, dead), "DEAD", "Dead-code SPOs by",
+            "Dead-code SPOs by Predicate Type");
     }
 
     static final List<Metric> allMetrics = new ArrayList<>();
@@ -210,41 +167,51 @@ public final class KtMetrics implements Metrics {
             METRIC_SPO_DISCHARGED,
             METRIC_SPO_DISCHARGED_PC,
 
-            METRIC_PPO_OPEN_PC,
-            METRIC_SPO_OPEN_PC,
+            makeIssuePercentMetric(metricKeyPc(PRIMARY, open), "% Of Open Primary Proof Obligations"),
+            makeIssuePercentMetric(metricKeyPc(SECONDARY, open), "% Of Open Secondary Proof Obligations"),
 
-            METRIC_PPO_VIOLATIONS_PC,
-            METRIC_SPO_VIOLATIONS_PC,
+            makeIssuePercentMetric(metricKeyPc(PRIMARY, violation), "% Of Primary Violations"),
+            makeIssuePercentMetric(metricKeyPc(SECONDARY, violation), "% Of Secondary Violations"),
 
-            METRIC_PPO_VIOLATIONS,
-            METRIC_SPO_VIOLATIONS,
+            makeIssuePercentMetric(metricKeyPc(PRIMARY, dead), "% Of PPO Dead-code"),
+            makeIssuePercentMetric(metricKeyPc(SECONDARY, dead), "% Of SPO Dead-code"),
 
-            METRIC_PPO_COMPLEXITY_C,
-            METRIC_PPO_COMPLEXITY_P,
-            METRIC_PPO_COMPLEXITY_G,
+            makeIssueCounterMetric(metricKey(PRIMARY, violation), "Violations, Primary"),
+            makeIssueCounterMetric(metricKey(SECONDARY, violation), "Violations, Secondary"),
 
-            METRIC_SPO_COMPLEXITY_C,
-            METRIC_SPO_COMPLEXITY_P,
-            METRIC_SPO_COMPLEXITY_G,
-
-            METRIC_PPO_COMPLEXITY_PER_LINE_C,
-            METRIC_PPO_COMPLEXITY_PER_LINE_P,
-            METRIC_PPO_COMPLEXITY_PER_LINE_G,
-
-            METRIC_SPO_COMPLEXITY_PER_LINE_C,
-            METRIC_SPO_COMPLEXITY_PER_LINE_P,
-            METRIC_SPO_COMPLEXITY_PER_LINE_G,
+            makeIssueCounterMetric(metricKey(PRIMARY, dead), "Dead-code, Primary"),
+            makeIssueCounterMetric(metricKey(SECONDARY, dead), "Dead-code, Secondary"),
 
             METRIC_KT_PO_BY_PREDICATE_DISTR));
 
-        allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, OPEN)).values());
-        allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, VIOLATION)).values());
+        for (final POLevel level : POLevel.values()) {
+            for (final POComplexity c : POComplexity.values()) {
 
-        allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, OPEN)).values());
-        allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, VIOLATION)).values());
+                final Metric<Float> complexityPerLineMetric = makeComplexityMetric(
+                    compexityPerLineMetricKey(level, c),
+                    level.key().toUpperCase() + " " + c.name() + "-complexity per line");
+
+                allMetrics.add(complexityPerLineMetric);
+
+                final Metric<Float> complexityMetric = makeComplexityMetric(
+                    compexityMetricKey(level, c),
+                    level.key().toUpperCase() + " " + c.name() + "-complexity");
+
+                allMetrics.add(complexityMetric);
+            }
+
+        }
+
+        allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, open)).values());
+        allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, violation)).values());
+
+        allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, open)).values());
+        allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, violation)).values());
 
         for (final Metric<?> m : allMetrics) {
-            allMetricsMap.put(m.getKey(), m);
+            final String metricKey = m.getKey();
+            Preconditions.checkArgument(!allMetricsMap.containsKey(metricKey));
+            allMetricsMap.put(metricKey, m);
             LOG.debug("Registered metric: " + m);
         }
     }
@@ -255,6 +222,20 @@ public final class KtMetrics implements Metrics {
 
     public static String compexityPerLineMetricKey(POLevel level, POComplexity c) {
         return join(PREFIX, level.key(), COMPLEXITY, "per_line", c.key());
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Metric<Float> getFloatMetric(String key) {
+        return (Metric<Float>) allMetricsMap.get(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Metric<Integer> getIntMetric(String key) {
+        return (Metric<Integer>) allMetricsMap.get(key);
+    }
+
+    public static Metric<?> getMetric(String key) {
+        return allMetricsMap.get(key);
     }
 
     public static Map<String, Metric<Integer>> getMetricsForPredicates(String metricKey) {
@@ -305,20 +286,20 @@ public final class KtMetrics implements Metrics {
         return join(PREFIX, level.key(), "");
     }
 
-    public static String metricKey(POLevel level, POState state) {
-        return join(PREFIX, level.key(), state.key());
+    public static String metricKey(POLevel level, POStatus state) {
+        return join(PREFIX, level.key(), state.name());
     }
 
-    public static String metricKeyPc(POLevel level, POState state) {
-        return join(PREFIX, level.key(), state.key(), PCT);
+    public static String metricKeyPc(POLevel level, POStatus state) {
+        return join(PREFIX, level.key(), state.name(), PCT);
     }
 
-    public static Metric<Integer> predicateMetric(String metricKey, PredicateKey predicateKey) {
+    public static Metric<Integer> predicateMetric(String metricKey, PredicateType predicateType) {
         try {
             return getMetricsForPredicates(metricKey)
-                    .get(joinKey(metricKey, predicateKey.toString()));
+                    .get(joinKey(metricKey, predicateType.name()));
         } catch (final NullPointerException ex) {
-            throw new IllegalArgumentException(metricKey + " " + predicateKey, ex);
+            throw new IllegalArgumentException(metricKey + " " + predicateType, ex);
         }
     }
 
@@ -352,20 +333,24 @@ public final class KtMetrics implements Metrics {
         final Map<String, Metric<Integer>> pm = new HashMap<>();
         PER_PREDICATE_METRICS.put(metricKey, pm);
 
-        for (final PredicateType pd : PredicateTypes.loadPredicates()) {
+        Preconditions.checkArgument(!pm.containsKey(metricKey));
 
-            final String key = joinKey(metricKey, pd.key.toString());
+        for (final PredicateType pd : PredicateType
+                .values()) {
+
+            final String key = joinKey(metricKey, pd.name());
             final Metric<Integer> metric = new Metric.Builder(
                     key,
-                    "(" + namePrefix + ") " + pd.name,
+                    "(" + namePrefix + ") " + pd.label,
                     Metric.ValueType.INT)
-                            .setDescription("(" + descrPrefix + ") " + pd.name)
+                            .setDescription("(" + descrPrefix + ") " + pd.label)
                             .setDirection(Metric.DIRECTION_WORST)
                             .setQualitative(true)
                             .setDomain(domain)
                             //.setHidden(true)
                             .create();
 
+            Preconditions.checkArgument(!pm.containsKey(key));
             pm.put(key, metric);
         }
         return pm;
