@@ -1,5 +1,9 @@
 # KT Advance SonarQube Plugin
 
+## 2018 upd:
+
+depends on https://github.com/compartia/xml-kt-advance-java
+
 [![Build Status](https://travis-ci.com/mrbkt/kestreltech.svg?token=1L4UwqexWxqBGfsyymrm&branch=master)](https://travis-ci.com/mrbkt/kestreltech)
 
 ## Installation steps
