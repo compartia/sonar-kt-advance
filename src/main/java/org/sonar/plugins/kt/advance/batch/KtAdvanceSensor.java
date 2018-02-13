@@ -96,28 +96,37 @@ public class KtAdvanceSensor implements SonarResourceLocator {
             for (final CFile file : app.cfiles.values()) {
 
                 final InputFile inputFile = getResource(app, file);
-                final Issuable issuable = perspectives.as(Issuable.class, inputFile);
+                Issuable fissuable = null;
 
-                for (final CFunction function : file.cfunctions.values()) {
-                    function.getPPOs()
-                            .stream()
-                            .map(ppo -> {
-                                statistics.handle(ppo, app, file, this);
-                                return ppo;
-                            })
-                            .map(ppo -> mapper.toIssue(ppo, issuable, this, app, file))
-                            .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
-                    //XXX: trigger stats
-                    for (final CFunctionCallsiteSPO callsite : function.getSPOs()) {
-                        //XXX: trigger stats
-                        callsite.spos.values().stream()
-                                .map(spo -> {
-                                    statistics.handle(spo, app, file, this);
-                                    return spo;
+                try {
+                    fissuable = perspectives.as(Issuable.class, inputFile);
+                } catch (final Exception ex) {
+                    LOG.error("cannot get issuable for file " + inputFile);
+                }
+                if (fissuable != null) {
+                    final Issuable issuable = fissuable;
+
+                    for (final CFunction function : file.cfunctions.values()) {
+                        function.getPPOs()
+                                .stream()
+                                .map(ppo -> {
+                                    statistics.handle(ppo, app, file, this);
+                                    return ppo;
                                 })
-                                .map(spo -> mapper.toIssue(spo, issuable, this, app, file))
+                                .map(ppo -> mapper.toIssue(ppo, issuable, this, app, file))
                                 .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
+                        //XXX: trigger stats
+                        for (final CFunctionCallsiteSPO callsite : function.getSPOs()) {
+                            //XXX: trigger stats
+                            callsite.spos.values().stream()
+                                    .map(spo -> {
+                                        statistics.handle(spo, app, file, this);
+                                        return spo;
+                                    })
+                                    .map(spo -> mapper.toIssue(spo, issuable, this, app, file))
+                                    .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
 
+                        }
                     }
                 }
             }
