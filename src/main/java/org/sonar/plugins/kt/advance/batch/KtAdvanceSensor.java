@@ -245,17 +245,10 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         Preconditions.checkNotNull(issuable, "issuable is null");
 
         try {
-
-            //            statistics.handle(issue);
-            //XXX: trigger stats!!!
             final boolean result = issuable.addIssue(issue);
-
             return result;
         } catch (final org.sonar.api.utils.MessageException me) {
             LOG.error(me.getLocalizedMessage(), me);
-            //            LOG.error(String.format("Can't add issue on file %s at line %d.",
-            //                "-=file=-", issue),//XXX: file name
-            //                me);
         }
 
         return false;
