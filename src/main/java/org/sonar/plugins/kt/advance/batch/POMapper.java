@@ -116,7 +116,7 @@ public class POMapper {
         final Issuable.IssueBuilder issueBuilder = issuable.newIssueBuilder();
 
         final NewIssueLocation primaryLocation = issueBuilder.newLocation()
-                .on(inputFile)
+                .on(inputFile).at(inputFile.newRange(po.getLocation().line, 0, po.getLocation().line, 0))
                 .message(getDescription(po));
 
         //        final Object textRange = null;
