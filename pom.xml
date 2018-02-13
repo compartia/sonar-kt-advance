@@ -64,9 +64,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.github.compartia</groupId>
+			<groupId>com.github.mrbkt</groupId>
 			<artifactId>xml-kt-advance-java</artifactId>
-			<version>242bf4bb8f</version>
+			<version>-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>log4j</artifactId>
