@@ -22,6 +22,9 @@ import com.google.common.base.Preconditions;
 
 import kt.advance.model.CApplication;
 import kt.advance.model.CFile;
+import kt.advance.model.CLocation;
+import kt.advance.model.Definitions;
+import kt.advance.model.Definitions.POLevel;
 import kt.advance.model.PO;
 
 public class POMapper {
@@ -88,7 +91,16 @@ public class POMapper {
     }
 
     public String getDescription(PO po) {
-        return po.explaination + "\n" + po.getPredicate().express() + "\n" + po.deps.toString();
+        String base = po.getLevel() == POLevel.SECONDARY ? "Secondary; " : "";
+        base += po.explaination +
+                "; [ " + po.getPredicate().express() + " ]";
+
+        if (po.deps.level != Definitions.DepsLevel.s /* self */
+                && po.deps.level != Definitions.DepsLevel.i /* unknown */) {
+            base += "; " + po.deps.level.label;
+        }
+
+        return base;
     }
 
     public RuleKey getRuleKey(PO po) {
@@ -115,8 +127,10 @@ public class POMapper {
 
         final Issuable.IssueBuilder issueBuilder = issuable.newIssueBuilder();
 
+        final CLocation poLoc = po.getLocation();
         final NewIssueLocation primaryLocation = issueBuilder.newLocation()
-                .on(inputFile).at(inputFile.newRange(po.getLocation().line, 0, po.getLocation().line, 0))
+                .on(inputFile)
+                .at(inputFile.newRange(poLoc.line, 0, poLoc.line, 0))
                 .message(getDescription(po));
 
         //        final Object textRange = null;
