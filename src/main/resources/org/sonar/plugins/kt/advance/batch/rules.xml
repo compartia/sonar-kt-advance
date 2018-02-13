@@ -1,6 +1,6 @@
 <rules>
     <rule>
-        <key>predicate_non_negative</key>
+        <key>predicate__nneg</key>
         <name>Value must not be negative</name>
         <description><![CDATA[
 			<p>A value must not be negative.</p>
@@ -22,9 +22,8 @@
         <tag>non-negative</tag>
     </rule>
 
-
     <rule>
-        <key>predicate_not_null</key>
+        <key>predicate__nn</key>
         <name>Value must not be null</name>
         <description><![CDATA[
 		<p>
@@ -33,54 +32,60 @@
         <tag>not-null</tag>
     </rule>
 
-
     <rule>
-        <key>predicate_allocation_base</key>
+        <key>predicate__ab</key>
         <name>Allocation Base</name>
         <description><![CDATA[<p>
-    For the predicate <code class="c">allocation_base(ptr)</code> the parameter <code class="name">ptr</code>
-    is the base address of a dynamically allocated memory region.
-</p>]]></description>
+            For the predicate <code class="c">allocation_base(ptr)</code> the parameter <code class="name">ptr</code>
+            is the base address of a dynamically allocated memory region.
+        </p>]]></description>
         <tag>allocation-base</tag>
     </rule>
+
     <rule>
-        <key>predicate_cast</key>
+        <key>predicate__c</key>
         <name>Cast</name>
         <description><![CDATA[<p>Cast</p>]]></description>
         <tag>cast</tag>
     </rule>
+
     <rule>
-        <key>predicate_common_base</key>
+        <key>predicate__cb</key>
         <name>Common Base</name>
         <description><![CDATA[<p>Common Base</p>]]></description>
         <tag>common-base</tag>
     </rule>
+
     <rule>
-        <key>predicate_common_base_type</key>
+        <key>predicate__cbt</key>
         <name>Common Base Type</name>
         <description><![CDATA[<p>Common Base Type</p>]]></description>
         <tag>common-base-type</tag>
     </rule>
-    <rule>
+
+    <!-- <rule>
         <key>predicate_format_string</key>
         <name>Format String</name>
         <description><![CDATA[<p>Format String</p>]]></description>
         <tag>format-string</tag>
-    </rule>
-    <rule>
+    </rule> -->
+
+    <!-- <rule>
         <key>predicate_f_precondition</key>
         <name>F-precondition</name>
         <description><![CDATA[<p>F-precondition</p>]]></description>
         <tag>f-precondition</tag>
-    </rule>
+    </rule> -->
+
     <rule>
-        <key>predicate_global_mem</key>
+        <key>predicate__gm</key>
         <name>Global Memory</name>
         <description><![CDATA[<p>Global Memory</p>]]></description>
         <tag>global-mem</tag>
     </rule>
+
     <rule>
-        <key>predicate_index_lower_bound</key>
+        <key>predicate__ilb</key>
         <name>Index Lower Bound</name>
         <description><![CDATA[<p>
     For the predicate <code class="c">index_lower_bound(exp)</code> expression <code class="name">exp</code>
@@ -88,8 +93,9 @@
 </p>]]></description>
         <tag>index-lower-bound</tag>
     </rule>
+
     <rule>
-        <key>predicate_index_upper_bound</key>
+        <key>predicate__iub</key>
         <name>Index Upper Bound</name>
         <description><![CDATA[<p>
     For the predicate <code class="c">index_upper_bound(exp)</code> expression <code class="name">exp</code>
@@ -98,8 +104,9 @@
 </p>]]></description>
         <tag>index-upper-bound</tag>
     </rule>
+
     <rule>
-        <key>predicate_initialized</key>
+        <key>predicate__i</key>
         <name>Initialized</name>
         <description><![CDATA[<p>
     For the predicate <code class="c">initialized(lhs)</code> the parameter <code class="name">lhs</code>
@@ -108,265 +115,251 @@
 ]]></description>
         <tag>initialized</tag>
     </rule>
+
     <rule>
-        <key>predicate_initialized_range</key>
+        <key>predicate__ir</key>
         <name>Initialized Range</name>
         <description><![CDATA[<p>Initialized Range</p>]]></description>
         <tag>initialized-range</tag>
     </rule>
+
+
     <rule>
-        <key>predicate_int_overflow</key>
+        <key>predicate__io</key>
         <name>Integer Overflow</name>
         <description><![CDATA[<p>
-    For the predicate <code class="c">integer_overflow(op,e1,e2,t)</code> the value of the result of the
-    operation
-    <code class="c">e1 op e2</code> does not exceed the maximum representable value of the type
-    <code class="name">t</code>, if <code class="name">t</code> is a signed type.
-</p>]]></description>
+            For the predicate <code class="c">integer_overflow(op,e1,e2,t)</code> the value of the result of the
+            operation
+            <code class="c">e1 op e2</code> does not exceed the maximum representable value of the type
+            <code class="name">t</code>, if <code class="name">t</code> is a signed type.
+        </p>]]></description>
         <tag>int-overflow</tag>
     </rule>
+
     <rule>
-        <key>predicate_int_underflow</key>
+        <key>predicate__iu</key>
         <name>Integer Underflow</name>
         <description><![CDATA[<p>
-    For the predicate <code class="c">integer_underflow(op,e1,e2,t)</code> the value of the result of the
-    operation
-    <code class="c">e1 op e2</code> is not less than the minimum representable value of the type
-    <code class="name">t</code>, if <code class="name">t</code> is a signed type.
-</p>]]></description>
+            For the predicate <code class="c">integer_underflow(op,e1,e2,t)</code> the value of the result of the
+            operation
+            <code class="c">e1 op e2</code> is not less than the minimum representable value of the type
+            <code class="name">t</code>, if <code class="name">t</code> is a signed type.
+        </p>]]></description>
         <tag>int-underflow</tag>
     </rule>
+
     <rule>
-        <key>predicate_lower_bound</key>
+        <key>predicate__lb</key>
         <name>Lower Bound</name>
         <description><![CDATA[<p>Lower Bound</p>]]></description>
         <tag>lower-bound</tag>
     </rule>
+
     <rule>
         <key>predicate_no_overlap</key>
         <name>No Overlap</name>
         <description><![CDATA[<p>
-    Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
-    type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
-    and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
-    the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
-    value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
-    loffset maps to a non-negative integer.
-</p>
-<p>
-    Let <code class="c">s=(m,v)</code> be a memory state with memory configuration m and valuation function <code class="name">v</code>.
-    Let <code class="c">l=(b,off)</code> be a location in the set of valid locations for m <code class="name">L_m</code> with
-    base address <code class="name">b</code> and offset <code class="name">off</code>.
-</p>
-<p>
-    For the predicate <code class="c">overlap(s,l_1,l_2,len)</code> we say for a given <code class="name">l_1</code> and
-    <code class="name">l_2</code> in <code class="name">L_m</code>, where
-    <code class="c">l_1 = (b_1, off_1)</code> and <code class="c">l_2 = (b_2, off_2)</code>, if
-    <code class="c">b_1 == b_2</code> and <code class="c">|off_1 - off_2| < len</code> then the regions overlap.
-    For the predicate <code class="name">no_overlap</code> the negation of <code class="name">overlap</code> applies.
-</p>]]></description>
+        Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
+        type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
+        and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
+        the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
+        value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
+        loffset maps to a non-negative integer.
+    </p>
+    <p>
+        Let <code class="c">s=(m,v)</code> be a memory state with memory configuration m and valuation function <code class="name">v</code>.
+        Let <code class="c">l=(b,off)</code> be a location in the set of valid locations for m <code class="name">L_m</code> with
+        base address <code class="name">b</code> and offset <code class="name">off</code>.
+    </p>
+    <p>
+        For the predicate <code class="c">overlap(s,l_1,l_2,len)</code> we say for a given <code class="name">l_1</code> and
+        <code class="name">l_2</code> in <code class="name">L_m</code>, where
+        <code class="c">l_1 = (b_1, off_1)</code> and <code class="c">l_2 = (b_2, off_2)</code>, if
+        <code class="c">b_1 == b_2</code> and <code class="c">|off_1 - off_2| < len</code> then the regions overlap.
+        For the predicate <code class="name">no_overlap</code> the negation of <code class="name">overlap</code> applies.
+    </p>]]></description>
         <tag>no-overlap</tag>
     </rule>
+
     <rule>
-        <key>predicate_not_zero</key>
+        <key>predicate__z</key>
         <name>Not zero</name>
         <description><![CDATA[<p>Not zero</p>]]></description>
         <tag>not-zero</tag>
     </rule>
+
     <rule>
-        <key>predicate_null</key>
+        <key>predicate__null</key>
         <name>null</name>
         <description><![CDATA[<p>null</p>]]></description>
         <tag>null</tag>
     </rule>
+
     <rule>
-        <key>predicate_null_terminated</key>
+        <key>predicate__nt</key>
         <name>null-terminated</name>
         <description><![CDATA[<p>
-    Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
-    type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
-    and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
-    the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
-    value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
-    loffset maps to a non-negative integer.
-</p>
-<p>
-    Let <code class="c">s=(m,v)</code> be a memory state with memory configuration m and valuation function <code class="name">v</code>.
-    Let <code class="c">l=(b,off)</code> be a location in the set of valid locations for m <code class="name">L_m</code> with
-    base address <code class="name">b</code> and offset <code class="name">off</code>.
-</p>
-<p>
-    For the predicate <code class="c">null_terminated(s,l)</code> we say there exists a location
-    <code class="c">l_1 = (b,k) . v(l_1) = '\0'</code> for all <code class="name">l_1</code> in <code class="name">L_m</code> where
-    <code class="c">k >= off</code>.
-    The character <code class="name">'\0'</code> is the null termination character for strings.
-</p>]]></description>
+            Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
+            type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
+            and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
+            the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
+            value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
+            loffset maps to a non-negative integer.
+        </p>
+        <p>
+            Let <code class="c">s=(m,v)</code> be a memory state with memory configuration m and valuation function <code class="name">v</code>.
+            Let <code class="c">l=(b,off)</code> be a location in the set of valid locations for m <code class="name">L_m</code> with
+            base address <code class="name">b</code> and offset <code class="name">off</code>.
+        </p>
+        <p>
+            For the predicate <code class="c">null_terminated(s,l)</code> we say there exists a location
+            <code class="c">l_1 = (b,k) . v(l_1) = '\0'</code> for all <code class="name">l_1</code> in <code class="name">L_m</code> where
+            <code class="c">k >= off</code>.
+            The character <code class="name">'\0'</code> is the null termination character for strings.
+        </p>]]></description>
         <tag>null-terminated</tag>
     </rule>
+
     <rule>
-        <key>predicate_pointer_cast</key>
+        <key>predicate__pc</key>
         <name>Pointer Cast</name>
         <description><![CDATA[<p>
-    Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
-    type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
-    and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
-    the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
-    value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
-    loffset maps to a non-negative integer.  For cast expressions we have
-    <code class="c">s(cast type_src type_tgt exp) = cast type_src type_tgt (s(exp))</code>.
-</p>
-<p>
-    Cast operations to pointer types may lead to undefined behavior, but only at the time of dereference.
-For any <code class="c">s(x)</code> defined in terms of <code class="c">f(e_1, e_2, ..., e_n)</code>
-    if <code class="c">e_i = undefined</code>
-    for some <code class="name">i</code>, <code>1 <= i <= n</code>, then <code class="c">s(x) = undefined</code>
-    (that is, there is no recovery from an undefined value).  For any <code class="name">s(x)</code> defined in terms of
-    <code class="c">f(e_1, e_2, ..., e_n)</code> if <code class="c">s(x) <> undefined</code> and if
-    <code class="c">e_i = uninitialized</code> for some <code class="name">i</code>, <code class="c">1 <= i <= n</code>, then
-    <code class="c">s(x) = uninitialized</code>.
-</p>]]></description>
+            Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
+            type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
+            and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
+            the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
+            value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
+            loffset maps to a non-negative integer.  For cast expressions we have
+            <code class="c">s(cast type_src type_tgt exp) = cast type_src type_tgt (s(exp))</code>.
+        </p>
+        <p>
+            Cast operations to pointer types may lead to undefined behavior, but only at the time of dereference.
+        For any <code class="c">s(x)</code> defined in terms of <code class="c">f(e_1, e_2, ..., e_n)</code>
+            if <code class="c">e_i = undefined</code>
+            for some <code class="name">i</code>, <code>1 <= i <= n</code>, then <code class="c">s(x) = undefined</code>
+            (that is, there is no recovery from an undefined value).  For any <code class="name">s(x)</code> defined in terms of
+            <code class="c">f(e_1, e_2, ..., e_n)</code> if <code class="c">s(x) <> undefined</code> and if
+            <code class="c">e_i = uninitialized</code> for some <code class="name">i</code>, <code class="c">1 <= i <= n</code>, then
+            <code class="c">s(x) = uninitialized</code>.
+        </p>]]></description>
         <tag>pointer-cast</tag>
     </rule>
+
     <rule>
-        <key>predicate_ptr_lower_bound</key>
+        <key>predicate__plb</key>
         <name>Pointer Lower Bound</name>
         <description><![CDATA[<p>
-    For the predicate <code class="c">lower_bound(ptr,t)</code> the element <code class="c">ptr</code>
-    is an address into a memory region <code class="name">r</code> such that <code class="c">ptr >= lb(r)</code>,
-    where <code class="name">r</code> is a declared or allocated memory region of size <code class="name">s</code> bytes,
-    <code class="c">lb(r)</code> is the base address of the region, and
-    <code class="c">ub(r) = lb(r) + s</code> is the upper bound of the region.
-</p>]]></description>
+            For the predicate <code class="c">lower_bound(ptr,t)</code> the element <code class="c">ptr</code>
+            is an address into a memory region <code class="name">r</code> such that <code class="c">ptr >= lb(r)</code>,
+            where <code class="name">r</code> is a declared or allocated memory region of size <code class="name">s</code> bytes,
+            <code class="c">lb(r)</code> is the base address of the region, and
+            <code class="c">ub(r) = lb(r) + s</code> is the upper bound of the region.
+        </p>]]></description>
         <tag>ptr-lower-bound</tag>
     </rule>
+
+    
+
     <rule>
-        <key>predicate_ptr_upper_bound</key>
-        <name>Pointer Upper Bound</name>
-        <description><![CDATA[<p>
-    For the predicate <code class="c">upper_bound(ptr,t)</code> the element <code class="name">ptr</code>
-    is an address into a memory region such that <code class="c">ptr + sizeof(t) <= ub(r)</code>, where
-    <code class="name">r</code> is a declared or allocated memory region of size <code class="name">s</code> bytes,
-    <code class="c">lb(r)</code> is the base address of the region, and
-    <code class="c">ub(r) = lb(r) + s</code> is the upper bound of the region.
-</p>]]></description>
-        <tag>ptr-upper-bound</tag>
-    </rule>
-    <rule>
-        <key>predicate_ptr_upper_bound_deref</key>
+        <key>predicate__pubd</key>
         <name>Pointer Upper Bound Dereference</name>
         <description><![CDATA[<p>Pointer Upper Bound Dereference</p>]]></description>
         <tag>ptr-upper-bound-deref</tag>
     </rule>
+
     <rule>
-        <key>predicate_signed_to_unsigned_cast</key>
+        <key>predicate__csu</key>
         <name>Signed to Unsigned Cast</name>
         <description><![CDATA[<p>
-    Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
-    type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
-    and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
-    the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
-    value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
-    loffset maps to a non-negative integer.  For cast expressions we have
-    <code class="c">s(cast type_src type_tgt exp) = cast type_src type_tgt (s(exp))</code>.
-</p>
-<p>
-    Cast operations may result in an undefined expression value if the source and target type are not compatible.
-    A common type of cast operation in C programs is the cast from <code class="c">signed int</code>
-    to <code class="c">unsigned int</code>:
-<pre>
-    <code class="c">cast(signed int, unsigned int, exp)</code>
-</pre>
-    For example, this type of cast is performed implicitly whenever a signed integer is a passed to a
-function that expects an unsigned integer as argument, such as the length parameter in
-<code class="c">memcpy(.,.,size t len)</code>. For this particular case we have
-<pre>
-    <code class="c">cast(signed int, unsigned int, exp) = s(exp) ; if s(exp) ≥ 0 </code>
-    <code class="c">cast(signed int, unsigned int, exp) = undefined ; otherwise </code>
-</pre>
-</p>]]></description>
+            Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
+            type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
+            and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
+            the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
+            value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
+            loffset maps to a non-negative integer.  For cast expressions we have
+            <code class="c">s(cast type_src type_tgt exp) = cast type_src type_tgt (s(exp))</code>.
+        </p>
+        <p>
+            Cast operations may result in an undefined expression value if the source and target type are not compatible.
+            A common type of cast operation in C programs is the cast from <code class="c">signed int</code>
+            to <code class="c">unsigned int</code>:
+        <pre>
+            <code class="c">cast(signed int, unsigned int, exp)</code>
+        </pre>
+            For example, this type of cast is performed implicitly whenever a signed integer is a passed to a
+        function that expects an unsigned integer as argument, such as the length parameter in
+        <code class="c">memcpy(.,.,size t len)</code>. For this particular case we have
+        <pre>
+            <code class="c">cast(signed int, unsigned int, exp) = s(exp) ; if s(exp) ≥ 0 </code>
+            <code class="c">cast(signed int, unsigned int, exp) = undefined ; otherwise </code>
+        </pre>
+        </p>]]></description>
         <tag>signed-to-unsigned-cast</tag>
     </rule>
+
     <rule>
-        <key>predicate_type_at_offset</key>
+        <key>predicate__tao</key>
         <name>Type At Offset</name>
         <description><![CDATA[<p>Type At Offset</p>]]></description>
         <tag>type-at-offset</tag>
     </rule>
+
     <rule>
-        <key>predicate_unsigned_to_signed_cast</key>
+        <key>predicate__cus</key>
         <name>Unsigned to Signed Cast</name>
         <description><![CDATA[<p>Unsigned to Signed Cast</p>]]></description>
         <tag>unsigned-to-signed-cast</tag>
     </rule>
+
     <rule>
-        <key>predicate_upper_bound</key>
+        <key>predicate__ub</key>
         <name>Upper Bound</name>
         <description><![CDATA[<p>Upper Bound</p>]]></description>
         <tag>upper-bound</tag>
     </rule>
+
     <rule>
-        <key>predicate_width_overflow</key>
+        <key>predicate__w</key>
         <name>Width Overflow</name>
         <description><![CDATA[<p>Width Overflow</p>]]></description>
         <tag>width-overflow</tag>
     </rule>
+
     <rule>
-        <key>predicate_valid_mem</key>
+        <key>predicate__vm</key>
         <name>Valid Memory</name>
         <description><![CDATA[<p>
-    For the predicate <code class="c">valid_memory(ptr)</code> the element <code class="name">ptr</code> is
-    an address within a valid memory region, that is, a memory region that has not been freed or gone
-    out of scope.
-</p>
-]]></description>
+            For the predicate <code class="c">valid_memory(ptr)</code> the element <code class="name">ptr</code> is
+            an address within a valid memory region, that is, a memory region that has not been freed or gone
+            out of scope.
+        </p>
+        ]]></description>
         <tag>valid-mem</tag>
     </rule>
+
     <rule>
-        <key>predicate_value_constraint</key>
+        <key>predicate__vc</key>
         <name>Value Constraint</name>
         <description><![CDATA[<p>Value Constraint</p>]]></description>
         <tag>value-constraint</tag>
     </rule>
+ 
+
+
     <rule>
-        <key>predicate_div_by_zero</key>
-        <name>Division By Zero</name>
+        <key>predicate__pub</key>
+        <name>Pointer Upper Bound</name>
         <description><![CDATA[<p>
-    Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
-    type assignment <code class="name">t</code>, and valuation function <code class="name">v</code>,
-    and a canonical construct <code class="name">c</code> we denote by <code class="name">s(c)</code>
-    the value of <code class="name">c</code> in memory state <code class="name">s</code> in its appropriate
-    value domain, that is, an lvalue maps to a location, an expression maps to a value of its type, and an
-    loffset maps to a non-negative integer.  For division expressions we have
-    <code class="c">s(op2 exp1 exp2) = op2 s(exp1) s(exp2)</code>.
-</p>
-<p>
-    The division and modulo operators may result in an undefined value when the second operand is zero
-    and the operator <code class="name">op</code> is one of <code class="name">/</code> or <code class="name">%</code>:
-<pre>
-    <code class="c">s(op exp1 exp2) = op s(exp1) s(exp2) ; if s(exp2) <> 0</code>
-    <code class="c">s(op exp1 exp2) = undefined ; if s(exp2) == 0</code>
-</pre>
-</p>]]></description>
-        <tag>div-by-zero</tag>
+            For the predicate <code class="c">upper_bound(ptr,t)</code> the element <code class="name">ptr</code>
+            is an address into a memory region such that <code class="c">ptr + sizeof(t) <= ub(r)</code>, where
+            <code class="name">r</code> is a declared or allocated memory region of size <code class="name">s</code> bytes,
+            <code class="c">lb(r)</code> is the base address of the region, and
+            <code class="c">ub(r) = lb(r) + s</code> is the upper bound of the region.
+        </p>]]></description>
+        <tag>ptr-upper-bound</tag>
     </rule>
-    <rule>
-        <key>predicate_ptr_upperbound</key>
-        <name>Pointer Upper Bound (!)</name>
-        <description><![CDATA[<p>Pointer Upper Bound (!)</p>]]></description>
-        <tag>ptr-upperbound</tag>
-    </rule>
-    <rule>
-        <key>predicate_ptr_op_lowerbound</key>
-        <name>Pointer Operation Lower Bound</name>
-        <description><![CDATA[<p>Pointer Operation Lower Bound</p>]]></description>
-        <tag>ptr-op-lowerbound</tag>
-    </rule>
-    <rule>
-        <key>predicate_ptr_op_upperbound</key>
-        <name>Pointer Operation Upper Bound</name>
-        <description><![CDATA[<p>Pointer Operation Upper Bound</p>]]></description>
-        <tag>ptr-op-upperbound</tag>
-    </rule>
+
+
 
 
 </rules>

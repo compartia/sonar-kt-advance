@@ -94,10 +94,11 @@ public class POMapper {
     public RuleKey getRuleKey(PO po) {
         return RuleKey.of(
             KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + po.status,
-            po.getPredicate().type.toString());//XXX: use code, not label
+            "predicate_" + po.getPredicate().type.name());//XXX: use code, not label
     }
 
     public final Issue toIssue(PO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFile file) {
+
         Preconditions.checkNotNull(po);
         Preconditions.checkNotNull(issuable);
         Preconditions.checkNotNull(app);
