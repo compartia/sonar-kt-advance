@@ -156,7 +156,7 @@
     </rule>
 
     <rule>
-        <key>predicate_no_overlap</key>
+        <key>predicate__no</key>
         <name>No Overlap</name>
         <description><![CDATA[<p>
         Given a memory state <code class="c">s = (m,t,v)</code> with memory configuration <code class="name">m</code>,
@@ -344,8 +344,6 @@
         <tag>value-constraint</tag>
     </rule>
  
-
-
     <rule>
         <key>predicate__pub</key>
         <name>Pointer Upper Bound</name>
@@ -366,7 +364,5 @@
         <tag>value-constraint</tag>
     </rule>
 
-
-
-
+ 
 </rules>
