@@ -144,7 +144,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
         Preconditions.checkNotNull(app);
         Preconditions.checkNotNull(cfile);
-        File f = new File(app.fs.getBaseDir().getParentFile(), "sourcefiles");
+        File f = new File(app.fs.getBaseDir().getParentFile().getParentFile(), "sourcefiles");
         f = new File(f, cfile.getName());
 
         final String relative = relativize(f);
@@ -252,9 +252,10 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
             return result;
         } catch (final org.sonar.api.utils.MessageException me) {
-            LOG.error(String.format("Can't add issue on file %s at line %d.",
-                "-=file=-", issue),//XXX: file name
-                me);
+            LOG.error(me.getLocalizedMessage(), me);
+            //            LOG.error(String.format("Can't add issue on file %s at line %d.",
+            //                "-=file=-", issue),//XXX: file name
+            //                me);
         }
 
         return false;
