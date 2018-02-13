@@ -3,7 +3,7 @@ export SONAR_DEV_MODE_DIR=/Users/artem/work/KestrelTechnology/sonar-kt-advance-p
 
 cwd=$(pwd)
 jarstem=sonar-kt-advance-plugin
-jarname=$jarstem-5.5.2.jar
+jarname=$jarstem-5.6.2.jar
 mvn clean sass:update-stylesheets
 mvn package
 
