@@ -30,13 +30,14 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.measures.Metric;
 import org.sonar.plugins.kt.advance.KtMetrics;
 
-@Ignore
+import kt.advance.model.PredicatesFactory.PredicateType;
+
+//@Ignore
 public class PropertyDefinitionsTest {
 
     @Test
@@ -76,7 +77,7 @@ public class PropertyDefinitionsTest {
         for (final Metric<?> pd : metrics) {
             final String descrKey = "metric." + pd.key() + ".description";
 
-            if (pd.key().indexOf("_predicate_") == -1) {
+            if (pd.key().indexOf("_predicate__") == -1) {
                 assertTrue("no description for metric key " + descrKey + "; valid keys are: "
                         + StringUtils.join(properties.keySet().toArray(), ", "),
                     properties.containsKey(descrKey));
@@ -96,9 +97,24 @@ public class PropertyDefinitionsTest {
         for (final Metric<?> pd : metrics) {
             final String name = "widget.metric." + pd.key() + ".name";
 
-            if (name.indexOf("_predicate_") == -1) {
+            if (name.indexOf("_open_predicate_") == -1
+                    && name.indexOf("_violation_predicate_") == -1
+                    && name.indexOf("_dead_predicate_") == -1) {
                 assertTrue("no message for key " + name, p.containsKey(name));
             }
+        }
+    }
+
+    @Test
+    public void testPredicatesHaveNames() throws IOException {
+
+        final KtMetrics km = new KtMetrics();
+        final List<Metric> metrics = km.getMetrics();
+        final Properties p = getStrings();
+
+        for (final PredicateType pt : PredicateType.values()) {
+            final String name = "widget.kt.advance.bc.property.predicate_" + pt.name() + ".name";
+            assertTrue("no message for key " + name, p.containsKey(name));
         }
     }
 

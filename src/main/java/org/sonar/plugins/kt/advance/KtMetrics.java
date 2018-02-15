@@ -125,39 +125,29 @@ public final class KtMetrics implements Metrics {
 
     //---------------------
     private static final Logger LOG = Loggers.get(KtMetrics.class.getName());
-
+    static final List<Metric> allMetrics = new ArrayList<>();
+    static final Map<String, Metric<?>> allMetricsMap = new HashMap<>();
     /**
      * per predicate metrics
      */
     private static final Map<String, Map<String, Metric<Integer>>> PER_PREDICATE_METRICS = new HashMap<>();
     static {
-        createMetricsForPredicates(metricKey(PRIMARY, open), "OPN", "Open PPOs by",
-            "Open PPOs by Predicate Type");
-
+        createMetricsForPredicates(metricKey(PRIMARY, open), "OPN", "Open PPOs by", "Open PPOs by Predicate Type");
         createMetricsForPredicates(metricKey(PRIMARY, violation), "VL1", "Violations by",
             "Violations by Predicate Type");
-
-        createMetricsForPredicates(metricKey(SECONDARY, open), "OPN", "Open SPOs by",
-            "Open SPOs by Predicate Type");
-
-        createMetricsForPredicates(metricKey(SECONDARY, violation), "VL2", "Secondary Violations by",
-            "Secondary Violations by Predicate Type");
-
         createMetricsForPredicates(metricKey(PRIMARY, dead), "DEAD", "Dead-code PPOs by",
             "Dead-code PPOs by Predicate Type");
 
+        createMetricsForPredicates(metricKey(SECONDARY, open), "OPN", "Open SPOs by", "Open SPOs by Predicate Type");
+        createMetricsForPredicates(metricKey(SECONDARY, violation), "VL2", "Secondary Violations by",
+            "Secondary Violations by Predicate Type");
         createMetricsForPredicates(metricKey(SECONDARY, dead), "DEAD", "Dead-code SPOs by",
             "Dead-code SPOs by Predicate Type");
-    }
-
-    static final List<Metric> allMetrics = new ArrayList<>();
-    static final Map<String, Metric<?>> allMetricsMap = new HashMap<>();
-
-    static {
 
         allMetrics.addAll(Arrays.asList(
             METRIC_PPO,
             METRIC_SPO,
+
             METRIC_PPO_OPEN,
             METRIC_SPO_OPEN,
 
@@ -204,15 +194,17 @@ public final class KtMetrics implements Metrics {
 
         allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, open)).values());
         allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, violation)).values());
+        allMetrics.addAll(getMetricsForPredicates(metricKey(PRIMARY, dead)).values());
 
         allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, open)).values());
         allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, violation)).values());
+        allMetrics.addAll(getMetricsForPredicates(metricKey(SECONDARY, dead)).values());
 
         for (final Metric<?> m : allMetrics) {
             final String metricKey = m.getKey();
             Preconditions.checkArgument(!allMetricsMap.containsKey(metricKey));
             allMetricsMap.put(metricKey, m);
-            LOG.debug("Registered metric: " + m);
+            LOG.debug("Registered metric: " + m.getKey() + "\t\t" + m);
         }
     }
 
@@ -295,11 +287,13 @@ public final class KtMetrics implements Metrics {
     }
 
     public static Metric<Integer> predicateMetric(String metricKey, PredicateType predicateType) {
+        final String joinKey = join(metricKey, "predicate", predicateType.name());
         try {
+
             return getMetricsForPredicates(metricKey)
-                    .get(joinKey(metricKey, predicateType.name()));
+                    .get(joinKey);
         } catch (final NullPointerException ex) {
-            throw new IllegalArgumentException(metricKey + " " + predicateType, ex);
+            throw new IllegalArgumentException(joinKey, ex);
         }
     }
 
@@ -338,7 +332,7 @@ public final class KtMetrics implements Metrics {
         for (final PredicateType pd : PredicateType
                 .values()) {
 
-            final String key = joinKey(metricKey, pd.name());
+            final String key = join(metricKey, "predicate", pd.name());
             final Metric<Integer> metric = new Metric.Builder(
                     key,
                     "(" + namePrefix + ") " + pd.label,

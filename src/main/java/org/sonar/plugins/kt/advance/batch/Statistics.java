@@ -213,9 +213,9 @@ public class Statistics {
         return t > 0 ? (100.0 * p / t) : 0;
     }
 
-    private static Metric<Integer> getPerPredicateMetric(String metricKey, PredicateType predicateKey) {
-        final Metric<Integer> predicateMetric = predicateMetric(metricKey, predicateKey);
-        Preconditions.checkNotNull(predicateMetric, "no metric found for " + metricKey + "+" + predicateKey);
+    private static Metric<Integer> getPerPredicateMetric(String metricKey, PredicateType predicateType) {
+        final Metric<Integer> predicateMetric = predicateMetric(metricKey, predicateType);
+        Preconditions.checkNotNull(predicateMetric, "no metric found for " + metricKey + "  type:" + predicateType);
         return predicateMetric;
     }
 
@@ -382,6 +382,7 @@ public class Statistics {
     }
 
     DoubleMeasureHolder getOrCreateMeasure(String metricKey, PredicateType predicateTag, InputFile scope) {
+        Preconditions.checkNotNull(predicateTag);
         final Metric<Integer> metric = getPerPredicateMetric(metricKey, predicateTag);
         return getOrCreateMeasure(metric, scope);
     }
