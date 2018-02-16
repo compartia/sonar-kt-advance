@@ -106,7 +106,7 @@ public class PropertyDefinitionsTest {
     }
 
     @Test
-    public void testPredicatesHaveNames() throws IOException {
+    public void testBarCharProperties() throws IOException {
 
         final KtMetrics km = new KtMetrics();
         final List<Metric> metrics = km.getMetrics();
