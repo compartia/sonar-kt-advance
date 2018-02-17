@@ -82,25 +82,26 @@ public class POMapper {
 
             final double effort = effortComputer.compute();
 
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(effortComputer.toString() + " effort=" + effort);
-            }
-
             return effort;
         }
     }
 
     public String getDescription(PO po) {
-        String base = po.getLevel() == POLevel.SECONDARY ? "Secondary; " : "";
-        base += po.explaination +
-                "; [ " + po.getPredicate().express() + " ]";
+        final StringBuffer sb = new StringBuffer();
+
+        sb.append(po.id).append(" ");
+        sb.append(po.getLevel() == POLevel.SECONDARY ? "Secondary; " : "");
+        if (null != po.explaination) {
+            sb.append(po.explaination).append("; ");
+        }
+        sb.append("[").append(po.getPredicate().express()).append("]");
 
         if (po.deps.level != Definitions.DepsLevel.s /* self */
                 && po.deps.level != Definitions.DepsLevel.i /* unknown */) {
-            base += "; " + po.deps.level.label;
+            sb.append("; ").append(po.deps.level.label);
         }
 
-        return base;
+        return sb.toString();
     }
 
     public RuleKey getRuleKey(PO po) {
