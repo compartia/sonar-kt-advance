@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>com.github.mrbkt</groupId>
 			<artifactId>xml-kt-advance-java</artifactId>
-			<version>10e044c7d0</version>
+			<version>02d80f1472</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>log4j</artifactId>
@@ -99,6 +99,7 @@
 			<version>${sonar.buildVersion}</version>
 			<scope>provided</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>junit</groupId>

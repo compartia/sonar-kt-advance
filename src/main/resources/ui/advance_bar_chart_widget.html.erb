@@ -9,31 +9,36 @@
 
 <%
     kt_per_predicate_distr = measure('kt_per_predicate_distr')
+
+    puts kt_per_predicate_distr.data
  
     if kt_per_predicate_distr 
         converted=[]
         parsed=JSON.parse(kt_per_predicate_distr.data)
          
         parsed.each do |p|         
+             
+            key = "predicate_" + p["key"]
+            puts key
             
-            if (widget_properties[p["key"]])
-            
+            if (widget_properties[key])
+                
                 converted = converted.push( 
                     p.merge(
-                        :name => message("metric."+p["key"]+".name"),
-                        :url_opn => url_for_drilldown("kt_ppo_open_"+p["key"]),
-                        :url_vlt => url_for_drilldown("kt_ppo_violation_"+p["key"]),
-                        :url_opn_s => url_for_drilldown("kt_spo_open_"+p["key"]),
-                        :url_vlt_s => url_for_drilldown("kt_spo_violation_"+p["key"])
+                        :name => message("metric."+key+".name"),
+                        :url_opn => url_for_drilldown("kt_ppo_open_"+key),
+                        :url_vlt => url_for_drilldown("kt_ppo_violation_"+key),
+                        :url_opn_s => url_for_drilldown("kt_spo_open_"+key),
+                        :url_vlt_s => url_for_drilldown("kt_spo_violation_"+key)
                     )
                 )
             end
         end
         
         distrib_violation_split_converted = JSON.generate(converted)
-        
+        puts "distrib_violation_split_converted=" + distrib_violation_split_converted
     end #end of if(kt_per_predicate_distr)
-
+    
 %>
 
 <% if kt_per_predicate_distr %>
@@ -223,5 +228,3 @@
 </script>
 
 <% end %>
- 
- 

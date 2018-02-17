@@ -144,10 +144,10 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
         Preconditions.checkNotNull(app);
         Preconditions.checkNotNull(cfile);
-        File f = new File(app.fs.getBaseDir().getParentFile().getParentFile(), "sourcefiles");
-        f = new File(f, cfile.getName());
 
-        final String relative = relativize(f);
+        final File cSourceFile = new File(app.getSourceDir(), cfile.getName());
+
+        final String relative = relativize(cSourceFile);
 
         //        final FilePredicate filePredicate = fileSystem.predicates().hasAbsolutePath(f.getAbsolutePath());
         final FilePredicate filePredicate = fileSystem.predicates().hasRelativePath(relative);
@@ -157,7 +157,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
             LOG.error("cannot find " + relative + " in " + app.fs.getBaseDir().getAbsolutePath());
             LOG.error("basedir:" + fileSystem.baseDir());
             LOG.error("app basedir:" + app.fs.getBaseDir());
-            LOG.error("abs file:" + f);
+            LOG.error("abs file:" + cSourceFile);
             return null;
         }
 

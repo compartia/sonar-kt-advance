@@ -41,6 +41,7 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.kt.advance.KtMetrics.PredicateKey;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 import org.sonar.plugins.kt.advance.util.MapCounter;
 
@@ -51,11 +52,10 @@ import kt.advance.model.CFile;
 import kt.advance.model.Definitions.POLevel;
 import kt.advance.model.Definitions.POStatus;
 import kt.advance.model.PO;
-import kt.advance.model.PredicatesFactory.PredicateType;
 
 public class Statistics {
 
-    private enum Col {
+    public enum Col {
         PRIMARY_OPEN, PRIMARY_VIOLATION, SECONDARY_OPEN, SECONDARY_VIOLATION;
     }
 
@@ -72,7 +72,7 @@ public class Statistics {
     static class MapMeasureHolderImpl implements MeasureHolder<Serializable> {
 
         private final Metric<?> metric;
-        final MapCounter<PredicateType> counter;
+        final MapCounter<PredicateKey> counter;
 
         public MapMeasureHolderImpl(Metric<?> metric, int columns) {
             this.metric = metric;
@@ -91,11 +91,11 @@ public class Statistics {
             return null;
         }
 
-        public void inc(PredicateType key, int column) {
+        public void inc(PredicateKey key, int column) {
             inc(key, column, 1d);
         }
 
-        public void inc(PredicateType key, int column, double val) {
+        public void inc(PredicateKey key, int column, double val) {
             counter.inc(key, column, val);
         }
 
@@ -209,18 +209,19 @@ public class Statistics {
         measures.put(perPredicateMetrics.key(), perPredicateMetrics);
     }
 
+    public static int metricColumn(POStatus state, final POLevel level) {
+        final String colName = (level.name() + "_" + state.name()).toUpperCase();
+        return Col.valueOf(colName).ordinal();
+    }
+
     public static double percentage(double p, double t) {
         return t > 0 ? (100.0 * p / t) : 0;
     }
 
-    private static Metric<Integer> getPerPredicateMetric(String metricKey, PredicateType predicateKey) {
+    private static Metric<Integer> getPerPredicateMetric(String metricKey, PredicateKey predicateKey) {
         final Metric<Integer> predicateMetric = predicateMetric(metricKey, predicateKey);
-        Preconditions.checkNotNull(predicateMetric, "no metric found for " + metricKey + "+" + predicateKey);
+        Preconditions.checkNotNull(predicateMetric, "no metric found for " + metricKey + "  type:" + predicateKey);
         return predicateMetric;
-    }
-
-    private static int metricColumn(POStatus state, final POLevel level) {
-        return Col.valueOf(level.name() + "_" + state.name().toUpperCase()).ordinal();
     }
 
     public void handle(PO ipo, CApplication app, CFile cfile, SonarResourceLocator rl) {
@@ -302,7 +303,7 @@ public class Statistics {
         if (!ipo.isSafe()) {
 
             //by predicate
-            final PredicateType predicateKey = ipo.getPredicate().type;
+            final PredicateKey predicateKey = new PredicateKey(ipo.getPredicate().type);
             getOrCreateMeasure(stateMetricKey, predicateKey, scope).inc();
 
             if (scope == null) {
@@ -381,7 +382,8 @@ public class Statistics {
         return getOrCreateMeasure(metric, resource);
     }
 
-    DoubleMeasureHolder getOrCreateMeasure(String metricKey, PredicateType predicateTag, InputFile scope) {
+    DoubleMeasureHolder getOrCreateMeasure(String metricKey, PredicateKey predicateTag, InputFile scope) {
+        Preconditions.checkNotNull(predicateTag);
         final Metric<Integer> metric = getPerPredicateMetric(metricKey, predicateTag);
         return getOrCreateMeasure(metric, scope);
     }
