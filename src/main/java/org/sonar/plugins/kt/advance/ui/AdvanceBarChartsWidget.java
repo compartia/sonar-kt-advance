@@ -47,13 +47,19 @@ import org.sonar.plugins.kt.advance.KtAdvancePlugin;
         @WidgetProperty(type = BOOLEAN, key = "wp_show_spo_violation", defaultValue = "true"),
         @WidgetProperty(type = BOOLEAN, key = "wp_show_spo_open", defaultValue = "true"),
 
-        //
+        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__lb"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__ub"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__nn"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__nt"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__ub"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__vm"),
+
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__ab"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__pre"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__c"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__cb"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__cbt"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__ft"),
-        //                @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate_f_precondition"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__gm"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__ilb"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__iub"),
@@ -61,28 +67,19 @@ import org.sonar.plugins.kt.advance.KtAdvancePlugin;
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__ir"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__io"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__iu"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__lb"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__nneg"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__no"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__nn"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__z"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__null"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__nt"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__pc"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__plb"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__pub"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__pubd"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__csu"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__tao"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate_cus"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__ub"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__cus"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__w"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "true", key = "predicate__vm"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__vc"),
-        //        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate_div_by_zero"),
-        //        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate_ptr_upperbound"),
-        //        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate_ptr_op_lowerbound"),
-        //        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate_ptr_op_upperbound")
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__vc")
 
 })
 

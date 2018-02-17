@@ -24,24 +24,26 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.measures.Metric;
+import org.sonar.api.web.AbstractRubyTemplate;
 import org.sonar.api.web.WidgetProperties;
 import org.sonar.api.web.WidgetProperty;
 import org.sonar.plugins.kt.advance.KtMetrics;
 import org.sonar.plugins.kt.advance.ui.AdvanceBarChartsWidget;
+import org.sonar.plugins.kt.advance.ui.KtAdvanceWidget;
 
 import kt.advance.model.PredicatesFactory.PredicateType;
 
-//@Ignore
 public class PropertyDefinitionsTest {
 
     @Test
@@ -57,19 +59,34 @@ public class PropertyDefinitionsTest {
         }
     }
 
-    @Ignore
+    /**
+     * ensure all widget properties have names defined
+     *
+     * @throws IOException
+     */
     @Test
     public void testBarCharWidgetProperties() throws IOException {
-        final WidgetProperties annotation = AdvanceBarChartsWidget.class.getAnnotation(WidgetProperties.class);
-        assertNotNull(annotation);
+        final Class<? extends AbstractRubyTemplate> widgetClass = AdvanceBarChartsWidget.class;
+        testWidgetProperties(widgetClass);
+    }
 
-        final WidgetProperty[] values = annotation.value();
+    @Test
+    public void testBarCharWidgetPropertiesNumber() throws IOException {
+        final Class<AdvanceBarChartsWidget> widgetClass = AdvanceBarChartsWidget.class;
+        testWidgetProperties(widgetClass);
 
-        final Properties properties = getStrings();
-        for (final WidgetProperty wp : values) {
+        final WidgetProperties annotation = widgetClass.getAnnotation(WidgetProperties.class);
 
-            final String key = "widget.kt.advance.bc.property." + wp.key();
-            assertTrue("no key in .properties file " + key, properties.containsKey(key));
+        final WidgetProperty[] value = annotation.value();
+        final Set<String> propertyKeys = Arrays.asList(value)
+                .stream()
+                .filter(p -> p.key().contains("predicate_"))
+                .map(p -> p.key().substring(10))
+                .collect(Collectors.toSet());
+
+        for (final PredicateType pt : PredicateType.values()) {
+            assertTrue("no key " + pt.name() + " available are: " + StringUtils.join(propertyKeys, "\t\n"),
+                propertyKeys.contains(pt.name()));
         }
 
     }
@@ -102,8 +119,7 @@ public class PropertyDefinitionsTest {
 
     @Test
     public void testMetricsHaveDescr() throws IOException {
-        //Properties p=new Properties();
-        //p.load(GetAndRemoveOutcome);
+
         final KtMetrics km = new KtMetrics();
         final List<Metric> metrics = km.getMetrics();
         final Properties properties = getStrings();
@@ -122,8 +138,7 @@ public class PropertyDefinitionsTest {
 
     @Test
     public void testMetricsHaveWidgetNames() throws IOException {
-        //Properties p=new Properties();
-        //p.load(GetAndRemoveOutcome);
+
         final KtMetrics km = new KtMetrics();
         final List<Metric> metrics = km.getMetrics();
         final Properties p = getStrings();
@@ -139,6 +154,18 @@ public class PropertyDefinitionsTest {
         }
     }
 
+    /**
+     * ensure all widget properties have names defined
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testStatsWidgetProperties() throws IOException {
+        final Class<? extends AbstractRubyTemplate> widgetClass = KtAdvanceWidget.class;
+        testWidgetProperties(widgetClass);
+
+    }
+
     private Properties getStrings() throws IOException {
         try (final InputStream stream = getClass().getResourceAsStream("/org/sonar/l10n/advance.properties");) {
             assertNotNull("cannot read 'advance.properties'", stream);
@@ -148,6 +175,21 @@ public class PropertyDefinitionsTest {
             assertTrue(!p.isEmpty());
 
             return p;
+        }
+    }
+
+    void testWidgetProperties(Class<? extends AbstractRubyTemplate> widgetClass) throws IOException {
+        final WidgetProperties annotation = widgetClass.getAnnotation(WidgetProperties.class);
+        if (annotation != null) {
+
+            final WidgetProperty[] values = annotation.value();
+
+            final Properties properties = getStrings();
+            for (final WidgetProperty wp : values) {
+
+                final String key = "widget.kt.advance.bc.property." + wp.key() + ".name";
+                assertTrue("no key " + key + " in .properties file ", properties.containsKey(key));
+            }
         }
     }
 
