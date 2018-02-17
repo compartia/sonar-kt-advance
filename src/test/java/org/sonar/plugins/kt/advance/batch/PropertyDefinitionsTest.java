@@ -30,15 +30,49 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.measures.Metric;
+import org.sonar.api.web.WidgetProperties;
+import org.sonar.api.web.WidgetProperty;
 import org.sonar.plugins.kt.advance.KtMetrics;
+import org.sonar.plugins.kt.advance.ui.AdvanceBarChartsWidget;
 
 import kt.advance.model.PredicatesFactory.PredicateType;
 
 //@Ignore
 public class PropertyDefinitionsTest {
+
+    @Test
+    public void testBarCharProperties() throws IOException {
+
+        final KtMetrics km = new KtMetrics();
+        final List<Metric> metrics = km.getMetrics();
+        final Properties p = getStrings();
+
+        for (final PredicateType pt : PredicateType.values()) {
+            final String name = "widget.kt.advance.bc.property.predicate_" + pt.name() + ".name";
+            assertTrue("no message for key " + name, p.containsKey(name));
+        }
+    }
+
+    @Ignore
+    @Test
+    public void testBarCharWidgetProperties() throws IOException {
+        final WidgetProperties annotation = AdvanceBarChartsWidget.class.getAnnotation(WidgetProperties.class);
+        assertNotNull(annotation);
+
+        final WidgetProperty[] values = annotation.value();
+
+        final Properties properties = getStrings();
+        for (final WidgetProperty wp : values) {
+
+            final String key = "widget.kt.advance.bc.property." + wp.key();
+            assertTrue("no key in .properties file " + key, properties.containsKey(key));
+        }
+
+    }
 
     @Test
     public void testKeysUnique() {
@@ -102,19 +136,6 @@ public class PropertyDefinitionsTest {
                     && name.indexOf("_dead_predicate_") == -1) {
                 assertTrue("no message for key " + name, p.containsKey(name));
             }
-        }
-    }
-
-    @Test
-    public void testBarCharProperties() throws IOException {
-
-        final KtMetrics km = new KtMetrics();
-        final List<Metric> metrics = km.getMetrics();
-        final Properties p = getStrings();
-
-        for (final PredicateType pt : PredicateType.values()) {
-            final String name = "widget.kt.advance.bc.property.predicate_" + pt.name() + ".name";
-            assertTrue("no message for key " + name, p.containsKey(name));
         }
     }
 

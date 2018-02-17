@@ -48,6 +48,49 @@ import kt.advance.model.Definitions.POStatus;
 import kt.advance.model.PredicatesFactory.PredicateType;
 
 public final class KtMetrics implements Metrics {
+    public static class PredicateKey implements Comparable<PredicateKey> {
+        private final PredicateType pt;
+
+        public PredicateKey(PredicateType t) {
+            this.pt = t;
+        }
+
+        @Override
+        public int compareTo(PredicateKey o) {
+            return pt.name().compareTo(o.pt.name());
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final PredicateKey other = (PredicateKey) obj;
+            if (pt != other.pt) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((pt == null) ? 0 : pt.hashCode());
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return pt.name();
+        }
+    }
 
     public static final String COMPLEXITY = "complexity";
 
@@ -286,8 +329,8 @@ public final class KtMetrics implements Metrics {
         return join(PREFIX, level.key(), state.name(), PCT);
     }
 
-    public static Metric<Integer> predicateMetric(String metricKey, PredicateType predicateType) {
-        final String joinKey = join(metricKey, "predicate", predicateType.name());
+    public static Metric<Integer> predicateMetric(String metricKey, PredicateKey predicateType) {
+        final String joinKey = join(metricKey, "predicate", predicateType.toString());
         try {
 
             return getMetricsForPredicates(metricKey)
