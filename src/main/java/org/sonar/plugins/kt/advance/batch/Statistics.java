@@ -224,7 +224,7 @@ public class Statistics {
         return predicateMetric;
     }
 
-    public void handle(PO ipo, CApplication app, CFile cfile, SonarResourceLocator rl) {
+    public <X extends PO> X handle(X ipo, CApplication app, CFile cfile, SonarResourceLocator rl) {
 
         final InputFile resource = rl.getResource(app, cfile);//  fileSystem.getResource(ipo.getLocation().file);
         /**
@@ -237,6 +237,7 @@ public class Statistics {
          */
         handle(ipo, resource);
         perFileStatistics.handle(resource);
+        return ipo;
 
     }
 

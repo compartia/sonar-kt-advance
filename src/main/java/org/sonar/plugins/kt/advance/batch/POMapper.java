@@ -6,7 +6,10 @@ import static org.sonar.plugins.kt.advance.batch.PluginParameters.PARAM_EFFORT_P
 import static org.sonar.plugins.kt.advance.batch.PluginParameters.PARAM_EFFORT_PREDICATE_SCALE;
 import static org.sonar.plugins.kt.advance.batch.PluginParameters.paramKey;
 
+import java.util.Set;
+
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
@@ -21,11 +24,13 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 import com.google.common.base.Preconditions;
 
 import kt.advance.model.CApplication;
-import kt.advance.model.CFile;
+import kt.advance.model.CFunction;
 import kt.advance.model.CLocation;
 import kt.advance.model.Definitions;
 import kt.advance.model.Definitions.POLevel;
 import kt.advance.model.PO;
+import kt.advance.model.PPO;
+import kt.advance.model.SPO;
 
 public class POMapper {
     static final Logger LOG = Loggers.get(POMapper.class.getName());
@@ -110,15 +115,25 @@ public class POMapper {
             "predicate_" + po.getPredicate().type.name());//XXX: use code, not label
     }
 
-    public final Issue toIssue(PO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFile file) {
+    public final Issue toIssue(PPO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFunction fun) {
+        return _toIssue(po, issuable, fs, app, fun);
+    }
+
+    public final Issue toIssue(SPO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFunction file) {
+        return _toIssue(po, issuable, fs, app, file);
+    }
+
+    private final Issue _toIssue(PO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFunction fun) {
 
         Preconditions.checkNotNull(po);
         Preconditions.checkNotNull(issuable);
         Preconditions.checkNotNull(app);
-        Preconditions.checkNotNull(file);
+        Preconditions.checkNotNull(fun);
         Preconditions.checkNotNull(fs);
 
-        final InputFile inputFile = fs.getResource(app, file);
+        //        CFile locCFile = app.getCFileStrictly(po.getLocation().file);
+        //        P
+        final InputFile inputFile = fs.getResource(app, fun.getCfile());
 
         Preconditions.checkNotNull(inputFile);
 
@@ -131,13 +146,8 @@ public class POMapper {
         final CLocation poLoc = po.getLocation();
         final NewIssueLocation primaryLocation = issueBuilder.newLocation()
                 .on(inputFile)
-                .at(inputFile.newRange(poLoc.line, 0, poLoc.line, 0))
+                .at(makeSonarLocation(inputFile, poLoc))
                 .message(getDescription(po));
-
-        //        final Object textRange = null;
-        //        if (textRange != null) {
-        //            primaryLocation.at(textRange.toTextRange(inputFile));
-        //        }
 
         //XXX: map textRange
 
@@ -146,14 +156,33 @@ public class POMapper {
                 .effortToFix(computeEffort(po, activeRules, settings))
                 .at(primaryLocation);
 
-        addLocationsToIssue(issueBuilder, fs);
+        //TODO: move to other method
+        if (po instanceof PPO) {
+            addLocationsToIssue(issueBuilder, fs, (PPO) po, fun, app);
+        }
 
         return issueBuilder.build();
 
     }
 
     private Issuable.IssueBuilder addLocationsToIssue(final Issuable.IssueBuilder issueBuilder,
-            SonarResourceLocator fs) {
+            SonarResourceLocator fs, PPO ppo, CFunction fun, CApplication app) {
+
+        final Set<SPO> associatedSpos = ppo.getAssociatedSpos(fun);
+
+        associatedSpos.stream().forEach(
+            spo -> {
+                final InputFile file = fs.getResource(app, app.getCFileStrictly(spo.getLocation().file));
+                Preconditions.checkNotNull(file);
+
+                final NewIssueLocation loc = issueBuilder.newLocation()
+                        .on(file)
+                        .at(makeSonarLocation(file, spo.getLocation()))
+                        .message(spo.deps != null ? spo.deps.toString() : "-//-");
+
+                issueBuilder.addLocation(loc);
+
+            });
 
         //      XXX: implement this
         //        for (final Reference r : getReferences()) {
@@ -171,5 +200,9 @@ public class POMapper {
         //
 
         return issueBuilder;
+    }
+
+    private TextRange makeSonarLocation(final InputFile inputFile, final CLocation poLoc) {
+        return inputFile.newRange(poLoc.line, 0, poLoc.line, 0);
     }
 }
