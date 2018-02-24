@@ -116,7 +116,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
                                 .map(ppo -> mapper.toIssue(ppo, issuable, this, app, file))
                                 .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
                         //XXX: trigger stats
-                        for (final CFunctionCallsiteSPO callsite : function.getSPOs()) {
+                        for (final CFunctionCallsiteSPO callsite : function.getCallsites()) {
                             //XXX: trigger stats
                             callsite.spos.values().stream()
                                     .map(spo -> {
