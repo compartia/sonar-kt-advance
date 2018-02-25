@@ -33,6 +33,7 @@ import kt.advance.model.PPO;
 import kt.advance.model.SPO;
 
 public class POMapper {
+    private static final String REF_DEFAULT_MESSAGE = "-//-";
     static final Logger LOG = Loggers.get(POMapper.class.getName());
     final ActiveRules activeRules;
 
@@ -131,8 +132,6 @@ public class POMapper {
         Preconditions.checkNotNull(fun);
         Preconditions.checkNotNull(fs);
 
-        //        CFile locCFile = app.getCFileStrictly(po.getLocation().file);
-        //        P
         final InputFile inputFile = fs.getResource(app, fun.getCfile());
 
         Preconditions.checkNotNull(inputFile);
@@ -146,7 +145,7 @@ public class POMapper {
         final CLocation poLoc = po.getLocation();
         final NewIssueLocation primaryLocation = issueBuilder.newLocation()
                 .on(inputFile)
-                .at(makeSonarLocation(inputFile, poLoc))
+                .at(toSonarTextRange(inputFile, poLoc))
                 .message(getDescription(po));
 
         //XXX: map textRange
@@ -172,37 +171,24 @@ public class POMapper {
 
         associatedSpos.stream().forEach(
             spo -> {
-                final InputFile file = fs.getResource(app, app.getCFileStrictly(spo.getLocation().file));
-                Preconditions.checkNotNull(file);
+                final InputFile file = fs.getResource(app, spo.getLocation().getCfile());
+                if (file != null) {
+                    final NewIssueLocation loc = issueBuilder.newLocation()
+                            .on(file)
+                            .at(toSonarTextRange(file, spo.getLocation()))
+                            .message(spo.deps != null ? spo.deps.toString() : REF_DEFAULT_MESSAGE);
 
-                final NewIssueLocation loc = issueBuilder.newLocation()
-                        .on(file)
-                        .at(makeSonarLocation(file, spo.getLocation()))
-                        .message(spo.deps != null ? spo.deps.toString() : "-//-");
-
-                issueBuilder.addLocation(loc);
+                    issueBuilder.addLocation(loc);
+                } else {
+                    LOG.warn("cannot find resource  " + spo.getLocation().toString());
+                }
 
             });
-
-        //      XXX: implement this
-        //        for (final Reference r : getReferences()) {
-        //            if (!r.missing) {
-        //                final InputFile file = fs.getResource(r.file);
-        //
-        //                final NewIssueLocation loc = issueBuilder.newLocation()
-        //                        .on(file)
-        //                        .at(r.textRange.toTextRange(file))
-        //                        .message(r.message);
-        //
-        //                issueBuilder.addLocation(loc);
-        //            }
-        //        }
-        //
 
         return issueBuilder;
     }
 
-    private TextRange makeSonarLocation(final InputFile inputFile, final CLocation poLoc) {
+    private TextRange toSonarTextRange(final InputFile inputFile, final CLocation poLoc) {
         return inputFile.newRange(poLoc.line, 0, poLoc.line, 0);
     }
 }
