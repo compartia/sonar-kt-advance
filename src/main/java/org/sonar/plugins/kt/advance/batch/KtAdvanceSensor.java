@@ -109,21 +109,15 @@ public class KtAdvanceSensor implements SonarResourceLocator {
                     for (final CFunction function : file.cfunctions.values()) {
                         function.getPPOs()
                                 .stream()
-                                .map(ppo -> {
-                                    statistics.handle(ppo, app, file, this);
-                                    return ppo;
-                                })
-                                .map(ppo -> mapper.toIssue(ppo, issuable, this, app, file))
+                                .map(ppo -> statistics.handle(ppo, app, file, this))
+                                .map(ppo -> mapper.toIssue(ppo, issuable, this, app, function))
                                 .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
-                        //XXX: trigger stats
-                        for (final CFunctionCallsiteSPO callsite : function.getSPOs()) {
+
+                        for (final CFunctionCallsiteSPO callsite : function.getCallsites()) {
                             //XXX: trigger stats
                             callsite.spos.values().stream()
-                                    .map(spo -> {
-                                        statistics.handle(spo, app, file, this);
-                                        return spo;
-                                    })
-                                    .map(spo -> mapper.toIssue(spo, issuable, this, app, file))
+                                    .map(spo -> statistics.handle(spo, app, file, this))
+                                    .map(spo -> mapper.toIssue(spo, issuable, this, app, function))
                                     .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
 
                         }

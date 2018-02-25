@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>com.github.mrbkt</groupId>
 			<artifactId>xml-kt-advance-java</artifactId>
-			<version>02d80f1472</version>
+			<version>06bb35b2fc</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>log4j</artifactId>

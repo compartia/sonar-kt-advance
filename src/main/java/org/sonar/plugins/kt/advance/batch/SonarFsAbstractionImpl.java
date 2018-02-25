@@ -37,6 +37,7 @@ import com.kt.advance.xml.FsAbstraction;
 
 public class SonarFsAbstractionImpl implements FsAbstraction {
 
+    @SuppressWarnings("unused")
     private static final Logger LOG = Loggers.get(SonarFsAbstractionImpl.class.getName());
 
     final FileSystem fileSystem;
@@ -75,6 +76,11 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
     @Override
     public Collection<File> listCDICTs() {
         return listFileByXmlSuffix(CDICT_SUFFIX);
+    }
+
+    @Override
+    public Collection<File> listCFuns() {
+        return listFileByXmlSuffix(CFUN_SUFFIX);
     }
 
     @Override
