@@ -1,21 +1,26 @@
 # KT Advance SonarQube Plugin
 
+## 2018 upd:
+
+depends on https://github.com/compartia/xml-kt-advance-java
+
 [![Build Status](https://travis-ci.com/mrbkt/kestreltech.svg?token=1L4UwqexWxqBGfsyymrm&branch=master)](https://travis-ci.com/mrbkt/kestreltech)
 
 ## Installation steps
 
-0. Download and install SonarQube 5.5
+
+0. Download and install [SonarQube 5.5](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.5.zip)
 
 1. Build the plug-in with `mvn package` command and install it. You may look into `redeploy.sh` file, which lists all the required steps.
 
-2. Navigate to **Quality Profiles** section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.
+2. Navigate to [**Quality Profiles**](http://localhost:9000/profiles) section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.
 
 >Small note aside: every Sonar’s project has many2many relations with Languages. There’s no C/C++ support out of the box, thus we
 >- either have to define own C Language, which probably may conflict with existing C/C++ plug-ins,
 >- OR we have to “invent" another fake language like “C-analysis”,
 >- OR we should depend on 3rd-partie’s C/C++ plug-ins.
 
-3. Navigate to **Rules** section and check Repository filter on the left panel, you should see at least 3 repositories:
+3. Navigate to [**Rules**](http://localhost:9000/coding_rules) section and check Repository filter on the left panel, you should see at least 3 repositories:
   - KT Advance (discharged)
   - KT Advance (open)
   - KT Advance (violations)  
