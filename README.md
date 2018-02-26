@@ -84,7 +84,7 @@ Each parameter is taken with configurable **magnitude** `m_X` (AKA *scale factor
 `SQ` | `l` |  Primary PO Multiplier | `effort.primary.multiplier` | `l` value for **primary** proof obligations | `2.0`
 `SQ` | `l` |  Secondary PO Multiplier | `effort.secondary.multiplier` | `l` value for **secondary** proof obligations | `4.0`
 `SQ` | `m_l` |  PO Level Scale Factor | `effort.level.scale` | PO **l**evel scale factor | `0.5`
-`SQ` | `t` |  Predicate type Multiplier | `<predicate type>`  | By predicate-**t**ype multiplier. There are 31 by-predicate coefficients, which could be tuned via (/settings?category=kt+advance). The effective list of predicates with default coefficients could be found at [predicates.tsv](https://github.com/kestreltechnology/sonar-kt-advance/blob/master/src/main/resources/predicates.tsv). | see predicates.tsv
+`SQ` | `t` |  Predicate type Multiplier | `<predicate type>`  | By predicate-**t**ype multiplier. There are 31 by-predicate coefficients, which could be tuned via (http://localhost:9000/settings?category=technicaldebt&subcategory=efforts.by.predicate). 
  
 TODO: support dead-code POs 
 
