@@ -2,9 +2,10 @@
 
 ## 2018 upd:
 
-depends on https://github.com/compartia/xml-kt-advance-java
+depends on https://github.com/mrbkt/xml-kt-advance-java
 
-[![Build Status](https://travis-ci.com/mrbkt/kestreltech.svg?token=1L4UwqexWxqBGfsyymrm&branch=master)](https://travis-ci.com/mrbkt/kestreltech)
+[![Build Status](https://travis-ci.org/kestreltechnology/sonar-kt-advance.svg?branch=master)](https://travis-ci.org/kestreltechnology/sonar-kt-advance)
+
 
 ## Installation steps
 
@@ -26,21 +27,18 @@ depends on https://github.com/compartia/xml-kt-advance-java
   - KT Advance (violations)  
 By default, rules in 'KT Advance (discharged)' group are disabled, so discharged proof obligations will not not be listed.
 
+4. Install SonarQube command-line tools (`sonar-scanner CLI`)
+Download version 2.8 from here https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/
+
 ## Running the scanner
-To try the scanner on a small Redis src subset, in terminal window, change dir to `/src/test/resources/test_project/redis` and run `sonar-scanner` (In case you don’t have `sonar-scanner CLI`, please refer to (http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) ).
-To log more debug info into console, you may run the scanner in verbose mode: `sonar-scanner -X`.
-
-Alternatively, you may run the scanner in `/src/test/resources/test_project/itc-benchmarks/01.w_Defects` subdir.
-
-Before the first scanner run, put `sonar-project.properties` file into the root dir of you C project. A sample `.properties` file could be found here: [here](https://github.com/kestreltechnology/sonar-kt-advance/blob/master/src/test/resources/test_project/redis/sonar-project.properties)
+ 
+Before the first scanner run, put `sonar-project.properties` file into the root dir of you C project. A sample `sonar-project.properties` file could be found here: [here](docs/sample.sonar-project.properties).  
 Please mind the `sonar.exclusions` property.
 
 
+  - Note 1:  after sonar-scanner has finished its task, the SonarQube should perform some internal work (navigate to Administration/Background Tasks section to check if there are active tasks). For instance, the entire Redis analysis lists about 180000 issues, thus SonarQube takes 5-10 minutes before you can see any results on UI.
 
-
-  - Note 1:  after sonar-scanner has finished its task, the SonarQube itself should perform some internal work (navigate to Administration/Background Tasks section to check if there are active ones). For instance, the entire Redis analysis lists about 180000 issues, thus SonarQube takes 5-10 minutes before you can see any results on UI.
-
-  - Note 2: SQ's display of issues on a file is limited to 100. To soften this unlovely feature, the rules in `KT Advance (discharged)` repository are disabled by default, thus discharged proof obligations are not submitted into Sonar Qube.
+  - Note 2: SQ's display of issues on a file is limited to 100. To soften this unlovely feature, the rules in `KT Advance (discharged)` repository are disabled by default, thus discharged proof obligations are not submitted into SonarQube.
 
 
 ## Configuration/administration
@@ -68,13 +66,12 @@ where
  No. | var | comment
 ---- | --- | -------
 1 | `s` | PO **s**tate (`open`, `discharged`, `violation`)
-2 | `c[X]` | predicate **c**omplexity (which is combination of 3 diff. params: `c-complexity`, `p-complexity` and `g-complexity`)
-3 | `l` | PO **l**evel (`primary` or `secondary`)
-4 | `t` | predicate **t**ype (AKA **t**ag; e.g. `pointer-cast`, `ptr-upper-bound`,...)
+2 | `l` | PO **l**evel (`primary` or `secondary`)
+3 | `t` | predicate **t**ype (AKA **t**ag; e.g. `pointer-cast`, `ptr-upper-bound`,...)
 
 Each parameter is taken with configurable **magnitude** `m_X` (AKA *scale factor*):
 
-<code>		effort = s<sup>m_s</sup> * l<sup>m_l</sup> * t<sup>m_t</sup> * c[c]<sup>m_c[c]</sup> * c[p]<sup>m_c[p]</sup> * c[g]<sup>m_c[g]</sup> </code>
+<code>		effort = s<sup>m_s</sup> * l<sup>m_l</sup> * t<sup>m_t</sup>  </code>
 
 #### Configurable Parameters
 
@@ -88,10 +85,8 @@ Each parameter is taken with configurable **magnitude** `m_X` (AKA *scale factor
 `SQ` | `l` |  Secondary PO Multiplier | `effort.secondary.multiplier` | `l` value for **secondary** proof obligations | `4.0`
 `SQ` | `m_l` |  PO Level Scale Factor | `effort.level.scale` | PO **l**evel scale factor | `0.5`
 `SQ` | `t` |  Predicate type Multiplier | `<predicate type>`  | By predicate-**t**ype multiplier. There are 31 by-predicate coefficients, which could be tuned via (/settings?category=kt+advance). The effective list of predicates with default coefficients could be found at [predicates.tsv](https://github.com/kestreltechnology/sonar-kt-advance/blob/master/src/main/resources/predicates.tsv). | see predicates.tsv
-`SQ` | `m_c[c]` | C-complexity Scale Factor | `effort.complexity.c.multiplier` | Scale Factor c-complexity (`c[c]`) | `0.5`
-`SQ` | `m_c[p]` | P-complexity Scale Factor | `effort.complexity.p.multiplier` | Scale Factor p-complexity (`c[p]`) | `0.5`
-`SQ` | `m_c[g]` | G-complexity Scale Factor | `effort.complexity.g.multiplier` | Scale Factor g-complexity (`c[g]`) | `0.5`
-
+ 
+TODO: support dead-code POs 
 
 ##### NOTE. SonarQube supports three ways of calculating remediation cost.
 Here's the quote from Sonar's API docs. :
