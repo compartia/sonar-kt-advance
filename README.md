@@ -1,6 +1,7 @@
-# KT Advance SonarQube Plugin
 
-[![Build Status](https://travis-ci.com/mrbkt/kestreltech.svg?token=1L4UwqexWxqBGfsyymrm&branch=master)](https://travis-ci.com/mrbkt/kestreltech)
+# KT Advance SonarQube Plugin (OBSOLETE branch) 
+
+[![Build Status](https://travis-ci.org/kestreltechnology/sonar-kt-advance.svg?branch=2017-BACKUP)](https://travis-ci.org/kestreltechnology/sonar-kt-advance)
 
 ## Installation steps
 
