@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.kt.advance;
 
-import static kt.advance.model.Definitions.POLevel.PRIMARY;
-import static kt.advance.model.Definitions.POLevel.SECONDARY;
-import static kt.advance.model.Definitions.POStatus.dead;
-import static kt.advance.model.Definitions.POStatus.discharged;
-import static kt.advance.model.Definitions.POStatus.open;
-import static kt.advance.model.Definitions.POStatus.violation;
+import static com.kt.advance.api.Definitions.POLevel.PRIMARY;
+import static com.kt.advance.api.Definitions.POLevel.SECONDARY;
+import static com.kt.advance.api.Definitions.POStatus.dead;
+import static com.kt.advance.api.Definitions.POStatus.discharged;
+import static com.kt.advance.api.Definitions.POStatus.open;
+import static com.kt.advance.api.Definitions.POStatus.violation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,13 +39,12 @@ import org.sonar.api.measures.Metrics;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
-//import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
 
 import com.google.common.base.Preconditions;
-
-import kt.advance.model.Definitions.POLevel;
-import kt.advance.model.Definitions.POStatus;
-import kt.advance.model.PredicatesFactory.PredicateType;
+//
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.Definitions.POStatus;
+import com.kt.advance.api.Definitions.PredicateType;
 
 public final class KtMetrics implements Metrics {
     public static class PredicateKey implements Comparable<PredicateKey> {
@@ -372,8 +371,7 @@ public final class KtMetrics implements Metrics {
 
         Preconditions.checkArgument(!pm.containsKey(metricKey));
 
-        for (final PredicateType pd : PredicateType
-                .values()) {
+        for (final PredicateType pd : PredicateType.values()) {
 
             final String key = join(metricKey, "predicate", pd.name());
             final Metric<Integer> metric = new Metric.Builder(

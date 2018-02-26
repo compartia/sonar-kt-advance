@@ -22,15 +22,14 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 
 import com.google.common.base.Preconditions;
-
-import kt.advance.model.CApplication;
-import kt.advance.model.CFunction;
-import kt.advance.model.CLocation;
-import kt.advance.model.Definitions;
-import kt.advance.model.Definitions.POLevel;
-import kt.advance.model.PO;
-import kt.advance.model.PPO;
-import kt.advance.model.SPO;
+import com.kt.advance.api.CApplication;
+import com.kt.advance.api.CFunction;
+import com.kt.advance.api.CLocation;
+import com.kt.advance.api.Definitions;
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.PO;
+import com.kt.advance.api.PPO;
+import com.kt.advance.api.SPO;
 
 public class POMapper {
     private static final String REF_DEFAULT_MESSAGE = "-//-";
@@ -65,7 +64,7 @@ public class POMapper {
             final EffortComputer effortComputer = new EffortComputer();
 
             /** 1. PO state <code>s</code> */
-            effortComputer.setStateMultiplier(oneIfNull(settings.getFloat(paramKey(po.status))));
+            effortComputer.setStateMultiplier(oneIfNull(settings.getFloat(paramKey(po.getStatus()))));
             effortComputer.setStateScaleFactor(oneIfNull(settings.getFloat(PARAM_EFFORT_PO_STATE_SCALE)));
 
             /** 2. PO level primary versus secondary <code>l</code> */
@@ -95,16 +94,16 @@ public class POMapper {
     public String getDescription(PO po) {
         final StringBuffer sb = new StringBuffer();
 
-        sb.append(po.id).append(" ");
+        //        sb.append(po.getId()).append(" ");
         sb.append(po.getLevel() == POLevel.SECONDARY ? "Secondary; " : "");
-        if (null != po.explaination) {
-            sb.append(po.explaination).append("; ");
+        if (null != po.getExplaination()) {
+            sb.append(po.getExplaination()).append("; ");
         }
         sb.append("[").append(po.getPredicate().express()).append("]");
 
-        if (po.deps.level != Definitions.DepsLevel.s /* self */
-                && po.deps.level != Definitions.DepsLevel.i /* unknown */) {
-            sb.append("; ").append(po.deps.level.label);
+        if (po.getDeps().level != Definitions.DepsLevel.s /* self */
+                && po.getDeps().level != Definitions.DepsLevel.i /* unknown */) {
+            sb.append("; ").append(po.getDeps().level.toString());
         }
 
         return sb.toString();
@@ -112,11 +111,12 @@ public class POMapper {
 
     public RuleKey getRuleKey(PO po) {
         return RuleKey.of(
-            KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + po.status,
+            KtAdvanceRulesDefinition.REPOSITORY_BASE_KEY + po.getStatus(),
             "predicate_" + po.getPredicate().type.name());//XXX: use code, not label
     }
 
-    public final Issue toIssue(PPO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFunction fun) {
+    public final Issue toIssue(PPO po, Issuable issuable, SonarResourceLocator fs, CApplication app,
+            CFunction fun) {
         return _toIssue(po, issuable, fs, app, fun);
     }
 
@@ -124,7 +124,8 @@ public class POMapper {
         return _toIssue(po, issuable, fs, app, file);
     }
 
-    private final Issue _toIssue(PO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFunction fun) {
+    private final Issue _toIssue(PO po, Issuable issuable, SonarResourceLocator fs, CApplication app,
+            CFunction fun) {
 
         Preconditions.checkNotNull(po);
         Preconditions.checkNotNull(issuable);
@@ -176,7 +177,7 @@ public class POMapper {
                     final NewIssueLocation loc = issueBuilder.newLocation()
                             .on(file)
                             .at(toSonarTextRange(file, spo.getLocation()))
-                            .message(spo.deps != null ? spo.deps.toString() : REF_DEFAULT_MESSAGE);
+                            .message(spo.getDeps() != null ? spo.getDeps().toString() : REF_DEFAULT_MESSAGE);
 
                     issueBuilder.addLocation(loc);
                 } else {
@@ -189,6 +190,6 @@ public class POMapper {
     }
 
     private TextRange toSonarTextRange(final InputFile inputFile, final CLocation poLoc) {
-        return inputFile.newRange(poLoc.line, 0, poLoc.line, 0);
+        return inputFile.newRange(poLoc.getLine(), 0, poLoc.getLine(), 0);
     }
 }

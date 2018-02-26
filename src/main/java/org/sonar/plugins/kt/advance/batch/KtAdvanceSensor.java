@@ -38,13 +38,13 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import com.google.common.base.Preconditions;
-import com.kt.advance.xml.FsAbstraction;
-
-import kt.advance.model.CAnalysis;
-import kt.advance.model.CApplication;
-import kt.advance.model.CFile;
-import kt.advance.model.CFunction;
-import kt.advance.model.CFunctionCallsiteSPO;
+import com.kt.advance.api.CAnalysis;
+import com.kt.advance.api.CAnalysisImpl;
+import com.kt.advance.api.CApplication;
+import com.kt.advance.api.CFile;
+import com.kt.advance.api.CFunction;
+import com.kt.advance.api.CFunctionCallsiteSPO;
+import com.kt.advance.api.FsAbstraction;
 
 public class KtAdvanceSensor implements SonarResourceLocator {
 
@@ -87,13 +87,13 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
     public void analyse(SensorContext sensorContext) throws JAXBException {
 
-        final CAnalysis cAnalysis = new CAnalysis(fsAbstraction);
+        final CAnalysis cAnalysis = new CAnalysisImpl(fsAbstraction);
         cAnalysis.read();
         //--------------------------------------------
 
         for (final CApplication app : cAnalysis.getApps()) {
 
-            for (final CFile file : app.cfiles.values()) {
+            for (final CFile file : app.getCfiles()) {
 
                 final InputFile inputFile = getResource(app, file);
                 Issuable fissuable = null;
@@ -106,7 +106,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
                 if (fissuable != null) {
                     final Issuable issuable = fissuable;
 
-                    for (final CFunction function : file.cfunctions.values()) {
+                    for (final CFunction function : file.getCFunctions()) {
                         function.getPPOs()
                                 .stream()
                                 .map(ppo -> statistics.handle(ppo, app, file, this))
@@ -115,7 +115,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
                         for (final CFunctionCallsiteSPO callsite : function.getCallsites()) {
                             //XXX: trigger stats
-                            callsite.spos.values().stream()
+                            callsite.getSpos().stream()
                                     .map(spo -> statistics.handle(spo, app, file, this))
                                     .map(spo -> mapper.toIssue(spo, issuable, this, app, function))
                                     .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
@@ -148,9 +148,8 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         final InputFile inputFile = fileSystem.inputFile(filePredicate);
         if (inputFile == null) {
 
-            LOG.error("cannot find " + relative + " in " + app.fs.getBaseDir().getAbsolutePath());
+            LOG.error("cannot find resource " + relative + " in " + app.getSourceDir());
             LOG.error("basedir:" + fileSystem.baseDir());
-            LOG.error("app basedir:" + app.fs.getBaseDir());
             LOG.error("abs file:" + cSourceFile);
             return null;
         }

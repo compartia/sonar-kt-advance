@@ -46,12 +46,11 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 import org.sonar.plugins.kt.advance.util.MapCounter;
 
 import com.google.common.base.Preconditions;
-
-import kt.advance.model.CApplication;
-import kt.advance.model.CFile;
-import kt.advance.model.Definitions.POLevel;
-import kt.advance.model.Definitions.POStatus;
-import kt.advance.model.PO;
+import com.kt.advance.api.CApplication;
+import com.kt.advance.api.CFile;
+import com.kt.advance.api.PO;
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.Definitions.POStatus;
 
 public class Statistics {
 
@@ -297,7 +296,7 @@ public class Statistics {
     private void handle(PO ipo, InputFile scope) {
 
         getOrCreateMeasure(metricKey(ipo.getLevel()), scope).inc();
-        final String stateMetricKey = metricKey(ipo.getLevel(), ipo.status);
+        final String stateMetricKey = metricKey(ipo.getLevel(), ipo.getStatus());
 
         getOrCreateMeasure(stateMetricKey, scope).inc();
 
@@ -308,7 +307,7 @@ public class Statistics {
             getOrCreateMeasure(stateMetricKey, predicateKey, scope).inc();
 
             if (scope == null) {
-                perPredicateMetrics.inc(predicateKey, metricColumn(ipo.status, ipo.getLevel()));
+                perPredicateMetrics.inc(predicateKey, metricColumn(ipo.getStatus(), ipo.getLevel()));
             }
 
         }

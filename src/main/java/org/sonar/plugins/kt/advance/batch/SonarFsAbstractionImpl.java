@@ -33,7 +33,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import com.kt.advance.xml.FsAbstraction;
+import com.kt.advance.api.FsAbstraction;
 
 public class SonarFsAbstractionImpl implements FsAbstraction {
 

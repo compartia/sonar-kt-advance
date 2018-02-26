@@ -42,7 +42,7 @@ import org.sonar.plugins.kt.advance.KtMetrics;
 import org.sonar.plugins.kt.advance.ui.AdvanceBarChartsWidget;
 import org.sonar.plugins.kt.advance.ui.KtAdvanceWidget;
 
-import kt.advance.model.PredicatesFactory.PredicateType;
+import com.kt.advance.api.Definitions;
 
 public class PropertyDefinitionsTest {
 
@@ -53,7 +53,7 @@ public class PropertyDefinitionsTest {
         final List<Metric> metrics = km.getMetrics();
         final Properties p = getStrings();
 
-        for (final PredicateType pt : PredicateType.values()) {
+        for (final Definitions.PredicateType pt : Definitions.PredicateType.values()) {
             final String name = "widget.kt.advance.bc.property.predicate_" + pt.name() + ".name";
             assertTrue("no message for key " + name, p.containsKey(name));
         }
@@ -84,7 +84,7 @@ public class PropertyDefinitionsTest {
                 .map(p -> p.key().substring(10))
                 .collect(Collectors.toSet());
 
-        for (final PredicateType pt : PredicateType.values()) {
+        for (final Definitions.PredicateType pt : Definitions.PredicateType.values()) {
             assertTrue("no key " + pt.name() + " available are: " + StringUtils.join(propertyKeys, "\t\n"),
                 propertyKeys.contains(pt.name()));
         }

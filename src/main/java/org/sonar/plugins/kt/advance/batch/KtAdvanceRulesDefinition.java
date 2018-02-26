@@ -32,7 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.KtAdvancePlugin;
 import org.sonar.plugins.kt.advance.KtLanguage;
 
-import kt.advance.model.Definitions.POStatus;
+import com.kt.advance.api.Definitions.POStatus;
 
 public final class KtAdvanceRulesDefinition implements RulesDefinition {
 
