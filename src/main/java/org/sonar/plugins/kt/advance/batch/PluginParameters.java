@@ -32,9 +32,9 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 
-import kt.advance.model.Definitions.POLevel;
-import kt.advance.model.Definitions.POStatus;
-import kt.advance.model.PredicatesFactory.PredicateType;
+import com.kt.advance.api.Definitions;
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.Definitions.POStatus;
 
 public class PluginParameters {
 
@@ -184,7 +184,7 @@ public class PluginParameters {
     List<PropertyDefinition> loadPredicates() {
         final List<PropertyDefinition> props = new ArrayList<>();
 
-        for (final PredicateType t : kt.advance.model.PredicatesFactory.PredicateType.values()) {
+        for (final Definitions.PredicateType t : com.kt.advance.api.Definitions.PredicateType.values()) {
             final PropertyDefinition prop = PropertyDefinition.builder(t.name())
                     .name(t.name())
                     .description(t.label)

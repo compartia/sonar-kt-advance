@@ -25,9 +25,9 @@ import org.junit.Test;
 import org.sonar.plugins.kt.advance.KtMetrics.PredicateKey;
 import org.sonar.plugins.kt.advance.util.MapCounter;
 
-import kt.advance.model.Definitions.POLevel;
-import kt.advance.model.Definitions.POStatus;
-import kt.advance.model.PredicatesFactory.PredicateType;
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.Definitions.POStatus;
+import com.kt.advance.api.Definitions.PredicateType;
 
 public class StatsTest {
 

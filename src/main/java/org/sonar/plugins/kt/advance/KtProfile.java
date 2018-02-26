@@ -31,7 +31,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition;
 
-import kt.advance.model.Definitions.POStatus;
+import com.kt.advance.api.Definitions.POStatus;
 
 public class KtProfile extends ProfileDefinition {
     private static final Logger LOG = Loggers.get(KtProfile.class.getName());
