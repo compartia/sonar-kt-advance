@@ -48,9 +48,9 @@ import org.sonar.plugins.kt.advance.util.MapCounter;
 import com.google.common.base.Preconditions;
 import com.kt.advance.api.CApplication;
 import com.kt.advance.api.CFile;
-import com.kt.advance.api.PO;
 import com.kt.advance.api.Definitions.POLevel;
 import com.kt.advance.api.Definitions.POStatus;
+import com.kt.advance.api.PO;
 
 public class Statistics {
 

@@ -64,7 +64,6 @@ public class PluginParameters {
     private static final String SUB_CATEGORY_STATE = "debt.computation.state";
 
     private static final String SUB_CATEGORY_LEVEL = "debt.computation.level";
-    private static final String SUB_CATEGORY_COMPLEXITY = "debt.computation.complexity";
     private static final Logger LOG = Loggers.get(PluginParameters.class.getName());
 
     public static String join(String... components) {
@@ -138,38 +137,6 @@ public class PluginParameters {
 
         }
 
-        /* predicate complexity-specific params */
-        {
-            /**
-             * <code>m_c[c]</code>
-             */
-            props.add(builder(paramKey(POComplexity.C))
-                    .defaultValue("0.5")
-                    .subCategory(SUB_CATEGORY_COMPLEXITY)
-                    .category(CATEGORY)
-                    .type(PropertyType.FLOAT)
-                    .build());
-            /**
-             * <code>m_c[p]</code>
-             */
-            props.add(builder(paramKey(POComplexity.P))
-                    .defaultValue("0.5")
-                    .subCategory(SUB_CATEGORY_COMPLEXITY)
-                    .category(CATEGORY)
-                    .type(PropertyType.FLOAT)
-                    .build());
-
-            /**
-             * <code>m_c[g]</code>
-             */
-            props.add(builder(paramKey(POComplexity.G))
-                    .defaultValue("0.5")
-                    .subCategory(SUB_CATEGORY_COMPLEXITY)
-                    .category(CATEGORY)
-                    .type(PropertyType.FLOAT)
-                    .build());
-        }
-
         props.addAll(loadPredicates());
         props.add(builder(PARAM_EFFORT_PREDICATE_SCALE)
                 .defaultValue("1")
@@ -185,8 +152,9 @@ public class PluginParameters {
         final List<PropertyDefinition> props = new ArrayList<>();
 
         for (final Definitions.PredicateType t : com.kt.advance.api.Definitions.PredicateType.values()) {
+
             final PropertyDefinition prop = PropertyDefinition.builder(t.name())
-                    .name(t.name())
+                    .name(t.label)
                     .description(t.label)
                     .defaultValue(Double.toString(t.defaultEffortValue()))
                     .subCategory("efforts.by.predicate")
