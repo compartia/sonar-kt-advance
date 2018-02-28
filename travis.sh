@@ -16,6 +16,7 @@ installJDK8
 # deploy does SQ install, not yet needed
 # regular_mvn_build_deploy_analyze
 echo '======= Build, no analysis, no deploy'
+mvn --version
 mvn package \
    -Dmaven.test.redirectTestOutputToFile=false \
    -B -e -V $*
