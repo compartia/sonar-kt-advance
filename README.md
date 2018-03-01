@@ -1,10 +1,9 @@
 # KT Advance SonarQube Plugin
-
-## 2018 upd:
-
-depends on https://github.com/mrbkt/xml-kt-advance-java
-
 [![Build Status](https://travis-ci.org/kestreltechnology/sonar-kt-advance.svg?branch=master)](https://travis-ci.org/kestreltechnology/sonar-kt-advance)
+## 2018 upd:
+depends on https://github.com/mrbkt/xml-kt-advance-java [![Build Status](https://travis-ci.org/mrbkt/xml-kt-advance-java.svg?branch=master)](https://travis-ci.org/mrbkt/xml-kt-advance-java)
+
+
 
 # Usage
 ## Installation steps
@@ -12,9 +11,7 @@ depends on https://github.com/mrbkt/xml-kt-advance-java
 0. Download and install [SonarQube 5.5](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.5.zip)
 
 1. Download the latest plug-in jar-file ( https://github.com/kestreltechnology/sonar-kt-advance/releases/latest ). 
-Put the downloaded jar in `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugins. 
-
-For details refer https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin
+Put the downloaded jar in `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugin. For more details refer https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin
 
 
 2. Navigate to [**Quality Profiles**](http://localhost:9000/profiles) section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.
