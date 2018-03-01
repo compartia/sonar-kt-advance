@@ -11,7 +11,11 @@ depends on https://github.com/mrbkt/xml-kt-advance-java
 
 0. Download and install [SonarQube 5.5](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.5.zip)
 
-1. Build the plug-in with `mvn package` command and install it. You may look into `redeploy.sh` file, which lists all the required steps.
+1. Download the latest plug-in jar-file ( https://github.com/kestreltechnology/sonar-kt-advance/releases/latest ). 
+Put the downloaded jar in `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugins. 
+
+For details refer https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin
+
 
 2. Navigate to [**Quality Profiles**](http://localhost:9000/profiles) section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.
 
@@ -102,4 +106,17 @@ To make a release, just add a git tag @ any stable branch you want to release.
 The simpliest way is to create and publish an empty release placeholder via web interface here:
 https://github.com/kestreltechnology/sonar-kt-advance/releases
 
-Adding a tag triggers Travis-CI build (https://travis-ci.org/kestreltechnology/sonar-kt-advance). When the build is done, Travis adds artefacts (jar file) to GitHub' release.
+Adding a tag triggers Travis-CI build ( https://travis-ci.org/kestreltechnology/sonar-kt-advance ). When the build is done, Travis adds artefacts (jar file) to GitHub' release.
+
+## Building
+#### requirements:
+- jdk 1.8+
+- Maven 3.3.* or higher  
+
+
+To build the plug-in, call 
+```
+mvn clean sass:update-stylesheets
+mvn package
+``` 
+Please refer [redeploy.sh](redeploy.sh) file, which lists all the required steps.
