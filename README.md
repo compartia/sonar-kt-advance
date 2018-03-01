@@ -6,9 +6,8 @@ depends on https://github.com/mrbkt/xml-kt-advance-java
 
 [![Build Status](https://travis-ci.org/kestreltechnology/sonar-kt-advance.svg?branch=master)](https://travis-ci.org/kestreltechnology/sonar-kt-advance)
 
-
+# Usage
 ## Installation steps
-
 
 0. Download and install [SonarQube 5.5](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.5.zip)
 
@@ -94,3 +93,13 @@ Here's the quote from Sonar's API docs. :
 > 1. **Linear** - Each issue of the rule costs the same amount of time (coefficient) to fix.
 > 2. **Linear with offset** - It takes a certain amount of time to analyze the issues of such kind on the file (offset). Then, each issue of the rule costs the same amount of time (coefficient) to fix. Total remediation cost by file = offset + (number of issues x coefficient)
 > 3. **Constant/issue** - The cost to fix all the issues of the rule is the same whatever the number of issues of this rule in the file. Total remediation cost by file = constant
+
+
+
+# Contributing
+## Making a release
+To make a release, just add a git tag @ any stable branch you want to release.
+The simpliest way is to create and publish an empty release placeholder via web interface here:
+https://github.com/kestreltechnology/sonar-kt-advance/releases
+
+Adding a tag triggers Travis-CI build (https://travis-ci.org/kestreltechnology/sonar-kt-advance). When the build is done, Travis adds artefacts (jar file) to GitHub' release.
