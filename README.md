@@ -1,5 +1,10 @@
 # KT Advance SonarQube Plugin
 [![Build Status](https://travis-ci.org/kestreltechnology/sonar-kt-advance.svg?branch=master)](https://travis-ci.org/kestreltechnology/sonar-kt-advance)
+
+[![Quality Status](https://sonarcloud.io/api/project_badges/measure?project=org.sonar.plugins.kt.advance%3Asonar-kt-advance-plugin%3Aplug-sonarcloud&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonar.plugins.kt.advance%3Asonar-kt-advance-plugin%3Aplug-sonarcloud)
+ 
+
+
 ## 2018 upd:
 depends on https://github.com/mrbkt/xml-kt-advance-java [![Build Status](https://travis-ci.org/mrbkt/xml-kt-advance-java.svg?branch=master)](https://travis-ci.org/mrbkt/xml-kt-advance-java)
 

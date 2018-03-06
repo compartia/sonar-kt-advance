@@ -1,13 +1,23 @@
 language: java
-sudo: false
-jdk: oraclejdk8
-git:
-  submodules: false
+sudo: required
 install: true
-script: "./travis.sh"
+
+addons:
+  sonarcloud:
+    organization: "compartia-github"
+    token: $SONAR_TOKEN
+    branches:
+      - master
+      - plug-sonarcloud
+
+script: 
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
 env:
 - TEST=CI
+
 before_deploy: "mv ./target/$(ls ./target|grep jar) ./target/sonar-kt-advance-plugin-$TRAVIS_TAG.jar"
+
 deploy:
   provider: releases
   skip_cleanup: true
