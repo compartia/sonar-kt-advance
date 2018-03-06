@@ -46,6 +46,7 @@ public final class KtAdvancePlugin extends SonarPlugin {
     @Override
     public List<Object> getExtensions() {
         final PluginParameters pt = new PluginParameters();
+        @SuppressWarnings({ "unchecked", "rawtypes" })
         final List<Object> extensions = (List) pt.getPropertyDefinitions();
         extensions.add(KtLanguage.class);
         extensions.add(KtAdvanceRulesDefinition.class);

@@ -10,6 +10,12 @@ import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.rule.RuleKey;
 
+/**
+ * represents an error during XML parsing
+ *
+ * @author artem
+ *
+ */
 public class XmlParsingIssue {
     private File file;
     private String message;
@@ -68,8 +74,7 @@ public class XmlParsingIssue {
         this.message = message;
     }
 
-    public Issue toIssue(InputFile inputFile, Issuable issuable, ActiveRules activeRules, Settings settings,
-            FsAbstraction fs) {
+    public Issue toIssue(InputFile inputFile, Issuable issuable, ActiveRules activeRules, Settings settings) {
 
         final RuleKey ruleKey = RuleKey.of(KtAdvanceRulesDefinition.XML_PROBLEMS_REPO_KEY,
             KtAdvanceRulesDefinition.XML_INCONSISTENCY_RULE);

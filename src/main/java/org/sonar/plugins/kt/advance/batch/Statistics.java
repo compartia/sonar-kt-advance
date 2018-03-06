@@ -21,19 +21,10 @@
 package org.sonar.plugins.kt.advance.batch;
 
 import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_KT_PO_BY_PREDICATE_DISTR;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_PPO_COMPLEXITY_C;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_PPO_COMPLEXITY_G;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_PPO_COMPLEXITY_P;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_PPO_COMPLEXITY_PER_LINE_C;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_PPO_COMPLEXITY_PER_LINE_G;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_PPO_COMPLEXITY_PER_LINE_P;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_SPO_COMPLEXITY_C;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_SPO_COMPLEXITY_G;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_SPO_COMPLEXITY_P;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_SPO_COMPLEXITY_PER_LINE_C;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_SPO_COMPLEXITY_PER_LINE_G;
-import static org.sonar.plugins.kt.advance.KtMetrics.METRIC_SPO_COMPLEXITY_PER_LINE_P;
 import static org.sonar.plugins.kt.advance.KtMetrics.compexityMetricKey;
+import static org.sonar.plugins.kt.advance.KtMetrics.compexityPerLineMetricKey;
+import static org.sonar.plugins.kt.advance.KtMetrics.getFloatMetric;
+import static org.sonar.plugins.kt.advance.KtMetrics.getIntMetric;
 import static org.sonar.plugins.kt.advance.KtMetrics.getMetricsMap;
 import static org.sonar.plugins.kt.advance.KtMetrics.metricKey;
 import static org.sonar.plugins.kt.advance.KtMetrics.metricKeyPc;
@@ -50,18 +41,20 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-//import org.sonar.plugins.kt.advance.KtMetrics;
+import org.sonar.plugins.kt.advance.KtMetrics.PredicateKey;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
-import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateKey;
 import org.sonar.plugins.kt.advance.util.MapCounter;
 
 import com.google.common.base.Preconditions;
+import com.kt.advance.api.CApplication;
+import com.kt.advance.api.CFile;
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.Definitions.POStatus;
+import com.kt.advance.api.PO;
 
 public class Statistics {
 
-    private enum Col {
+    public enum Col {
         PRIMARY_OPEN, PRIMARY_VIOLATION, SECONDARY_OPEN, SECONDARY_VIOLATION;
     }
 
@@ -206,15 +199,18 @@ public class Statistics {
 
     final MapMeasureHolderImpl perPredicateMetrics;
 
-    final FsAbstraction fileSystem;
-
     private final PerFileStatistics perFileStatistics = new PerFileStatistics();
 
-    public Statistics(FsAbstraction fileSystem) {
+    public Statistics() {
         super();
-        this.fileSystem = fileSystem;
+
         perPredicateMetrics = new MapMeasureHolderImpl(METRIC_KT_PO_BY_PREDICATE_DISTR, 4);
         measures.put(perPredicateMetrics.key(), perPredicateMetrics);
+    }
+
+    public static int metricColumn(POStatus state, final POLevel level) {
+        final String colName = (level.name() + "_" + state.name()).toUpperCase();
+        return Col.valueOf(colName).ordinal();
     }
 
     public static double percentage(double p, double t) {
@@ -223,17 +219,13 @@ public class Statistics {
 
     private static Metric<Integer> getPerPredicateMetric(String metricKey, PredicateKey predicateKey) {
         final Metric<Integer> predicateMetric = predicateMetric(metricKey, predicateKey);
-        Preconditions.checkNotNull(predicateMetric, "no metric found for " + metricKey + "+" + predicateKey);
+        Preconditions.checkNotNull(predicateMetric, "no metric found for " + metricKey + "  type:" + predicateKey);
         return predicateMetric;
     }
 
-    private static int metricColumn(POState state, final POLevel level) {
-        return Col.valueOf(level.name() + "_" + state.name()).ordinal();
-    }
+    public <X extends PO> X handle(X ipo, CApplication app, CFile cfile, SonarResourceLocator rl) {
 
-    public void handle(IssuableProofObligation ipo) {
-
-        final InputFile resource = fileSystem.getResource(ipo.getLocation().file);
+        final InputFile resource = rl.getResource(app, cfile);//  fileSystem.getResource(ipo.getLocation().file);
         /**
          * per project
          */
@@ -244,6 +236,7 @@ public class Statistics {
          */
         handle(ipo, resource);
         perFileStatistics.handle(resource);
+        return ipo;
 
     }
 
@@ -267,63 +260,71 @@ public class Statistics {
         final int totalLines = perFileStatistics.getTotalNumberOfLines();
         LOG.info("Total number of lines: " + totalLines);
 
-        saveComplexityPerLineMeasure(sensorContext, totalLines,
-            METRIC_PPO_COMPLEXITY_PER_LINE_C,
-            METRIC_PPO_COMPLEXITY_C);
-        saveComplexityPerLineMeasure(sensorContext, totalLines,
-            METRIC_PPO_COMPLEXITY_PER_LINE_P,
-            METRIC_PPO_COMPLEXITY_P);
-        saveComplexityPerLineMeasure(sensorContext, totalLines,
-            METRIC_PPO_COMPLEXITY_PER_LINE_G,
-            METRIC_PPO_COMPLEXITY_G);
+        for (final POComplexity c : POComplexity.values()) {
+            for (final POLevel l : POLevel.values()) {
+                saveComplexityPerLineMeasure(sensorContext, totalLines,
+                    getFloatMetric(compexityPerLineMetricKey(l, c)),
+                    getIntMetric(compexityMetricKey(l, c)));
+            }
+        }
 
-        saveComplexityPerLineMeasure(sensorContext, totalLines,
-            METRIC_SPO_COMPLEXITY_PER_LINE_C,
-            METRIC_SPO_COMPLEXITY_C);
-        saveComplexityPerLineMeasure(sensorContext, totalLines,
-            METRIC_SPO_COMPLEXITY_PER_LINE_P,
-            METRIC_SPO_COMPLEXITY_P);
-        saveComplexityPerLineMeasure(sensorContext, totalLines,
-            METRIC_SPO_COMPLEXITY_PER_LINE_G,
-            METRIC_SPO_COMPLEXITY_G);
+        //        saveComplexityPerLineMeasure(sensorContext, totalLines,
+        //            METRIC_PPO_COMPLEXITY_PER_LINE_C,
+        //            METRIC_PPO_COMPLEXITY_C);
+        //        saveComplexityPerLineMeasure(sensorContext, totalLines,
+        //            METRIC_PPO_COMPLEXITY_PER_LINE_P,
+        //            METRIC_PPO_COMPLEXITY_P);
+        //        saveComplexityPerLineMeasure(sensorContext, totalLines,
+        //            METRIC_PPO_COMPLEXITY_PER_LINE_G,
+        //            METRIC_PPO_COMPLEXITY_G);
+        //
+        //        saveComplexityPerLineMeasure(sensorContext, totalLines,
+        //            METRIC_SPO_COMPLEXITY_PER_LINE_C,
+        //            METRIC_SPO_COMPLEXITY_C);
+        //        saveComplexityPerLineMeasure(sensorContext, totalLines,
+        //            METRIC_SPO_COMPLEXITY_PER_LINE_P,
+        //            METRIC_SPO_COMPLEXITY_P);
+        //        saveComplexityPerLineMeasure(sensorContext, totalLines,
+        //            METRIC_SPO_COMPLEXITY_PER_LINE_G,
+        //            METRIC_SPO_COMPLEXITY_G);
 
         //
         saveNcLocMeasure(sensorContext);
 
     }
 
-    private void handle(IssuableProofObligation ipo, InputFile scope) {
+    private void handle(PO ipo, InputFile scope) {
 
         getOrCreateMeasure(metricKey(ipo.getLevel()), scope).inc();
-        final String stateMetricKey = metricKey(ipo.getLevel(), ipo.getState());
+        final String stateMetricKey = metricKey(ipo.getLevel(), ipo.getStatus());
 
         getOrCreateMeasure(stateMetricKey, scope).inc();
 
-        if (!ipo.isDischarged()) {
+        if (!ipo.isSafe()) {
 
             //by predicate
-            final PredicateKey predicateKey = ipo.getPredicateType();
+            final PredicateKey predicateKey = new PredicateKey(ipo.getPredicate().type);
             getOrCreateMeasure(stateMetricKey, predicateKey, scope).inc();
 
             if (scope == null) {
-                perPredicateMetrics.inc(predicateKey, metricColumn(ipo.getState(), ipo.getLevel()));
+                perPredicateMetrics.inc(predicateKey, metricColumn(ipo.getStatus(), ipo.getLevel()));
             }
 
         }
 
-        //complexities
-        if (null != ipo.getComplexityC()) {
-            getOrCreateMeasure(compexityMetricKey(ipo.getLevel(), POComplexity.C), scope)
-                    .inc(ipo.getComplexityC());
-        }
-        if (null != ipo.getComplexityP()) {
-            getOrCreateMeasure(compexityMetricKey(ipo.getLevel(), POComplexity.P), scope)
-                    .inc(ipo.getComplexityP());
-        }
-        if (null != ipo.getComplexityG()) {
-            getOrCreateMeasure(compexityMetricKey(ipo.getLevel(), POComplexity.G), scope)
-                    .inc(ipo.getComplexityG());
-        }
+        //complexities XXX:
+        //        if (null != ipo.getComplexityC()) {
+        //            getOrCreateMeasure(compexityMetricKey(ipo.getLevel(), POComplexity.C), scope)
+        //                    .inc(ipo.getComplexityC());
+        //        }
+        //        if (null != ipo.getComplexityP()) {
+        //            getOrCreateMeasure(compexityMetricKey(ipo.getLevel(), POComplexity.P), scope)
+        //                    .inc(ipo.getComplexityP());
+        //        }
+        //        if (null != ipo.getComplexityG()) {
+        //            getOrCreateMeasure(compexityMetricKey(ipo.getLevel(), POComplexity.G), scope)
+        //                    .inc(ipo.getComplexityG());
+        //        }
 
     }
 
@@ -347,7 +348,7 @@ public class Statistics {
         for (final POLevel l : POLevel.values()) {
             final DoubleMeasureHolder totalPerLevel = getOrCreateMeasure(metricKey(l), scope);
 
-            for (final POState s : POState.values()) {
+            for (final POStatus s : POStatus.values()) {
                 final DoubleMeasureHolder totalPerLevelState = getOrCreateMeasure(metricKey(l, s), scope);
 
                 getOrCreateMeasure(metricKeyPc(l, s), scope)
@@ -382,6 +383,7 @@ public class Statistics {
     }
 
     DoubleMeasureHolder getOrCreateMeasure(String metricKey, PredicateKey predicateTag, InputFile scope) {
+        Preconditions.checkNotNull(predicateTag);
         final Metric<Integer> metric = getPerPredicateMetric(metricKey, predicateTag);
         return getOrCreateMeasure(metric, scope);
     }

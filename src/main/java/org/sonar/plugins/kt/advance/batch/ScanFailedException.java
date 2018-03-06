@@ -27,6 +27,10 @@ public class ScanFailedException extends RuntimeException {
         super();
     }
 
+    public ScanFailedException(String message) {
+        super(message);
+    }
+
     public ScanFailedException(String message, Throwable cause) {
         super(message, cause);
     }

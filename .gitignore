@@ -30,3 +30,7 @@ src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export/*
 
 src/test/resources/test_project/itc-benchmarks/01.w_Defects/kt_analysis_export_5.*/**
 *.log
+
+.scannerwork/report-task.txt
+
+.scannerwork/.sonar_lock

@@ -21,10 +21,12 @@ package org.sonar.plugins.kt.advance.batch;
 
 import static org.junit.Assert.assertNotEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugins.kt.advance.ui.AdvanceBarChartsWidget;
 import org.sonar.plugins.kt.advance.ui.KtAdvanceWidget;
 
+@Ignore
 public class WidgetsTest {
 
     @Test

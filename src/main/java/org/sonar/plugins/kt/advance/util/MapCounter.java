@@ -33,9 +33,15 @@ public class MapCounter<K> {
     private final Map<K, Double[]> map = new HashMap<>();
     private final int numberOfColumns;
 
+    //    private final Map<Integer, String> columnNames = new HashMap<>();
+    private final Map<String, Integer> columnNamesReverse = new HashMap<>();
+
+    private final String[] columns;
+
     public MapCounter(int numberOfColumns) {
         super();
         this.numberOfColumns = numberOfColumns;
+        columns = new String[numberOfColumns];
     }
 
     public Double get(K key, int col) {
@@ -62,8 +68,26 @@ public class MapCounter<K> {
         value[col] += inc;
     }
 
+    public void inc(K key, String col, double inc) {
+        final Integer cname = columnNamesReverse.get(col);
+        if (cname == null) {
+            this.setColumnName(columnNamesReverse.size(), col);
+        }
+        this.inc(key, cname, inc);
+    }
+
     public Set<K> keySet() {
         return map.keySet();
+    }
+
+    public void setColumnName(Integer idx, String name) {
+        this.columns[idx] = name;
+        //        this.columnNames.put(idx, name);
+        this.columnNamesReverse.put(name, idx);
+    }
+
+    public String toCsv() {
+        return toSv(",");
     }
 
     /**
@@ -95,6 +119,35 @@ public class MapCounter<K> {
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    public String toSv(String separator) {
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(separator).append(StringUtils.join(this.columns, separator)).append("\n");
+        //        }
+
+        final SortedSet<K> set = new TreeSet<>(keySet());
+        final Iterator<K> iterator = set.iterator();
+        while (iterator.hasNext()) {
+
+            final K key = iterator.next();
+
+            sb.append(key).append(separator);
+
+            sb.append(StringUtils.join(map.get(key), separator));
+
+            if (iterator.hasNext()) {
+                sb.append("\n");
+            }
+
+        }
+
+        return sb.toString();
+    }
+
+    public String toTsv() {
+        return toSv("\t");
     }
 
 }

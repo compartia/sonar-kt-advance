@@ -31,9 +31,10 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POLevel;
-import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POState;
-import org.sonar.plugins.kt.advance.batch.PredicateTypes.PredicateType;
+
+import com.kt.advance.api.Definitions;
+import com.kt.advance.api.Definitions.POLevel;
+import com.kt.advance.api.Definitions.POStatus;
 
 public class PluginParameters {
 
@@ -63,7 +64,6 @@ public class PluginParameters {
     private static final String SUB_CATEGORY_STATE = "debt.computation.state";
 
     private static final String SUB_CATEGORY_LEVEL = "debt.computation.level";
-    private static final String SUB_CATEGORY_COMPLEXITY = "debt.computation.complexity";
     private static final Logger LOG = Loggers.get(PluginParameters.class.getName());
 
     public static String join(String... components) {
@@ -78,8 +78,8 @@ public class PluginParameters {
         return join(PFX, level.key(), M_SUFFIX);
     }
 
-    public static String paramKey(POState state) {
-        return join(PFX, state.key(), M_SUFFIX);
+    public static String paramKey(POStatus state) {
+        return join(PFX, state.name(), M_SUFFIX);
     }
 
     public List<PropertyDefinition> getPropertyDefinitions() {
@@ -94,19 +94,19 @@ public class PluginParameters {
                     .type(PropertyType.FLOAT)
                     .build());
 
-            props.add(builder(paramKey(POState.DISCHARGED))
+            props.add(builder(paramKey(POStatus.discharged))
                     .defaultValue("0")
                     .category(CATEGORY)
                     .subCategory(SUB_CATEGORY_STATE)
                     .type(PropertyType.FLOAT)
                     .build());
-            props.add(builder(paramKey(POState.OPEN))
+            props.add(builder(paramKey(POStatus.open))
                     .defaultValue("2")
                     .subCategory(SUB_CATEGORY_STATE)
                     .category(CATEGORY)
                     .type(PropertyType.FLOAT)
                     .build());
-            props.add(builder(paramKey(POState.VIOLATION))
+            props.add(builder(paramKey(POStatus.violation))
                     .defaultValue("10")
                     .subCategory(SUB_CATEGORY_STATE)
                     .category(CATEGORY)
@@ -137,38 +137,6 @@ public class PluginParameters {
 
         }
 
-        /* predicate complexity-specific params */
-        {
-            /**
-             * <code>m_c[c]</code>
-             */
-            props.add(builder(paramKey(POComplexity.C))
-                    .defaultValue("0.5")
-                    .subCategory(SUB_CATEGORY_COMPLEXITY)
-                    .category(CATEGORY)
-                    .type(PropertyType.FLOAT)
-                    .build());
-            /**
-             * <code>m_c[p]</code>
-             */
-            props.add(builder(paramKey(POComplexity.P))
-                    .defaultValue("0.5")
-                    .subCategory(SUB_CATEGORY_COMPLEXITY)
-                    .category(CATEGORY)
-                    .type(PropertyType.FLOAT)
-                    .build());
-
-            /**
-             * <code>m_c[g]</code>
-             */
-            props.add(builder(paramKey(POComplexity.G))
-                    .defaultValue("0.5")
-                    .subCategory(SUB_CATEGORY_COMPLEXITY)
-                    .category(CATEGORY)
-                    .type(PropertyType.FLOAT)
-                    .build());
-        }
-
         props.addAll(loadPredicates());
         props.add(builder(PARAM_EFFORT_PREDICATE_SCALE)
                 .defaultValue("1")
@@ -183,11 +151,12 @@ public class PluginParameters {
     List<PropertyDefinition> loadPredicates() {
         final List<PropertyDefinition> props = new ArrayList<>();
 
-        for (final PredicateType t : PredicateTypes.loadPredicates()) {
-            final PropertyDefinition prop = PropertyDefinition.builder(t.key.toString())
-                    .name(t.name)
-                    .description(t.name)
-                    .defaultValue(t.defaultValue.toString())
+        for (final Definitions.PredicateType t : com.kt.advance.api.Definitions.PredicateType.values()) {
+
+            final PropertyDefinition prop = PropertyDefinition.builder(t.name())
+                    .name(t.label)
+                    .description(t.label)
+                    .defaultValue(Double.toString(t.defaultEffortValue()))
                     .subCategory("efforts.by.predicate")
                     .category(CATEGORY)
                     .type(PropertyType.FLOAT)
