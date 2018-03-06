@@ -1,18 +1,18 @@
 # KT Advance SonarQube Plugin
-
-## 2018 upd:
-
-depends on https://github.com/mrbkt/xml-kt-advance-java
-
 [![Build Status](https://travis-ci.org/kestreltechnology/sonar-kt-advance.svg?branch=master)](https://travis-ci.org/kestreltechnology/sonar-kt-advance)
+## 2018 upd:
+depends on https://github.com/mrbkt/xml-kt-advance-java [![Build Status](https://travis-ci.org/mrbkt/xml-kt-advance-java.svg?branch=master)](https://travis-ci.org/mrbkt/xml-kt-advance-java)
 
 
+
+# Usage
 ## Installation steps
-
 
 0. Download and install [SonarQube 5.5](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.5.zip)
 
-1. Build the plug-in with `mvn package` command and install it. You may look into `redeploy.sh` file, which lists all the required steps.
+1. Download the latest plug-in jar-file ( https://github.com/kestreltechnology/sonar-kt-advance/releases/latest ). 
+Put the downloaded jar in `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugin. For more details refer https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin
+
 
 2. Navigate to [**Quality Profiles**](http://localhost:9000/profiles) section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.
 
@@ -94,3 +94,26 @@ Here's the quote from Sonar's API docs. :
 > 1. **Linear** - Each issue of the rule costs the same amount of time (coefficient) to fix.
 > 2. **Linear with offset** - It takes a certain amount of time to analyze the issues of such kind on the file (offset). Then, each issue of the rule costs the same amount of time (coefficient) to fix. Total remediation cost by file = offset + (number of issues x coefficient)
 > 3. **Constant/issue** - The cost to fix all the issues of the rule is the same whatever the number of issues of this rule in the file. Total remediation cost by file = constant
+
+
+
+# Contributing
+## Making a release
+To make a release, just add a git tag @ any stable branch you want to release.
+The simpliest way is to create and publish an empty release placeholder via web interface here:
+https://github.com/kestreltechnology/sonar-kt-advance/releases
+
+Adding a tag triggers Travis-CI build ( https://travis-ci.org/kestreltechnology/sonar-kt-advance ). When the build is done, Travis adds artefacts (jar file) to GitHub' release.
+
+## Building
+#### requirements:
+- jdk 1.8+
+- Maven 3.3.* or higher  
+
+
+To build the plug-in, call 
+```
+mvn clean sass:update-stylesheets
+mvn package
+``` 
+Please refer [redeploy.sh](redeploy.sh) file, which lists all the required steps.
