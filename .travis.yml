@@ -1,13 +1,24 @@
 language: java
-sudo: false
-jdk: oraclejdk8
-git:
-  submodules: false
+sudo: required
 install: true
-script: "./travis.sh"
+
+addons:
+  sonarcloud:
+    organization: "compartia-github"
+    token:
+      secure: "LOojO1g+VqNHRYyxShrDHdzjxZ5gImuGjy/0Yis2x3hx7xm+F/d07ah8w88NXOsVdDioKPaxuC6Tlf+GLEaUFO9anC0MzxFln2SlWZA1nza9AoUTB9bOfQm9FBTrOsjSwRyW64GnZiou1cP5h8Dn5J5mrlNX/RShz5GxMrBrVsTLcRRwuy1A3REZ4Mv1CJ6BuTIi4HvM/VOYzIKoiAyPdaGswHioV0jGQjmlSNGePu9sSC7exDL4nO72YfSeN7skOE0Q42k8/wcFIC2S9cS9SqBDRNx37kaJxPVGyUvvHW8gLSDDlyyZQxjIj3q9wAKKxf7KuzOeOK/Ojnkxkvh/wm2ycr/+Xm99a5vRIstMWgHjZJIcXDpI6JPE/krck90zAq/UKYHnylyDr8djKG17XojNNpHMPyS7cZC2hDAg9bwPjB2iDRWFzq4c/7rTJ2kSLcx4cxd9zRX5MY09y+AWt+OkWdgqYKw3wnDosLAbmSPth3Obp4s8Q1ZvU4H0rRiQjAMH1ahRQbS2WGB7mGG2lgUf5yMYsjDyApjS/TlHHSL8DGrdk40vt0fPqJsXSK1JGgC5eSCIs1a2J/ZTr2zJquqa1+RQzJRybAIqqKQDyp4vIQcDGyQFq0LX005CRJLOp/i84xaJxQ4z8kvcHNAuhKH0z7SgxmapOUqEckXTa0g="
+    branches:
+      - master
+      - plug-sonarcloud
+
+script: 
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
 env:
 - TEST=CI
+
 before_deploy: "mv ./target/$(ls ./target|grep jar) ./target/sonar-kt-advance-plugin-$TRAVIS_TAG.jar"
+
 deploy:
   provider: releases
   skip_cleanup: true
