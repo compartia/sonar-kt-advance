@@ -46,7 +46,6 @@ import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 import org.sonar.plugins.kt.advance.util.MapCounter;
 
 import com.google.common.base.Preconditions;
-import com.kt.advance.api.CApplication;
 import com.kt.advance.api.CFile;
 import com.kt.advance.api.Definitions.POLevel;
 import com.kt.advance.api.Definitions.POStatus;
@@ -223,9 +222,9 @@ public class Statistics {
         return predicateMetric;
     }
 
-    public <X extends PO> X handle(X ipo, CApplication app, CFile cfile, SonarResourceLocator rl) {
+    public <X extends PO> X handle(X ipo, CFile cfile, SonarResourceLocator rl) {
 
-        final InputFile resource = rl.getResource(app, cfile);//  fileSystem.getResource(ipo.getLocation().file);
+        final InputFile resource = rl.getResource(cfile);//  fileSystem.getResource(ipo.getLocation().file);
         /**
          * per project
          */

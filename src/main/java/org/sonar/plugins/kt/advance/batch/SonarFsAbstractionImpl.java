@@ -37,6 +37,8 @@ import com.kt.advance.api.FsAbstraction;
 
 public class SonarFsAbstractionImpl implements FsAbstraction {
 
+    private static final String KTADVANCE_DIR = "ktadvance";
+
     @SuppressWarnings("unused")
     private static final Logger LOG = Loggers.get(SonarFsAbstractionImpl.class.getName());
 
@@ -107,8 +109,14 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
     public Collection<File> listTargetFiles() {
         final Collection<File> cdicts = listFileByXmlSuffix(CDICT_SUFFIX);
         final Set<File> roots = new TreeSet<File>();
+
         for (final File f : cdicts) {
-            roots.add(f.getParentFile());
+
+            final int index = f.getAbsolutePath().lastIndexOf(KTADVANCE_DIR);
+            if (index > 0) {
+                roots.add(new File(
+                        f.getAbsolutePath().substring(0, index), KTADVANCE_DIR));
+            }
         }
 
         return roots;
