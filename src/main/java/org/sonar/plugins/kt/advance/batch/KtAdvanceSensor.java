@@ -85,9 +85,11 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
     }
 
+    CAnalysis cAnalysis;
+
     public void analyse(SensorContext sensorContext) throws JAXBException {
 
-        final CAnalysis cAnalysis = new CAnalysisImpl(fsAbstraction);
+        cAnalysis = new CAnalysisImpl(fsAbstraction);
         cAnalysis.read();
         //--------------------------------------------
 
@@ -95,13 +97,14 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
             for (final CFile file : app.getCfiles()) {
 
-                final InputFile inputFile = getResource(app, file);
+                final InputFile inputFile = getResource(file);
                 Issuable fissuable = null;
 
                 try {
                     fissuable = perspectives.as(Issuable.class, inputFile);
                 } catch (final Exception ex) {
-                    LOG.error("cannot get issuable for file " + inputFile);
+                    LOG.error("Cannot get issuable for file " + file.getName() + " ["
+                            + file.getApplication().getSourceDir() + "]");
                 }
                 if (fissuable != null) {
                     final Issuable issuable = fissuable;
@@ -109,15 +112,15 @@ public class KtAdvanceSensor implements SonarResourceLocator {
                     for (final CFunction function : file.getCFunctions()) {
                         function.getPPOs()
                                 .stream()
-                                .map(ppo -> statistics.handle(ppo, app, file, this))
-                                .map(ppo -> mapper.toIssue(ppo, issuable, this, app, function))
+                                .map(ppo -> statistics.handle(ppo, file, this))
+                                .map(ppo -> mapper.toIssue(ppo, issuable, this, function))
                                 .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
 
                         for (final CFunctionCallsiteSPO callsite : function.getCallsites()) {
                             //XXX: trigger stats
                             callsite.getSpos().stream()
-                                    .map(spo -> statistics.handle(spo, app, file, this))
-                                    .map(spo -> mapper.toIssue(spo, issuable, this, app, function))
+                                    .map(spo -> statistics.handle(spo, file, this))
+                                    .map(spo -> mapper.toIssue(spo, issuable, this, function))
                                     .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
 
                         }
@@ -134,21 +137,19 @@ public class KtAdvanceSensor implements SonarResourceLocator {
     }
 
     @Override
-    public InputFile getResource(CApplication app, CFile cfile) {
+    public InputFile getResource(CFile cfile) {
 
-        Preconditions.checkNotNull(app);
         Preconditions.checkNotNull(cfile);
 
-        final File cSourceFile = new File(app.getSourceDir(), cfile.getName());
+        final File cSourceFile = new File(cfile.getApplication().getSourceDir(), cfile.getName());
 
-        final String relative = relativize(cSourceFile);
+        final String relative = cAnalysis.relativize(cSourceFile);
 
-        //        final FilePredicate filePredicate = fileSystem.predicates().hasAbsolutePath(f.getAbsolutePath());
         final FilePredicate filePredicate = fileSystem.predicates().hasRelativePath(relative);
         final InputFile inputFile = fileSystem.inputFile(filePredicate);
         if (inputFile == null) {
 
-            LOG.error("cannot find resource " + relative + " in " + app.getSourceDir());
+            LOG.error("cannot find resource " + relative + " in " + cfile.getApplication().getSourceDir());
             LOG.error("basedir:" + fileSystem.baseDir());
             LOG.error("abs file:" + cSourceFile);
             return null;
@@ -249,10 +250,6 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
     FsAbstraction getFsContext() {
         return fsAbstraction;
-    }
-
-    String relativize(File f) {
-        return fsAbstraction.getBaseDir().toPath().relativize(f.toPath()).toString();
     }
 
 }

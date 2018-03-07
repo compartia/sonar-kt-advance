@@ -22,7 +22,6 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.kt.advance.batch.KtAdvanceRulesDefinition.POComplexity;
 
 import com.google.common.base.Preconditions;
-import com.kt.advance.api.CApplication;
 import com.kt.advance.api.CFunction;
 import com.kt.advance.api.CLocation;
 import com.kt.advance.api.Definitions;
@@ -115,27 +114,26 @@ public class POMapper {
             "predicate_" + po.getPredicate().type.name());//XXX: use code, not label
     }
 
-    public final Issue toIssue(PPO po, Issuable issuable, SonarResourceLocator fs, CApplication app,
+    public final Issue toIssue(PPO po, Issuable issuable, SonarResourceLocator fs,
             CFunction fun) {
-        return _toIssue(po, issuable, fs, app, fun);
+        return _toIssue(po, issuable, fs, fun);
     }
 
-    public final Issue toIssue(SPO po, Issuable issuable, SonarResourceLocator fs, CApplication app, CFunction file) {
-        return _toIssue(po, issuable, fs, app, file);
+    public final Issue toIssue(SPO po, Issuable issuable, SonarResourceLocator fs, CFunction file) {
+        return _toIssue(po, issuable, fs, file);
     }
 
-    private final Issue _toIssue(PO po, Issuable issuable, SonarResourceLocator fs, CApplication app,
+    private final Issue _toIssue(PO po, Issuable issuable, SonarResourceLocator fs,
             CFunction fun) {
 
         Preconditions.checkNotNull(po);
         Preconditions.checkNotNull(issuable);
-        Preconditions.checkNotNull(app);
+
         Preconditions.checkNotNull(fun);
         Preconditions.checkNotNull(fs);
 
-        final InputFile inputFile = fs.getResource(app, fun.getCfile());
-
-        Preconditions.checkNotNull(inputFile);
+        final InputFile inputFile = fs.getResource(fun.getCfile());
+        Preconditions.checkNotNull(inputFile, "cannot find resource %s", fun.getCfile().getName());
 
         final RuleKey ruleKey = getRuleKey(po);
 
@@ -158,7 +156,7 @@ public class POMapper {
 
         //TODO: move to other method
         if (po instanceof PPO) {
-            addLocationsToIssue(issueBuilder, fs, (PPO) po, fun, app);
+            addLocationsToIssue(issueBuilder, fs, (PPO) po, fun);
         }
 
         return issueBuilder.build();
@@ -166,13 +164,13 @@ public class POMapper {
     }
 
     private Issuable.IssueBuilder addLocationsToIssue(final Issuable.IssueBuilder issueBuilder,
-            SonarResourceLocator fs, PPO ppo, CFunction fun, CApplication app) {
+            SonarResourceLocator fs, PPO ppo, CFunction fun) {
 
         final Set<SPO> associatedSpos = ppo.getAssociatedSpos(fun);
 
         associatedSpos.stream().forEach(
             spo -> {
-                final InputFile file = fs.getResource(app, spo.getLocation().getCfile());
+                final InputFile file = fs.getResource(spo.getLocation().getCfile());
                 if (file != null) {
                     final NewIssueLocation loc = issueBuilder.newLocation()
                             .on(file)
