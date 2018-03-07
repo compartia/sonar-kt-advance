@@ -24,7 +24,7 @@ deploy:
   provider: releases
   skip_cleanup: true
 
-  file: target/sonar-kt-advance-plugin-$TRAVIS_TAG.jar
+  file: release/sonar-kt-advance-plugin-$TRAVIS_TAG.jar
   api_key: $DEPLOY_KEY
   on:
     tags: true
