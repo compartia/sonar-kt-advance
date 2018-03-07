@@ -6,9 +6,9 @@
 	<artifactId>sonar-kt-advance-plugin</artifactId>
 	<groupId>org.sonar.plugins.kt.advance</groupId>
 	<packaging>sonar-plugin</packaging>
-	<version>5.6.2</version>
+	<version>0</version>
 
-	<name>KT Advance</name>
+	<name>KT Advance SonarQube plug-in</name>
 	<description>KT Advance Memory Safety Analyzer for C</description>
 	<inceptionYear>2016</inceptionYear>
 
@@ -64,9 +64,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.github.mrbkt</groupId>
+			<groupId>com.github.compartia</groupId>
 			<artifactId>xml-kt-advance-java</artifactId>
-			<version>784fe746b3</version>
+			<version>2.1.2</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>log4j</artifactId>
@@ -130,24 +130,15 @@
 		</dependency>
 
 
-
 	</dependencies>
 
 	<build>
-	    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-	
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+
 		<plugins>
-			<!-- <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>native2ascii-maven-plugin</artifactId> 
+				<executions> <execution> <goals> <goal>native2ascii</goal> </goals> </execution> 
+				</executions> </plugin> -->
 
 			<plugin>
 				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
@@ -180,17 +171,46 @@
 				</configuration>
 			</plugin>
 
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo>used version: ${jgitver.used_version}</echo>
+								<echo>version calculated: ${jgitver.calculated_version}</echo>
+								<echo>dirty: ${jgitver.dirty}</echo>
+								<echo>head_committer_name: ${jgitver.head_committer_name}</echo>
+								<echo>head_commiter_email: ${jgitver.head_commiter_email}</echo>
+								<echo>head_commit_datetime: ${jgitver.head_commit_datetime}</echo>
+								<echo>git_sha1_full: ${jgitver.git_sha1_full}</echo>
+								<echo>git_sha1_8: ${jgitver.git_sha1_8}</echo>
+								<echo>branch_name: ${jgitver.branch_name}</echo>
+								<echo>head_tags: ${jgitver.head_tags}</echo>
+								<echo>head_annotated_tags: ${jgitver.head_annotated_tags}</echo>
+								<echo>head_lightweight_tags: ${jgitver.head_lightweight_tags}</echo>
+								<echo>base_tag: ${jgitver.base_tag}</echo>
+								<echo>all_tags: ${jgitver.all_tags}</echo>
+								<echo>all_annotated_tags: ${jgitver.all_annotated_tags}</echo>
+								<echo>all_lightweight_tags: ${jgitver.all_lightweight_tags}</echo>
+								<echo>all_version_tags: ${jgitver.all_version_tags}</echo>
+								<echo>all_version_annotated_tags:
+									${jgitver.all_version_annotated_tags}</echo>
+								<echo>all_version_lightweight_tags:
+									${jgitver.all_version_lightweight_tags}</echo>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.sonarsource.scanner.maven</groupId>
-					<artifactId>sonar-maven-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 
 	</build>
 

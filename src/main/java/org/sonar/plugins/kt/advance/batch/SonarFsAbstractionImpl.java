@@ -132,4 +132,10 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
         return files;
     }
 
+    @Override
+    public Collection<File> listXMLs(String arg0) {
+        return listFileByXmlSuffix(arg0);
+
+    }
+
 }
