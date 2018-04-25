@@ -22,6 +22,7 @@ package org.sonar.plugins.kt.advance.batch;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.xml.bind.JAXBException;
 
@@ -42,33 +43,34 @@ import com.kt.advance.api.CAnalysis;
 import com.kt.advance.api.CAnalysisImpl;
 import com.kt.advance.api.CApplication;
 import com.kt.advance.api.CFile;
-import com.kt.advance.api.CFunction;
 import com.kt.advance.api.CFunctionCallsiteSPOs;
 import com.kt.advance.api.FsAbstraction;
 
 public class KtAdvanceSensor implements SonarResourceLocator {
 
     static final Logger LOG = Loggers.get(KtAdvanceSensor.class.getName());
+    private final ActiveRules activeRules;
+
+    private int errorsCounterXml = 0;
     /**
      * The file system object for the project being analysed.
      */
 
     private final ResourcePerspectives perspectives;
 
-    private final ActiveRules activeRules;
     private final Settings settings;
 
-    final Statistics statistics;
+    private final Set<XmlParsingIssue> xmlParsingIssues = new HashSet<>();
+
+    CAnalysis cAnalysis;
+    @Deprecated
+    final FileSystem fileSystem;
 
     final FsAbstraction fsAbstraction;
 
-    private int errorsCounterXml = 0;
-    private final Set<XmlParsingIssue> xmlParsingIssues = new HashSet<>();
-
     final POMapper mapper;
 
-    @Deprecated
-    final FileSystem fileSystem;
+    final Statistics statistics;
 
     public KtAdvanceSensor(final Settings settings, final FileSystem fileSystem, final ActiveRules ruleFinder,
             final ResourcePerspectives perspectives) {
@@ -85,55 +87,15 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
     }
 
-    CAnalysis cAnalysis;
-
     public void analyse(SensorContext sensorContext) throws JAXBException {
 
         cAnalysis = new CAnalysisImpl(fsAbstraction);
         cAnalysis.read();
         //--------------------------------------------
 
-        for (final CApplication app : cAnalysis.getApps()) {
-
-            for (final CFile file : app.getCfiles()) {
-
-                final InputFile inputFile = getResource(file);
-                Issuable fissuable = null;
-
-                try {
-                    fissuable = perspectives.as(Issuable.class, inputFile);
-                } catch (final Exception ex) {
-                    LOG.error("Cannot get issuable for file " + file.getName() + " ["
-                            + file.getApplication().getSourceDir() + "]");
-                }
-                if (fissuable != null) {
-                    final Issuable issuable = fissuable;
-
-                    for (final CFunction function : file.getCFunctions()) {
-                        function.getPPOs()
-                                .stream()
-                                .map(ppo -> statistics.handle(ppo, file, this))
-                                .map(ppo -> mapper.toIssue(ppo, issuable, this, function))
-                                .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
-
-                        for (final CFunctionCallsiteSPOs callsite : function.getCallsites()) {
-                            //XXX: trigger stats
-                            callsite.getSpos().stream()
-                                    .map(spo -> statistics.handle(spo, file, this))
-                                    .map(spo -> mapper.toIssue(spo, issuable, this, function))
-                                    .forEach(issue -> saveProofObligationAsIssueToSq(issue, issuable));
-
-                        }
-                    }
-                }
-            }
-        }
-
+        cAnalysis.getApps().forEach(this::analyzeApplication);
         statistics.save(sensorContext);
-        for (final XmlParsingIssue pi : xmlParsingIssues) {
-            saveParsingIssueToSq(pi);
-        }
-
+        xmlParsingIssues.forEach(this::saveParsingIssueToSq);
     }
 
     @Override
@@ -172,6 +134,48 @@ public class KtAdvanceSensor implements SonarResourceLocator {
             LOG.error("cannot find '" + file.getAbsolutePath());
         }
         return inputFile;
+    }
+
+    private void analyzeApplication(final CApplication app) {
+        app.getCfiles().forEach(this::analyzeCFile);
+    }
+
+    private void analyzeCFile(final CFile file) {
+        final InputFile inputFile = getResource(file);
+        Issuable fissuable = null;
+
+        try {
+            fissuable = perspectives.as(Issuable.class, inputFile);
+        } catch (final Exception ex) {
+            LOG.error("Cannot get issuable for file " + file.getName() + " ["
+                    + file.getApplication().getSourceDir() + "]");
+        }
+
+        if (fissuable != null) {
+            final Issuable issuable = fissuable;
+
+            file.getCFunctions().forEach(function -> {
+
+                Stream<Issue> poIssues = function.getPPOs()
+                        .stream()
+                        .map(ppo -> statistics.handle(ppo, file, this))
+                        .map(ppo -> mapper.toIssue(ppo, issuable, this, function));
+
+                for (final CFunctionCallsiteSPOs callsite : function.getCallsites()) {
+
+                    final Stream<Issue> spoIssues = callsite.getSpos().stream()
+                            .map(spo -> statistics.handle(spo, file, this))
+                            .map(spo -> mapper.toIssue(spo, issuable, this, function));
+
+                    poIssues = Stream.concat(poIssues, spoIssues);
+
+                }
+
+                poIssues.forEach(
+                    issue -> saveProofObligationAsIssueToSq(issue, issuable));
+            });
+
+        }
     }
 
     private void handleParsingError(File xmlFile, String msg) {
