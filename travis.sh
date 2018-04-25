@@ -12,10 +12,6 @@ configureTravis
 
 # see https://github.com/SonarSource/travis-utils/bin/...
 installJDK8
-
-sonarqube:
-    branches :
-    - switch-to-2018-XMLs-format
     
 # NOTE: see shell source for expected environment variables
 # deploy does SQ install, not yet needed
