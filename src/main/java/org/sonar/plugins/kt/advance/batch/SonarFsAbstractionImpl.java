@@ -42,9 +42,9 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
     @SuppressWarnings("unused")
     private static final Logger LOG = Loggers.get(SonarFsAbstractionImpl.class.getName());
 
-    final FileSystem fileSystem;
-
     private final File baseDirOverride;
+
+    final FileSystem fileSystem;
 
     public SonarFsAbstractionImpl(FileSystem fileSystem) {
         super();
@@ -86,6 +86,22 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
     }
 
     @Override
+    public Collection<File> listFilesRecursively(String suffix) {
+        final Set<File> files = new TreeSet<File>();
+
+        final String inclusionPattern = getSearchPath() + "/**/*" + suffix;
+
+        final FilePredicate filePredicate = fileSystem
+                .predicates().matchesPathPattern(inclusionPattern);
+
+        final Iterable<InputFile> ifiles = fileSystem.inputFiles(filePredicate);
+        for (final InputFile ifile : ifiles) {
+            files.add(ifile.file());
+        }
+        return files;
+    }
+
+    @Override
     public Collection<File> listPODs() {
         return listFileByXmlSuffix(POD_SUFFIX);
     }
@@ -106,6 +122,21 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
     }
 
     @Override
+    public Collection<File> listSubdirsRecursively(String dirname) {
+        final Set<File> files = new TreeSet<File>();
+
+        final String inclusionPattern = getSearchPath() + "/**/" + dirname;
+
+        final FilePredicate filePredicate = fileSystem
+                .predicates().matchesPathPattern(inclusionPattern);
+
+        final Iterable<File> matching = fileSystem.files(filePredicate);
+        matching.forEach(f -> files.add(f));
+
+        return files;
+    }
+
+    @Override
     public Collection<File> listTargetFiles() {
         final Collection<File> cdicts = listFileByXmlSuffix(CDICT_SUFFIX);
         final Set<File> roots = new TreeSet<File>();
@@ -122,28 +153,18 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
         return roots;
     }
 
-    private Collection<File> listFileByXmlSuffix(String suffix) {
-
-        final Set<File> files = new TreeSet<File>();
-
-        final String path = fileSystem.baseDir().toPath().relativize(this.baseDirOverride.toPath()).toString();
-
-        final String inclusionPattern = path + "/**/*" + suffix + ".xml";
-
-        final FilePredicate filePredicate = fileSystem
-                .predicates().matchesPathPattern(inclusionPattern);
-
-        final Iterable<InputFile> ifiles = fileSystem.inputFiles(filePredicate);
-        for (final InputFile ifile : ifiles) {
-            files.add(ifile.file());
-        }
-        return files;
-    }
-
     @Override
     public Collection<File> listXMLs(String arg0) {
         return listFileByXmlSuffix(arg0);
 
+    }
+
+    private String getSearchPath() {
+        return fileSystem.baseDir().toPath().relativize(this.baseDirOverride.toPath()).toString();
+    }
+
+    private Collection<File> listFileByXmlSuffix(String suffix) {
+        return this.listFilesRecursively(suffix + ".xml");
     }
 
 }
