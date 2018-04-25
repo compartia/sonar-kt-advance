@@ -8,8 +8,8 @@ addons:
     token: $SONAR_TOKEN
     branches:
       - master
-      - plug-sonarcloud
-
+      - switch-to-2018-XMLs-format
+    
 script: 
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 
