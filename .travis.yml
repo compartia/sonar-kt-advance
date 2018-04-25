@@ -16,7 +16,9 @@ script:
 env:
 - TEST=CI
 
-before_deploy: "mv ./target/$(ls ./target|grep jar) ./target/sonar-kt-advance-plugin-$TRAVIS_TAG.jar"
+before_deploy: 
+  - "mkdir -p release"
+  - "mv ./target/$(ls ./target|grep jar) ./release/sonar-kt-advance-plugin-$TRAVIS_TAG.jar"
 
 deploy:
   provider: releases

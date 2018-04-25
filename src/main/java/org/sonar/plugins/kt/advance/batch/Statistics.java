@@ -257,7 +257,7 @@ public class Statistics {
         }
 
         final int totalLines = perFileStatistics.getTotalNumberOfLines();
-        LOG.info("Total number of lines: " + totalLines);
+        LOG.info("Total number of lines: {}", totalLines);
 
         for (final POComplexity c : POComplexity.values()) {
             for (final POLevel l : POLevel.values()) {
