@@ -20,6 +20,7 @@
 package org.sonar.plugins.kt.advance.batch;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -83,8 +84,22 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         mapper = new POMapper(ruleFinder, settings);
 
         fsAbstraction = new SonarFsAbstractionImpl(fileSystem);
-        statistics = new Statistics();
 
+        statistics = new Statistics();
+        printDiagnostics();
+
+    }
+
+    private void printDiagnostics() {
+        final Collection<File> aDirs = fsAbstraction.listSubdirsRecursively(FsAbstraction.ANALYSIS_DIR_NAME);
+        if (aDirs.size() == 0) {
+            LOG.error("NO '{}' subdirectories found!", FsAbstraction.ANALYSIS_DIR_NAME);
+        } else {
+            LOG.info("number of dirs to scan: {}", aDirs.size());
+            aDirs.forEach(f -> {
+                LOG.info("DIR to scan: {}", f.getAbsolutePath());
+            });
+        }
     }
 
     public void analyse(SensorContext sensorContext) throws JAXBException {
@@ -93,8 +108,13 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         cAnalysis.read();
         //--------------------------------------------
 
-        cAnalysis.getApps().forEach(this::analyzeApplication);
-        statistics.save(sensorContext);
+        final Collection<CApplication> apps = cAnalysis.getApps();
+        if (apps.isEmpty()) {
+            LOG.error("NO analyzed C projects found! Nothing to report to SonarQube");
+        } else {
+            apps.forEach(this::analyzeApplication);
+            statistics.save(sensorContext);
+        }
         xmlParsingIssues.forEach(this::saveParsingIssueToSq);
     }
 
@@ -111,9 +131,9 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         final InputFile inputFile = fileSystem.inputFile(filePredicate);
         if (inputFile == null) {
 
-            LOG.error("cannot find resource " + relative + " in " + cfile.getApplication().getSourceDir());
-            LOG.error("basedir:" + fileSystem.baseDir());
-            LOG.error("abs file:" + cSourceFile);
+            LOG.error("cannot find resource {}  in {}", relative, cfile.getApplication().getSourceDir());
+            LOG.error("basedir: \t{}", fileSystem.baseDir());
+            LOG.error("abs file: \t{}", cSourceFile);
             return null;
         }
 
@@ -131,7 +151,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         final InputFile inputFile = fileSystem.inputFile(filePredicate);
 
         if (inputFile == null) {
-            LOG.error("cannot find '" + file.getAbsolutePath());
+            LOG.error("cannot find '{}'", file.getAbsolutePath());
         }
         return inputFile;
     }
@@ -147,8 +167,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         try {
             fissuable = perspectives.as(Issuable.class, inputFile);
         } catch (final Exception ex) {
-            LOG.error("Cannot get issuable for file " + file.getName() + " ["
-                    + file.getApplication().getSourceDir() + "]");
+            LOG.error("Cannot get issuable for file {} [{}]", file.getName(), file.getApplication().getSourceDir());
         }
 
         if (fissuable != null) {
@@ -190,7 +209,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         if (!xmlParsingIssues.contains(pi)) {
             errorsCounterXml++;
             if (log) {
-                LOG.error("XML: (#" + errorsCounterXml + ") " + xmlFile.getAbsolutePath() + " : " + msg);
+                LOG.error("XML: (#{}) \t {}:{}", errorsCounterXml, xmlFile.getAbsolutePath(), msg);
             }
             if (xmlParsingIssues.size() < 5000) {
                 xmlParsingIssues.add(pi);
@@ -209,7 +228,7 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
         if (null == issuable) {
             LOG.error(
-                "Can't find an Issuable corresponding to InputFile:" + inputFile.absolutePath());
+                "Can't find an Issuable corresponding to InputFile: {}", inputFile.absolutePath());
             return false;
         } else {
             try {

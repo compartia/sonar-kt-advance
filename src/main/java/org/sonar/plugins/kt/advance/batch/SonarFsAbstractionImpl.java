@@ -95,6 +95,7 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
                 .predicates().matchesPathPattern(inclusionPattern);
 
         final Iterable<InputFile> ifiles = fileSystem.inputFiles(filePredicate);
+
         for (final InputFile ifile : ifiles) {
             files.add(ifile.file());
         }
@@ -123,17 +124,19 @@ public class SonarFsAbstractionImpl implements FsAbstraction {
 
     @Override
     public Collection<File> listSubdirsRecursively(String dirname) {
-        final Set<File> files = new TreeSet<File>();
+        /* hack */
+        final Collection<File> cdicts = listFileByXmlSuffix(CDICT_SUFFIX);
+        final Set<File> roots = new TreeSet<File>();
 
-        final String inclusionPattern = getSearchPath() + "/**/" + dirname;
+        cdicts.forEach(file -> {
+            final int index = file.getAbsolutePath().lastIndexOf(dirname);
+            if (index > 0) {
+                roots.add(new File(
+                        file.getAbsolutePath().substring(0, index), dirname));
+            }
+        });
 
-        final FilePredicate filePredicate = fileSystem
-                .predicates().matchesPathPattern(inclusionPattern);
-
-        final Iterable<File> matching = fileSystem.files(filePredicate);
-        matching.forEach(f -> files.add(f));
-
-        return files;
+        return roots;
     }
 
     @Override
