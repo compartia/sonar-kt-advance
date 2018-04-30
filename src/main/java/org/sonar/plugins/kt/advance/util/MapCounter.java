@@ -59,13 +59,13 @@ public class MapCounter<K> {
     }
 
     public void inc(K key, int col, double inc) {
-        Double[] value = map.get(key);
-        if (value == null) {
-            value = new Double[numberOfColumns];
+        final Double[] vv = map.computeIfAbsent(key, k -> {
+            final Double[] value = new Double[numberOfColumns];
             Arrays.fill(value, Double.valueOf(0));
-            map.put(key, value);
-        }
-        value[col] += inc;
+            return value;
+        });
+
+        vv[col] += inc;
     }
 
     public void inc(K key, String col, double inc) {
