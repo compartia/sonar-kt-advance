@@ -6,8 +6,6 @@ import static org.sonar.plugins.kt.advance.batch.PluginParameters.PARAM_EFFORT_P
 import static org.sonar.plugins.kt.advance.batch.PluginParameters.PARAM_EFFORT_PREDICATE_SCALE;
 import static org.sonar.plugins.kt.advance.batch.PluginParameters.paramKey;
 
-import java.util.Set;
-
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.ActiveRule;
@@ -116,15 +114,15 @@ public class POMapper {
 
     public final Issue toIssue(PPO po, Issuable issuable, SonarResourceLocator fs,
             CFunction fun) {
-        return _toIssue(po, issuable, fs, fun);
+        return _toIssue(po, issuable, fs, fun, po.getLocation());
     }
 
     public final Issue toIssue(SPO po, Issuable issuable, SonarResourceLocator fs, CFunction file) {
-        return _toIssue(po, issuable, fs, file);
+        return _toIssue(po, issuable, fs, file, po.getSite().getLocation());
     }
 
     private final Issue _toIssue(PO po, Issuable issuable, SonarResourceLocator fs,
-            CFunction fun) {
+            CFunction fun, CLocation poLoc) {
 
         Preconditions.checkNotNull(po);
         Preconditions.checkNotNull(issuable);
@@ -141,7 +139,6 @@ public class POMapper {
 
         final Issuable.IssueBuilder issueBuilder = issuable.newIssueBuilder();
 
-        final CLocation poLoc = po.getLocation();
         final NewIssueLocation primaryLocation = issueBuilder.newLocation()
                 .on(inputFile)
                 .at(toSonarTextRange(inputFile, poLoc))
@@ -154,37 +151,8 @@ public class POMapper {
                 .effortToFix(computeEffort(po, activeRules, settings))
                 .at(primaryLocation);
 
-        //TODO: move to other method
-        if (po instanceof PPO) {
-            addLocationsToIssue(issueBuilder, fs, (PPO) po, fun);
-        }
-
         return issueBuilder.build();
 
-    }
-
-    private Issuable.IssueBuilder addLocationsToIssue(final Issuable.IssueBuilder issueBuilder,
-            SonarResourceLocator fs, PPO ppo, CFunction fun) {
-
-        final Set<SPO> associatedSpos = ppo.getAssociatedSpos(fun);
-
-        associatedSpos.stream().forEach(
-            spo -> {
-                final InputFile file = fs.getResource(spo.getLocation().getCfile());
-                if (file != null) {
-                    final NewIssueLocation loc = issueBuilder.newLocation()
-                            .on(file)
-                            .at(toSonarTextRange(file, spo.getLocation()))
-                            .message(spo.getDeps() != null ? spo.getDeps().toString() : REF_DEFAULT_MESSAGE);
-
-                    issueBuilder.addLocation(loc);
-                } else {
-                    LOG.warn("cannot find resource  " + spo.getLocation().toString());
-                }
-
-            });
-
-        return issueBuilder;
     }
 
     private TextRange toSonarTextRange(final InputFile inputFile, final CLocation poLoc) {

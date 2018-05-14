@@ -45,6 +45,7 @@ import com.kt.advance.api.CAnalysisImpl;
 import com.kt.advance.api.CApplication;
 import com.kt.advance.api.CFile;
 import com.kt.advance.api.CFunctionCallsiteSPOs;
+import com.kt.advance.api.CFunctionSiteSPOs;
 import com.kt.advance.api.FsAbstraction;
 
 public class KtAdvanceSensor implements SonarResourceLocator {
@@ -181,6 +182,16 @@ public class KtAdvanceSensor implements SonarResourceLocator {
                         .map(ppo -> mapper.toIssue(ppo, issuable, this, function));
 
                 for (final CFunctionCallsiteSPOs callsite : function.getCallsites()) {
+
+                    final Stream<Issue> spoIssues = callsite.getSpos().stream()
+                            .map(spo -> statistics.handle(spo, file, this))
+                            .map(spo -> mapper.toIssue(spo, issuable, this, function));
+
+                    poIssues = Stream.concat(poIssues, spoIssues);
+
+                }
+
+                for (final CFunctionSiteSPOs callsite : function.getReturnsites()) {
 
                     final Stream<Issue> spoIssues = callsite.getSpos().stream()
                             .map(spo -> statistics.handle(spo, file, this))
