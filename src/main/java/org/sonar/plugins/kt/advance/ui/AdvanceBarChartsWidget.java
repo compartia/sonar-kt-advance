@@ -79,7 +79,12 @@ import org.sonar.plugins.kt.advance.KtAdvancePlugin;
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__tao"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__cus"),
         @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__w"),
-        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__vc")
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__vc"),
+        
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__is"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__pv"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__cls"),
+        @WidgetProperty(type = BOOLEAN, defaultValue = "false", key = "predicate__prm")
 
 })
 

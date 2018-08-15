@@ -361,7 +361,14 @@
         <key>predicate__ft</key>
         <name>Format String</name>
         <description><![CDATA[<p>Format String</p>]]></description>
-        <tag>value-constraint</tag>
+        <tag>format-string</tag>
+    </rule>
+    
+    <rule>
+        <key>predicate__is</key>
+        <name>In scope</name>
+        <description><![CDATA[<p>In scope</p>]]></description>
+        <tag>in-scope</tag>
     </rule>
 
  
