@@ -14,10 +14,10 @@ depends on https://github.com/mrbkt/xml-kt-advance-java [![Build Status](https:/
 # Usage
 ## Installation steps
 
-0. Download and install [SonarQube 5.5](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.5.zip)
+0. Download and install [SonarQube 5.6.4](https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.6.4.zip)
 
 1. Download the latest plug-in jar-file ( https://github.com/kestreltechnology/sonar-kt-advance/releases/latest ). 
-Put the downloaded jar in `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugin. For more details refer https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin
+Put the downloaded jar into `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugin. For more details refer https://docs.sonarqube.org/display/SONAR/Installing+a+Plugin
 
 
 2. Navigate to [**Quality Profiles**](http://localhost:9000/profiles) section and ensure that there exists **KT Advance way** profile. Select it and check if it has active rules.

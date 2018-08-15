@@ -208,9 +208,9 @@ public class KtAdvanceSensor implements SonarResourceLocator {
         }
     }
 
-    private void handleParsingError(File xmlFile, String msg) {
-        handleParsingError(xmlFile, msg, true);
-    }
+//    private void handleParsingError(File xmlFile, String msg) {
+//        handleParsingError(xmlFile, msg, true);
+//    }
 
     private void handleParsingError(File xmlFile, String msg, boolean log) {
         final XmlParsingIssue pi = new XmlParsingIssue();

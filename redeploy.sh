@@ -1,9 +1,10 @@
 export SONAR_DEV_MODE=TRUE
-export SONAR_DEV_MODE_DIR=/Users/artem/work/KestrelTechnology/sonar-kt-advance-plugin/src/main/resources
+export SONARQUBE_HOME=/Users/artem/work/KT/sonarqube-5.6.4
+export SONAR_DEV_MODE_DIR=/Users/artem/work/KT/sonar-kt-advance/src/main/resources
 
 cwd=$(pwd)
 jarstem=sonar-kt-advance-plugin
-jarname=$jarstem-0.jar
+jarname=$jarstem-*.jar
 mvn clean sass:update-stylesheets
 mvn package
 
