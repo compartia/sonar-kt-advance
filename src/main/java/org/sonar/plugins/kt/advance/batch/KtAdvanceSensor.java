@@ -40,6 +40,8 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import com.google.common.base.Preconditions;
+import com.kt.advance.ErrorsBundle;
+import com.kt.advance.ProgressTracker;
 import com.kt.advance.api.CAnalysis;
 import com.kt.advance.api.CAnalysisImpl;
 import com.kt.advance.api.CApplication;
@@ -105,8 +107,8 @@ public class KtAdvanceSensor implements SonarResourceLocator {
 
     public void analyse(SensorContext sensorContext) throws JAXBException {
 
-        cAnalysis = new CAnalysisImpl(fsAbstraction);
-        cAnalysis.read();
+        cAnalysis = new CAnalysisImpl(fsAbstraction, new ErrorsBundle());
+        cAnalysis.read(new ProgressTracker());
         //--------------------------------------------
 
         final Collection<CApplication> apps = cAnalysis.getApps();
