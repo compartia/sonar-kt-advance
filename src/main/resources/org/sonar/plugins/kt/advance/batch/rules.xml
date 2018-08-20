@@ -370,6 +370,26 @@
         <description><![CDATA[<p>In scope</p>]]></description>
         <tag>in-scope</tag>
     </rule>
+    
+	<rule>
+		<key>predicate__prm</key>
+		<name>Preserves All Memory</name>
+		<description><![CDATA[<p>Preserves All Memory</p>]]></description>
+		<tag>preserves-all-memory</tag>
+	</rule>
 
+	<rule>
+		<key>predicate__cls</key>
+		<name>Can Leave Scope</name>
+		<description><![CDATA[<p>Can Leave Scope</p>]]></description>
+		<tag>can-leave-scope</tag>
+	</rule>
+
+	<rule>
+		<key>predicate__pv</key>
+		<name>Preserved Value</name>
+		<description><![CDATA[<p>Preserved Value</p>]]></description>
+		<tag>preserved-value</tag>
+	</rule>
  
 </rules>
